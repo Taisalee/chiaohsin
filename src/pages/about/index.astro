@@ -1,0 +1,60 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import siteData from '../../data/site-data.json';
+
+const { company } = siteData;
+---
+
+<Layout title="特色簡介" description={company.description}>
+  <div class="hero bg-base-200 py-12">
+    <div class="hero-content text-center">
+      <div class="max-w-md">
+        <h1 class="text-5xl font-bold">特色簡介</h1>
+        <p class="py-6">專業、品質、誠信</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-4xl mx-auto px-4 py-16">
+    <div class="prose prose-lg mx-auto">
+      <p class="lead text-xl font-bold text-center mb-12">
+        {company.description}
+      </p>
+
+      <div class="divider">我們的優勢</div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-12">
+        <div class="card bg-base-100 shadow-md">
+           <div class="card-body">
+              <h3 class="card-title text-primary">產品優良</h3>
+              <p>我們堅持高品質的生產標準，確保每一雙手套都能提供最佳的防護效果。</p>
+           </div>
+        </div>
+        <div class="card bg-base-100 shadow-md">
+           <div class="card-body">
+              <h3 class="card-title text-secondary">價格合宜</h3>
+              <p>工廠直營，免去中間商剝削，將最實惠的價格回饋給客戶。</p>
+           </div>
+        </div>
+        <div class="card bg-base-100 shadow-md">
+           <div class="card-body">
+              <h3 class="card-title text-accent">重量足</h3>
+              <p>我們保證產品重量與規格實在，不偷工減料。</p>
+           </div>
+        </div>
+        <div class="card bg-base-100 shadow-md text-white bg-neutral">
+           <div class="card-body">
+              <h3 class="card-title">深受信任</h3>
+              <p>多年來深受各界客戶支持與信賴，是您最可靠的合作夥伴。</p>
+           </div>
+        </div>
+      </div>
+
+       <div class="alert alert-success shadow-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <span>{company.slogan}</span>
+      </div>
+
+    </div>
+  </div>
+</Layout>

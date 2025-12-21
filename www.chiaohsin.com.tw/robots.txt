@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+Allow: /skin/
+Allow: /script/
+Sitemap: http://www.chiaohsin.com.tw/sitemap.xml

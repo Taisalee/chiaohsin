@@ -1,0 +1,68 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import siteData from '../../data/site-data.json';
+
+const { company } = siteData;
+---
+
+<Layout title="基本資料">
+  <div class="bg-base-200 py-12">
+      <div class="max-w-4xl mx-auto px-4">
+        <h1 class="text-4xl font-bold mb-8 text-center text-primary">基本資料</h1>
+        
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <div class="overflow-x-auto">
+              <table class="table text-lg">
+                <tbody>
+                  <tr>
+                    <th class="w-1/3 bg-base-200/50">公司名稱</th>
+                    <td class="font-bold">{company.name}</td>
+                  </tr>
+                  <tr>
+                    <th class="bg-base-200/50">英文名稱</th>
+                    <td>{company.englishName}</td>
+                  </tr>
+                  <tr>
+                    <th class="bg-base-200/50">主要產品</th>
+                    <td>{company.tagline}</td>
+                  </tr>
+                  <tr>
+                    <th class="bg-base-200/50">服務項目</th>
+                    <td>
+                      <div class="flex flex-wrap gap-2">
+                      {company.services.products.map(p => (
+                        <span class="badge badge-outline">{p}</span>
+                      ))}
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class="bg-base-200/50">配送方式</th>
+                    <td>{company.services.delivery.join(' / ')}</td>
+                  </tr>
+                  <tr>
+                    <th class="bg-base-200/50">付款方式</th>
+                    <td>{company.services.payment.join(' / ')}</td>
+                  </tr>
+                   <tr>
+                    <th class="bg-base-200/50">服務區域</th>
+                    <td>{company.services.area}</td>
+                  </tr>
+                  <tr>
+                    <th class="bg-base-200/50">地址</th>
+                    <td>{company.address.full}</td>
+                  </tr>
+                  <tr>
+                     <th class="bg-base-200/50">聯絡電話</th>
+                    <td><a href={`tel:${company.contact.phone}`} class="link">{company.contact.phone}</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+  </div>
+</Layout>

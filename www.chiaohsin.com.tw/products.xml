@@ -1,0 +1,1921 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  =============================
+  智邦生活館 - 輕鬆架站 RSS 2.0
+  =============================
+  產生器資訊
+  應用程式: Foresight v0.3.2 RSS 2.0 Generator
+  更新日期: Mar 27 16:41 CST 2007
+-->
+<rss version="2.0">
+  <channel>
+    <!-- 公司名稱 -->
+    <title>喬新針織有限公司</title>
+    <!-- 公司黃頁網站 -->
+    <link>http://www.chiaohsin.com.tw/</link>
+    <!-- 公司簡介 -->
+    <description>棉紗手套｜膠手套｜尼龍手套｜白龍手套｜花龍手套｜特殊手套｜口罩｜包裝材料.膠帶｜建築五金｜PVC手套｜NBR手套｜太空包｜本公司專營各種針織工作手套各式五金耗材，如棉紗手套、尼龍手套、花龍手套、工作用禦寒手套、白龍手套、電子手套、沾膠手套、點膠手套、洗澡手套、活性碳口罩、膠帶、PE伸縮膜、砂輪片...等，種類眾多，產品優良，價格合宜，深受客戶信任，重量足，品質好。歡迎來電詢問06-6900359(王小姐)。※手套封口部分為車頭，不會脫落，更加緊實的包覆著您的雙手。</description>
+    <!-- 文件語言 -->
+    <language>zh</language>
+    <!-- 版權說明 -->
+    <copyright>智邦生活館 版權所有</copyright>
+    <!-- 管理工具 -->
+    <managingEditor>Foresight v0.3.2 RSS 2.0 Generator</managingEditor>
+    <!-- 管理者 -->
+    <webMaster>智邦生活館 網站代管</webMaster>
+    <!-- 出版日期 -->
+    <pubDate>Mon, 25 Jul 2022 15:47:55 CST</pubDate>
+    <!-- 最後製造日期 -->
+    <lastBuildDate>Mon, 25 Jul 2022 15:47:55 CST</lastBuildDate>
+    <!-- 產生器 -->
+    <generator>智邦生活館 版權所有</generator>
+    <!-- 存活時間, 這個頻道會被快取幾分鐘 -->
+    <ttl>10080</ttl>
+	 <!-- 分類列表 -->
+		<category id="368192" level="0">棉紗手套</category>
+		<category id="369080" level="0">膠手套</category>
+		<category id="368195" level="0">尼龍手套</category>
+		<category id="368193" level="0">白龍手套</category>
+		<category id="368194" level="0">花龍手套</category>
+		<category id="368198" level="0">各式口罩</category>
+		<category id="368197" level="0">包裝材料、膠帶</category>
+		<category id="368199" level="0">建築五金</category>
+		<category id="371098" level="0">太空包</category>
+		<category id="369438" level="0">清潔用品</category>
+		<category id="368196" level="0">特殊手套</category>
+	    <!-- 每一個項目的內容 -->
+        <item>
+	  <!-- 商品流水號 -->
+	  <id>1464787</id>
+      <!-- 項目標題 -->
+	  <title></title>
+      <!-- 發佈時間 -->
+      <pubDate></pubDate>
+      <!-- 項目分類 -->
+      <category></category>
+	  <!-- 項目價錢 -->
+      <price></price>
+	  <!-- 項目優惠價 -->
+      <sprice></sprice>
+      <!-- 項目內容 -->
+      <description></description>
+	  <!-- 項目簡介 -->
+      <intro></intro>
+      <!-- 項目連結 -->
+      <link></link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname></hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid></guid>
+      <!-- 商品圖 -->
+          </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>PE膜</title>
+      <!-- 發佈時間 -->
+      <pubDate>Wed, 09 Mar 2022 19:15:16 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>包裝材料、膠帶</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>寬度50cm淨重1.7kg</description>
+	  <!-- 項目簡介 -->
+      <intro>本產品拉伸力強度高，延伸率大、自粘性佳，透明度高，主要應用於各種貨物集中纏繞包裝、造紙、物流、化工、塑膠原料、建材、玻璃、外貿出口等各行業上。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1467669.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1467669.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1467669.jpg" length="6523" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>太空包底部加強型(白/黑/綠)</title>
+      <!-- 發佈時間 -->
+      <pubDate>Fri, 01 Apr 2022 06:42:09 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>太空包</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>尺寸90*90*100有白/黑/綠3種顏色</description>
+	  <!-- 項目簡介 -->
+      <intro>太空包適合營造業、紡織業、化工、農業、漁業、食品業..等盛裝廢棄物、重物使用。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1473320.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1473320.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1473320.jpg" length="9000" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>太空包一般(白/黑)</title>
+      <!-- 發佈時間 -->
+      <pubDate>Fri, 01 Apr 2022 06:44:10 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>太空包</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>尺寸90*90*100有白/黑2種顏色</description>
+	  <!-- 項目簡介 -->
+      <intro>太空包適合營造業、紡織業、化工、農業、漁業、食品業..等盛裝廢棄物、重物使用。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1473321.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1473321.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1473321.jpg" length="11876" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>NBR手套(多倍PROTOS)</title>
+      <!-- 發佈時間 -->
+      <pubDate>Mon, 14 Mar 2022 23:20:45 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>膠手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>本產品包裝為100支/盒，有以下規格：SMLXL</description>
+	  <!-- 項目簡介 -->
+      <intro>NBR手套為合成橡膠製成，與傳統乳膠手套相較更耐油、耐酸、耐鹼，適合電子業、印刷業、機械加工業、食品加工調理用、市場小販、實驗室用、電子裝備、美髮、清潔用。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468521.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468521.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468521.jpg" length="16407" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>雙面淋膜藍白帆布</title>
+      <!-- 發佈時間 -->
+      <pubDate>Wed, 09 Mar 2022 14:57:50 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>建築五金</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>本項產品有以下規格10x10  12x12  14x14  16x16  18x18  20x20  20x30  30x30  40x40</description>
+	  <!-- 項目簡介 -->
+      <intro>雙面淋膜藍白帆布，防水防潮，尺寸多樣，歡迎選購</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1467511.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1467511.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1467511.jpg" length="14560" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>砂輪片</title>
+      <!-- 發佈時間 -->
+      <pubDate>Wed, 09 Mar 2022 15:04:09 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>建築五金</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>106x1.35x16mmMax13500r.p.m50PCS</description>
+	  <!-- 項目簡介 -->
+      <intro>適用於金屬、一般鋼、不鏽鋼、鋁合金、平面、曲面、邊角的研磨等</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1467515.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1467515.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1467515.jpg" length="11510" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>7針20兩灰棉</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 11:28:03 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>棉紗手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>棉紗手套用途廣泛，如建築工地、日常生活搬運、電鍍車間、五金沖壓、塑膠廠、化工廠、鋼鐵製造、造船廠、電子廠、包裝製品廠、印刷企業、電力工程、機械製造、餐館食堂等大部分工作環境。本產品含棉量高，舒適耐用，有效保護您的雙手。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468540.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468540.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468540.jpg" length="12729" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>六角網布</title>
+      <!-- 發佈時間 -->
+      <pubDate>Wed, 09 Mar 2022 15:07:51 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>建築五金</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>本產品有以下規格：寬度20公分寬度100公分</description>
+	  <!-- 項目簡介 -->
+      <intro>增加防水層的抗裂性、抗撞力，適合用於彈性水泥夾層</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1467517.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1467517.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1467517.jpg" length="8214" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>7針20兩棉紗(小)</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 11:29:35 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>棉紗手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>SSize</description>
+	  <!-- 項目簡介 -->
+      <intro>棉紗手套用途廣泛，如建築工地、日常生活搬運、電鍍車間、五金沖壓、塑膠廠、化工廠、鋼鐵製造、造船廠、電子廠、包裝製品廠、印刷企業、電力工程、機械製造、餐館食堂等大部分工作環境。本產品含棉量高，舒適耐用，有效保護您的雙手。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468541.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468541.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468541.jpg" length="11084" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>NBR手套(ChemMax)</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 12:08:59 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>膠手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>本產品包裝為100支/盒，有以下規格：SMLXL</description>
+	  <!-- 項目簡介 -->
+      <intro>NBR手套為合成橡膠製成，與傳統乳膠手套相較更耐油、耐酸、耐鹼，適合電子業、印刷業、機械加工業、食品加工調理用、市場小販、實驗室用、電子裝備、美髮、清潔用。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468545.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468545.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468545.jpg" length="12776" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>丁晴膠手套</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 13:14:22 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>膠手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>13針尼龍丁晴膠手套，貼手、彈性好、防滑、耐磨，常用於園藝。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468547.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468547.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468547.jpg" length="14579" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>10針花紋手套</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 13:19:21 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>膠手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>LSize</description>
+	  <!-- 項目簡介 -->
+      <intro>透氣花紋沾膠手套，表面皺紋處裡有效止滑，可用於建築、板模、鐵工、土木工程、水電、機械維修、搬運、物流業、電子廠....等，用途多樣。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468548.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468548.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468548.jpg" length="13876" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>A級防水不織布</title>
+      <!-- 發佈時間 -->
+      <pubDate>Wed, 09 Mar 2022 15:12:20 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>建築五金</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>本產品有以下規格：寬度20公分寬度100公分</description>
+	  <!-- 項目簡介 -->
+      <intro>防水塗層加強用不織布</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1467525.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1467525.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1467525.jpg" length="5834" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>長纖防水不織布</title>
+      <!-- 發佈時間 -->
+      <pubDate>Wed, 09 Mar 2022 15:17:38 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>建築五金</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>本產品有以下尺寸：寬度20cm寬度100cm</description>
+	  <!-- 項目簡介 -->
+      <intro>長纖防水不織布</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1467526.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1467526.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1467526.jpg" length="5834" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>PVC無粉手套(多倍PROTOS)</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 13:26:37 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>膠手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>本產品包裝為100支/盒，有以下尺寸：SMLXL</description>
+	  <!-- 項目簡介 -->
+      <intro>常用於醫療檢驗、醫療護理，具有隔離防護功能，非乳膠或橡膠，不易致敏。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468550.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468550.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468550.jpg" length="14972" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>PVC無粉手套(ChemMax)</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 13:36:13 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>膠手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>本產品包裝為100支/盒，有以下尺寸：SMLXL</description>
+	  <!-- 項目簡介 -->
+      <intro>常用於醫療檢驗、醫療護理，具有隔離防護功能，非乳膠或橡膠，不易致敏。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468551.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468551.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468551.jpg" length="13846" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>洗手劑</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 13:42:58 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>清潔用品</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>3公斤</description>
+	  <!-- 項目簡介 -->
+      <intro>成分使用進口高級珍珠岩粉、活性界面劑、天然香精，可用於清除油垢、地板油汙、油墨、黑手清潔。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468553.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468553.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468553.jpg" length="11905" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>三層防護口罩</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 13:49:51 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>各式口罩</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>單片獨立包裝，50入，台灣製造</description>
+	  <!-- 項目簡介 -->
+      <intro>使用熔噴不織布、親水性不織布、防潑水不織布，可阻絕空氣中飛沫、粉塵、體液以及粒狀物質，一次性使用。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468554.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468554.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468554.jpg" length="14638" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>活性碳口罩</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 13:53:58 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>各式口罩</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>單片獨立包裝，一盒50入，台灣製造。</description>
+	  <!-- 項目簡介 -->
+      <intro>使用PP不織布、活性碳布，材質柔軟不刺激皮膚，防塵、有效過濾飛沫、粉塵及異味，一次性使用。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468555.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468555.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468555.jpg" length="13962" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>打包帶</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 13:57:13 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>包裝材料、膠帶</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>歡迎來電詢問。</description>
+	  <!-- 項目簡介 -->
+      <intro>打包貨品，須搭配打包機使用，堅固不易斷裂。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468556.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468556.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468556.jpg" length="9514" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>擦拭紙(清潔馬)</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 14:04:08 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>建築五金</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>3.5公斤</description>
+	  <!-- 項目簡介 -->
+      <intro>用於廚房油汙、食品工業、汽機車、一般家庭用清潔擦拭，厚度夠，吸油不易破，表面輪胎狀壓紋。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468558.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468558.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468558.jpg" length="7912" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>擦拭紙(鷹牌)</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 14:12:13 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>建築五金</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>3.5公斤</description>
+	  <!-- 項目簡介 -->
+      <intro>用於廚房油汙、食品工業、汽機車、一般家庭用清潔擦拭。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468561.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468561.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468561.jpg" length="5834" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>玻纖網</title>
+      <!-- 發佈時間 -->
+      <pubDate>Wed, 09 Mar 2022 15:26:57 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>建築五金</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>本產品有以下規格：洞寬：5x5mm9x9mm寬度：20cm100cm</description>
+	  <!-- 項目簡介 -->
+      <intro>與防水塗料一起施工，可補強抗裂，延長防水層壽命</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1467539.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1467539.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1467539.jpg" length="8153" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>雙面膠帶</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 14:51:55 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>包裝材料、膠帶</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>歡迎來電詢問</description>
+	  <!-- 項目簡介 -->
+      <intro>雙面膠帶，辦公、一般黏貼使用。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468565.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468565.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468565.jpg" length="8288" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>OPP文具膠帶</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 14:53:41 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>包裝材料、膠帶</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>歡迎來電詢問。</description>
+	  <!-- 項目簡介 -->
+      <intro>OPP文具膠帶，辦公、一般黏貼使用。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468566.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468566.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468566.jpg" length="9275" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>OPP有色膠帶</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 15:01:13 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>包裝材料、膠帶</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>歡迎來電詢問。</description>
+	  <!-- 項目簡介 -->
+      <intro>辦公、打包、一般黏貼使用。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468567.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468567.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468567.jpg" length="9467" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>OPP膠帶</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 15:03:16 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>包裝材料、膠帶</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>歡迎來電詢問。</description>
+	  <!-- 項目簡介 -->
+      <intro>透明OPP膠帶，辦公、打包封箱、一般黏貼使用。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468568.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468568.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468568.jpg" length="7516" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>PVC有色膠帶</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 15:05:36 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>包裝材料、膠帶</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>歡迎來電詢問。</description>
+	  <!-- 項目簡介 -->
+      <intro>可手撕，辦公、打包封箱、一般黏貼使用。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468569.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468569.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468569.jpg" length="8419" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>PVC膠帶</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 15:07:16 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>包裝材料、膠帶</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>歡迎來電詢問。</description>
+	  <!-- 項目簡介 -->
+      <intro>可手撕，辦公、打包封箱、一般黏貼使用。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468570.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468570.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468570.jpg" length="8568" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>角鏟</title>
+      <!-- 發佈時間 -->
+      <pubDate>Wed, 09 Mar 2022 15:32:07 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>建築五金</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>可用於鏟土、挖洞、園藝.....等多種用途，好施力。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1467547.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1467547.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1467547.jpg" length="8975" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>紙膠帶</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 15:08:52 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>包裝材料、膠帶</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>歡迎來電詢問。</description>
+	  <!-- 項目簡介 -->
+      <intro>可手撕，辦公、打包封箱、一般黏貼使用。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468571.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468571.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468571.jpg" length="9426" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>斑馬膠帶(警示膠帶)</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 15:12:19 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>包裝材料、膠帶</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>歡迎來電詢問。</description>
+	  <!-- 項目簡介 -->
+      <intro>表層耐磨損，能承受高流量腳踏，配色顯眼，可用於一般警示、施工標示、動線規劃、工安....等用途。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468572.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468572.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468572.jpg" length="10857" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>電火布</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 15:16:39 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>包裝材料、膠帶</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>歡迎來電詢問。</description>
+	  <!-- 項目簡介 -->
+      <intro>修補電線，用於電線接頭纏繞、家用電器阻燃。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468573.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468573.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468573.jpg" length="14212" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>牛仔圍裙</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 15:32:06 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>建築五金</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>3尺、4尺</description>
+	  <!-- 項目簡介 -->
+      <intro>防塵、防髒汙。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468574.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468574.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468574.jpg" length="8422" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>7針16兩棉紗</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sat, 12 Feb 2022 21:22:33 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>棉紗手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>棉紗手套用途廣泛，如建築工地、日常生活搬運、電鍍車間、五金沖壓、塑膠廠、化工廠、鋼鐵製造、造船廠、電子廠、包裝製品廠、印刷企業、電力工程、機械製造、餐館食堂等大部分工作環境。本產品含棉量高，舒適耐用，有效保護您的雙手。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464760.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464760.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464760.jpg" length="10795" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>7針16兩白龍(小)</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sat, 12 Feb 2022 22:18:28 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>白龍手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>SSize</description>
+	  <!-- 項目簡介 -->
+      <intro>白龍手套用途廣泛，適合機械操作、搬運作業、農漁業、冷凍物流及其他需保護雙手之作業場所使用。本產品不含棉、不掉棉絮，舒適耐用，有效保護您的雙手。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464766.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464766.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464766.jpg" length="9395" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>13針花紋手套</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 16:41:00 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>膠手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>本產品有以下尺寸：ML</description>
+	  <!-- 項目簡介 -->
+      <intro>透氣花紋沾膠手套，表面皺紋處裡有效止滑，可用於建築、板模、鐵工、土木工程、水電、機械維修、搬運、物流業、電子廠....等，用途多樣。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468606.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468606.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468606.jpg" length="13664" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>擦拭紙架(清潔馬)</title>
+      <!-- 發佈時間 -->
+      <pubDate>Tue, 15 Mar 2022 17:27:54 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>建築五金</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>擦拭紙專用立架</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1468614.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1468614.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1468614.jpg" length="10135" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>7針16兩花龍</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sat, 12 Feb 2022 22:58:01 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>花龍手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>花龍手套用途廣泛，適合機械操作、搬運作業、農漁業、冷凍物流及其他需保護雙手之作業場所使用。本產品不含棉、不掉棉絮，花色多樣，舒適耐用，有效保護您的雙手。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464775.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464775.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464775.jpg" length="15716" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>10針白尼龍</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sun, 13 Feb 2022 18:20:36 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>尼龍手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>尼龍手套編織細膩柔軟、透氣、彈性貼手，保護使用者雙手，適用水產養殖、農作、工業…等用途。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464779.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464779.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464779.jpg" length="11194" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>10針黑尼龍加長</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sun, 12 Jun 2022 12:19:37 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>尼龍手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>尼龍手套編織細膩柔軟、透氣、彈性貼手，保護使用者雙手，適用水產養殖、農作、工業…等用途。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464784.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464784.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464784.jpg" length="12385" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>點膠手套</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sun, 13 Feb 2022 19:07:43 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>膠手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>清潔、耐熱、耐磨、搬運、止滑、抓著力強、經濟實用防護手套。編織部分為7針棉紗手套。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464790.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464790.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464790.jpg" length="20033" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>7針20兩棉紗</title>
+      <!-- 發佈時間 -->
+      <pubDate>Fri, 11 Feb 2022 13:43:21 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>棉紗手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>棉紗手套用途廣泛，如建築工地、日常生活搬運、電鍍車間、五金沖壓、塑膠廠、化工廠、鋼鐵製造、造船廠、電子廠、包裝製品廠、印刷企業、電力工程、機械製造、餐館食堂等大部分工作環境。本產品含棉量高，舒適耐用，有效保護您的雙手。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464759.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464759.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464759.jpg" length="10860" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>7針16兩白龍(大)</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sat, 12 Feb 2022 22:22:40 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>白龍手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>LSize</description>
+	  <!-- 項目簡介 -->
+      <intro>白龍手套用途廣泛，適合機械操作、搬運作業、農漁業、冷凍物流及其他需保護雙手之作業場所使用。本產品不含棉、不掉棉絮，舒適耐用，有效保護您的雙手。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464767.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464767.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464767.jpg" length="9011" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>7針20兩花龍</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sat, 12 Feb 2022 22:59:30 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>花龍手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>花龍手套用途廣泛，適合機械操作、搬運作業、農漁業、冷凍物流及其他需保護雙手之作業場所使用。本產品不含棉、不掉棉絮，花色多樣，舒適耐用，有效保護您的雙手。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464776.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464776.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464776.jpg" length="17006" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>10針花尼龍</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sun, 13 Feb 2022 18:23:30 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>尼龍手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>尼龍手套編織細膩柔軟、透氣、彈性貼手，保護使用者雙手，適用水產養殖、農作、工業…等用途。本產品花色多樣，隨機出貨。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464780.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464780.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464780.jpg" length="19020" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>7針沾膠手套</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sun, 13 Feb 2022 19:11:11 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>膠手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>清潔、耐熱、耐磨、搬運、止滑、抓著力強、經濟實用防護手套。編織部分為7針棉紗手套。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464792.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464792.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464792.jpg" length="17136" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>7針24兩棉紗</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sat, 12 Feb 2022 21:35:54 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>棉紗手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>棉紗手套用途廣泛，如建築工地、日常生活搬運、電鍍車間、五金沖壓、塑膠廠、化工廠、鋼鐵製造、造船廠、電子廠、包裝製品廠、印刷企業、電力工程、機械製造、餐館食堂等大部分工作環境。本產品含棉量高，舒適耐用，有效保護您的雙手。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464763.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464763.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464763.jpg" length="10273" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>7針20兩白龍</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sat, 12 Feb 2022 22:24:08 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>白龍手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>白龍手套用途廣泛，適合機械操作、搬運作業、農漁業、冷凍物流及其他需保護雙手之作業場所使用。本產品不含棉、不掉棉絮，舒適耐用，有效保護您的雙手。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464768.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464768.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464768.jpg" length="10018" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>10針花龍(小)</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sat, 12 Feb 2022 23:01:41 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>花龍手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>SSize</description>
+	  <!-- 項目簡介 -->
+      <intro>花龍手套用途廣泛，適合機械操作、搬運作業、農漁業、冷凍物流及其他需保護雙手之作業場所使用。本產品不含棉、不掉棉絮，花色多樣，舒適耐用，有效保護您的雙手。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464778.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464778.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464778.jpg" length="17430" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>10針暗紅尼龍</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sun, 13 Feb 2022 18:25:57 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>尼龍手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>尼龍手套編織細膩柔軟、透氣、彈性貼手，保護使用者雙手，適用水產養殖、農作、工業…等用途。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464781.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464781.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464781.jpg" length="15183" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>10針沾膠手套</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sun, 13 Feb 2022 19:12:24 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>膠手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>清潔、耐熱、耐磨、搬運、止滑、抓著力強、經濟實用防護手套。編織部分為10針棉紗手套。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464793.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464793.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464793.jpg" length="15992" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>10針棉紗(小)</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sat, 12 Feb 2022 21:26:52 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>棉紗手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>SSize</description>
+	  <!-- 項目簡介 -->
+      <intro>棉紗手套用途廣泛，如建築工地、日常生活搬運、電鍍車間、五金沖壓、塑膠廠、化工廠、鋼鐵製造、造船廠、電子廠、包裝製品廠、印刷企業、電力工程、機械製造、餐館食堂等大部分工作環境。本產品含棉量高，舒適耐用，有效保護您的雙手。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464761.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464761.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464761.jpg" length="9706" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>7針24兩白龍</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sat, 12 Feb 2022 22:25:28 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>白龍手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>白龍手套用途廣泛，適合機械操作、搬運作業、農漁業、冷凍物流及其他需保護雙手之作業場所使用。本產品不含棉、不掉棉絮，舒適耐用，有效保護您的雙手。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464769.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464769.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464769.jpg" length="10094" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>10針花龍(大)</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sat, 12 Feb 2022 23:00:49 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>花龍手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>L Size</description>
+	  <!-- 項目簡介 -->
+      <intro>花龍手套用途廣泛，適合機械操作、搬運作業、農漁業、冷凍物流及其他需保護雙手之作業場所使用。本產品不含棉、不掉棉絮，花色多樣，舒適耐用，有效保護您的雙手。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464777.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464777.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464777.jpg" length="17983" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>10針暗紅尼龍加長</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sun, 13 Feb 2022 18:27:31 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>尼龍手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>尼龍手套編織細膩柔軟、透氣、彈性貼手，保護使用者雙手，適用水產養殖、農作、工業…等用途。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464782.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464782.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464782.jpg" length="14141" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>沐浴手套</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sun, 13 Feb 2022 19:22:47 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>特殊手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>本產品使用尼龍材質編織，沐浴時使用，能有效去角質，輕鬆搓出大量泡泡。顏色多樣歡迎訂購。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464797.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464797.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464797.jpg" length="13189" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>10針棉紗(大)</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sat, 12 Feb 2022 21:33:20 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>棉紗手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>LSize</description>
+	  <!-- 項目簡介 -->
+      <intro>棉紗手套用途廣泛，如建築工地、日常生活搬運、電鍍車間、五金沖壓、塑膠廠、化工廠、鋼鐵製造、造船廠、電子廠、包裝製品廠、印刷企業、電力工程、機械製造、餐館食堂等大部分工作環境。本產品含棉量高，舒適耐用，有效保護您的雙手。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464762.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464762.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464762.jpg" length="10348" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>7針30兩白龍</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sat, 12 Feb 2022 22:26:23 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>白龍手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>白龍手套用途廣泛，適合機械操作、搬運作業、農漁業、冷凍物流及其他需保護雙手之作業場所使用。本產品不含棉、不掉棉絮，舒適耐用，有效保護您的雙手。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464770.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464770.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464770.jpg" length="9582" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>禦寒手套(全壓克力紗)</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sun, 13 Feb 2022 19:17:24 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>特殊手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>本產品使用全壓克力紗編織，具有禦寒效果。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464795.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464795.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464795.jpg" length="13961" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>10針棉紗+彈性紗</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sat, 12 Feb 2022 21:37:54 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>棉紗手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize本項產品含彈性紗</description>
+	  <!-- 項目簡介 -->
+      <intro>棉紗手套用途廣泛，如建築工地、日常生活搬運、電鍍車間、五金沖壓、塑膠廠、化工廠、鋼鐵製造、造船廠、電子廠、包裝製品廠、印刷企業、電力工程、機械製造、餐館食堂等大部分工作環境。本產品含棉量高，舒適耐用，有效保護您的雙手。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464764.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464764.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464764.jpg" length="10905" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>7針30兩白龍加長</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sat, 12 Feb 2022 22:29:22 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>白龍手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>白龍手套用途廣泛，適合機械操作、搬運作業、農漁業、冷凍物流及其他需保護雙手之作業場所使用。本產品不含棉、不掉棉絮，舒適耐用，有效保護您的雙手。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464771.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464771.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464771.jpg" length="9951" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>禦寒手套(壓克力紗+特多龍紗)</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sun, 13 Feb 2022 19:19:07 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>特殊手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>本產品使用壓克力紗與特多龍紗混和編織，具有禦寒效果。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464796.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464796.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464796.jpg" length="16414" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>10針白龍(小)</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sat, 12 Feb 2022 22:32:53 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>白龍手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>SSize</description>
+	  <!-- 項目簡介 -->
+      <intro>白龍手套用途廣泛，適合機械操作、搬運作業、農漁業、冷凍物流及其他需保護雙手之作業場所使用。本產品不含棉、不掉棉絮，舒適耐用，有效保護您的雙手。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464773.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464773.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464773.jpg" length="9538" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>13針白尼龍</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sun, 13 Feb 2022 18:32:36 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>尼龍手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize包裝方式：打裝/雙裝</description>
+	  <!-- 項目簡介 -->
+      <intro>尼龍手套編織細膩柔軟、透氣、彈性貼手，保護使用者雙手，適用水產養殖、農作、工業…等用途。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464785.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464785.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464785.jpg" length="9320" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>10針白龍(大)</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sat, 12 Feb 2022 22:31:09 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>白龍手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>LSize</description>
+	  <!-- 項目簡介 -->
+      <intro>白龍手套用途廣泛，適合機械操作、搬運作業、農漁業、冷凍物流及其他需保護雙手之作業場所使用。本產品不含棉、不掉棉絮，舒適耐用，有效保護您的雙手。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464772.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464772.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464772.jpg" length="9332" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>13針暗紅手套</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sun, 13 Feb 2022 18:39:27 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>尼龍手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize包裝方式：打裝/雙裝</description>
+	  <!-- 項目簡介 -->
+      <intro>尼龍手套編織細膩柔軟、透氣、彈性貼手，保護使用者雙手，適用水產養殖、農作、工業…等用途。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464788.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464788.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464788.jpg" length="13985" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>機車手套</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sat, 12 Feb 2022 22:34:05 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>白龍手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>白龍手套用途廣泛，適合機械操作、搬運作業、農漁業、冷凍物流及其他需保護雙手之作業場所使用。本產品不含棉、不掉棉絮，舒適耐用，有效保護您的雙手。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464774.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464774.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464774.jpg" length="10707" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>13針暗紅手套加長</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sun, 13 Feb 2022 18:40:57 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>尼龍手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize</description>
+	  <!-- 項目簡介 -->
+      <intro>尼龍手套編織細膩柔軟、透氣、彈性貼手，保護使用者雙手，適用水產養殖、農作、工業…等用途。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464789.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464789.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464789.jpg" length="13981" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>13針花尼龍</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sun, 13 Feb 2022 18:34:32 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>尼龍手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize包裝方式：打裝/雙裝</description>
+	  <!-- 項目簡介 -->
+      <intro>尼龍手套編織細膩柔軟、透氣、彈性貼手，保護使用者雙手，適用水產養殖、農作、工業…等用途。本產品花色多樣，隨機出貨。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464786.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464786.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464786.jpg" length="15671" type="image/jpeg"/>    </item>
+        <item>
+	  <!-- 商品流水號 -->
+	  <id></id>
+      <!-- 項目標題 -->
+	  <title>13針黑尼龍</title>
+      <!-- 發佈時間 -->
+      <pubDate>Sun, 13 Feb 2022 18:36:58 +0800</pubDate>
+      <!-- 項目分類 -->
+      <category>尼龍手套</category>
+	  <!-- 項目價錢 -->
+      <price>NT$ (Call)</price>
+	  <!-- 項目優惠價 -->
+      <sprice>NT$ (Call)</sprice>
+      <!-- 項目內容 -->
+      <description>FSize包裝方式：打裝/雙裝</description>
+	  <!-- 項目簡介 -->
+      <intro>尼龍手套編織細膩柔軟、透氣、彈性貼手，保護使用者雙手，適用水產養殖、農作、工業…等用途。</intro>
+      <!-- 項目連結 -->
+      <link>http://www.chiaohsin.com.tw/product_1464787.html</link>
+	  <!-- 自訂連結 -->
+	  <href></href>
+	  <hrefname>相關連結</hrefname>
+      <!-- 唯一識別名稱 -->
+      <guid>http://www.chiaohsin.com.tw/product_1464787.html</guid>
+      <!-- 商品圖 -->
+      <enclosure url="http://www.chiaohsin.com.tw/images/product_1464787.jpg" length="10211" type="image/jpeg"/>    </item>
+    
+  </channel>
+</rss>

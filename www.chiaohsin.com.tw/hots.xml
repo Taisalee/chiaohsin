@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  =============================
+  智邦生活館 - 輕鬆架站 RSS 2.0
+  =============================
+  產生器資訊
+  應用程式: Foresight v0.3.2 RSS 2.0 Generator
+  更新日期: Mar 27 16:41 CST 2007
+-->
+<rss version="2.0">
+  <channel>
+    <!-- 公司名稱 -->
+    <title>喬新針織有限公司</title>
+    <!-- 公司黃頁網站 -->
+    <link>http://www.chiaohsin.com.tw/</link>
+    <!-- 公司簡介 -->
+    <description>棉紗手套｜膠手套｜尼龍手套｜白龍手套｜花龍手套｜特殊手套｜口罩｜包裝材料.膠帶｜建築五金｜PVC手套｜NBR手套｜太空包｜本公司專營各種針織工作手套各式五金耗材，如棉紗手套、尼龍手套、花龍手套、工作用禦寒手套、白龍手套、電子手套、沾膠手套、點膠手套、洗澡手套、活性碳口罩、膠帶、PE伸縮膜、砂輪片...等，種類眾多，產品優良，價格合宜，深受客戶信任，重量足，品質好。歡迎來電詢問06-6900359(王小姐)。※手套封口部分為車頭，不會脫落，更加緊實的包覆著您的雙手。</description>
+    <!-- 文件語言 -->
+    <language>zh</language>
+    <!-- 版權說明 -->
+    <copyright>智邦生活館 版權所有</copyright>
+    <!-- 管理工具 -->
+    <managingEditor>Foresight v0.3.2 RSS 2.0 Generator</managingEditor>
+    <!-- 管理者 -->
+    <webMaster>智邦生活館 網站代管</webMaster>
+    <!-- 出版日期 -->
+    <pubDate>Mon, 25 Jul 2022 15:47:54 CST</pubDate>
+    <!-- 最後製造日期 -->
+    <lastBuildDate>Mon, 25 Jul 2022 15:47:54 CST</lastBuildDate>
+    <!-- 產生器 -->
+    <generator>智邦生活館 版權所有</generator>
+    <!-- 存活時間, 這個頻道會被快取幾分鐘 -->
+    <ttl>10080</ttl>
+	 <!-- 分類列表 -->
+	    <!-- 每一個項目的內容 -->
+    
+  </channel>
+</rss>

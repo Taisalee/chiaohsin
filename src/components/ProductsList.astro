@@ -1,0 +1,118 @@
+---
+import siteData from '../data/site-data.json';
+
+const { categories, products } = siteData;
+
+interface Props {
+  categoryId?: string;
+}
+
+const { categoryId } = Astro.props;
+
+// If we want to show all products by default
+const displayedCategories = categories;
+
+---
+
+<div class="drawer lg:drawer-open">
+  <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+  <div class="drawer-content flex flex-col p-4 md:p-10">
+    <!-- Page content -->
+    <div class="flex justify-between items-center mb-8">
+      <h1 class="text-3xl font-bold">產品介紹</h1>
+      <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">分類選單</label>
+    </div>
+
+    {displayedCategories.map(cat => {
+      const catProducts = products.filter(p => p.category === cat.id);
+      if (catProducts.length === 0) return null;
+
+      return (
+        <div id={cat.id} class="mb-16 scroll-mt-24">
+          <div class="flex items-center gap-4 mb-6 border-b pb-2 border-base-300">
+            <span class="text-4xl">{cat.icon}</span>
+            <div>
+              <h2 class="text-2xl font-bold">{cat.name}</h2>
+              <p class="text-gray-500 text-sm mt-1">{cat.description}</p>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            {catProducts.map(product => (
+              <div class="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow border border-base-200">
+                <figure class="px-4 pt-4 relative bg-base-200/50 min-h-[200px] flex items-center justify-center">
+                  <img 
+                    src={`/${product.image}`} 
+                    alt={product.name} 
+                    class="rounded-xl custom-img h-48 object-contain"
+                    loading="lazy"
+                  />
+                  <div class="badge badge-secondary absolute top-2 right-2">{cat.name}</div>
+                </figure>
+                <div class="card-body">
+                  <h3 class="card-title text-lg">
+                    {product.name}
+                    {product.size && product.size !== '-' && <div class="badge badge-outline text-xs">{product.size}</div>}
+                  </h3>
+                  <p class="text-sm text-gray-500 line-clamp-3">{product.description}</p>
+                  <div class="card-actions justify-end mt-4">
+                    <button class="btn btn-sm btn-primary" onclick={`document.getElementById('modal_${product.id}').showModal()`}>詳細資訊</button>
+                  </div>
+                </div>
+
+                {/* Modal for details */}
+                <dialog id={`modal_${product.id}`} class="modal">
+                  <div class="modal-box w-11/12 max-w-5xl">
+                    <div class="flex flex-col lg:flex-row gap-8">
+                       <figure class="flex-1 bg-base-200 rounded-box flex items-center justify-center p-4">
+                          <img src={`/${product.imageLarge || product.image}`} alt={product.name} class="max-h-[60vh] object-contain" />
+                       </figure>
+                       <div class="flex-1 space-y-4">
+                          <h3 class="font-bold text-3xl">{product.name}</h3>
+                          <div class="badge badge-primary badge-lg">{cat.name}</div>
+                          <div class="divider"></div>
+                          <p class="py-4 text-lg">{product.description}</p>
+                          
+                          <div class="stats shadow w-full bg-base-200">
+                            <div class="stat">
+                              <div class="stat-title">尺寸/規格</div>
+                              <div class="stat-value text-lg">{product.size}</div>
+                            </div>
+                            <div class="stat">
+                               <div class="stat-title">產品編號</div>
+                               <div class="stat-value text-lg text-gray-400">#{product.id}</div>
+                            </div>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="modal-action">
+                      <form method="dialog">
+                        <button class="btn">關閉</button>
+                      </form>
+                    </div>
+                  </div>
+                </dialog>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    })}
+
+  </div> 
+  <div class="drawer-side z-40">
+    <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label> 
+    <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content pt-20 lg:pt-4">
+      <li class="menu-title text-lg mb-2 text-primary">產品分類</li>
+      {categories.map(cat => (
+        <li>
+            <a href={`#${cat.id}`} class="flex justify-between">
+                <span>{cat.icon} {cat.name}</span>
+                <span class="badge badge-sm">{products.filter(p => p.category === cat.id).length}</span>
+            </a>
+        </li>
+      ))}
+    </ul>
+  
+  </div>
+</div>
