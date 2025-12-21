@@ -32,12 +32,28 @@
         "PE伸縮膜",
         "五金雜貨"
       ],
-      "delivery": ["宅配", "親取"],
-      "payment": ["現金", "ATM轉帳", "貨到付款", "電匯"],
+      "delivery": [
+        "宅配",
+        "親取"
+      ],
+      "payment": [
+        "現金",
+        "ATM轉帳",
+        "貨到付款",
+        "電匯"
+      ],
       "area": "全國地區"
     },
     "logo": "images/corpimg.png",
-    "keywords": ["棉紗手套", "尼龍手套", "工作手套", "口罩", "膠帶", "PE膜", "砂輪片"]
+    "keywords": [
+      "棉紗手套",
+      "尼龍手套",
+      "工作手套",
+      "口罩",
+      "膠帶",
+      "PE膜",
+      "砂輪片"
+    ]
   },
   "navigation": {
     "main": [
@@ -45,9 +61,18 @@
         "title": "公司介紹",
         "url": "/about",
         "children": [
-          { "title": "特色簡介", "url": "/about" },
-          { "title": "基本資料", "url": "/about/info" },
-          { "title": "聯絡資訊", "url": "/contact" }
+          {
+            "title": "特色簡介",
+            "url": "/about"
+          },
+          {
+            "title": "基本資料",
+            "url": "/about/info"
+          },
+          {
+            "title": "聯絡資訊",
+            "url": "/contact"
+          }
         ]
       },
       {
@@ -62,8 +87,14 @@
       }
     ],
     "footer": [
-      { "title": "訂閱最新消息", "url": "/rss/news" },
-      { "title": "訂閱商品訊息", "url": "/rss/products" }
+      {
+        "title": "訂閱最新消息",
+        "url": "/rss/news"
+      },
+      {
+        "title": "訂閱商品訊息",
+        "url": "/rss/products"
+      }
     ]
   },
   "categories": [
@@ -720,7 +751,7 @@
   "assets": {
     "images": {
       "logo": "images/corpimg.png",
-      "banner": "skin/banner.jpg",
+      "banner": "skin/banner.png",
       "map": "corp_map.png"
     },
     "sourceDir": "www.chiaohsin.com.tw"
