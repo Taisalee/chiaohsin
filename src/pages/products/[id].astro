@@ -1,0 +1,352 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import siteData from "../../data/site-data.json";
+
+export function getStaticPaths() {
+    const products = siteData.products;
+    const categories = siteData.categories;
+
+    return products.map((product) => {
+        const category = categories.find((c) => c.id === product.category);
+        return {
+            params: { id: product.id },
+            props: { product, category },
+        };
+    });
+}
+
+interface Props {
+    product: (typeof siteData.products)[0];
+    category: (typeof siteData.categories)[0];
+}
+
+const { product, category } = Astro.props;
+const { company } = siteData;
+
+// 取得同分類的其他產品作為相關產品
+const relatedProducts = siteData.products
+    .filter((p) => p.category === product.category && p.id !== product.id)
+    .slice(0, 3);
+
+// SEO 相關設定
+const productTitle = `${product.name} - ${category.name}`;
+const productDescription = `${product.name}｜${category.name}｜${product.description}｜${company.name}專業提供各式工作手套、防護用品。`;
+const productKeywords = [
+    product.name,
+    category.name,
+    ...siteData.seo.keywords.slice(0, 5),
+];
+
+// 結構化資料 (JSON-LD)
+const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description,
+    image: `https://www.chiaohsin.com.tw/${product.image}`,
+    sku: product.id,
+    category: category.name,
+    brand: {
+        "@type": "Brand",
+        name: company.name,
+    },
+    manufacturer: {
+        "@type": "Organization",
+        name: company.name,
+        url: `https://${company.website}`,
+    },
+    offers: {
+        "@type": "Offer",
+        availability: "https://schema.org/InStock",
+        seller: {
+            "@type": "Organization",
+            name: company.name,
+        },
+    },
+};
+
+// 麵包屑結構化資料
+const breadcrumbData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+        {
+            "@type": "ListItem",
+            position: 1,
+            name: "首頁",
+            item: "https://www.chiaohsin.com.tw/",
+        },
+        {
+            "@type": "ListItem",
+            position: 2,
+            name: "產品介紹",
+            item: "https://www.chiaohsin.com.tw/products",
+        },
+        {
+            "@type": "ListItem",
+            position: 3,
+            name: category.name,
+            item: `https://www.chiaohsin.com.tw/products#${category.id}`,
+        },
+        {
+            "@type": "ListItem",
+            position: 4,
+            name: product.name,
+            item: `https://www.chiaohsin.com.tw/products/${product.id}`,
+        },
+    ],
+};
+---
+
+<Layout
+    title={productTitle}
+    description={productDescription}
+    keywords={productKeywords}
+    canonical={`/products/${product.id}`}
+    ogImage={`/${product.image}`}
+    ogType="product"
+>
+    <!-- 結構化資料 -->
+    <Fragment slot="head">
+        <script
+            type="application/ld+json"
+            set:html={JSON.stringify(structuredData)}
+        />
+        <script
+            type="application/ld+json"
+            set:html={JSON.stringify(breadcrumbData)}
+        />
+    </Fragment>
+
+    <div class="min-h-screen bg-base-100">
+        <!-- 麵包屑導航 -->
+        <nav class="bg-base-200 py-3 px-4 md:px-10" aria-label="麵包屑">
+            <div class="max-w-7xl mx-auto">
+                <ol
+                    class="breadcrumbs text-sm flex flex-wrap items-center gap-2"
+                    itemscope
+                    itemtype="https://schema.org/BreadcrumbList"
+                >
+                    <li
+                        itemprop="itemListElement"
+                        itemscope
+                        itemtype="https://schema.org/ListItem"
+                    >
+                        <a href="/" itemprop="item" class="link link-hover">
+                            <span itemprop="name">首頁</span>
+                        </a>
+                        <meta itemprop="position" content="1" />
+                    </li>
+                    <li class="text-gray-400">/</li>
+                    <li
+                        itemprop="itemListElement"
+                        itemscope
+                        itemtype="https://schema.org/ListItem"
+                    >
+                        <a
+                            href="/products"
+                            itemprop="item"
+                            class="link link-hover"
+                        >
+                            <span itemprop="name">產品介紹</span>
+                        </a>
+                        <meta itemprop="position" content="2" />
+                    </li>
+                    <li class="text-gray-400">/</li>
+                    <li
+                        itemprop="itemListElement"
+                        itemscope
+                        itemtype="https://schema.org/ListItem"
+                    >
+                        <a
+                            href={`/products#${category.id}`}
+                            itemprop="item"
+                            class="link link-hover"
+                        >
+                            <span itemprop="name">{category.name}</span>
+                        </a>
+                        <meta itemprop="position" content="3" />
+                    </li>
+                    <li class="text-gray-400">/</li>
+                    <li
+                        itemprop="itemListElement"
+                        itemscope
+                        itemtype="https://schema.org/ListItem"
+                        class="text-primary font-medium"
+                    >
+                        <span itemprop="name">{product.name}</span>
+                        <meta itemprop="position" content="4" />
+                    </li>
+                </ol>
+            </div>
+        </nav>
+
+        <!-- 產品詳情 -->
+        <article class="max-w-7xl mx-auto px-4 md:px-10 py-8 md:py-12">
+            <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
+                <!-- 產品圖片 -->
+                <div class="flex-1">
+                    <figure
+                        class="bg-base-200 rounded-2xl p-8 flex items-center justify-center min-h-[400px] sticky top-24"
+                    >
+                        <img
+                            src={`/${product.image}`}
+                            alt={`${product.name} 產品圖片`}
+                            class="max-h-[500px] object-contain rounded-xl shadow-lg"
+                            width="500"
+                            height="500"
+                            loading="eager"
+                        />
+                    </figure>
+                </div>
+
+                <!-- 產品資訊 -->
+                <div class="flex-1 space-y-6">
+                    <!-- 分類標籤 -->
+                    <div class="flex items-center gap-2">
+                        <span class="text-3xl" aria-hidden="true"
+                            >{category.icon}</span
+                        >
+                        <a
+                            href={`/products#${category.id}`}
+                            class="badge badge-primary badge-lg hover:badge-secondary transition-colors"
+                        >
+                            {category.name}
+                        </a>
+                    </div>
+
+                    <!-- 產品名稱 -->
+                    <h1 class="text-4xl md:text-5xl font-bold leading-tight">
+                        {product.name}
+                    </h1>
+
+                    <!-- 產品規格 -->
+                    {
+                        product.size && product.size !== "-" && (
+                            <div class="flex items-center gap-2">
+                                <span class="text-gray-500">規格尺寸：</span>
+                                <span class="badge badge-outline badge-lg">
+                                    {product.size}
+                                </span>
+                            </div>
+                        )
+                    }
+
+                    <div class="divider"></div>
+
+                    <!-- 產品說明 -->
+                    <div class="prose prose-lg max-w-none">
+                        <h2 class="text-xl font-semibold mb-3">產品說明</h2>
+                        <p class="text-gray-600 leading-relaxed">
+                            {product.description}
+                        </p>
+                    </div>
+
+                    <!-- 產品編號 -->
+                    <div class="bg-base-200 rounded-xl p-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-500">產品編號</span>
+                            <span class="font-mono text-lg">#{product.id}</span>
+                        </div>
+                    </div>
+
+                    <!-- 分類說明 -->
+                    <div
+                        class="bg-gradient-to-r from-base-200 to-base-100 rounded-xl p-6 border border-base-300"
+                    >
+                        <h3 class="font-semibold mb-2 flex items-center gap-2">
+                            <span aria-hidden="true">{category.icon}</span>
+                            關於{category.name}
+                        </h3>
+                        <p class="text-sm text-gray-600">
+                            {category.description}
+                        </p>
+                    </div>
+
+                    <!-- CTA 按鈕 -->
+                    <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                        <a
+                            href={`tel:${company.contact.phone}`}
+                            class="btn btn-primary btn-lg flex-1 shadow-lg hover:scale-105 transition-transform"
+                        >
+                            📞 立即洽詢
+                        </a>
+                        <a
+                            href="/contact"
+                            class="btn btn-outline btn-lg flex-1"
+                        >
+                            聯絡我們
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 相關產品 -->
+            {
+                relatedProducts.length > 0 && (
+                    <section class="mt-16 pt-8 border-t border-base-300">
+                        <h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
+                            <span aria-hidden="true">{category.icon}</span>
+                            其他{category.name}產品
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {relatedProducts.map((relatedProduct) => (
+                                <a
+                                    href={`/products/${relatedProduct.id}`}
+                                    class="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 border border-base-200 group hover:-translate-y-1"
+                                >
+                                    <figure class="px-4 pt-4 bg-base-200/50 min-h-[160px] flex items-center justify-center overflow-hidden">
+                                        <img
+                                            src={`/${relatedProduct.image}`}
+                                            alt={relatedProduct.name}
+                                            class="rounded-xl h-40 object-contain group-hover:scale-105 transition-transform duration-300"
+                                            loading="lazy"
+                                            width="200"
+                                            height="160"
+                                        />
+                                    </figure>
+                                    <div class="card-body">
+                                        <h3 class="card-title text-lg">
+                                            {relatedProduct.name}
+                                            {relatedProduct.size &&
+                                                relatedProduct.size !== "-" && (
+                                                    <span class="badge badge-outline text-xs">
+                                                        {relatedProduct.size}
+                                                    </span>
+                                                )}
+                                        </h3>
+                                        <p class="text-sm text-gray-500 line-clamp-2">
+                                            {relatedProduct.description}
+                                        </p>
+                                    </div>
+                                </a>
+                            ))}
+                        </div>
+                        <div class="text-center mt-8">
+                            <a
+                                href={`/products#${category.id}`}
+                                class="btn btn-outline"
+                            >
+                                查看所有{category.name} →
+                            </a>
+                        </div>
+                    </section>
+                )
+            }
+
+            <!-- 返回連結 -->
+            <div class="mt-12 pt-8 border-t border-base-300">
+                <a href="/products" class="btn btn-ghost gap-2">
+                    ← 返回產品列表
+                </a>
+            </div>
+        </article>
+    </div>
+</Layout>
+
+<style>
+    .breadcrumbs li {
+        display: inline-flex;
+        align-items: center;
+    }
+</style>

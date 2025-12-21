@@ -1,8 +1,25 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import siteData from "../data/site-data.json";
+
+const { company } = siteData;
+
+// 最新消息頁面 SEO 設定
+const newsDescription = `${company.name}最新消息 - 了解我們的最新產品資訊、公司動態與優惠活動。`;
+const newsKeywords = [
+  company.name,
+  "最新消息",
+  "公司動態",
+  ...siteData.seo.keywords.slice(0, 5),
+];
 ---
 
-<Layout title="最新消息">
+<Layout
+  title="最新消息"
+  description={newsDescription}
+  keywords={newsKeywords}
+  canonical="/news"
+>
   <div class="hero min-h-[50vh] bg-base-200">
     <div class="hero-content text-center">
       <div class="max-w-md">

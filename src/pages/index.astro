@@ -4,9 +4,22 @@ import siteData from '../data/site-data.json';
 
 const { company, categories } = siteData;
 const { banner } = siteData.assets.images;
+
+// 首頁 SEO 設定
+const homeDescription = `${company.name} - ${company.tagline}。${company.description.slice(0, 100)}`;
+const homeKeywords = [
+  company.name,
+  company.englishName,
+  ...siteData.seo.keywords
+];
 ---
 
-<Layout title="首頁">
+<Layout 
+  title={company.tagline}
+  description={homeDescription}
+  keywords={homeKeywords}
+  canonical="/"
+>
   <!-- Hero Section -->
   <div class="hero min-h-[70vh] bg-base-200" style={`background-image: url(/${banner});`}>
     <div class="hero-overlay bg-opacity-60 bg-gradient-to-r from-neutral-900/80 to-transparent"></div>

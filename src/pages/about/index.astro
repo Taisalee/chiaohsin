@@ -1,11 +1,26 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import siteData from '../../data/site-data.json';
+import Layout from "../../layouts/Layout.astro";
+import siteData from "../../data/site-data.json";
 
 const { company } = siteData;
+
+// 關於頁面 SEO 設定
+const aboutDescription = `${company.name}特色簡介 - ${company.description}`;
+const aboutKeywords = [
+  company.name,
+  "公司簡介",
+  "關於我們",
+  "工作手套製造商",
+  ...siteData.seo.keywords.slice(0, 5),
+];
 ---
 
-<Layout title="特色簡介" description={company.description}>
+<Layout
+  title="特色簡介"
+  description={aboutDescription}
+  keywords={aboutKeywords}
+  canonical="/about"
+>
   <div class="hero bg-base-200 py-12">
     <div class="hero-content text-center">
       <div class="max-w-md">
@@ -25,36 +40,47 @@ const { company } = siteData;
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-12">
         <div class="card bg-base-100 shadow-md">
-           <div class="card-body">
-              <h3 class="card-title text-primary">產品優良</h3>
-              <p>我們堅持高品質的生產標準，確保每一雙手套都能提供最佳的防護效果。</p>
-           </div>
+          <div class="card-body">
+            <h3 class="card-title text-primary">產品優良</h3>
+            <p>
+              我們堅持高品質的生產標準，確保每一雙手套都能提供最佳的防護效果。
+            </p>
+          </div>
         </div>
         <div class="card bg-base-100 shadow-md">
-           <div class="card-body">
-              <h3 class="card-title text-secondary">價格合宜</h3>
-              <p>工廠直營，免去中間商剝削，將最實惠的價格回饋給客戶。</p>
-           </div>
+          <div class="card-body">
+            <h3 class="card-title text-secondary">價格合宜</h3>
+            <p>工廠直營，免去中間商剝削，將最實惠的價格回饋給客戶。</p>
+          </div>
         </div>
         <div class="card bg-base-100 shadow-md">
-           <div class="card-body">
-              <h3 class="card-title text-accent">重量足</h3>
-              <p>我們保證產品重量與規格實在，不偷工減料。</p>
-           </div>
+          <div class="card-body">
+            <h3 class="card-title text-accent">重量足</h3>
+            <p>我們保證產品重量與規格實在，不偷工減料。</p>
+          </div>
         </div>
         <div class="card bg-base-100 shadow-md text-white bg-neutral">
-           <div class="card-body">
-              <h3 class="card-title">深受信任</h3>
-              <p>多年來深受各界客戶支持與信賴，是您最可靠的合作夥伴。</p>
-           </div>
+          <div class="card-body">
+            <h3 class="card-title">深受信任</h3>
+            <p>多年來深受各界客戶支持與信賴，是您最可靠的合作夥伴。</p>
+          </div>
         </div>
       </div>
 
-       <div class="alert alert-success shadow-lg">
-        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      <div class="alert alert-success shadow-lg">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="stroke-current shrink-0 h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          ><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg
+        >
         <span>{company.slogan}</span>
       </div>
-
     </div>
   </div>
 </Layout>

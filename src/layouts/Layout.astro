@@ -1,43 +1,198 @@
 ---
-import siteData from '../data/site-data.json';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import siteData from "../data/site-data.json";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 
 interface Props {
-	title?: string;
+  title?: string;
   description?: string;
+  keywords?: string[];
+  canonical?: string;
+  ogImage?: string;
+  ogType?: "website" | "article" | "product";
+  noIndex?: boolean;
 }
 
-const { title, description } = Astro.props;
-const pageTitle = title ? `${title} | ${siteData.company.name}` : siteData.seo.title;
+const {
+  title,
+  description,
+  keywords: customKeywords,
+  canonical,
+  ogImage,
+  ogType = "website",
+  noIndex = false,
+} = Astro.props;
+
+const { company } = siteData;
+const pageTitle = title ? `${title} | ${company.name}` : siteData.seo.title;
 const pageDescription = description || siteData.seo.description;
-const { keywords } = siteData.seo;
+const pageKeywords = customKeywords || siteData.seo.keywords;
+
+// 網站基本 URL
+const siteUrl = "https://www.chiaohsin.com.tw";
+const currentPath = Astro.url.pathname;
+const canonicalUrl = canonical
+  ? `${siteUrl}${canonical}`
+  : `${siteUrl}${currentPath}`;
+
+// OG 圖片
+const ogImageUrl = ogImage
+  ? `${siteUrl}${ogImage}`
+  : `${siteUrl}/${siteData.assets.images.banner}`;
+
+// 組織結構化資料
+const organizationData = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: company.name,
+  alternateName: company.englishName,
+  url: `https://${company.website}`,
+  logo: `${siteUrl}/${company.logo}`,
+  description: company.description,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: company.address.full,
+    addressLocality: company.address.district,
+    addressRegion: company.address.city,
+    addressCountry: "TW",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: company.address.coordinates.lat,
+    longitude: company.address.coordinates.lng,
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: company.contact.phone,
+    contactType: "customer service",
+    email: company.contact.email,
+    availableLanguage: ["Chinese"],
+  },
+  sameAs: [],
+};
+
+// LocalBusiness 結構化資料
+const localBusinessData = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: company.name,
+  image: `${siteUrl}/${company.logo}`,
+  telephone: company.contact.phone,
+  email: company.contact.email,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: company.address.full,
+    addressLocality: company.address.district,
+    addressRegion: company.address.city,
+    postalCode: "",
+    addressCountry: "TW",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: company.address.coordinates.lat,
+    longitude: company.address.coordinates.lng,
+  },
+  url: `https://${company.website}`,
+  priceRange: "$$",
+};
 ---
 
 <!doctype html>
 <html lang="zh-TW" data-theme="corporate">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content={pageDescription} />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="keywords" content={keywords.join(", ")} />
-		<meta name="generator" content={Astro.generator} />
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<title>{pageTitle}</title>
-	</head>
-	<body class="font-['Noto_Sans_TC'] flex flex-col min-h-screen bg-base-100 text-base-content">
+    <!-- 基本 SEO -->
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="keywords" content={pageKeywords.join(", ")} />
+    <meta name="author" content={company.name} />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Robots -->
+    {
+      noIndex ? (
+        <meta name="robots" content="noindex, nofollow" />
+      ) : (
+        <meta name="robots" content="index, follow" />
+      )
+    }
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:alt" content={pageTitle} />
+    <meta property="og:locale" content="zh_TW" />
+    <meta property="og:site_name" content={company.name} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- 其他 Meta 標籤 -->
+    <meta name="theme-color" content="#4A90A4" />
+    <meta name="format-detection" content="telephone=yes" />
+    <meta name="geo.region" content="TW-TNN" />
+    <meta name="geo.placename" content={company.address.city} />
+    <meta
+      name="geo.position"
+      content={`${company.address.coordinates.lat};${company.address.coordinates.lng}`}
+    />
+    <meta
+      name="ICBM"
+      content={`${company.address.coordinates.lat}, ${company.address.coordinates.lng}`}
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- 結構化資料 -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(organizationData)}
+    />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(localBusinessData)}
+    />
+
+    <!-- 額外的 head 內容 slot -->
+    <slot name="head" />
+  </head>
+  <body
+    class="font-['Noto_Sans_TC'] flex flex-col min-h-screen bg-base-100 text-base-content"
+  >
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded"
+    >
+      跳至主要內容
+    </a>
     <Header />
-		<main class="flex-grow">
-			<slot />
-		</main>
+    <main id="main-content" class="flex-grow" role="main">
+      <slot />
+    </main>
     <Footer />
-	</body>
+  </body>
 </html>
 
 <style is:global>
@@ -49,10 +204,10 @@ const { keywords } = siteData.seo;
     background: #f1f1f1;
   }
   ::-webkit-scrollbar-thumb {
-    background: #888; 
+    background: #888;
     border-radius: 5px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
+    background: #555;
   }
 </style>

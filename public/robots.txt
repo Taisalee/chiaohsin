@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.chiaohsin.com.tw/sitemap.xml
+
+# Disallow admin or private paths (if any)
+# Disallow: /admin/

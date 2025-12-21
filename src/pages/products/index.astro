@@ -1,0 +1,144 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import siteData from "../../data/site-data.json";
+
+const { categories, products, company } = siteData;
+---
+
+<Layout
+    title="商品介紹"
+    description={`${company.name}提供多樣化的工作手套與防護用品，包括棉紗手套、尼龍手套、膠手套、口罩、包裝材料等，品質優良、價格合宜。`}
+    keywords={[
+        "工作手套",
+        "棉紗手套",
+        "尼龍手套",
+        "防護用品",
+        "口罩",
+        "膠帶",
+        ...siteData.seo.keywords,
+    ]}
+    canonical="/products"
+>
+    <div class="drawer lg:drawer-open">
+        <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+        <div class="drawer-content flex flex-col p-4 md:p-10">
+            <!-- Page content -->
+            <div class="flex justify-between items-center mb-8">
+                <h1 class="text-3xl font-bold">產品介紹</h1>
+                <label
+                    for="my-drawer-2"
+                    class="btn btn-primary drawer-button lg:hidden"
+                    >分類選單</label
+                >
+            </div>
+
+            {
+                categories.map((cat) => {
+                    const catProducts = products.filter(
+                        (p) => p.category === cat.id,
+                    );
+                    if (catProducts.length === 0) return null;
+
+                    return (
+                        <section id={cat.id} class="mb-16 scroll-mt-24">
+                            <div class="flex items-center gap-4 mb-6 border-b pb-2 border-base-300">
+                                <span class="text-4xl" aria-hidden="true">
+                                    {cat.icon}
+                                </span>
+                                <div>
+                                    <h2 class="text-2xl font-bold">
+                                        {cat.name}
+                                    </h2>
+                                    <p class="text-gray-500 text-sm mt-1">
+                                        {cat.description}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                                {catProducts.map((product) => (
+                                    <a
+                                        href={`/products/${product.id}`}
+                                        class="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 border border-base-200 group hover:-translate-y-1"
+                                    >
+                                        <figure class="px-4 pt-4 relative bg-base-200/50 min-h-[200px] flex items-center justify-center overflow-hidden">
+                                            <img
+                                                src={`/${product.image}`}
+                                                alt={`${product.name} - ${cat.name}`}
+                                                class="rounded-xl h-48 object-contain group-hover:scale-105 transition-transform duration-300"
+                                                loading="lazy"
+                                                width="300"
+                                                height="200"
+                                            />
+                                            <div class="badge badge-secondary absolute top-2 right-2">
+                                                {cat.name}
+                                            </div>
+                                        </figure>
+                                        <div class="card-body">
+                                            <h3 class="card-title text-lg">
+                                                {product.name}
+                                                {product.size &&
+                                                    product.size !== "-" && (
+                                                        <div class="badge badge-outline text-xs">
+                                                            {product.size}
+                                                        </div>
+                                                    )}
+                                            </h3>
+                                            <p class="text-sm text-gray-500 line-clamp-3">
+                                                {product.description}
+                                            </p>
+                                            <div class="card-actions justify-end mt-4">
+                                                <span class="btn btn-sm btn-primary group-hover:btn-secondary transition-colors">
+                                                    查看詳情 →
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                ))}
+                            </div>
+                        </section>
+                    );
+                })
+            }
+        </div>
+        <div class="drawer-side z-40">
+            <label
+                for="my-drawer-2"
+                aria-label="關閉側邊選單"
+                class="drawer-overlay"></label>
+            <nav aria-label="產品分類">
+                <ul
+                    class="menu p-4 w-80 min-h-full bg-base-200 text-base-content pt-20 lg:pt-4"
+                >
+                    <li class="menu-title text-lg mb-2 text-primary">
+                        產品分類
+                    </li>
+                    {
+                        categories.map((cat) => (
+                            <li>
+                                <a
+                                    href={`#${cat.id}`}
+                                    class="flex justify-between"
+                                >
+                                    <span>
+                                        <span aria-hidden="true">
+                                            {cat.icon}
+                                        </span>{" "}
+                                        {cat.name}
+                                    </span>
+                                    <span class="badge badge-sm">
+                                        {
+                                            products.filter(
+                                                (p) => p.category === cat.id,
+                                            ).length
+                                        }
+                                    </span>
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </nav>
+        </div>
+    </div>
+</Layout>
