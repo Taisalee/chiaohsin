@@ -30,11 +30,8 @@ const relatedProducts = products
 // SEO 相關設定
 const productTitle = `${product.name} - ${category.name}`;
 const productDescription = `${product.name}｜${category.name}｜${product.description}｜${company.name}專業提供各式工作手套、防護用品。`;
-const productKeywords = [
-    product.name,
-    category.name,
-    ...seo.keywords.slice(0, 5),
-];
+// 產品專屬關鍵字：產品名、分類名、tags（同義詞）
+const productKeywords = [product.name, category.name, ...(product.tags || [])];
 
 // 結構化資料 (JSON-LD)
 const structuredData = {

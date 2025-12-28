@@ -5,12 +5,7 @@ import seo from "../data/seo.json";
 
 // 最新消息頁面 SEO 設定
 const newsDescription = `${company.name}最新消息 - 了解我們的最新產品資訊、公司動態與優惠活動。`;
-const newsKeywords = [
-  company.name,
-  "最新消息",
-  "公司動態",
-  ...seo.keywords.slice(0, 5),
-];
+const newsKeywords = [company.name, "最新消息", "公司動態"];
 ---
 
 <Layout

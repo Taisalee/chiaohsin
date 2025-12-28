@@ -9,15 +9,7 @@ import seo from "../../data/seo.json";
 <Layout
     title="商品介紹"
     description={`${company.name}提供多樣化的工作手套與防護用品，包括棉紗手套、尼龍手套、膠手套、口罩、包裝材料等，品質優良、價格合宜。`}
-    keywords={[
-        "工作手套",
-        "棉紗手套",
-        "尼龍手套",
-        "防護用品",
-        "口罩",
-        "膠帶",
-        ...seo.keywords,
-    ]}
+    keywords={["工作手套", "棉紗手套", "尼龍手套", "防護用品", "口罩", "膠帶"]}
     canonical="/products"
 >
     <div class="drawer lg:drawer-open">
@@ -33,6 +25,74 @@ import seo from "../../data/seo.json";
                 >
             </div>
 
+            <!-- 搜尋結果提示 -->
+            <div id="search-result-banner" class="hidden mb-6">
+                <div class="alert alert-info shadow-lg">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="stroke-current shrink-0 h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                        ></path>
+                    </svg>
+                    <div>
+                        <span
+                            >搜尋「<strong id="search-query-display"
+                            ></strong>」的結果：</span
+                        >
+                        <span id="search-count" class="font-bold"></span> 項產品
+                    </div>
+                    <a href="/products" class="btn btn-sm btn-ghost">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4 mr-1"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                        清除搜尋
+                    </a>
+                </div>
+            </div>
+
+            <!-- 無搜尋結果提示 -->
+            <div id="no-results-banner" class="hidden mb-6">
+                <div class="alert alert-warning shadow-lg">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="stroke-current shrink-0 h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"
+                        ></path>
+                    </svg>
+                    <span
+                        >找不到符合「<strong id="no-results-query"
+                        ></strong>」的產品</span
+                    >
+                    <a href="/products" class="btn btn-sm btn-ghost"
+                        >查看所有產品</a
+                    >
+                </div>
+            </div>
+
             {
                 categories.map((cat) => {
                     const catProducts = products.filter(
@@ -41,7 +101,11 @@ import seo from "../../data/seo.json";
                     if (catProducts.length === 0) return null;
 
                     return (
-                        <section id={cat.id} class="mb-16 scroll-mt-24">
+                        <section
+                            id={cat.id}
+                            class="mb-16 scroll-mt-24 category-section"
+                            data-category={cat.id}
+                        >
                             <div class="flex items-center gap-4 mb-6 border-b pb-2 border-base-300">
                                 <span class="text-4xl" aria-hidden="true">
                                     {cat.icon}
@@ -60,7 +124,16 @@ import seo from "../../data/seo.json";
                                 {catProducts.map((product) => (
                                     <a
                                         href={`/products/${product.id}`}
-                                        class="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 border border-base-200 group hover:-translate-y-1"
+                                        class="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 border border-base-200 group hover:-translate-y-1 product-card"
+                                        data-product-id={product.id}
+                                        data-product-name={product.name}
+                                        data-product-description={
+                                            product.description
+                                        }
+                                        data-product-category={product.category}
+                                        data-product-tags={(
+                                            product.tags || []
+                                        ).join(" ")}
                                     >
                                         <figure class="px-4 pt-4 relative bg-base-200/50 min-h-[200px] flex items-center justify-center overflow-hidden">
                                             <img
@@ -143,3 +216,73 @@ import seo from "../../data/seo.json";
         </div>
     </div>
 </Layout>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const query = urlParams.get("q");
+
+        if (!query) return;
+
+        const searchQuery = query.trim().toLowerCase();
+        const searchResultBanner = document.getElementById(
+            "search-result-banner",
+        );
+        const noResultsBanner = document.getElementById("no-results-banner");
+        const searchQueryDisplay = document.getElementById(
+            "search-query-display",
+        );
+        const searchCount = document.getElementById("search-count");
+        const noResultsQuery = document.getElementById("no-results-query");
+        const productCards = document.querySelectorAll(".product-card");
+        const categorySections = document.querySelectorAll(".category-section");
+
+        let matchCount = 0;
+        const matchingCategories = new Set();
+
+        // 過濾產品
+        productCards.forEach((el) => {
+            const card = el as HTMLElement;
+            const name = (card.dataset.productName || "").toLowerCase();
+            const description = (
+                card.dataset.productDescription || ""
+            ).toLowerCase();
+            const category = (card.dataset.productCategory || "").toLowerCase();
+            const tags = (card.dataset.productTags || "").toLowerCase();
+
+            const matches =
+                name.includes(searchQuery) ||
+                description.includes(searchQuery) ||
+                category.includes(searchQuery) ||
+                tags.includes(searchQuery);
+
+            if (matches) {
+                matchCount++;
+                matchingCategories.add(card.dataset.productCategory);
+                card.classList.remove("hidden");
+            } else {
+                card.classList.add("hidden");
+            }
+        });
+
+        // 隱藏沒有符合產品的分類區塊
+        categorySections.forEach((el) => {
+            const section = el as HTMLElement;
+            const categoryId = section.dataset.category;
+            if (!matchingCategories.has(categoryId)) {
+                section.classList.add("hidden");
+            }
+        });
+
+        // 顯示搜尋結果提示
+        if (matchCount > 0) {
+            if (searchResultBanner)
+                searchResultBanner.classList.remove("hidden");
+            if (searchQueryDisplay) searchQueryDisplay.textContent = query;
+            if (searchCount) searchCount.textContent = matchCount.toString();
+        } else {
+            if (noResultsBanner) noResultsBanner.classList.remove("hidden");
+            if (noResultsQuery) noResultsQuery.textContent = query;
+        }
+    });
+</script>

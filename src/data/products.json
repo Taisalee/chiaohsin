@@ -524,6 +524,15 @@
         "category": "special-gloves",
         "size": "F",
         "description": "本產品使用尼龍材質編織，沐浴時使用，能有效去角質，輕鬆搓出大量泡泡。顏色多樣。",
-        "image": "images/product_l_1464797.jpg"
+        "image": "images/product_l_1464797.jpg",
+        "tags": [
+            "洗澡",
+            "浴室",
+            "去角質",
+            "清潔",
+            "搓澡",
+            "洗澡手套",
+            "浴室用品"
+        ]
     }
 ]

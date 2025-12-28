@@ -25,7 +25,10 @@ const {
 } = Astro.props;
 const pageTitle = title ? `${title} | ${company.name}` : seo.title;
 const pageDescription = description || seo.description;
-const pageKeywords = customKeywords || seo.keywords;
+// 自訂關鍵字 + 品牌關鍵字，或者預設使用全部產品關鍵字 + 品牌關鍵字
+const pageKeywords = customKeywords
+  ? [...customKeywords, ...seo.brandKeywords]
+  : [...seo.productKeywords, ...seo.brandKeywords];
 
 // 網站基本 URL
 const siteUrl = "https://www.chiaohsin.com.tw";
