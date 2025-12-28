@@ -1,9 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import siteData from "../data/site-data.json";
+import company from "../data/company.json";
+import seo from "../data/seo.json";
 
-const { company } = siteData;
-const { map } = siteData.assets.images;
+const { map } = company.assets.images;
 
 // 聯絡頁面 SEO 設定
 const contactDescription = `聯絡${company.name} - 電話：${company.contact.phone}，地址：${company.address.full}。專業工作手套供應商，歡迎來電或來信洽詢。`;
@@ -13,7 +13,7 @@ const contactKeywords = [
   "工作手套",
   company.address.city,
   company.address.district,
-  ...siteData.seo.keywords.slice(0, 5),
+  ...seo.keywords.slice(0, 5),
 ];
 ---
 

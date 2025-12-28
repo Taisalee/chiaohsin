@@ -1,0 +1,42 @@
+{
+    "main": [
+        {
+            "title": "公司介紹",
+            "url": "/about",
+            "children": [
+                {
+                    "title": "特色簡介",
+                    "url": "/about"
+                },
+                {
+                    "title": "基本資料",
+                    "url": "/about/info"
+                },
+                {
+                    "title": "聯絡資訊",
+                    "url": "/contact"
+                }
+            ]
+        },
+        {
+            "title": "最新消息",
+            "url": "/news",
+            "children": []
+        },
+        {
+            "title": "商品介紹",
+            "url": "/products",
+            "children": []
+        }
+    ],
+    "footer": [
+        {
+            "title": "訂閱最新消息",
+            "url": "/rss/news"
+        },
+        {
+            "title": "訂閱商品訊息",
+            "url": "/rss/products"
+        }
+    ]
+}

@@ -1,24 +1,74 @@
 ---
-import siteData from '../data/site-data.json';
-
-const { navigation, company } = siteData;
+import company from "../data/company.json";
+import navigation from "../data/navigation.json";
 ---
 
 <div class="navbar bg-base-100 shadow-md sticky top-0 z-50 px-4 md:px-8">
   <div class="navbar-start">
     <div class="dropdown">
       <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          ><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h8m-8 6h16"></path></svg
+        >
       </div>
-      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-        {navigation.main.map((item) => (
+      <ul
+        tabindex="0"
+        class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+      >
+        {
+          navigation.main.map((item) => (
+            <li>
+              {item.children.length > 0 ? (
+                <details>
+                  <summary>{item.title}</summary>
+                  <ul class="p-2">
+                    {item.children.map((child) => (
+                      <li>
+                        <a href={child.url}>{child.title}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              ) : (
+                <a href={item.url}>{item.title}</a>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <a
+      href="/"
+      class="btn btn-ghost text-xl normal-case font-bold text-primary flex items-center gap-2"
+    >
+      <img src={`/${company.logo}`} alt={company.name} class="h-10 w-auto" />
+      <span class="hidden sm:inline">喬新針織有限公司/永力新國際有限公司</span>
+    </a>
+  </div>
+  <div class="navbar-center hidden lg:flex">
+    <ul
+      class="menu menu-horizontal px-1 font-medium bg-base-100/50 backdrop-blur-sm rounded-full"
+    >
+      {
+        navigation.main.map((item) => (
           <li>
             {item.children.length > 0 ? (
               <details>
                 <summary>{item.title}</summary>
-                <ul class="p-2">
+                <ul class="p-2 w-48 bg-base-100 shadow-xl border border-base-200">
                   {item.children.map((child) => (
-                    <li><a href={child.url}>{child.title}</a></li>
+                    <li>
+                      <a href={child.url}>{child.title}</a>
+                    </li>
                   ))}
                 </ul>
               </details>
@@ -26,38 +76,15 @@ const { navigation, company } = siteData;
               <a href={item.url}>{item.title}</a>
             )}
           </li>
-        ))}
-      </ul>
-    </div>
-    <a href="/" class="btn btn-ghost text-xl normal-case font-bold text-primary flex items-center gap-2">
-      <!-- <img src={`/${company.logo}`} alt={company.name} class="h-8 w-auto" /> -->
-       <!-- Using text if image missing or for simplicity first -->
-      <span class="text-2xl">🧤</span>
-      {company.name}
-    </a>
-  </div>
-  <div class="navbar-center hidden lg:flex">
-    <ul class="menu menu-horizontal px-1 font-medium bg-base-100/50 backdrop-blur-sm rounded-full">
-      {navigation.main.map((item) => (
-        <li>
-          {item.children.length > 0 ? (
-            <details>
-              <summary>{item.title}</summary>
-              <ul class="p-2 w-48 bg-base-100 shadow-xl border border-base-200">
-                {item.children.map((child) => (
-                  <li><a href={child.url}>{child.title}</a></li>
-                ))}
-              </ul>
-            </details>
-          ) : (
-            <a href={item.url}>{item.title}</a>
-          )}
-        </li>
-      ))}
+        ))
+      }
     </ul>
   </div>
   <div class="navbar-end">
-    <a href="tel:{company.contact.phone}" class="btn btn-primary btn-sm md:btn-md text-white">
+    <a
+      href="tel:{company.contact.phone}"
+      class="btn btn-primary btn-sm md:btn-md text-white"
+    >
       聯絡我們
     </a>
   </div>

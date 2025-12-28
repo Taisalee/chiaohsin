@@ -1,8 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import siteData from "../../data/site-data.json";
-
-const { categories, products, company } = siteData;
+import company from "../../data/company.json";
+import categories from "../../data/categories.json";
+import products from "../../data/products.json";
+import seo from "../../data/seo.json";
 ---
 
 <Layout
@@ -15,7 +16,7 @@ const { categories, products, company } = siteData;
         "防護用品",
         "口罩",
         "膠帶",
-        ...siteData.seo.keywords,
+        ...seo.keywords,
     ]}
     canonical="/products"
 >

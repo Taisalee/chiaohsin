@@ -1,7 +1,6 @@
 ---
-import siteData from "../data/site-data.json";
-
-const { categories, products } = siteData;
+import categories from "../data/categories.json";
+import products from "../data/products.json";
 
 interface Props {
   categoryId?: string;
@@ -102,12 +101,6 @@ const displayedCategories = categories;
                               <div class="stat-title">尺寸/規格</div>
                               <div class="stat-value text-lg">
                                 {product.size}
-                              </div>
-                            </div>
-                            <div class="stat">
-                              <div class="stat-title">產品編號</div>
-                              <div class="stat-value text-lg text-gray-400">
-                                #{product.id}
                               </div>
                             </div>
                           </div>

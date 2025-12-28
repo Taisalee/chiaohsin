@@ -1,8 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import siteData from "../../data/site-data.json";
-
-const { company } = siteData;
+import company from "../../data/company.json";
+import seo from "../../data/seo.json";
 
 // 關於頁面 SEO 設定
 const aboutDescription = `${company.name}特色簡介 - ${company.description}`;
@@ -11,7 +10,7 @@ const aboutKeywords = [
   "公司簡介",
   "關於我們",
   "工作手套製造商",
-  ...siteData.seo.keywords.slice(0, 5),
+  ...seo.keywords.slice(0, 5),
 ];
 ---
 

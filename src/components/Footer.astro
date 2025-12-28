@@ -1,21 +1,29 @@
 ---
-import siteData from '../data/site-data.json';
+import company from "../data/company.json";
+import navigation from "../data/navigation.json";
+import categories from "../data/categories.json";
+import products from "../data/products.json";
 
-const { company, navigation } = siteData;
 const currentYear = new Date().getFullYear();
 ---
 
 <footer class="footer p-10 bg-neutral text-neutral-content">
   <aside>
     <div class="font-bold text-2xl flex items-center gap-2 mb-2">
-      <span class="text-3xl">🧤</span>
+      <img src={`/${company.logo}`} alt={company.name} class="h-12 w-auto" />
       {company.name}
     </div>
     <p class="max-w-md text-neutral-content/80">
       {company.description}
     </p>
     <div class="flex gap-4 mt-4">
-      <a href={company.address.coordinates ? `https://www.google.com/maps/search/?api=1&query=${company.address.coordinates.lat},${company.address.coordinates.lng}` : '#'} target="_blank" class="link link-hover">
+      <a
+        href={company.address.coordinates
+          ? `https://www.google.com/maps/search/?api=1&query=${company.address.coordinates.lat},${company.address.coordinates.lng}`
+          : "#"}
+        target="_blank"
+        class="link link-hover"
+      >
         📍 {company.address.full}
       </a>
     </div>
@@ -23,25 +31,37 @@ const currentYear = new Date().getFullYear();
       📞 {company.contact.phone} | 📠 {company.contact.fax}
     </div>
     <div>
-      ✉️ <a href={`mailto:${company.contact.email}`} class="link link-hover">{company.contact.email}</a>
+      ✉️ <a href={`mailto:${company.contact.email}`} class="link link-hover"
+        >{company.contact.email}</a
+      >
     </div>
-  </aside> 
+  </aside>
   <nav>
-    <header class="footer-title">網站地圖</header> 
-    {navigation.main.map(item => (
-      <a href={item.url} class="link link-hover">{item.title}</a>
-    ))}
-  </nav> 
+    <header class="footer-title">網站地圖</header>
+    {
+      navigation.main.map((item) => (
+        <a href={item.url} class="link link-hover">
+          {item.title}
+        </a>
+      ))
+    }
+  </nav>
   <nav>
-    <header class="footer-title">產品分類</header> 
-    {siteData.categories.slice(0, 5).map(cat => (
-      <a href={`/products#${cat.id}`} class="link link-hover">{cat.name}</a>
-    ))}
+    <header class="footer-title">產品分類</header>
+    {
+      categories.slice(0, 5).map((cat) => (
+        <a href={`/products#${cat.id}`} class="link link-hover">
+          {cat.name}
+        </a>
+      ))
+    }
     <a href="/products" class="link link-hover text-primary">查看更多...</a>
   </nav>
 </footer>
 <footer class="footer footer-center p-4 bg-neutral-900 text-neutral-content">
   <aside>
-    <p>Copyright © {currentYear} - All right reserved by {company.englishName}</p>
+    <p>
+      Copyright © {currentYear} - All right reserved by {company.englishName}
+    </p>
   </aside>
 </footer>

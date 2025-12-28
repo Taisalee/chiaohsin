@@ -1,5 +1,6 @@
 ---
-import siteData from "../data/site-data.json";
+import company from "../data/company.json";
+import seo from "../data/seo.json";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
@@ -22,11 +23,9 @@ const {
   ogType = "website",
   noIndex = false,
 } = Astro.props;
-
-const { company } = siteData;
-const pageTitle = title ? `${title} | ${company.name}` : siteData.seo.title;
-const pageDescription = description || siteData.seo.description;
-const pageKeywords = customKeywords || siteData.seo.keywords;
+const pageTitle = title ? `${title} | ${company.name}` : seo.title;
+const pageDescription = description || seo.description;
+const pageKeywords = customKeywords || seo.keywords;
 
 // 網站基本 URL
 const siteUrl = "https://www.chiaohsin.com.tw";
@@ -38,7 +37,7 @@ const canonicalUrl = canonical
 // OG 圖片
 const ogImageUrl = ogImage
   ? `${siteUrl}${ogImage}`
-  : `${siteUrl}/${siteData.assets.images.banner}`;
+  : `${siteUrl}/${company.assets.images.banner}`;
 
 // 組織結構化資料
 const organizationData = {

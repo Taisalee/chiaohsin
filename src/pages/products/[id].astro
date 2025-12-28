@@ -1,11 +1,11 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import siteData from "../../data/site-data.json";
+import company from "../../data/company.json";
+import categories from "../../data/categories.json";
+import products from "../../data/products.json";
+import seo from "../../data/seo.json";
 
 export function getStaticPaths() {
-    const products = siteData.products;
-    const categories = siteData.categories;
-
     return products.map((product) => {
         const category = categories.find((c) => c.id === product.category);
         return {
@@ -16,15 +16,14 @@ export function getStaticPaths() {
 }
 
 interface Props {
-    product: (typeof siteData.products)[0];
-    category: (typeof siteData.categories)[0];
+    product: (typeof products)[0];
+    category: (typeof categories)[0];
 }
 
 const { product, category } = Astro.props;
-const { company } = siteData;
 
 // 取得同分類的其他產品作為相關產品
-const relatedProducts = siteData.products
+const relatedProducts = products
     .filter((p) => p.category === product.category && p.id !== product.id)
     .slice(0, 3);
 
@@ -34,7 +33,7 @@ const productDescription = `${product.name}｜${category.name}｜${product.descr
 const productKeywords = [
     product.name,
     category.name,
-    ...siteData.seo.keywords.slice(0, 5),
+    ...seo.keywords.slice(0, 5),
 ];
 
 // 結構化資料 (JSON-LD)
@@ -241,15 +240,6 @@ const breadcrumbData = {
                             {product.description}
                         </p>
                     </div>
-
-                    <!-- 產品編號 -->
-                    <div class="bg-base-200 rounded-xl p-4">
-                        <div class="flex items-center justify-between">
-                            <span class="text-gray-500">產品編號</span>
-                            <span class="font-mono text-lg">#{product.id}</span>
-                        </div>
-                    </div>
-
                     <!-- 分類說明 -->
                     <div
                         class="bg-gradient-to-r from-base-200 to-base-100 rounded-xl p-6 border border-base-300"

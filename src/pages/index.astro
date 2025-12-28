@@ -1,16 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import siteData from '../data/site-data.json';
+import company from '../data/company.json';
+import categories from '../data/categories.json';
+import seo from '../data/seo.json';
 
-const { company, categories } = siteData;
-const { banner } = siteData.assets.images;
+const { banner } = company.assets.images;
 
 // 首頁 SEO 設定
 const homeDescription = `${company.name} - ${company.tagline}。${company.description.slice(0, 100)}`;
 const homeKeywords = [
   company.name,
   company.englishName,
-  ...siteData.seo.keywords
+  ...seo.keywords
 ];
 ---
 

@@ -1,4 +1,4 @@
-import siteData from '../data/site-data.json';
+import products from '../data/products.json';
 
 const siteUrl = 'https://www.chiaohsin.com.tw';
 const currentDate = new Date().toISOString().split('T')[0];
@@ -14,7 +14,7 @@ const staticPages = [
 ];
 
 // 產品頁面
-const productPages = siteData.products.map((product) => ({
+const productPages = products.map((product) => ({
     url: `/products/${product.id}`,
     priority: '0.8',
     changefreq: 'monthly',
