@@ -7,56 +7,129 @@ import products from "../data/products.json";
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="footer p-10 bg-neutral text-neutral-content">
-  <aside>
-    <div class="font-bold text-2xl flex items-center gap-2 mb-2">
-      <img src={`/${company.logo}`} alt={company.name} class="h-12 w-auto" />
-      {company.name}
+<footer
+  class="footer p-10 bg-[#151515] text-neutral-content grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_0.8fr_0.8fr_1.2fr_1.2fr] gap-8 lg:gap-8"
+>
+  <aside class="flex flex-col gap-6 lg:col-span-1">
+    <div class="font-bold text-2xl flex items-center gap-3">
+      <img
+        src={`/${company.logo}`}
+        alt={company.name}
+        class="h-12 w-auto brightness-200 grayscale-0"
+      />
+      <div class="flex flex-col">
+        <span class="tracking-wide text-white text-lg">{company.name}</span>
+        <span
+          class="text-[10px] font-light text-gray-400 tracking-wider uppercase"
+          >{company.englishName}</span
+        >
+      </div>
     </div>
-    <p class="max-w-md text-neutral-content/80">
+    <p class="text-gray-500 leading-relaxed text-sm text-justify">
       {company.description}
     </p>
-    <div class="flex gap-4 mt-4">
-      <a
-        href={company.address.coordinates
-          ? `https://www.google.com/maps/search/?api=1&query=${company.address.coordinates.lat},${company.address.coordinates.lng}`
-          : "#"}
-        target="_blank"
-        class="link link-hover"
-      >
-        📍 {company.address.full}
-      </a>
-    </div>
-    <div>
-      📞 {company.contact.phone} | 📠 {company.contact.fax}
-    </div>
-    <div>
-      ✉️ <a href={`mailto:${company.contact.email}`} class="link link-hover"
-        >{company.contact.email}</a
-      >
-    </div>
   </aside>
-  <nav>
-    <header class="footer-title">網站地圖</header>
+
+  <nav class="flex flex-col gap-4">
+    <header class="text-white font-bold text-base mb-2 relative inline-block">
+      網站地圖
+      <span
+        class="absolute -bottom-2 left-0 w-8 h-0.5 bg-primary/80 rounded-full"
+      ></span>
+    </header>
     {
       navigation.main.map((item) => (
-        <a href={item.url} class="link link-hover">
+        <a
+          href={item.url}
+          class="link link-hover text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300 text-sm"
+        >
           {item.title}
         </a>
       ))
     }
   </nav>
-  <nav>
-    <header class="footer-title">產品分類</header>
+
+  <nav class="flex flex-col gap-4">
+    <header class="text-white font-bold text-base mb-2 relative inline-block">
+      熱門分類
+      <span
+        class="absolute -bottom-2 left-0 w-8 h-0.5 bg-primary/80 rounded-full"
+      ></span>
+    </header>
     {
       categories.slice(0, 5).map((cat) => (
-        <a href={`/products#${cat.id}`} class="link link-hover">
+        <a
+          href={`/products#${cat.id}`}
+          class="link link-hover text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300 text-sm"
+        >
           {cat.name}
         </a>
       ))
     }
-    <a href="/products" class="link link-hover text-primary">查看更多...</a>
+    <a
+      href="/products"
+      class="link link-hover text-primary font-medium mt-2 flex items-center gap-1 group text-sm"
+    >
+      查看更多
+      <span class="group-hover:translate-x-1 transition-transform">→</span>
+    </a>
   </nav>
+
+  <div class="flex flex-col gap-4">
+    <header class="text-white font-bold text-base mb-2 relative inline-block">
+      聯絡我們
+      <span
+        class="absolute -bottom-2 left-0 w-8 h-0.5 bg-primary/80 rounded-full"
+      ></span>
+    </header>
+
+    <div class="flex flex-col gap-4 text-sm text-gray-400">
+      <a
+        href={company.address.coordinates
+          ? `https://www.google.com/maps/search/?api=1&query=${company.address.coordinates.lat},${company.address.coordinates.lng}`
+          : "#"}
+        target="_blank"
+        class="flex items-start gap-3 hover:text-white transition-colors"
+      >
+        <span class="text-primary mt-0.5">📍</span>
+        <span class="leading-relaxed">{company.address.full}</span>
+      </a>
+      <div class="flex items-center gap-3 hover:text-white transition-colors">
+        <span class="text-primary">📞</span>
+        <span>{company.contact.phone}</span>
+      </div>
+      <div class="flex items-center gap-3 hover:text-white transition-colors">
+        <span class="text-primary">📠</span>
+        <span>{company.contact.fax}</span>
+      </div>
+      <a
+        href={`mailto:${company.contact.email}`}
+        class="flex items-center gap-3 hover:text-white transition-colors"
+      >
+        <span class="text-primary">✉️</span>
+        <span>{company.contact.email}</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="flex flex-col items-start lg:items-end gap-3 lg:col-span-1">
+    <div
+      class="flex flex-col items-center gap-3 bg-white/5 p-4 rounded-2xl border border-white/10 backdrop-blur-sm"
+    >
+      <span class="text-sm font-medium text-white flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-[#00B900] animate-pulse"></span>
+        加入官方 LINE
+      </span>
+      <div class="bg-white p-2 rounded-xl">
+        <img
+          src="/images/lineqr.png"
+          alt="LINE QR Code"
+          class="w-32 h-32 object-contain"
+        />
+      </div>
+      <span class="text-[10px] text-gray-400">掃描 QR Code 立即諮詢</span>
+    </div>
+  </div>
 </footer>
 <footer class="footer footer-center p-4 bg-neutral-900 text-neutral-content">
   <aside>

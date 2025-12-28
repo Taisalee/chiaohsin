@@ -22,24 +22,28 @@ import navigation from "../data/navigation.json";
       </div>
       <ul
         tabindex="0"
-        class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+        class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-base"
       >
         {
           navigation.main.map((item) => (
             <li>
               {item.children.length > 0 ? (
                 <details>
-                  <summary>{item.title}</summary>
+                  <summary class="text-base">{item.title}</summary>
                   <ul class="p-2">
                     {item.children.map((child) => (
                       <li>
-                        <a href={child.url}>{child.title}</a>
+                        <a href={child.url} class="text-base">
+                          {child.title}
+                        </a>
                       </li>
                     ))}
                   </ul>
                 </details>
               ) : (
-                <a href={item.url}>{item.title}</a>
+                <a href={item.url} class="text-base">
+                  {item.title}
+                </a>
               )}
             </li>
           ))
@@ -56,7 +60,7 @@ import navigation from "../data/navigation.json";
   </div>
   <div class="navbar-center hidden lg:flex">
     <ul
-      class="menu menu-horizontal px-1 font-medium bg-base-100/50 backdrop-blur-sm rounded-full"
+      class="menu menu-horizontal px-1 font-medium bg-base-100/50 backdrop-blur-sm rounded-full text-lg"
     >
       {
         navigation.main.map((item) => (
