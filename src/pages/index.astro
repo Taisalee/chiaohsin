@@ -3,8 +3,17 @@ import Layout from '../layouts/Layout.astro';
 import company from '../data/company.json';
 import categories from '../data/categories.json';
 import seo from '../data/seo.json';
+import { getCollection } from 'astro:content';
 
 const { banner } = company.assets.images;
+
+// 取得精選文章（最新 3 篇）
+const allPosts = await getCollection('blog', ({ data }) => {
+    return data.draft !== true;
+});
+const featuredPosts = allPosts
+    .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+    .slice(0, 3);
 
 // 首頁 SEO 設定
 const homeDescription = `${company.name} - ${company.tagline}。${company.description.slice(0, 100)}`;
@@ -111,6 +120,64 @@ const homeKeywords = [
             </div>
           </a>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Section: 如何挑選手套 -->
+  <section class="py-20 px-4 bg-base-100">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4">如何挑選手套</h2>
+        <p class="text-xl text-gray-500">專業教學文章，幫助您選擇最適合的工作防護用品</p>
+        <div class="w-24 h-1 bg-accent mx-auto mt-4 rounded-full"></div>
+      </div>
+      
+      {featuredPosts.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredPosts.map((post) => (
+            <a href={`/blog/${post.slug}`} class="group">
+              <article class="card bg-base-100 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 h-full border border-base-200 hover:border-primary/30">
+                <div class="card-body">
+                  {post.data.category && (
+                    <div class="badge badge-accent badge-outline mb-2">
+                      {post.data.category}
+                    </div>
+                  )}
+                  <h3 class="card-title text-xl group-hover:text-primary transition-colors">
+                    {post.data.title}
+                  </h3>
+                  <p class="text-gray-500 line-clamp-3">
+                    {post.data.description}
+                  </p>
+                  <div class="flex items-center justify-between mt-4 pt-4 border-t border-base-200">
+                    <time class="text-sm text-gray-400" datetime={post.data.publishDate.toISOString()}>
+                      {post.data.publishDate.toLocaleDateString('zh-TW', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </time>
+                    <span class="text-primary group-hover:translate-x-1 transition-transform inline-block">
+                      閱讀更多 →
+                    </span>
+                  </div>
+                </div>
+              </article>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-8">
+          <div class="text-5xl mb-4">📝</div>
+          <p class="text-gray-500">教學文章即將推出，敬請期待！</p>
+        </div>
+      )}
+      
+      <div class="text-center mt-12">
+        <a href="/blog" class="btn btn-outline btn-lg hover:btn-accent transition-colors">
+          查看所有文章 →
+        </a>
       </div>
     </div>
   </section>

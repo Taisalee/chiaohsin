@@ -179,82 +179,80 @@ const breadcrumbData = {
 
         <!-- 產品詳情 -->
         <article class="max-w-7xl mx-auto px-4 md:px-10 py-8 md:py-12">
+            <!-- 手機版：分類 + 名稱 先顯示 -->
+            <div class="lg:hidden mb-6">
+                <!-- 分類標籤 -->
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="text-2xl" aria-hidden="true"
+                        >{category.icon}</span
+                    >
+                    <a
+                        href={`/products#${category.id}`}
+                        class="badge badge-primary badge-lg hover:badge-secondary transition-colors text-white"
+                    >
+                        {category.name}
+                    </a>
+                </div>
+                <!-- 產品名稱 -->
+                <h1 class="text-3xl font-bold leading-tight">
+                    {product.name}
+                </h1>
+                <!-- 規格尺寸 -->
+                {
+                    product.size && product.size !== "-" && (
+                        <div class="flex items-center gap-2 mt-2">
+                            <span class="text-gray-500 text-sm">
+                                規格尺寸：
+                            </span>
+                            <span class="badge badge-outline">
+                                {product.size}
+                            </span>
+                        </div>
+                    )
+                }
+                <!-- 手機版：產品特色標籤（移到圖片上面）-->
+                {
+                    product.features && product.features.length > 0 && (
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            {product.features.map((feature: string) => (
+                                <span class="badge badge-primary badge-lg gap-1">
+                                    ✓ {feature}
+                                </span>
+                            ))}
+                        </div>
+                    )
+                }
+            </div>
+
             <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
-                <!-- 產品圖片 -->
-                <div class="flex-1">
+                <!-- 產品圖片 + 規格表 -->
+                <div class="flex-1 lg:sticky lg:top-24 self-start">
                     <figure
-                        class="bg-base-200 rounded-2xl p-8 flex items-center justify-center min-h-[400px] sticky top-24"
+                        class="bg-base-200 rounded-2xl lg:p-8 flex items-center justify-center lg:min-h-[400px]"
                     >
                         <img
                             src={`/${product.image}`}
                             alt={`${product.name} 產品圖片`}
-                            class="max-h-[500px] object-contain rounded-xl shadow-lg"
+                            class="w-full lg:max-h-[500px] object-contain rounded-xl shadow-lg"
                             width="500"
                             height="500"
                             loading="eager"
                         />
                     </figure>
-                </div>
-
-                <!-- 產品資訊 -->
-                <div class="flex-1 space-y-6">
-                    <!-- 分類標籤 -->
-                    <div class="flex items-center gap-2">
-                        <span class="text-3xl" aria-hidden="true"
-                            >{category.icon}</span
-                        >
-                        <a
-                            href={`/products#${category.id}`}
-                            class="badge badge-primary badge-lg hover:badge-secondary transition-colors"
-                        >
-                            {category.name}
-                        </a>
-                    </div>
-
-                    <!-- 產品名稱 -->
-                    <h1 class="text-4xl md:text-5xl font-bold leading-tight">
-                        {product.name}
-                    </h1>
-
-                    <!-- 產品規格 -->
-                    {
-                        product.size && product.size !== "-" && (
-                            <div class="flex items-center gap-2">
-                                <span class="text-gray-500">規格尺寸：</span>
-                                <span class="badge badge-outline badge-lg">
-                                    {product.size}
-                                </span>
-                            </div>
-                        )
-                    }
-
-                    <!-- 產品特色標籤 -->
-                    {
-                        product.features && product.features.length > 0 && (
-                            <div class="flex flex-wrap gap-2 pt-2">
-                                {product.features.map((feature: string) => (
-                                    <span class="badge badge-primary badge-lg gap-1">
-                                        ✓ {feature}
-                                    </span>
-                                ))}
-                            </div>
-                        )
-                    }
-
-                    <div class="divider"></div>
 
                     <!-- 產品規格表格 -->
                     {
                         (product.materials ||
                             product.packaging ||
-                            product.weight) && (
-                            <div class="overflow-x-auto">
-                                <table class="table table-zebra w-full">
+                            product.weight ||
+                            product.specifications) && (
+                            <div class="overflow-x-auto mt-4 lg:mt-6">
+                                <table class="table table-zebra w-full text-sm lg:text-base">
                                     <thead>
                                         <tr>
                                             <th
                                                 colspan="2"
-                                                class="bg-base-200 text-lg"
+                                                class="bg-base-200 text-base lg:text-lg"
                                             >
                                                 📋 產品規格
                                             </th>
@@ -270,7 +268,8 @@ const breadcrumbData = {
                                             </tr>
                                         )}
                                         {product.size &&
-                                            product.size !== "-" && (
+                                            product.size !== "-" &&
+                                            !product.specifications && (
                                                 <tr>
                                                     <td class="font-medium">
                                                         尺寸規格
@@ -294,8 +293,67 @@ const breadcrumbData = {
                                                 <td>{product.weight}</td>
                                             </tr>
                                         )}
+                                        {product.specifications &&
+                                            Object.entries(
+                                                product.specifications,
+                                            ).map(([key, value]) => (
+                                                <tr>
+                                                    <td class="font-medium w-1/3">
+                                                        {key}
+                                                    </td>
+                                                    <td>{value}</td>
+                                                </tr>
+                                            ))}
                                     </tbody>
                                 </table>
+                            </div>
+                        )
+                    }
+                </div>
+
+                <!-- 產品資訊 -->
+                <div class="flex-1 space-y-6">
+                    <!-- 電腦版：分類標籤 -->
+                    <div class="hidden lg:flex items-center gap-2">
+                        <span class="text-3xl" aria-hidden="true"
+                            >{category.icon}</span
+                        >
+                        <a
+                            href={`/products#${category.id}`}
+                            class="badge badge-primary badge-lg hover:badge-secondary transition-colors text-white"
+                        >
+                            {category.name}
+                        </a>
+                    </div>
+
+                    <!-- 電腦版：產品名稱 -->
+                    <h1
+                        class="hidden lg:block text-4xl md:text-5xl font-bold leading-tight"
+                    >
+                        {product.name}
+                    </h1>
+
+                    <!-- 電腦版：產品規格 -->
+                    {
+                        product.size && product.size !== "-" && (
+                            <div class="hidden lg:flex items-center gap-2">
+                                <span class="text-gray-500">規格尺寸：</span>
+                                <span class="badge badge-outline badge-lg">
+                                    {product.size}
+                                </span>
+                            </div>
+                        )
+                    }
+
+                    <!-- 產品特色標籤 (電腦版顯示) -->
+                    {
+                        product.features && product.features.length > 0 && (
+                            <div class="hidden lg:flex flex-wrap gap-2 pt-2">
+                                {product.features.map((feature: string) => (
+                                    <span class="badge badge-primary badge-lg gap-1">
+                                        ✓ {feature}
+                                    </span>
+                                ))}
                             </div>
                         )
                     }
@@ -344,50 +402,24 @@ const breadcrumbData = {
                             )
                     }
 
-                    <!-- 產品說明 -->
+                    <!-- 產品說明 (全裝置顯示) -->
                     <div class="prose prose-lg max-w-none">
                         <h2 class="text-xl font-semibold mb-3">產品說明</h2>
-                        <p class="text-gray-600 leading-relaxed">
-                            {product.description}
-                        </p>
+                        {
+                            (product.description || "")
+                                .split("\n")
+                                .map(
+                                    (paragraph) =>
+                                        paragraph.trim() && (
+                                            <p class="text-gray-600 leading-relaxed mb-4">
+                                                {paragraph}
+                                            </p>
+                                        ),
+                                )
+                        }
                     </div>
 
-                    <!-- 信任標章區 -->
-                    <div class="flex flex-wrap gap-3 py-4">
-                        <div
-                            class="badge badge-lg gap-2 py-4 px-4 bg-amber-100 text-amber-800 border-amber-200"
-                        >
-                            <span>🇹🇼</span>
-                            <span class="font-medium">台灣製造</span>
-                        </div>
-                        <div
-                            class="badge badge-lg gap-2 py-4 px-4 bg-blue-100 text-blue-800 border-blue-200"
-                        >
-                            <span>🏭</span>
-                            <span class="font-medium">工廠直營</span>
-                        </div>
-                        <div
-                            class="badge badge-lg gap-2 py-4 px-4 bg-green-100 text-green-800 border-green-200"
-                        >
-                            <span>✅</span>
-                            <span class="font-medium">品質保證</span>
-                        </div>
-                    </div>
-
-                    <!-- 分類說明 -->
-                    <div
-                        class="bg-gradient-to-r from-base-200 to-base-100 rounded-xl p-6 border border-base-300"
-                    >
-                        <h3 class="font-semibold mb-2 flex items-center gap-2">
-                            <span aria-hidden="true">{category.icon}</span>
-                            關於{category.name}
-                        </h3>
-                        <p class="text-sm text-gray-600">
-                            {category.description}
-                        </p>
-                    </div>
-
-                    <!-- 批量採購提示 -->
+                    <!-- 批量採購提示 (復原) -->
                     <div
                         class="alert bg-gradient-to-r from-orange-100 to-amber-100 border border-orange-200 shadow-md"
                     >
@@ -413,45 +445,91 @@ const breadcrumbData = {
                             </p>
                         </div>
                     </div>
-
-                    <!-- CTA 按鈕 -->
-                    <div class="flex flex-col gap-4 pt-4">
-                        <!-- 賣貨便購買按鈕 -->
-                        <a
-                            href="https://myship.7-11.com.tw/general/detail/GM2101143624321"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="btn btn-lg w-full shadow-lg hover:scale-105 transition-transform text-white border-0"
-                            style="background: linear-gradient(135deg, #00a651 0%, #00873e 100%);"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-6 w-6 mr-2"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
+                    <!-- CTA 按鈕區塊 -->
+                    <div class="space-y-4 pt-4">
+                        <!-- 線上購買專區 (並排顯示) -->
+                        <div class="grid grid-cols-2 gap-3">
+                            <!-- 賣貨便 -->
+                            <a
+                                href="https://myship.7-11.com.tw/general/detail/GM2101143624321"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn h-auto py-3 px-2 border-0 shadow-lg shadow-green-500/20 text-white flex flex-col items-center gap-1 hover:scale-[1.02] active:scale-95 transition-all rounded-xl"
+                                style="background: linear-gradient(145deg, #21903E 0%, #007C36 100%);"
                             >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                                ></path>
-                            </svg>
-                            🏪 到賣貨便購買
-                        </a>
-                        <div class="flex flex-col sm:flex-row gap-4">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                                    ></path>
+                                </svg>
+                                <span class="text-sm font-medium"
+                                    >7-11 賣貨便</span
+                                >
+                            </a>
+
+                            <!-- 好賣+ -->
+                            <a
+                                href="https://famistore.famiport.com.tw/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn h-auto py-3 px-2 border-0 shadow-lg shadow-blue-500/20 text-white flex flex-col items-center gap-1 hover:scale-[1.02] active:scale-95 transition-all rounded-xl"
+                                style="background: linear-gradient(145deg, #00AEEF 0%, #0077c8 100%);"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                                    ></path>
+                                </svg>
+                                <span class="text-sm font-medium"
+                                    >全家 好賣+</span
+                                >
+                            </a>
+                        </div>
+
+                        <!-- 聯絡 buttons -->
+                        <div class="flex flex-col sm:flex-row gap-3">
                             <a
                                 href={`tel:${company.contact.phone}`}
-                                class="btn btn-primary btn-lg flex-1 shadow-lg hover:scale-105 transition-transform"
+                                class="btn btn-lg flex-1 border-0 shadow-lg shadow-violet-500/20 text-white hover:scale-[1.02] active:scale-95 transition-all rounded-xl"
+                                style="background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);"
                             >
-                                📞 立即洽詢
+                                <span class="text-xl">📞</span> 立即洽詢
                             </a>
                             <a
-                                href="/contact"
-                                class="btn btn-outline btn-lg flex-1"
+                                href="https://line.me/ti/p/~ulh0933098358"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn btn-lg flex-1 border-0 shadow-lg shadow-green-500/20 text-white hover:scale-[1.02] active:scale-95 transition-all rounded-xl"
+                                style="background: linear-gradient(135deg, #06C755 0%, #05a346 100%);"
                             >
-                                聯絡我們
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    class="h-8 w-8 fill-current"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M24 10.304c0-5.369-5.383-9.738-12-9.738s-12 4.369-12 9.738c0 4.814 4.269 8.846 10.049 9.608.391.051.924.258 1.058.59.121.303.079.778.039 1.084l-.171 1.026c-.052.312-.252 1.222 1.084.666 1.335-.556 7.203-4.241 9.824-7.261 1.956-2.144 2.117-4.156 2.117-4.965l.001-.748zm-15.538 2.05h-.936c-.229 0-.413-.185-.413-.413V8.814c0-.228.184-.413.413-.413h.936c.228 0 .413.185.413.413v3.127c0 .228-.185.413-.413.413zm2.536 0h-.935c-.229 0-.413-.185-.413-.413V8.814c0-.228.184-.413.413-.413h.935c.229 0 .413.185.413.413v3.127c0 .228-.184.413-.413.413zm4.518 0h-2.138c-.229 0-.413-.185-.413-.413V8.814c0-.228.184-.413.413-.413h.935c.229 0 .413.185.413.413v2.302h1.203c.228 0 .413.185.413.413v.412c0 .228-.185.413-.413.413zm2.4 0h-.936c-.228 0-.413-.185-.413-.413v-1.125h-.649V12.353h-.936c-.229 0-.413-.185-.413-.413V8.814c0-.228.184-.413.413-.413h3.587c.229 0 .413.185.413.413v.411c0 .228-.185.413-.413.413h-2.651v.656h.649c.229 0 .413.185.413.413v1.654c0 .228-.185.412-.413.412z"
+                                    ></path>
+                                </svg>
+                                LINE 洽詢
                             </a>
                         </div>
                     </div>

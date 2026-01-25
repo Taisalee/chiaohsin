@@ -27,6 +27,11 @@
             "title": "商品介紹",
             "url": "/products",
             "children": []
+        },
+        {
+            "title": "如何挑選手套",
+            "url": "/blog",
+            "children": []
         }
     ],
     "footer": [
