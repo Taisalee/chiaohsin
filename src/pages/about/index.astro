@@ -1,81 +1,314 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import company from "../../data/company.json";
-import seo from "../../data/seo.json";
 
-// 關於頁面 SEO 設定
-const aboutDescription = `${company.name}特色簡介 - ${company.description}`;
-const aboutKeywords = [company.name, "公司簡介", "關於我們", "工作手套製造商"];
+const aboutDescription = `${company.name} - 專業工作手套製造商。深耕產業多年，提供品質穩定、規格實在的防護方案。`;
+const aboutKeywords = [
+  company.name,
+  "公司簡介",
+  "基本資料",
+  "聯絡我們",
+  "工作手套製造商",
+];
+
+const { banner } = company.assets.images;
 ---
 
 <Layout
-  title="特色簡介"
+  title="關於我們"
   description={aboutDescription}
   keywords={aboutKeywords}
   canonical="/about"
 >
-  <div class="hero bg-base-200 py-12">
-    <div class="hero-content text-center">
-      <div class="max-w-md">
-        <h1 class="text-5xl font-bold">特色簡介</h1>
-        <p class="py-6">專業、品質、誠信</p>
+  <!-- 1. 精緻頁首 (Refined Hero) -->
+  <header
+    class="relative h-[40vh] md:h-[50vh] flex items-center justify-center overflow-hidden"
+  >
+    <div class="absolute inset-0 z-0">
+      <img
+        src={`/${banner}`}
+        alt="Banner"
+        class="w-full h-full object-cover brightness-[0.4]"
+      />
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-primary/20 to-base-100"
+      >
       </div>
     </div>
-  </div>
-
-  <div class="max-w-4xl mx-auto px-4 py-16">
-    <div class="prose prose-lg mx-auto">
-      <div
-        class="max-w-3xl mx-auto mb-12 space-y-6 text-lg leading-relaxed text-gray-700"
+    <div class="relative z-10 text-center px-4">
+      <nav class="text-white/60 text-sm mb-4">
+        <a href="/" class="hover:text-white transition-colors">首頁</a>
+        <span class="mx-2">/</span>
+        <span class="text-white">關於我們</span>
+      </nav>
+      <h1
+        class="text-4xl md:text-6xl font-black text-white tracking-widest mb-4"
       >
-        {company.description.split("\n").map((paragraph) => <p>{paragraph}</p>)}
+        關於<span class="text-primary">喬新</span>
+      </h1>
+      <div class="w-20 h-1.5 bg-primary mx-auto rounded-full"></div>
+    </div>
+  </header>
+
+  <!-- 2. 品牌故事與核心優勢 (The Story & Core Values) -->
+  <section class="py-24 bg-base-100 relative overflow-hidden">
+    <!-- 背景裝飾字 -->
+    <div
+      class="absolute top-20 right-[-5%] text-[15rem] font-black text-base-200 select-none pointer-events-none opacity-50"
+    >
+      ABOUT
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-16 items-start">
+        <!-- 左側：品牌描述 (Story) -->
+        <div class="space-y-10">
+          <div>
+            <span
+              class="text-primary font-bold tracking-widest text-sm uppercase"
+              >Our Story</span
+            >
+            <h2
+              class="text-4xl md:text-5xl font-black text-gray-900 mt-3 leading-tight"
+            >
+              深耕針織產業<br />守護每一雙勤勞的手
+            </h2>
+          </div>
+          <div
+            class="space-y-6 text-lg text-gray-600 leading-[1.8] text-justify"
+          >
+            {
+              company.description
+                .split("\n")
+                .map((paragraph) => <p>{paragraph}</p>)
+            }
+          </div>
+          <div
+            class="p-8 bg-primary/5 border-l-4 border-primary rounded-r-2xl italic text-primary font-medium text-lg leading-relaxed shadow-sm"
+          >
+            "{company.slogan}"
+          </div>
+        </div>
+
+        <!-- 右側：優勢網格 (Adaptive Grid - Style 1 Refined) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4 lg:pt-10">
+          {[
+            {
+              title: "優選品質",
+              desc: "高品質生產標準，確保每一雙手套的最佳防護。",
+              icon: "/images/featureicon01.png",
+              delay: "0",
+            },
+            {
+              title: "合理價格",
+              desc: "工廠直營優勢，將實惠價格直接回饋客戶。",
+              icon: "/images/featureicon02.png",
+              delay: "100",
+            },
+            {
+              title: "重量足額",
+              desc: "誠信規格，不偷工減料，實實在在的品質。",
+              icon: "/images/featureicon03.png",
+              delay: "200",
+            },
+            {
+              title: "信賴夥伴",
+              desc: "多年口碑，是專業人士與企業的防護首選。",
+              icon: "/images/featureicon04.png",
+              delay: "300",
+            },
+          ].map((item) => (
+            <div 
+              class="group relative p-8 bg-white border border-gray-100 shadow-sm rounded-[2.5rem] hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden"
+              style={`animation-delay: ${item.delay}ms`}
+            >
+              <!-- 背景裝飾 -->
+              <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150 duration-700"></div>
+              
+              <div class="relative z-10 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
+                <div class="w-20 h-20 bg-gray-50 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-inner">
+                  <img
+                    src={item.icon}
+                    alt={item.title}
+                    class="w-12 h-12 object-contain"
+                  />
+                </div>
+                <div class="space-y-3">
+                  <h3 class="text-2xl font-black text-gray-900 group-hover:text-primary transition-colors">
+                    {item.title}
+                  </h3>
+                  <p class="text-gray-500 text-sm leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- 4. 聯絡資訊區 (Integrated Contact) -->
+  <section class="relative bg-base-100">
+    <div class="flex flex-col lg:flex-row min-h-[600px]">
+      <!-- 左：地圖 (滿版高度) -->
+      <div
+        class="lg:flex-1 relative order-2 lg:order-1 h-[400px] lg:h-auto overflow-hidden"
+      >
+        <iframe
+          src={`https://maps.google.com/maps?q=${company.address.coordinates.lat},${company.address.coordinates.lng}&hl=zh-TW&z=16&output=embed`}
+          width="100%"
+          height="100%"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="absolute inset-0"
+          title="公司位置地圖"></iframe>
       </div>
 
-      <div class="divider">我們的優勢</div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-12">
-        <div class="card bg-base-100 shadow-md">
-          <div class="card-body">
-            <h3 class="card-title text-primary">產品優良</h3>
-            <p>
-              我們堅持高品質的生產標準，確保每一雙手套都能提供最佳的防護效果。
+      <!-- 右：聯絡內容 -->
+      <div
+        class="lg:flex-1 flex items-center py-20 lg:py-24 order-1 lg:order-2"
+      >
+        <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 w-full space-y-16">
+          <div class="text-center lg:text-left">
+            <span
+              class="text-primary font-bold tracking-widest text-sm uppercase"
+              >Contact Us</span
+            >
+            <h2 class="text-4xl md:text-5xl font-black text-gray-900 mt-2">
+              如何找到我們
+            </h2>
+            <p
+              class="text-gray-500 mt-4 leading-relaxed max-w-2xl mx-auto lg:mx-0"
+            >
+              不論您是企業大宗採購或是一般使用諮詢，都歡迎透過以下管道與我們聯繫。
             </p>
           </div>
-        </div>
-        <div class="card bg-base-100 shadow-md">
-          <div class="card-body">
-            <h3 class="card-title text-secondary">價格合宜</h3>
-            <p>工廠直營，免去中間商剝削，將最實惠的價格回饋給客戶。</p>
-          </div>
-        </div>
-        <div class="card bg-base-100 shadow-md">
-          <div class="card-body">
-            <h3 class="card-title text-accent">重量足</h3>
-            <p>我們保證產品重量與規格實在，不偷工減料。</p>
-          </div>
-        </div>
-        <div class="card bg-base-100 shadow-md text-white bg-neutral">
-          <div class="card-body">
-            <h3 class="card-title">深受信任</h3>
-            <p>多年來深受各界客戶支持與信賴，是您最可靠的合作夥伴。</p>
-          </div>
-        </div>
-      </div>
 
-      <div class="alert alert-success shadow-lg">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="stroke-current shrink-0 h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          ><path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg
-        >
-        <span>{company.slogan}</span>
+          <div
+            class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 gap-12 lg:gap-10"
+          >
+            <!-- 地址 -->
+            <div
+              class="flex flex-col lg:flex-row items-center lg:items-start gap-6 group text-center lg:text-left"
+            >
+              <div
+                class="w-14 h-14 bg-primary/10 text-primary rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-7 w-7"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="space-y-2">
+                <h4
+                  class="text-xs font-black text-gray-400 uppercase tracking-tighter"
+                >
+                  Factory Address
+                </h4>
+                <p class="text-lg font-bold text-gray-800 break-keep">
+                  {company.address.full}
+                </p>
+              </div>
+            </div>
+
+            <!-- 電話與傳真 -->
+            <div
+              class="flex flex-col lg:flex-row items-center lg:items-start gap-6 group text-center lg:text-left border-y md:border-y-0 md:border-x lg:border-x-0 lg:border-y border-gray-100 py-10 md:py-0 md:px-6 lg:px-0 lg:py-10"
+            >
+              <div
+                class="w-14 h-14 bg-primary/10 text-primary rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-7 w-7"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="space-y-2">
+                <h4
+                  class="text-xs font-black text-gray-400 uppercase tracking-tighter"
+                >
+                  Phone & Fax
+                </h4>
+                <a
+                  href={`tel:${company.contact.phone}`}
+                  class="text-3xl font-black text-primary hover:underline block"
+                >
+                  {company.contact.phone}
+                </a>
+                <p class="text-sm text-gray-500 font-medium tracking-wide">
+                  FAX: {company.contact.fax}
+                </p>
+              </div>
+            </div>
+
+            <!-- 營業時間 -->
+            <div
+              class="flex flex-col lg:flex-row items-center lg:items-start gap-6 group text-center lg:text-left"
+            >
+              <div
+                class="w-14 h-14 bg-primary/10 text-primary rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-7 w-7"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div class="space-y-2">
+                <h4
+                  class="text-xs font-black text-gray-400 uppercase tracking-tighter"
+                >
+                  Business Hours
+                </h4>
+                <p class="text-lg font-bold text-gray-800">
+                  週一至週五 08:00 - 17:00
+                </p>
+                <p class="text-sm text-gray-500 font-medium">
+                  週六、週日與國定假日公休
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 </Layout>
+
+<style>
+  /* 確保平滑捲動 */
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

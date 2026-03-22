@@ -31,7 +31,6 @@ const displayedCategories = categories;
         return (
           <div id={cat.id} class="mb-16 scroll-mt-24">
             <div class="flex items-center gap-4 mb-6 border-b pb-2 border-base-300">
-              <span class="text-4xl">{cat.icon}</span>
               <div>
                 <h2 class="text-2xl font-bold">{cat.name}</h2>
                 <p class="text-gray-500 text-sm mt-1">{cat.description}</p>
@@ -132,9 +131,7 @@ const displayedCategories = categories;
         categories.map((cat) => (
           <li>
             <a href={`#${cat.id}`} class="flex justify-between">
-              <span>
-                {cat.icon} {cat.name}
-              </span>
+              <span>{cat.name}</span>
               <span class="badge badge-sm">
                 {products.filter((p) => p.category === cat.id).length}
               </span>

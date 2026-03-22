@@ -5,16 +5,12 @@
             "url": "/about",
             "children": [
                 {
-                    "title": "特色簡介",
+                    "title": "關於我們",
                     "url": "/about"
                 },
                 {
                     "title": "基本資料",
                     "url": "/about/info"
-                },
-                {
-                    "title": "聯絡資訊",
-                    "url": "/contact"
                 }
             ]
         },

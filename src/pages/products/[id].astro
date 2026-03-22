@@ -183,9 +183,6 @@ const breadcrumbData = {
             <div class="lg:hidden mb-6">
                 <!-- 分類標籤 -->
                 <div class="flex items-center gap-2 mb-3">
-                    <span class="text-2xl" aria-hidden="true"
-                        >{category.icon}</span
-                    >
                     <a
                         href={`/products#${category.id}`}
                         class="badge badge-primary badge-lg hover:badge-secondary transition-colors text-white"
@@ -315,9 +312,6 @@ const breadcrumbData = {
                 <div class="flex-1 space-y-6">
                     <!-- 電腦版：分類標籤 -->
                     <div class="hidden lg:flex items-center gap-2">
-                        <span class="text-3xl" aria-hidden="true"
-                            >{category.icon}</span
-                        >
                         <a
                             href={`/products#${category.id}`}
                             class="badge badge-primary badge-lg hover:badge-secondary transition-colors text-white"
@@ -542,7 +536,6 @@ const breadcrumbData = {
             relatedProducts.length > 0 && (
                 <section class="mt-16 pt-8 border-t border-base-300">
                     <h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
-                        <span aria-hidden="true">{category.icon}</span>
                         其他{category.name}產品
                     </h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
