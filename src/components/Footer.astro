@@ -107,11 +107,12 @@ const currentYear = new Date().getFullYear();
         <span>{company.contact.fax}</span>
       </div>
       <a
-        href={`mailto:${company.contact.email}`}
+        href={`https://line.me/ti/p/~${company.contact["LINE ID"]}`}
+        target="_blank"
         class="flex items-center gap-3 hover:text-white transition-colors"
       >
-        <span class="text-primary">✉️</span>
-        <span>{company.contact.email}</span>
+        <span class="text-primary">💬</span>
+        <span>LINE ID：{company.contact["LINE ID"]}</span>
       </a>
     </div>
   </div>

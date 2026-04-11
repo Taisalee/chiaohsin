@@ -1,31 +1,22 @@
 {
     "main": [
         {
-            "title": "公司介紹",
+            "title": "關於喬新",
             "url": "/about",
-            "children": [
-                {
-                    "title": "關於我們",
-                    "url": "/about"
-                },
-                {
-                    "title": "基本資料",
-                    "url": "/about/info"
-                }
-            ]
+            "children": []
         },
         {
-            "title": "最新消息",
+            "title": "最新動態",
             "url": "/news",
             "children": []
         },
         {
-            "title": "商品介紹",
+            "title": "探索產品",
             "url": "/products",
             "children": []
         },
         {
-            "title": "如何挑選手套",
+            "title": "挑選手套指南",
             "url": "/blog",
             "children": []
         }
