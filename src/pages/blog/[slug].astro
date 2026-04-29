@@ -3,29 +3,89 @@ import Layout from "../../layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
 import { Image } from "astro:assets";
 import company from "../../data/company.json";
+import GloveSpecCard from "../../components/GloveSpecCard.astro";
+import GloveInsight from "../../components/GloveInsight.astro";
+import CauseList from "../../components/CauseList.astro";
+import FaqSection from "../../components/FaqSection.astro";
+import SelectionFlow from "../../components/SelectionFlow.astro";
+
+const allDataFiles = import.meta.glob<{ default: any }>(
+    "../../content/blog/*/data.json",
+    { eager: true }
+);
 
 export async function getStaticPaths() {
+    const dataFiles = import.meta.glob<{ default: any }>(
+        "../../content/blog/*/data.json",
+        { eager: true }
+    );
     const posts = await getCollection("blog", ({ data }) => {
         return data.draft !== true;
     });
 
-    return posts.map((post) => ({
-        params: { slug: post.id },
-        props: { post },
-    }));
+    return posts.map((post) => {
+        const dataKey = Object.keys(dataFiles).find((key) =>
+            key.includes(`/${post.id}/data.json`)
+        );
+        const blockData = dataKey ? dataFiles[dataKey].default : null;
+
+        return {
+            params: { slug: post.id },
+            props: { post, blockData },
+        };
+    });
 }
 
-const { post } = Astro.props;
+const { post, blockData } = Astro.props;
 const { Content } = await render(post);
 
-// 計算閱讀時間 (初步估計)
 const wordCount = post.body ? post.body.length : 0;
-const readingTime = Math.ceil(wordCount / 400); // 假設每分鐘閱讀 400 字
+const readingTime =
+    blockData?.metadata?.readingTime ?? Math.ceil(wordCount / 400);
 
-// SEO 設定
 const pageTitle = `${post.data.title} - ${company.name}`;
 const pageDescription = post.data.description;
 const pageKeywords = post.data.tags || ["手套", "教學"];
+
+const siteUrl = "https://www.chiaohsin.com.tw";
+
+const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.data.title,
+    description: post.data.description,
+    datePublished: post.data.publishDate.toISOString(),
+    author: {
+        "@type": "Organization",
+        name: company.name,
+        url: `https://${company.website}`,
+    },
+    publisher: {
+        "@type": "Organization",
+        name: company.name,
+        logo: {
+            "@type": "ImageObject",
+            url: `${siteUrl}/${company.logo}`,
+        },
+    },
+    url: `${siteUrl}/blog/${post.id}`,
+    keywords: (post.data.tags || []).join(", "),
+};
+
+const proseClass =
+    "prose prose-lg max-w-none " +
+    "prose-headings:text-gray-900 prose-headings:font-bold " +
+    "prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-6 prose-h2:pb-4 prose-h2:border-b prose-h2:border-gray-100 " +
+    "prose-h3:text-2xl prose-h3:mt-10 prose-h3:mb-4 " +
+    "prose-p:text-gray-600 prose-p:leading-8 prose-p:mb-6 " +
+    "prose-li:text-gray-600 prose-li:leading-7 " +
+    "prose-strong:text-gray-900 prose-strong:font-semibold " +
+    "prose-a:text-primary prose-a:font-medium prose-a:no-underline hover:prose-a:underline " +
+    "prose-blockquote:not-italic prose-blockquote:text-gray-700 " +
+    "prose-img:rounded-2xl prose-img:shadow-xl prose-img:my-10 " +
+    "prose-table:border-collapse prose-table:w-full " +
+    "prose-th:bg-gray-50 prose-th:p-4 prose-th:text-left " +
+    "prose-td:p-4 prose-td:border-b prose-td:border-gray-50";
 ---
 
 <Layout
@@ -33,7 +93,14 @@ const pageKeywords = post.data.tags || ["手套", "教學"];
     description={pageDescription}
     keywords={pageKeywords}
     canonical={`/blog/${post.id}`}
+    ogType="article"
 >
+    <Fragment slot="head">
+        <script
+            type="application/ld+json"
+            set:html={JSON.stringify(articleSchema)}
+        />
+    </Fragment>
     <!-- Featured Image at the Top -->
     <div class="max-w-5xl mx-auto px-4 pt-8">
         <div
@@ -125,22 +192,100 @@ const pageKeywords = post.data.tags || ["手套", "教學"];
     <!-- Article Content -->
     <article class="pb-16 px-4">
         <div class="max-w-4xl mx-auto">
-            <div
-                class="prose prose-lg max-w-none
-                prose-headings:text-gray-900 prose-headings:font-bold
-                prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-6 prose-h2:pb-4 prose-h2:border-b prose-h2:border-gray-100
-                prose-h3:text-2xl prose-h3:mt-10 prose-h3:mb-4
-                prose-p:text-gray-600 prose-p:leading-8 prose-p:mb-6
-                prose-li:text-gray-600 prose-li:leading-7
-                prose-strong:text-gray-900 prose-strong:font-semibold
-                prose-a:text-primary prose-a:font-medium prose-a:no-underline hover:prose-a:underline
-                prose-img:rounded-2xl prose-img:shadow-xl prose-img:my-10
-                prose-table:border-collapse prose-table:w-full
-                prose-th:bg-gray-50 prose-th:p-4 prose-th:text-left
-                prose-td:p-4 prose-td:border-b prose-td:border-gray-50"
-            >
-                <Content />
-            </div>
+            {
+                blockData?.blocks ? (
+                    blockData.blocks.map((block: any) => (
+                        <>
+                            {block.type === "prose" && (
+                                <div class={proseClass} set:html={block.html} />
+                            )}
+                            {block.type === "spec_cards" && (
+                                <div
+                                    class={`my-8 grid ${block.cols === 2 ? "md:grid-cols-2" : "md:grid-cols-3"} gap-6`}
+                                >
+                                    {block.items.map((item: any) => (
+                                        <GloveSpecCard
+                                            number={item.title}
+                                            subtitle={item.subtitle}
+                                            badgeLabel={item.badge.label}
+                                            badgeType={item.badge.type}
+                                            specs={item.metrics}
+                                            tags={item.tags}
+                                            featured={item.featured ?? false}
+                                        />
+                                    ))}
+                                </div>
+                            )}
+                            {block.type === "insight" && (
+                                <GloveInsight
+                                    type={block.variant}
+                                    title={block.title}
+                                    content={block.content}
+                                />
+                            )}
+                            {block.type === "cause_list" && (
+                                <div class="my-8">
+                                    <CauseList causes={block.items} />
+                                </div>
+                            )}
+                            {block.type === "selection_flow" && (
+                                <div class="my-8">
+                                    <SelectionFlow steps={block.steps} />
+                                </div>
+                            )}
+                            {block.type === "comparison_table" && (
+                                <div class="overflow-x-auto my-8 bg-white border border-gray-200 rounded-2xl">
+                                    <table class="w-full text-sm">
+                                        <thead class="bg-gray-50 border-b border-gray-200">
+                                            <tr>
+                                                {block.headers.map(
+                                                    (h: string) => (
+                                                        <th class="px-6 py-3 text-left font-semibold text-gray-900">
+                                                            {h}
+                                                        </th>
+                                                    ),
+                                                )}
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-gray-200">
+                                            {block.rows.map(
+                                                (row: string[]) => (
+                                                    <tr>
+                                                        {row.map(
+                                                            (
+                                                                cell: string,
+                                                                i: number,
+                                                            ) =>
+                                                                i === 0 ? (
+                                                                    <td class="px-6 py-4 font-semibold text-gray-900">
+                                                                        {cell}
+                                                                    </td>
+                                                                ) : (
+                                                                    <td class="px-6 py-4 text-gray-600">
+                                                                        {cell}
+                                                                    </td>
+                                                                ),
+                                                        )}
+                                                    </tr>
+                                                ),
+                                            )}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            )}
+                            {block.type === "faq" && (
+                                <div class="my-8">
+                                    <FaqSection items={block.items} />
+                                </div>
+                            )}
+                        </>
+                    ))
+                ) : (
+                    <div class={proseClass}>
+                        <Content />
+                    </div>
+                )
+            }
 
             {
                 post.data.tags && post.data.tags.length > 0 && (
@@ -158,7 +303,7 @@ const pageKeywords = post.data.tags || ["手套", "教學"];
         </div>
     </article>
 
-    <!-- Post Side Actions or Suggested -->
+    <!-- Post Side Actions -->
     <div class="max-w-4xl mx-auto px-4 pb-16">
         <div
             class="p-8 rounded-3xl bg-primary/5 border border-primary/10 flex flex-col md:flex-row items-center justify-between gap-8"
@@ -215,17 +360,11 @@ const pageKeywords = post.data.tags || ["手套", "教學"];
 </Layout>
 
 <style is:global>
-    /* Custom prose styling extensions */
     .prose blockquote {
         @apply border-l-4 border-primary bg-primary/5 px-6 py-4 rounded-r-xl not-italic text-gray-700;
     }
 
     .prose ul > li {
         @apply relative pl-1;
-    }
-
-    /* Custom style for the assessment card if used in MD */
-    .check-list-card {
-        @apply bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow mb-8;
     }
 </style>

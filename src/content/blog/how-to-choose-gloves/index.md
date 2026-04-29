@@ -2,7 +2,7 @@
 title: "如何挑選手套"
 description: "專業手套挑選指南，教您如何選擇最適合的工作手套"
 publishDate: 2025-01-25
-image: "./cover.jpg"
+image: "./cover.WebP"
 category: "教學"
 tags: ["手套", "選購指南", "工作防護"]
 featured: true
