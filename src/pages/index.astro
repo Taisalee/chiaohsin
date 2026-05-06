@@ -4,6 +4,7 @@ import company from '../data/company.json';
 import categories from '../data/categories.json';
 import seo from '../data/seo.json';
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 
 const { banner } = company.assets.images;
 
@@ -137,6 +138,15 @@ const homeKeywords = [
           {featuredPosts.map((post) => (
             <a href={`/blog/${post.id}`} class="group">
               <article class="card bg-base-100 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 h-full border border-base-200 hover:border-primary/30">
+                <figure class="aspect-video overflow-hidden">
+                  <Image
+                    src={post.data.image}
+                    alt={post.data.title}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    width={600}
+                    height={337}
+                  />
+                </figure>
                 <div class="card-body">
                   {post.data.category && (
                     <div class="badge badge-accent badge-outline mb-2">

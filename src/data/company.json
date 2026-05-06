@@ -7,6 +7,7 @@
     "contact": {
         "phone": "06-6900359",
         "fax": "06-6903233",
+        "email": "gloves@chiaohsin.com.tw",
         "LINE ID": "ulh0933098358",
         "contactPerson": "王小姐"
     },
@@ -14,6 +15,7 @@
         "full": "台南市官田區渡拔里010鄰渡仔頭184號",
         "city": "台南市",
         "district": "官田區",
+        "postalCode": "72341",
         "coordinates": {
             "lat": 23.169508,
             "lng": 120.330238
@@ -57,9 +59,7 @@
     "assets": {
         "images": {
             "logo": "images/LOGO-03.png",
-            "banner": "skin/banner.png",
-            "map": "corp_map.png"
-        },
-        "sourceDir": "www.chiaohsin.com.tw"
+            "banner": "skin/banner.png"
+        }
     }
 }

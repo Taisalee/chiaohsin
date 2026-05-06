@@ -1,0 +1,43 @@
+---
+// 选择流程组件 - 用于展示决策流程
+interface FlowStep {
+  number: number;
+  question: string;
+  options: Array<{
+    text: string;
+    highlight: string;
+  }>;
+}
+
+interface Props {
+  steps: FlowStep[];
+}
+
+const { steps } = Astro.props;
+---
+
+<div class="space-y-6">
+  {steps.map((step, idx) => (
+    <div class="flex gap-4">
+      <div class="flex flex-col items-center">
+        <div class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-blue-700 font-semibold text-sm">
+          {step.number}
+        </div>
+        {idx < steps.length - 1 && (
+          <div class="w-0.5 h-16 bg-gray-200 mt-3"></div>
+        )}
+      </div>
+      <div class="flex-1 pt-0.5">
+        <p class="font-semibold text-gray-900 mb-3">{step.question}</p>
+        <div class="flex flex-wrap gap-2">
+          {step.options.map((opt) => (
+            <span class="px-3 py-2 rounded-lg border border-gray-200 bg-white text-sm text-gray-700 hover:bg-gray-50">
+              {opt.text.split('→')[0]}
+              <span class="font-semibold"> {opt.text.split('→')[1] ? '→ ' + opt.text.split('→')[1].trim() : ''}</span>
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  ))}
+</div>

@@ -494,6 +494,38 @@ const { banner } = company.assets.images;
             </div>
           </div>
 
+          <!-- Email -->
+          <div class="flex items-start gap-4 pt-4 border-t border-white/10">
+            <div
+              class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary flex-shrink-0"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-5 h-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                ></path></svg
+              >
+            </div>
+            <div>
+              <p class="text-white/40 text-sm mb-1 uppercase tracking-wider">
+                電子郵件
+              </p>
+              <a
+                href={`mailto:${company.contact.email}`}
+                class="text-lg text-white/90 hover:text-primary transition-colors"
+              >
+                {company.contact.email}
+              </a>
+            </div>
+          </div>
+
           <!-- 營業時間 -->
           <div class="flex items-start gap-4 pt-4 border-t border-white/10">
             <div

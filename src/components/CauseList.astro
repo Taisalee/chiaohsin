@@ -1,0 +1,28 @@
+---
+// 原因列表组件 - 用于显示"为什么一直破"等
+interface CauseItem {
+  number: number;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  causes: CauseItem[];
+}
+
+const { causes } = Astro.props;
+---
+
+<div class="space-y-4">
+  {causes.map((cause) => (
+    <div class="flex gap-4 rounded-xl border border-gray-200 bg-white p-4 hover:shadow-md transition-shadow">
+      <div class="flex h-7 w-7 min-w-fit items-center justify-center rounded-full bg-red-100 text-sm font-semibold text-red-700">
+        {cause.number}
+      </div>
+      <div class="flex-1">
+        <h4 class="font-semibold text-gray-900 mb-1">{cause.title}</h4>
+        <p class="text-sm text-gray-600 leading-relaxed">{cause.description}</p>
+      </div>
+    </div>
+  ))}
+</div>

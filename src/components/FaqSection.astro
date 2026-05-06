@@ -1,0 +1,33 @@
+---
+// FAQ 手风琴组件
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: FaqItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="space-y-3" id="faq-container">
+  {items.map((item, index) => (
+    <details class="group border border-gray-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow" open={index === 0}>
+      <summary class="flex cursor-pointer items-center justify-between px-5 py-4 bg-white hover:bg-gray-50 font-semibold text-gray-900 select-none">
+        <span>{item.question}</span>
+        <span class="text-xl text-gray-400 group-open:rotate-45 transition-transform">+</span>
+      </summary>
+      <div class="border-t border-gray-100 bg-gray-50 px-5 py-4 text-sm text-gray-600 leading-relaxed">
+        {item.answer}
+      </div>
+    </details>
+  ))}
+</div>
+
+<style>
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+</style>
