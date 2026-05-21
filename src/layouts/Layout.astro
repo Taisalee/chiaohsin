@@ -23,7 +23,7 @@ const {
   ogType = "website",
   noIndex = false,
 } = Astro.props;
-const pageTitle = title ? `${title} | ${company.name}` : seo.title;
+const pageTitle = title ? `${title} | ${company.shortName}` : seo.title;
 const pageDescription = description || seo.description;
 // 自訂關鍵字 + 品牌關鍵字，或者預設使用全部產品關鍵字 + 品牌關鍵字
 const pageKeywords = customKeywords
@@ -46,16 +46,27 @@ const ogImageUrl = ogImage
 const organizationData = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: company.name,
-  alternateName: company.englishName,
+  "@id": `${siteUrl}/#organization`,
+  name: company.shortName,
+  legalName: company.name,
+  alternateName: [company.englishName],
   url: `https://${company.website}`,
-  logo: `${siteUrl}/${company.logo}`,
+  logo: {
+    "@type": "ImageObject",
+    url: `${siteUrl}/${company.logo}`,
+    width: 200,
+    height: 200,
+  },
   description: company.description,
+  foundingDate: company.foundingYear,
+  areaServed: "TW",
+  knowsAbout: ["工業手套", "棉紗手套", "NBR手套", "PVC手套", "尼龍手套", "沾膠手套", "工作防護用品", "手套批發製造"],
   address: {
     "@type": "PostalAddress",
     streetAddress: company.address.full,
     addressLocality: company.address.district,
     addressRegion: company.address.city,
+    postalCode: company.address.postalCode,
     addressCountry: "TW",
   },
   geo: {
@@ -63,6 +74,8 @@ const organizationData = {
     latitude: company.address.coordinates.lat,
     longitude: company.address.coordinates.lng,
   },
+  telephone: company.contact.phone,
+  email: company.contact.email,
   contactPoint: {
     "@type": "ContactPoint",
     telephone: company.contact.phone,
@@ -70,14 +83,16 @@ const organizationData = {
     email: company.contact.email,
     availableLanguage: ["Chinese"],
   },
-  sameAs: [],
+  sameAs: company.sameAs,
 };
 
 // LocalBusiness 結構化資料
 const localBusinessData = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: company.name,
+  "@type": "WholesaleStore",
+  "@id": `${siteUrl}/#local-business`,
+  name: company.shortName,
+  description: company.description,
   image: `${siteUrl}/${company.logo}`,
   telephone: company.contact.phone,
   email: company.contact.email,
@@ -96,6 +111,17 @@ const localBusinessData = {
   },
   url: `https://${company.website}`,
   priceRange: "$$",
+};
+
+// WebSite 結構化資料
+const websiteData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${siteUrl}/#website`,
+  name: company.shortName,
+  url: siteUrl,
+  description: seo.description,
+  inLanguage: "zh-TW",
 };
 ---
 
@@ -177,6 +203,10 @@ const localBusinessData = {
     <script
       type="application/ld+json"
       set:html={JSON.stringify(localBusinessData)}
+    />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(websiteData)}
     />
 
     <!-- 額外的 head 內容 slot -->

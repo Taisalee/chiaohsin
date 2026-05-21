@@ -14,13 +14,15 @@ const staticPages = [
     { url: '/contact', priority: '0.6', changefreq: 'monthly', lastmod: currentDate },
 ];
 
-// 產品頁面
-const productPages = products.map((product) => ({
-    url: `/products/${product.id}`,
-    priority: '0.8',
-    changefreq: 'monthly',
-    lastmod: currentDate,
-}));
+// 產品頁面（排除隱藏商品）
+const productPages = products
+    .filter((product) => product.available !== false)
+    .map((product) => ({
+        url: `/products/${product.id}`,
+        priority: '0.8',
+        changefreq: 'monthly',
+        lastmod: currentDate,
+    }));
 
 export async function GET() {
     const blogPosts = await getCollection('blog', ({ data }) => !data.draft);

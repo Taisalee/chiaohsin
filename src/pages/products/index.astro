@@ -96,7 +96,7 @@ import seo from "../../data/seo.json";
             {
                 categories.map((cat) => {
                     const catProducts = products.filter(
-                        (p) => p.category === cat.id,
+                        (p) => p.category === cat.id && p.available !== false,
                     );
                     if (catProducts.length === 0) return null;
 
@@ -203,7 +203,7 @@ import seo from "../../data/seo.json";
                                     <span class="badge badge-sm">
                                         {
                                             products.filter(
-                                                (p) => p.category === cat.id,
+                                                (p) => p.category === cat.id && p.available !== false,
                                             ).length
                                         }
                                     </span>

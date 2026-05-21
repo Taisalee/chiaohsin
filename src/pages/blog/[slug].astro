@@ -44,7 +44,7 @@ const wordCount = post.body ? post.body.length : 0;
 const readingTime =
     blockData?.metadata?.readingTime ?? Math.ceil(wordCount / 400);
 
-const pageTitle = `${post.data.title} - ${company.name}`;
+const pageTitle = `${post.data.title} - ${company.shortName}`;
 const pageDescription = post.data.description;
 const pageKeywords = post.data.tags || ["手套", "教學"];
 
@@ -52,27 +52,51 @@ const siteUrl = "https://www.chiaohsin.com.tw";
 
 const articleSchema = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     headline: post.data.title,
     description: post.data.description,
     image: `${siteUrl}${processedHeroImage.src}`,
     datePublished: post.data.publishDate.toISOString(),
     author: {
         "@type": "Organization",
-        name: company.name,
+        "@id": `${siteUrl}/#organization`,
+        name: company.shortName,
         url: `https://${company.website}`,
     },
     publisher: {
         "@type": "Organization",
-        name: company.name,
+        "@id": `${siteUrl}/#organization`,
+        name: company.shortName,
         logo: {
             "@type": "ImageObject",
             url: `${siteUrl}/${company.logo}`,
         },
     },
+    mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": `${siteUrl}/blog/${post.id}`,
+    },
     url: `${siteUrl}/blog/${post.id}`,
     keywords: (post.data.tags || []).join(", "),
 };
+
+// FAQPage Schema：從 blockData 提取 faq 類型的區塊
+const faqItems = (blockData?.blocks ?? [])
+    .filter((b: { type: string }) => b.type === "faq")
+    .flatMap((b: { items: { question: string; answer: string }[] }) => b.items ?? []);
+
+const faqSchema = faqItems.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item: { question: string; answer: string }) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+        },
+    })),
+} : null;
 
 const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -117,6 +141,12 @@ const proseClass =
             type="application/ld+json"
             set:html={JSON.stringify(breadcrumbSchema)}
         />
+        {faqSchema && (
+            <script
+                type="application/ld+json"
+                set:html={JSON.stringify(faqSchema)}
+            />
+        )}
     </Fragment>
     <!-- Featured Image at the Top -->
     <div class="max-w-5xl mx-auto px-4 pt-8">
@@ -203,6 +233,20 @@ const proseClass =
             <p class="text-xl text-gray-600 leading-relaxed max-w-2xl">
                 {post.data.description}
             </p>
+
+            {post.data.summary && post.data.summary.length > 0 && (
+                <div class="mt-8 bg-primary/5 border-l-4 border-primary rounded-r-xl px-6 py-5 max-w-2xl">
+                    <p class="text-xs font-semibold text-primary uppercase tracking-widest mb-3">本文重點</p>
+                    <ul class="space-y-2">
+                        {post.data.summary.map((point: string) => (
+                            <li class="flex items-start gap-2 text-gray-700 text-sm leading-relaxed">
+                                <span class="text-primary mt-0.5 shrink-0">✓</span>
+                                <span>{point}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
         </div>
     </div>
 

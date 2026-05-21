@@ -6,13 +6,15 @@ import products from "../../data/products.json";
 import seo from "../../data/seo.json";
 
 export function getStaticPaths() {
-    return products.map((product) => {
-        const category = categories.find((c) => c.id === product.category);
-        return {
-            params: { id: product.id },
-            props: { product, category },
-        };
-    });
+    return products
+        .filter((product) => product.available !== false)
+        .map((product) => {
+            const category = categories.find((c) => c.id === product.category);
+            return {
+                params: { id: product.id },
+                props: { product, category },
+            };
+        });
 }
 
 interface Props {
@@ -22,14 +24,18 @@ interface Props {
 
 const { product, category } = Astro.props;
 
+const siteUrl = "https://www.chiaohsin.com.tw";
+
 // 取得同分類的其他產品作為相關產品
 const relatedProducts = products
-    .filter((p) => p.category === product.category && p.id !== product.id)
+    .filter((p) => p.category === product.category && p.id !== product.id && p.available !== false)
     .slice(0, 3);
 
 // SEO 相關設定
 const productTitle = `${product.name} - ${category.name}`;
-const productDescription = `${product.name}｜${category.name}｜${product.description}｜${company.name}專業提供各式工作手套、防護用品。`;
+const _descFirstSentence = product.description.replace(/\n+/g, ' ').split('。')[0];
+const _descSnippet = _descFirstSentence.length > 80 ? _descFirstSentence.slice(0, 80) + '…' : _descFirstSentence;
+const productDescription = `${product.name}｜${category.name}批發直供。${_descSnippet}。喬新針織，全台配送。`.slice(0, 155);
 // 產品專屬關鍵字：產品名、分類名、tags（同義詞）
 const productKeywords = [product.name, category.name, ...(product.tags || [])];
 
@@ -37,26 +43,35 @@ const productKeywords = [product.name, category.name, ...(product.tags || [])];
 const structuredData = {
     "@context": "https://schema.org",
     "@type": "Product",
+    "@id": `${siteUrl}/products/${product.id}`,
     name: product.name,
     description: product.description,
-    image: `https://www.chiaohsin.com.tw/${product.image}`,
+    image: `${siteUrl}/${product.image}`,
+    url: `${siteUrl}/products/${product.id}`,
     sku: product.id,
     category: category.name,
+    ...(product.materials && { material: product.materials }),
+    ...(product.size && product.size !== "-" && { size: product.size }),
     brand: {
-        "@type": "Brand",
-        name: company.name,
+        "@type": "Organization",
+        "@id": `${siteUrl}/#organization`,
+        name: company.shortName,
     },
     manufacturer: {
         "@type": "Organization",
-        name: company.name,
+        "@id": `${siteUrl}/#organization`,
+        name: company.shortName,
         url: `https://${company.website}`,
     },
     offers: {
         "@type": "Offer",
+        url: `${siteUrl}/products/${product.id}`,
         availability: "https://schema.org/InStock",
+        itemCondition: "https://schema.org/NewCondition",
         seller: {
             "@type": "Organization",
-            name: company.name,
+            "@id": `${siteUrl}/#organization`,
+            name: company.shortName,
         },
     },
 };
@@ -472,7 +487,7 @@ const breadcrumbData = {
 
                             <!-- 好賣+ -->
                             <a
-                                href="https://famistore.famiport.com.tw/"
+                                href="https://famistore.famiport.com.tw/users/6035178"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 class="btn h-auto py-3 px-2 border-0 shadow-lg shadow-blue-500/20 text-white flex flex-col items-center gap-1 hover:scale-[1.02] active:scale-95 transition-all rounded-xl"
@@ -520,7 +535,8 @@ const breadcrumbData = {
                                     xmlns="http://www.w3.org/2000/svg"
                                 >
                                     <path
-                                        d="M24 10.304c0-5.369-5.383-9.738-12-9.738s-12 4.369-12 9.738c0 4.814 4.269 8.846 10.049 9.608.391.051.924.258 1.058.59.121.303.079.778.039 1.084l-.171 1.026c-.052.312-.252 1.222 1.084.666 1.335-.556 7.203-4.241 9.824-7.261 1.956-2.144 2.117-4.156 2.117-4.965l.001-.748zm-15.538 2.05h-.936c-.229 0-.413-.185-.413-.413V8.814c0-.228.184-.413.413-.413h.936c.228 0 .413.185.413.413v3.127c0 .228-.185.413-.413.413zm2.536 0h-.935c-.229 0-.413-.185-.413-.413V8.814c0-.228.184-.413.413-.413h.935c.229 0 .413.185.413.413v3.127c0 .228-.184.413-.413.413zm4.518 0h-2.138c-.229 0-.413-.185-.413-.413V8.814c0-.228.184-.413.413-.413h.935c.229 0 .413.185.413.413v2.302h1.203c.228 0 .413.185.413.413v.412c0 .228-.185.413-.413.413zm2.4 0h-.936c-.228 0-.413-.185-.413-.413v-1.125h-.649V12.353h-.936c-.229 0-.413-.185-.413-.413V8.814c0-.228.184-.413.413-.413h3.587c.229 0 .413.185.413.413v.411c0 .228-.185.413-.413.413h-2.651v.656h.649c.229 0 .413.185.413.413v1.654c0 .228-.185.412-.413.412z"
+                                        fill-rule="evenodd"
+                                        d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"
                                     ></path>
                                 </svg>
                                 LINE 洽詢
@@ -547,7 +563,7 @@ const breadcrumbData = {
                                 <figure class="px-4 pt-4 bg-base-200/50 min-h-[160px] flex items-center justify-center overflow-hidden">
                                     <img
                                         src={`/${relatedProduct.image}`}
-                                        alt={relatedProduct.name}
+                                        alt={`${relatedProduct.name} 產品圖片`}
                                         class="rounded-xl h-40 object-contain group-hover:scale-105 transition-transform duration-300"
                                         loading="lazy"
                                         width="200"
