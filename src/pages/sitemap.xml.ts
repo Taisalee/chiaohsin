@@ -1,7 +1,7 @@
 import { getCollection } from 'astro:content';
 import products from '../data/products.json';
 
-const siteUrl = 'https://www.chiaohsin.com.tw';
+const siteUrl = (import.meta.env.SITE as string).replace(/\/$/, '');
 const currentDate = new Date().toISOString().split('T')[0];
 
 // 靜態頁面
@@ -33,7 +33,15 @@ export async function GET() {
         lastmod: (post.data.updatedDate ?? post.data.publishDate).toISOString().split('T')[0],
     }));
 
-    const allPages = [...staticPages, ...productPages, ...blogPages];
+    const newsItems = await getCollection('news', ({ data }) => !data.draft);
+    const newsPages = newsItems.map((item) => ({
+        url: `/news/${item.id.replace(/\/index$/, '')}`,
+        priority: '0.6',
+        changefreq: 'monthly',
+        lastmod: item.data.publishDate.toISOString().split('T')[0],
+    }));
+
+    const allPages = [...staticPages, ...productPages, ...blogPages, ...newsPages];
 
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

@@ -17,6 +17,10 @@ const featuredPosts = allPosts
 ---
 
 <Layout canonical="/">
+  <Fragment slot="head">
+    <link rel="preload" as="image" href={`/${banner}`} fetchpriority="high" />
+  </Fragment>
+
   <!-- Hero Section -->
   <div class="hero min-h-[70vh] bg-base-200" style={`background-image: url(/${banner});`} role="img" aria-label="喬新針織工作手套工廠實景">
     <div class="hero-overlay bg-opacity-60 bg-gradient-to-r from-neutral-900/80 to-transparent"></div>
@@ -184,7 +188,7 @@ const featuredPosts = allPosts
       <h2 class="text-3xl md:text-4xl font-bold mb-6">需要專業的防護建議？</h2>
       <p class="text-xl mb-8 opacity-90">我們提供最優質的手套與防護用品，歡迎來電洽詢或親臨選購</p>
       <div class="flex flex-col sm:flex-row justify-center gap-4">
-        <a href="tel:{company.contact.phone}" class="btn btn-primary btn-lg shadow-lg">
+        <a href={`tel:${company.contact.phone}`} class="btn btn-primary btn-lg shadow-lg">
           📞 立即來電 {company.contact.phone}
         </a>
         <a href="/about#contact" class="btn btn-outline btn-lg text-white hover:bg-white hover:text-neutral">

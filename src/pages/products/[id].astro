@@ -24,7 +24,7 @@ interface Props {
 
 const { product, category } = Astro.props;
 
-const siteUrl = "https://www.chiaohsin.com.tw";
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? "https://www.chiaohsin.com.tw";
 
 // 取得同分類的其他產品作為相關產品
 const relatedProducts = products

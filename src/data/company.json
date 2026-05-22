@@ -49,7 +49,7 @@
         "area": "全國地區"
     },
     "logoIcon": "",
-    "logo": "images/LOGO-03.png",
+    "logo": "images/LOGO-03.webp",
     "keywords": [
         "棉紗手套",
         "尼龍手套",
@@ -61,8 +61,8 @@
     ],
     "assets": {
         "images": {
-            "logo": "images/LOGO-03.png",
-            "banner": "skin/banner.png"
+            "logo": "images/LOGO-03.webp",
+            "banner": "skin/banner.webp"
         }
     }
 }

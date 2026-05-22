@@ -1,26 +1,90 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
 import company from "../data/company.json";
-import seo from "../data/seo.json";
 
-// 最新消息頁面 SEO 設定
-const newsDescription = `${company.name}最新消息 - 了解我們的最新產品資訊、公司動態與優惠活動。`;
-const newsKeywords = [company.name, "最新消息", "公司動態"];
+const allNews = await getCollection("news", ({ data }) => data.draft !== true);
+const sortedNews = allNews.sort(
+    (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
+
+const pageTitle = `最新消息 - ${company.shortName}`;
+const pageDescription = `${company.shortName}最新消息，包含新品上架、公司動態、採購優惠等公告。`;
 ---
 
 <Layout
-  title="最新消息"
-  description={newsDescription}
-  keywords={newsKeywords}
-  canonical="/news"
+    title={pageTitle}
+    description={pageDescription}
+    keywords={["喬新針織最新消息", "台南手套批發公告", "工安耗材新品"]}
+    canonical="/news"
 >
-  <div class="hero min-h-[50vh] bg-base-200">
-    <div class="hero-content text-center">
-      <div class="max-w-md">
-        <h1 class="text-5xl font-bold">最新消息</h1>
-        <p class="py-6">目前沒有最新消息發布。</p>
-        <a href="/" class="btn btn-primary">回首頁</a>
-      </div>
+    <div class="bg-gradient-to-r from-primary/10 to-secondary/10 py-16 px-4">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">最新消息</h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                新品上架、公司動態與採購相關公告
+            </p>
+            <div class="w-24 h-1 bg-primary mx-auto mt-6 rounded-full"></div>
+        </div>
     </div>
-  </div>
+
+    <section class="py-16 px-4 bg-base-100">
+        <div class="max-w-4xl mx-auto">
+            {sortedNews.length > 0 ? (
+                <div class="space-y-6">
+                    {sortedNews.map((item) => (
+                        <a href={`/news/${item.id.replace(/\/index$/, '')}`} class="group block">
+                            <article class="card bg-base-100 shadow-md hover:shadow-xl transition-all duration-300 border border-base-200 p-6">
+                                <div class="flex items-start justify-between gap-4">
+                                    <div class="flex-1">
+                                        <time
+                                            class="text-sm text-gray-400 block mb-2"
+                                            datetime={item.data.publishDate.toISOString()}
+                                        >
+                                            {item.data.publishDate.toLocaleDateString("zh-TW", {
+                                                year: "numeric",
+                                                month: "long",
+                                                day: "numeric",
+                                            })}
+                                        </time>
+                                        <h2 class="text-xl font-bold group-hover:text-primary transition-colors mb-2">
+                                            {item.data.title}
+                                        </h2>
+                                        <p class="text-gray-500 line-clamp-2">
+                                            {item.data.description}
+                                        </p>
+                                        {item.data.tags && item.data.tags.length > 0 && (
+                                            <div class="flex flex-wrap gap-2 mt-3">
+                                                {item.data.tags.map((tag: string) => (
+                                                    <span class="px-2 py-1 rounded-md bg-gray-100 text-gray-500 text-xs">
+                                                        {tag}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                    <span class="text-primary group-hover:translate-x-1 transition-transform mt-1 shrink-0">
+                                        閱讀 →
+                                    </span>
+                                </div>
+                            </article>
+                        </a>
+                    ))}
+                </div>
+            ) : (
+                <div class="text-center py-16">
+                    <h2 class="text-2xl font-bold mb-2">目前沒有消息</h2>
+                    <p class="text-gray-500">請稍後再來查看。</p>
+                </div>
+            )}
+        </div>
+    </section>
+
+    <section class="py-16 px-4 bg-base-200">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-2xl font-bold mb-4">需要批發報價？</h2>
+            <p class="text-lg text-gray-600 mb-8">歡迎來電或 LINE 詢價，告知品項與數量即可快速報價</p>
+            <a href="/contact" class="btn btn-primary btn-lg">聯絡我們</a>
+        </div>
+    </section>
 </Layout>
