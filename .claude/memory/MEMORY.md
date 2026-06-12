@@ -1,0 +1,3 @@
+- [SEO/GEO/AEO 優化待辦清單](project_seo_todo.md) — 網站優化工作項目狀態，含已完成與待處理事項
+- [修改前必須先確認](feedback_no_changes_without_approval.md) — 任何修改或優化都必須先告知用戶並等待確認，不可擅自動手
+- [待撰寫最新消息文章](project_news_drafts.md) — 候選文章題目清單，完成後刪除對應條目
