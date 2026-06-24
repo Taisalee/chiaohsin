@@ -252,13 +252,73 @@ const breadcrumbData = {
                         />
                     </figure>
 
+                    <!-- 批量採購提示 -->
+                    <div
+                        class="alert bg-gradient-to-r from-orange-100 to-amber-100 border border-orange-200 shadow-md mt-4 lg:mt-6"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="stroke-orange-600 shrink-0 h-6 w-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                            ></path>
+                        </svg>
+                        <div>
+                            <h4 class="font-bold text-orange-800">
+                                💼 企業大量採購享優惠
+                            </h4>
+                            <p class="text-sm text-orange-700">
+                                歡迎公司行號、工廠批量訂購，量大另有折扣，請來電洽詢！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 產品資訊 -->
+                <div class="flex-1 space-y-6">
+                    <!-- 電腦版：分類標籤 -->
+                    <div class="hidden lg:flex items-center gap-2">
+                        <a
+                            href={`/products#${category.id}`}
+                            class="badge badge-primary badge-lg hover:badge-secondary transition-colors text-white"
+                        >
+                            {category.name}
+                        </a>
+                    </div>
+
+                    <!-- 電腦版：產品名稱 -->
+                    <h1
+                        class="hidden lg:block text-4xl md:text-5xl font-bold leading-tight"
+                    >
+                        {product.name}
+                    </h1>
+
+                    <!-- 產品特色標籤 (電腦版顯示) -->
+                    {
+                        product.features && product.features.length > 0 && (
+                            <div class="hidden lg:flex flex-wrap gap-2 pt-2">
+                                {product.features.map((feature: string) => (
+                                    <span class="badge badge-primary badge-lg gap-1">
+                                        ✓ {feature}
+                                    </span>
+                                ))}
+                            </div>
+                        )
+                    }
+
                     <!-- 產品規格表格 -->
                     {
                         (product.materials ||
                             product.packaging ||
                             product.weight ||
                             product.specifications) && (
-                            <div class="overflow-x-auto mt-4 lg:mt-6">
+                            <div class="overflow-x-auto">
                                 <table class="table table-zebra w-full text-sm lg:text-base">
                                     <thead>
                                         <tr>
@@ -321,139 +381,7 @@ const breadcrumbData = {
                             </div>
                         )
                     }
-                </div>
 
-                <!-- 產品資訊 -->
-                <div class="flex-1 space-y-6">
-                    <!-- 電腦版：分類標籤 -->
-                    <div class="hidden lg:flex items-center gap-2">
-                        <a
-                            href={`/products#${category.id}`}
-                            class="badge badge-primary badge-lg hover:badge-secondary transition-colors text-white"
-                        >
-                            {category.name}
-                        </a>
-                    </div>
-
-                    <!-- 電腦版：產品名稱 -->
-                    <h1
-                        class="hidden lg:block text-4xl md:text-5xl font-bold leading-tight"
-                    >
-                        {product.name}
-                    </h1>
-
-                    <!-- 電腦版：產品規格 -->
-                    {
-                        product.size && product.size !== "-" && (
-                            <div class="hidden lg:flex items-center gap-2">
-                                <span class="text-gray-500">規格尺寸：</span>
-                                <span class="badge badge-outline badge-lg">
-                                    {product.size}
-                                </span>
-                            </div>
-                        )
-                    }
-
-                    <!-- 產品特色標籤 (電腦版顯示) -->
-                    {
-                        product.features && product.features.length > 0 && (
-                            <div class="hidden lg:flex flex-wrap gap-2 pt-2">
-                                {product.features.map((feature: string) => (
-                                    <span class="badge badge-primary badge-lg gap-1">
-                                        ✓ {feature}
-                                    </span>
-                                ))}
-                            </div>
-                        )
-                    }
-
-                    <!-- 適用對象 -->
-                    {
-                        product.targetAudiences &&
-                            product.targetAudiences.length > 0 && (
-                                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-base-200 dark:to-base-300 rounded-xl p-5 border border-blue-100 dark:border-base-300">
-                                    <h3 class="font-semibold mb-3 flex items-center gap-2 text-blue-700 dark:text-blue-300">
-                                        <span class="text-xl">👷</span>
-                                        適用對象
-                                    </h3>
-                                    <div class="flex flex-wrap gap-2">
-                                        {product.targetAudiences.map(
-                                            (audience: string) => (
-                                                <span class="badge badge-outline badge-lg">
-                                                    {audience}
-                                                </span>
-                                            ),
-                                        )}
-                                    </div>
-                                </div>
-                            )
-                    }
-
-                    <!-- 適用行業 -->
-                    {
-                        product.targetIndustries &&
-                            product.targetIndustries.length > 0 && (
-                                <div class="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-base-200 dark:to-base-300 rounded-xl p-5 border border-green-100 dark:border-base-300">
-                                    <h3 class="font-semibold mb-3 flex items-center gap-2 text-green-700 dark:text-green-300">
-                                        <span class="text-xl">🏭</span>
-                                        適用行業
-                                    </h3>
-                                    <div class="flex flex-wrap gap-2">
-                                        {product.targetIndustries.map(
-                                            (industry: string) => (
-                                                <span class="badge badge-outline badge-lg">
-                                                    {industry}
-                                                </span>
-                                            ),
-                                        )}
-                                    </div>
-                                </div>
-                            )
-                    }
-
-                    <!-- 產品說明 (全裝置顯示) -->
-                    <div class="prose prose-lg max-w-none">
-                        <h2 class="text-xl font-semibold mb-3">產品說明</h2>
-                        {
-                            (product.description || "")
-                                .split("\n")
-                                .map(
-                                    (paragraph) =>
-                                        paragraph.trim() && (
-                                            <p class="text-gray-600 leading-relaxed mb-4">
-                                                {paragraph}
-                                            </p>
-                                        ),
-                                )
-                        }
-                    </div>
-
-                    <!-- 批量採購提示 (復原) -->
-                    <div
-                        class="alert bg-gradient-to-r from-orange-100 to-amber-100 border border-orange-200 shadow-md"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="stroke-orange-600 shrink-0 h-6 w-6"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                            ></path>
-                        </svg>
-                        <div>
-                            <h4 class="font-bold text-orange-800">
-                                💼 企業大量採購享優惠
-                            </h4>
-                            <p class="text-sm text-orange-700">
-                                歡迎公司行號、工廠批量訂購，量大另有折扣，請來電洽詢！
-                            </p>
-                        </div>
-                    </div>
                     <!-- CTA 按鈕區塊 -->
                     <div class="space-y-4 pt-4">
                         <!-- 線上購買專區 (並排顯示) -->
@@ -545,6 +473,70 @@ const breadcrumbData = {
                     </div>
                 </div>
             </div>
+
+            <!-- 次要資訊：適用對象/行業 + 產品說明（全寬） -->
+            {
+                (product.targetAudiences?.length > 0 ||
+                    product.targetIndustries?.length > 0 ||
+                    product.description) && (
+                    <div class="mt-10 pt-8 border-t border-base-300 space-y-8">
+                        {(product.targetAudiences?.length > 0 ||
+                            product.targetIndustries?.length > 0) && (
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {product.targetAudiences &&
+                                    product.targetAudiences.length > 0 && (
+                                        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-base-200 dark:to-base-300 rounded-xl p-5 border border-blue-100 dark:border-base-300">
+                                            <h3 class="font-semibold mb-3 flex items-center gap-2 text-blue-700 dark:text-blue-300">
+                                                <span class="text-xl">👷</span>
+                                                適用對象
+                                            </h3>
+                                            <div class="flex flex-wrap gap-2">
+                                                {product.targetAudiences.map(
+                                                    (audience: string) => (
+                                                        <span class="badge badge-outline badge-lg">
+                                                            {audience}
+                                                        </span>
+                                                    ),
+                                                )}
+                                            </div>
+                                        </div>
+                                    )}
+                                {product.targetIndustries &&
+                                    product.targetIndustries.length > 0 && (
+                                        <div class="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-base-200 dark:to-base-300 rounded-xl p-5 border border-green-100 dark:border-base-300">
+                                            <h3 class="font-semibold mb-3 flex items-center gap-2 text-green-700 dark:text-green-300">
+                                                <span class="text-xl">🏭</span>
+                                                適用行業
+                                            </h3>
+                                            <div class="flex flex-wrap gap-2">
+                                                {product.targetIndustries.map(
+                                                    (industry: string) => (
+                                                        <span class="badge badge-outline badge-lg">
+                                                            {industry}
+                                                        </span>
+                                                    ),
+                                                )}
+                                            </div>
+                                        </div>
+                                    )}
+                            </div>
+                        )}
+                        <div class="prose prose-lg max-w-none">
+                            <h2 class="text-xl font-semibold mb-3">產品說明</h2>
+                            {(product.description || "")
+                                .split("\n")
+                                .map(
+                                    (paragraph) =>
+                                        paragraph.trim() && (
+                                            <p class="text-gray-600 leading-relaxed mb-4">
+                                                {paragraph}
+                                            </p>
+                                        ),
+                                )}
+                        </div>
+                    </div>
+                )
+            }
         </article>
 
         <!-- 相關產品 -->
