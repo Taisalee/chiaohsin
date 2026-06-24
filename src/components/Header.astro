@@ -55,7 +55,15 @@ import products from "../data/products.json";
       href="/"
       class="btn btn-ghost text-xl normal-case font-bold text-primary flex items-center gap-2"
     >
-      <img src={`/${company.logo}`} alt={`${company.name}標誌`} class="h-10 w-auto" style="filter: brightness(0) saturate(100%) invert(56%) sepia(17%) saturate(800%) hue-rotate(155deg) brightness(95%);" />
+      <span class="relative inline-block h-10">
+        <img src={`/${company.logo}`} alt="" class="h-10 w-auto invisible" aria-hidden="true" />
+        <span
+          class="absolute inset-0 bg-primary"
+          style={`-webkit-mask-image: url('/${company.logo}'); mask-image: url('/${company.logo}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}
+          role="img"
+          aria-label={`${company.name}標誌`}
+        ></span>
+      </span>
       <span class="hidden sm:inline">喬新針織有限公司(永力新國際有限公司)</span>
     </a>
   </div>

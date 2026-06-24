@@ -12,11 +12,15 @@ const currentYear = new Date().getFullYear();
 >
   <aside class="flex flex-col gap-6 col-span-2 lg:col-span-1">
     <div class="font-bold text-2xl flex items-center gap-3">
-      <img
-        src={`/${company.logo}`}
-        alt={`${company.name}標誌`}
-        class="h-20 w-auto brightness-0 invert"
-      />
+      <span class="relative inline-block h-20">
+        <img src={`/${company.logo}`} alt="" class="h-20 w-auto invisible" aria-hidden="true" />
+        <span
+          class="absolute inset-0 bg-white"
+          style={`-webkit-mask-image: url('/${company.logo}'); mask-image: url('/${company.logo}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}
+          role="img"
+          aria-label={`${company.name}標誌`}
+        ></span>
+      </span>
       <div class="flex flex-col">
         <span class="tracking-wide text-white text-lg">{company.name}</span>
         <span
