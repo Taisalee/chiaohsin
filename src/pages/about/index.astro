@@ -361,19 +361,19 @@ const { banner } = company.assets.images;
   <div class="flex flex-col lg:flex-row min-h-[520px]">
     <!-- 左側：文字內容 -->
     <div
-      class="lg:w-1/2 flex items-center py-16 lg:py-20 px-8 md:px-14 lg:px-16 order-2"
+      class="lg:w-3/5 flex items-center py-8 lg:py-10 px-6 md:px-8 lg:px-10 order-2"
     >
-      <div class="w-full max-w-xl mx-auto lg:ml-auto lg:mr-4">
-        <h2 class="text-3xl md:text-5xl font-black mb-4">
+      <div class="w-full">
+        <h2 class="text-3xl md:text-5xl font-black mb-2">
           即刻諮詢專屬防護方案
         </h2>
-        <p class="text-white/60 text-lg mb-12">
+        <p class="text-white/60 text-lg mb-5">
           喬新/永立新國際誠摯歡迎全台企業、工地負責人與經銷商洽詢合作，我們將由專人為您提供最精確的產品建議。
         </p>
 
-        <div class="space-y-8 font-medium">
-          <!-- 聯絡窗口 & 電話 -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <div class="space-y-3 font-medium">
+          <!-- 聯絡窗口 & LINE -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-white/10">
             <div class="flex items-start gap-4">
               <div
                 class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary"
@@ -432,7 +432,7 @@ const { banner } = company.assets.images;
 
           <!-- 服務專線 & 傳真 -->
           <div
-            class="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-4 border-t border-white/10"
+            class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-white/10"
           >
             <div class="flex items-start gap-4">
               <div
@@ -494,67 +494,68 @@ const { banner } = company.assets.images;
             </div>
           </div>
 
-          <!-- Email -->
-          <div class="flex items-start gap-4 pt-4 border-t border-white/10">
-            <div
-              class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary flex-shrink-0"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                ></path></svg
+          <!-- Email & 營業時間 -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-white/10">
+            <div class="flex items-start gap-4">
+              <div
+                class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary flex-shrink-0"
               >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  ></path></svg
+                >
+              </div>
+              <div>
+                <p class="text-white/40 text-sm mb-1 uppercase tracking-wider">
+                  電子郵件
+                </p>
+                <a
+                  href={`mailto:${company.contact.email}`}
+                  class="text-lg text-white/90 hover:text-primary transition-colors"
+                >
+                  {company.contact.email}
+                </a>
+              </div>
             </div>
-            <div>
-              <p class="text-white/40 text-sm mb-1 uppercase tracking-wider">
-                電子郵件
-              </p>
-              <a
-                href={`mailto:${company.contact.email}`}
-                class="text-lg text-white/90 hover:text-primary transition-colors"
-              >
-                {company.contact.email}
-              </a>
-            </div>
-          </div>
 
-          <!-- 營業時間 -->
-          <div class="flex items-start gap-4 pt-4 border-t border-white/10">
-            <div
-              class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary flex-shrink-0"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg
+            <div class="flex items-start gap-4">
+              <div
+                class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary flex-shrink-0"
               >
-            </div>
-            <div>
-              <p class="text-white/40 text-sm mb-1 uppercase tracking-wider">
-                營業時間
-              </p>
-              <p class="text-lg text-white/90">週一至週五　08:00 – 17:00</p>
-              <p class="text-white/40 text-xs mt-0.5">週六日・國定假日公休</p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg
+                >
+              </div>
+              <div>
+                <p class="text-white/40 text-sm mb-1 uppercase tracking-wider">
+                  營業時間
+                </p>
+                <p class="text-lg text-white/90">週一至週五　08:00 – 17:00</p>
+                <p class="text-white/40 text-xs mt-0.5">週六日・國定假日公休</p>
+              </div>
             </div>
           </div>
 
           <!-- 地址 -->
-          <div class="flex items-start gap-4 pt-4 border-t border-white/10">
+          <div class="flex items-start gap-4 pt-3 border-t border-white/10">
             <div
               class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary flex-shrink-0"
             >
@@ -584,63 +585,64 @@ const { banner } = company.assets.images;
             </div>
           </div>
 
-          <!-- 服務區域 -->
-          <div class="flex items-start gap-4 pt-4 border-t border-white/10">
-            <div
-              class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary flex-shrink-0"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                ><path
-                  d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"
-                ></path><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"
-                ></path></svg
+          <!-- 服務區域 & 支援付款 -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-white/10">
+            <div class="flex items-start gap-4">
+              <div
+                class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary flex-shrink-0"
               >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  ><path
+                    d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"
+                  ></path><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"
+                  ></path></svg
+                >
+              </div>
+              <div>
+                <p class="text-white/40 text-sm mb-1 uppercase tracking-wider">
+                  服務區域
+                </p>
+                <p class="text-lg text-white/90">
+                  台灣全境配送 / 台南地區歡迎親取
+                </p>
+              </div>
             </div>
-            <div>
-              <p class="text-white/40 text-sm mb-1 uppercase tracking-wider">
-                服務區域
-              </p>
-              <p class="text-lg text-white/90">
-                台灣全境配送 / 台南地區歡迎親取
-              </p>
-            </div>
-          </div>
 
-          <!-- 支援付款 -->
-          <div class="flex items-start gap-4 pt-4 border-t border-white/10">
-            <div
-              class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary flex-shrink-0"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
-                ></path></svg
+            <div class="flex items-start gap-4">
+              <div
+                class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary flex-shrink-0"
               >
-            </div>
-            <div>
-              <p class="text-white/40 text-sm mb-1 uppercase tracking-wider">
-                支援付款
-              </p>
-              <p class="text-lg text-white/90">
-                現金、ATM 轉帳、貨到付款、電匯
-              </p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+                  ></path></svg
+                >
+              </div>
+              <div>
+                <p class="text-white/40 text-sm mb-1 uppercase tracking-wider">
+                  支援付款
+                </p>
+                <p class="text-lg text-white/90">
+                  現金、ATM 轉帳、貨到付款、電匯
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -649,7 +651,7 @@ const { banner } = company.assets.images;
 
     <!-- 右側：Google 地圖 -->
     <div
-      class="lg:w-1/2 relative order-1 h-[360px] lg:h-auto border-t lg:border-t-0 lg:border-r border-gray-800"
+      class="lg:w-2/5 relative order-1 h-[360px] lg:h-auto border-t lg:border-t-0 lg:border-r border-gray-800"
     >
       <iframe
         src={`https://maps.google.com/maps?q=${company.address.coordinates.lat},${company.address.coordinates.lng}&hl=zh-TW&z=15&output=embed`}
