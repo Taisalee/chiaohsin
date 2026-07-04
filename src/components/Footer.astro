@@ -2,157 +2,455 @@
 import company from "../data/company.json";
 import navigation from "../data/navigation.json";
 import categories from "../data/categories.json";
-import products from "../data/products.json";
 
 const currentYear = new Date().getFullYear();
+const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=120.3252%2C23.1645%2C120.3352%2C23.1745&layer=mapnik&marker=${company.address.coordinates.lat}%2C${company.address.coordinates.lng}`;
+const mapsLink = `https://www.google.com/maps/search/?api=1&query=${company.address.coordinates.lat},${company.address.coordinates.lng}`;
 ---
 
-<footer
-  class="footer p-6 md:p-10 bg-[#151515] text-neutral-content grid-cols-2 lg:grid-cols-[2fr_0.8fr_0.8fr_1.2fr_1.2fr] gap-8 lg:gap-8"
->
-  <aside class="flex flex-col gap-6 col-span-2 lg:col-span-1">
-    <div class="font-bold text-2xl flex items-center gap-3">
-      <span class="relative inline-block h-20">
-        <img src={`/${company.logo}`} alt="" class="h-20 w-auto invisible" aria-hidden="true" />
-        <span
-          class="absolute inset-0 bg-white"
-          style={`-webkit-mask-image: url('/${company.logo}'); mask-image: url('/${company.logo}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}
-          role="img"
-          aria-label={`${company.name}標誌`}
-        ></span>
-      </span>
-      <div class="flex flex-col">
-        <span class="tracking-wide text-white text-lg">{company.name}</span>
-        <span
-          class="text-[10px] font-light text-gray-400 tracking-wider uppercase"
-          >{company.englishName}</span
-        >
+<footer class="ft">
+
+  <!-- 信任帶 -->
+  <div class="ft-trust">
+    <div class="ft-trust-inner">
+      <div class="ft-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-4 0v2M12 12v4M10 14h4"/>
+        </svg>
+        <span>成立 <strong>{company.foundingYear} 年</strong></span>
       </div>
-    </div>
-    <p class="text-gray-500 leading-relaxed text-sm text-justify">
-      {company.description}
-    </p>
-  </aside>
-
-  <nav class="flex flex-col gap-4 col-span-2 lg:col-span-1">
-    <header class="text-white font-bold text-base mb-2 relative inline-block">
-      網站地圖
-      <span
-        class="absolute -bottom-2 left-0 w-8 h-0.5 bg-primary/80 rounded-full"
-      ></span>
-    </header>
-    <div class="grid grid-cols-3 gap-2 lg:flex lg:flex-col lg:gap-4">
-      {
-        navigation.main.map((item) => (
-          <a
-            href={item.url}
-            class="link link-hover text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300 text-sm"
-          >
-            {item.title}
-          </a>
-        ))
-      }
-    </div>
-  </nav>
-
-  <nav class="flex flex-col gap-4 col-span-2 lg:col-span-1">
-    <header class="text-white font-bold text-base mb-2 relative inline-block">
-      熱門分類
-      <span
-        class="absolute -bottom-2 left-0 w-8 h-0.5 bg-primary/80 rounded-full"
-      ></span>
-    </header>
-    <div class="grid grid-cols-3 gap-2 lg:flex lg:flex-col lg:gap-4">
-      {
-        categories.slice(0, 5).map((cat) => (
-          <a
-            href={`/products#${cat.id}`}
-            class="link link-hover text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300 text-sm"
-          >
-            {cat.name}
-          </a>
-        ))
-      }
-      <a
-        href="/products"
-        class="link link-hover text-primary font-medium flex items-center gap-1 group text-sm"
-      >
-        查看更多
-        <span class="group-hover:translate-x-1 transition-transform">→</span>
-      </a>
-    </div>
-  </nav>
-
-  <div class="flex flex-col gap-4 col-span-2 lg:col-span-1">
-    <header class="text-white font-bold text-base mb-2 relative inline-block">
-      聯絡我們
-      <span
-        class="absolute -bottom-2 left-0 w-8 h-0.5 bg-primary/80 rounded-full"
-      ></span>
-    </header>
-
-    <div class="flex flex-col gap-4 text-sm text-gray-400">
-      <a
-        href={company.address.coordinates
-          ? `https://www.google.com/maps/search/?api=1&query=${company.address.coordinates.lat},${company.address.coordinates.lng}`
-          : "#"}
-        target="_blank"
-        class="flex items-start gap-3 hover:text-white transition-colors"
-      >
-        <span class="text-primary mt-0.5">📍</span>
-        <span class="leading-relaxed">{company.address.full}</span>
-      </a>
-      <div class="flex items-center gap-3 hover:text-white transition-colors">
-        <span class="text-primary">📞</span>
-        <span>{company.contact.phone}</span>
+      <div class="ft-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><circle cx="12" cy="12" r="2"/>
+        </svg>
+        <span>重量足・<strong>品質穩定</strong></span>
       </div>
-      <div class="flex items-center gap-3 hover:text-white transition-colors">
-        <span class="text-primary">📠</span>
-        <span>{company.contact.fax}</span>
+      <div class="ft-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+        <span><strong>全台</strong>配送</span>
       </div>
-      <a
-        href={`mailto:${company.contact.email}`}
-        class="flex items-center gap-3 hover:text-white transition-colors"
-      >
-        <span class="text-primary">✉️</span>
-        <span>{company.contact.email}</span>
-      </a>
-      <a
-        href={`https://line.me/ti/p/~${company.contact["LINE ID"]}`}
-        target="_blank"
-        class="flex items-center gap-3 hover:text-white transition-colors"
-      >
-        <span class="text-primary">💬</span>
-        <span>LINE ID：{company.contact["LINE ID"]}</span>
-      </a>
+      <div class="ft-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+        </svg>
+        <span>企業 &amp; <strong>批發</strong>優先</span>
+      </div>
     </div>
   </div>
 
-  <div
-    class="flex flex-col items-start lg:items-end gap-3 col-span-2 lg:col-span-1"
-  >
-    <div
-      class="flex flex-col items-center gap-3 bg-white/5 p-4 rounded-2xl border border-white/10 backdrop-blur-sm w-full lg:w-auto"
-    >
-      <span class="text-sm font-medium text-white flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-[#00B900] animate-pulse"></span>
-        加入官方 LINE
-      </span>
-      <div class="bg-white p-2 rounded-xl">
-        <img
-          src="/images/lineqr.webp"
-          alt="喬新針織官方 LINE 客服 QR Code"
-          class="w-32 h-32 object-contain"
-        />
+  <!-- 主欄 -->
+  <div class="ft-main">
+    <div class="ft-inner">
+
+      <!-- 品牌欄 -->
+      <div class="ft-col ft-col--brand">
+        <a href="/" class="ft-brand-link" aria-label="紅螞蟻手套 喬新針織有限公司">
+          <span class="ft-logo-wrap" aria-hidden="true">
+            <img src={`/${company.logo}`} alt="" class="ft-logo-img" />
+            <span
+              class="ft-logo-mask"
+              style={`-webkit-mask-image:url('/${company.logo}');mask-image:url('/${company.logo}');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;`}
+            ></span>
+          </span>
+          <span class="ft-brand-name">
+            <span class="ft-brand-main">紅螞蟻手套</span>
+            <span class="ft-brand-sub">喬新針織有限公司</span>
+          </span>
+        </a>
+        <p class="ft-tagline">棉紗・尼龍・花龍・白龍・沾膠・工作用手套批發</p>
+        <p class="ft-year">成立 <strong>{company.foundingYear} 年</strong>，服務工業、電子、物流、清潔各產業</p>
+        <!-- 平板：品牌欄底部地圖 -->
+        <iframe
+          class="ft-map-frame ft-map--tablet-brand"
+          src={mapSrc}
+          allowfullscreen=""
+          loading="lazy"
+          title="喬新針織有限公司位置地圖"
+        ></iframe>
+        <!-- 桌面：品牌欄底部地圖 -->
+        <iframe
+          class="ft-map-frame ft-map--desktop"
+          src={mapSrc}
+          allowfullscreen=""
+          loading="lazy"
+          title="喬新針織有限公司位置地圖"
+        ></iframe>
       </div>
-      <span class="text-[10px] text-gray-400">掃描 QR Code 立即諮詢</span>
+
+      <!-- 網站地圖 -->
+      <nav class="ft-col ft-col--nav" aria-label="網站地圖">
+        <div class="ft-heading-static">網站地圖</div>
+        <details class="ft-details">
+          <summary>
+            網站地圖
+            <svg class="ft-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="ft-details-body">
+            <ul class="ft-links">
+              {navigation.main.map((item) => (
+                <li><a href={item.url} class="ft-link">{item.title}</a></li>
+              ))}
+            </ul>
+          </div>
+        </details>
+      </nav>
+
+      <!-- 熱門分類 -->
+      <nav class="ft-col ft-col--cats" aria-label="熱門分類">
+        <div class="ft-heading-static">熱門分類</div>
+        <details class="ft-details">
+          <summary>
+            熱門分類
+            <svg class="ft-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="ft-details-body">
+            <ul class="ft-links">
+              {categories.slice(0, 5).map((cat) => (
+                <li><a href={`/products#${cat.id}`} class="ft-link">{cat.name}</a></li>
+              ))}
+              <li><a href="/products" class="ft-link ft-link--more">查看全部 →</a></li>
+            </ul>
+          </div>
+        </details>
+      </nav>
+
+      <!-- 右欄群組 -->
+      <div class="ft-right">
+
+        <!-- 聯絡資訊 -->
+        <div class="ft-col ft-col--contact">
+          <div class="ft-heading">聯絡我們</div>
+          <a href={`tel:${company.contact.phone}`} class="ft-phone">
+            <span class="ft-phone-eyebrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.08 1.19 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+              立即來電詢價
+            </span>
+            <span class="ft-phone-num">{company.contact.phone}</span>
+            <span class="ft-phone-hint">{company.contact.contactPerson}　週一至週六 08:00–18:00</span>
+          </a>
+          <ul class="ft-contact-list">
+            <li>
+              <a href={mapsLink} target="_blank" rel="noopener noreferrer" class="ft-ci">
+                <svg class="ft-ci-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>{company.address.full}</span>
+              </a>
+            </li>
+            <li>
+              <div class="ft-ci">
+                <svg class="ft-ci-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/></svg>
+                <span>傳真：{company.contact.fax}</span>
+              </div>
+            </li>
+            <li>
+              <a href={`mailto:${company.contact.email}`} class="ft-ci">
+                <svg class="ft-ci-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+                <span>{company.contact.email}</span>
+              </a>
+            </li>
+            <li class="ft-line-inline">
+              <a href={`https://line.me/ti/p/~${company.contact["LINE ID"]}`} target="_blank" rel="noopener noreferrer" class="ft-ci">
+                <svg class="ft-ci-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+                <span>官方 LINE：{company.contact["LINE ID"]}</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- LINE QR -->
+        <div class="ft-col ft-col--line">
+          <div class="ft-heading">官方 LINE</div>
+          <div class="ft-line-card">
+            <span class="ft-line-badge">
+              <span class="ft-line-dot"></span>
+              加入官方 LINE 客服
+            </span>
+            <div class="ft-qr-wrap">
+              <img src="/images/lineqr.webp" alt="喬新針織官方 LINE 客服 QR Code" class="ft-qr-img" loading="lazy" width="108" height="108" />
+            </div>
+            <p class="ft-line-hint">掃描 QR Code 或搜尋<br />ID：{company.contact["LINE ID"]}</p>
+          </div>
+        </div>
+
+      </div><!-- /ft-right -->
+
     </div>
   </div>
+
+  <!-- 版權列 -->
+  <div class="ft-legal">
+    <div class="ft-legal-inner">
+      <p class="ft-copyright">© {currentYear} 喬新針織有限公司・紅螞蟻手套　版權所有</p>
+      <p class="ft-legal-note">魚得水 品牌旗下　｜　關係企業：永立新國際有限公司</p>
+    </div>
+  </div>
+
 </footer>
-<footer class="footer footer-center p-4 bg-neutral-900 text-neutral-content">
-  <aside>
-    <p>
-      Copyright © {currentYear} - All right reserved by {company.englishName}
-    </p>
-  </aside>
-</footer>
+
+<style>
+.ft {
+  --ft-red:    #c0392b;
+  --ft-bg:     #111827;
+  --ft-legal:  #0a0f1a;
+  --ft-border: rgba(255,255,255,.08);
+  --ft-muted:  #9ca3af;
+  --ft-hover:  #e5e7eb;
+  --ft-px:     clamp(20px, 5vw, 64px);
+  background: var(--ft-bg);
+  color: var(--ft-muted);
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+/* ── 信任帶 ── */
+.ft-trust { display: none; border-bottom: 1px solid var(--ft-border); }
+@media (min-width: 640px) { .ft-trust { display: block; } }
+.ft-trust-inner {
+  max-width: 1280px; margin: 0 auto;
+  padding: 14px var(--ft-px);
+  display: flex; flex-wrap: wrap; gap: 12px 32px;
+  align-items: center; justify-content: center;
+}
+.ft-trust-item {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 12px; color: #6b7280; white-space: nowrap;
+}
+.ft-trust-item svg { width: 14px; height: 14px; flex-shrink: 0; stroke: var(--ft-red); }
+.ft-trust-item strong { color: #d1d5db; font-weight: 600; }
+
+/* ── 主欄 Grid ── */
+.ft-main { border-bottom: 1px solid var(--ft-border); }
+.ft-inner {
+  max-width: 1280px; margin: 0 auto;
+  padding: 48px var(--ft-px) 40px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px 28px;
+}
+@media (min-width: 1100px) {
+  .ft-inner { grid-template-columns: 1.8fr 0.85fr 0.85fr 1.5fr 1fr; gap: 40px 28px; }
+}
+
+/* ── 手機：全部單欄 ── */
+.ft-col--brand, .ft-col--nav, .ft-col--cats,
+.ft-col--contact, .ft-col--line { grid-column: 1 / -1; }
+.ft-right { display: contents; }
+
+/* ── 地圖 iframe ── */
+.ft-map-frame {
+  width: 100%; border: none; border-radius: 10px;
+  opacity: .88; display: block;
+  border: 1px solid var(--ft-border);
+}
+.ft-map--desktop      { display: none; margin-top: 18px; height: 128px; }
+.ft-map--tablet-brand { display: none; margin-top: 18px; height: 128px; }
+
+/* ── 平板（640–1099px）── */
+@media (min-width: 640px) and (max-width: 1099px) {
+  .ft-inner {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "brand  right"
+      "nav    right"
+      "cats   right";
+    align-items: start;
+    gap: 28px 32px;
+  }
+  .ft-col--brand { grid-area: brand; grid-column: auto; }
+  .ft-col--nav   { grid-area: nav;   grid-column: auto; }
+  .ft-col--cats  { grid-area: cats;  grid-column: auto; margin-top: -14px; }
+  .ft-map--tablet-brand { display: block; }
+  .ft-right {
+    display: grid; grid-area: right;
+    grid-template-columns: 1fr;
+    gap: 28px; align-content: start;
+  }
+  .ft-right .ft-col--contact,
+  .ft-right .ft-col--line { grid-column: auto; }
+  .ft-col--nav .ft-links, .ft-col--cats .ft-links {
+    flex-direction: row; flex-wrap: wrap; gap: 8px 20px;
+  }
+  .ft-col--nav .ft-link:hover, .ft-col--cats .ft-link:hover { transform: none; }
+  .ft-col--nav .ft-link, .ft-col--cats .ft-link { white-space: nowrap; font-size: 13px; }
+  .ft-phone-num { font-size: 24px; }
+}
+
+/* ── 桌面（≥1100px）── */
+@media (min-width: 1100px) {
+  .ft-col--brand, .ft-col--nav, .ft-col--cats,
+  .ft-col--contact, .ft-col--line { grid-column: auto; }
+  .ft-map--desktop { display: block; }
+}
+
+/* ── 品牌欄 ── */
+.ft-brand-link {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; margin-bottom: 16px;
+}
+.ft-logo-wrap { position: relative; width: 40px; height: 40px; flex-shrink: 0; }
+.ft-logo-img  { width: 40px; height: 40px; visibility: hidden; display: block; }
+.ft-logo-mask { position: absolute; inset: 0; background: #fff; }
+.ft-brand-name { display: flex; flex-direction: column; gap: 2px; }
+.ft-brand-main { font-size: 18px; font-weight: 900; color: #fff; letter-spacing: .02em; }
+.ft-brand-sub  {
+  font-size: 10px; color: var(--ft-muted);
+  width: 100%; text-align: justify; text-align-last: justify;
+}
+.ft-tagline { font-size: 12px; color: #6b7280; line-height: 1.7; margin-bottom: 6px; }
+.ft-year { font-size: 11px; color: #4b5563; }
+.ft-year strong { color: #9ca3af; font-weight: 600; }
+
+/* ── 欄標題 ── */
+.ft-heading {
+  font-size: 11px; font-weight: 700; color: #fff;
+  text-transform: uppercase; letter-spacing: .1em;
+  padding-bottom: 12px; margin-bottom: 16px; position: relative;
+}
+.ft-heading::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 20px; height: 2px; border-radius: 1px; background: var(--ft-red);
+}
+
+/* ── <details> 折疊（手機） ── */
+.ft-details { border: none; }
+.ft-details summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 11px; font-weight: 700; color: #fff;
+  text-transform: uppercase; letter-spacing: .1em;
+  padding-bottom: 12px; margin-bottom: 0; position: relative;
+  border-bottom: 1px solid var(--ft-border);
+}
+.ft-details summary::before {
+  content: ''; position: absolute; bottom: -1px; left: 0;
+  width: 20px; height: 2px; background: var(--ft-red);
+}
+.ft-details summary::-webkit-details-marker { display: none; }
+.ft-details summary .ft-chevron {
+  width: 14px; height: 14px; stroke: #6b7280; flex-shrink: 0; transition: transform .2s;
+}
+.ft-details[open] summary .ft-chevron { transform: rotate(180deg); }
+.ft-details[open] summary { margin-bottom: 16px; }
+.ft-details-body { padding-bottom: 4px; }
+@media (min-width: 640px) { .ft-details summary { display: none; } }
+
+.ft-heading-static {
+  display: none;
+  font-size: 11px; font-weight: 700; color: #fff;
+  text-transform: uppercase; letter-spacing: .1em;
+  padding-bottom: 12px; margin-bottom: 16px; position: relative;
+}
+.ft-heading-static::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 20px; height: 2px; border-radius: 1px; background: var(--ft-red);
+}
+@media (min-width: 640px) { .ft-heading-static { display: block; } }
+
+/* ── 連結清單 ── */
+.ft-links { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+
+/* 手機：品牌欄全置中 */
+@media (max-width: 639px) {
+  .ft-brand-link { justify-content: center; }
+  .ft-tagline, .ft-year { text-align: center; }
+}
+
+/* 手機：網站地圖 & 熱門分類 細項橫排 */
+@media (max-width: 639px) {
+  .ft-col--nav .ft-links,
+  .ft-col--cats .ft-links { flex-direction: row; flex-wrap: wrap; gap: 8px 20px; }
+  .ft-col--nav .ft-link,
+  .ft-col--cats .ft-link { white-space: nowrap; font-size: 13px; }
+  .ft-col--nav .ft-link:hover,
+  .ft-col--cats .ft-link:hover { transform: none; }
+}
+.ft-link {
+  font-size: 14px; color: var(--ft-muted); text-decoration: none;
+  display: inline-block; transition: color .15s, transform .15s;
+}
+.ft-link:hover { color: var(--ft-hover); transform: translateX(3px); }
+.ft-link--more { color: var(--ft-red); font-weight: 600; }
+.ft-link--more:hover { color: #e74c3c; }
+
+/* ── 電話 CTA 卡 ── */
+.ft-phone {
+  display: flex; flex-direction: column; gap: 5px;
+  text-decoration: none; padding: 14px 16px;
+  background: rgba(192,57,43,.1); border: 1px solid rgba(192,57,43,.28);
+  border-radius: 10px; margin-bottom: 18px;
+  transition: background .15s, border-color .15s;
+}
+.ft-phone:hover { background: rgba(192,57,43,.18); border-color: rgba(192,57,43,.5); }
+.ft-phone-eyebrow {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 10px; font-weight: 700; color: var(--ft-red);
+  text-transform: uppercase; letter-spacing: .07em;
+}
+.ft-phone-eyebrow svg { width: 12px; height: 12px; }
+.ft-phone-num {
+  font-size: 26px; font-weight: 900; color: #fff;
+  letter-spacing: .04em; line-height: 1; white-space: nowrap;
+}
+.ft-phone-hint { font-size: 11px; color: #6b7280; }
+
+/* ── 聯絡細項 ── */
+.ft-contact-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.ft-ci {
+  display: flex; align-items: flex-start; gap: 9px;
+  font-size: 13px; color: var(--ft-muted); text-decoration: none; transition: color .15s;
+}
+a.ft-ci:hover { color: var(--ft-hover); }
+.ft-ci-icon { width: 15px; height: 15px; flex-shrink: 0; margin-top: 1px; stroke: var(--ft-red); }
+
+/* 手機：LINE 合併進聯絡區，獨立 LINE 欄隱藏 */
+.ft-line-inline { display: list-item; }
+@media (min-width: 640px) {
+  .ft-line-inline { display: none; }
+  .ft-col--line   { display: block !important; }
+}
+@media (max-width: 639px) {
+  .ft-col--line { display: none !important; }
+}
+
+/* ── LINE 卡 ── */
+.ft-line-card {
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  padding: 18px 16px; border-radius: 12px;
+  background: rgba(255,255,255,.04); border: 1px solid var(--ft-border);
+}
+.ft-line-badge { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: #fff; }
+.ft-line-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #00B900; animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+.ft-qr-wrap { background: #fff; padding: 8px; border-radius: 8px; }
+.ft-qr-img  { width: 108px; height: 108px; object-fit: contain; display: block; }
+.ft-line-hint { font-size: 11px; color: #4b5563; text-align: center; }
+
+/* ── 版權列 ── */
+.ft-legal { background: var(--ft-legal); }
+.ft-legal-inner {
+  max-width: 1280px; margin: 0 auto;
+  padding: 14px var(--ft-px);
+  display: flex; flex-direction: column; align-items: center; gap: 5px; text-align: center;
+}
+@media (min-width: 640px) {
+  .ft-legal-inner { flex-direction: row; justify-content: space-between; text-align: left; }
+}
+.ft-copyright  { font-size: 12px; color: #6b7280; }
+.ft-legal-note { font-size: 11px; color: #374151; }
+</style>
+
+<script>
+function syncDetails(width?: number) {
+  const w = width ?? window.innerWidth;
+  const wide = w >= 640;
+  document.querySelectorAll('.ft-details').forEach((el) => {
+    wide ? el.setAttribute('open', '') : el.removeAttribute('open');
+  });
+}
+
+syncDetails();
+window.addEventListener('resize', () => syncDetails());
+</script>

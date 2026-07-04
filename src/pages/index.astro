@@ -64,19 +64,29 @@ function articleFilter(post: typeof sortedPosts[0]): string {
           {categories.map(cat => (
             <a class="hp-qn-item" href={`/products#${cat.id}`} title={cat.name}>
               <div class="hp-qn-icon">
-                {cat.id === 'cotton-gloves'        && <svg viewBox="0 0 64 64"><path d="M20 30V14a4 4 0 018 0v10M28 24V10a4 4 0 018 0v14M36 24V12a4 4 0 018 0v14M44 26v-6a4 4 0 018 0v20c0 8-6 16-16 16H26c-6 0-10-4-10-10V34c0-3 2-5 5-5h1"/></svg>}
-                {cat.id === 'rubber-gloves'        && <svg viewBox="0 0 64 64"><path d="M20 30V14a4 4 0 018 0v10M28 24V10a4 4 0 018 0v14M36 24V12a4 4 0 018 0v14M44 26v-6a4 4 0 018 0v20c0 8-6 16-16 16H26c-6 0-10-4-10-10V34c0-3 2-5 5-5h1"/><path d="M26 38c0 2 2 4 6 4s6-2 6-4" stroke-dasharray="3 2"/></svg>}
-                {cat.id === 'nylon-gloves'         && <svg viewBox="0 0 64 64"><path d="M20 30V14a4 4 0 018 0v10M28 24V10a4 4 0 018 0v14M36 24V12a4 4 0 018 0v14M44 26v-6a4 4 0 018 0v20c0 8-6 16-16 16H26c-6 0-10-4-10-10V34c0-3 2-5 5-5h1"/><line x1="22" y1="20" x2="50" y2="20" stroke-dasharray="2 3"/></svg>}
-                {cat.id === 'white-dragon-gloves'  && <svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M7 11V7a5 5 0 0110 0v4"/><path d="M5 11h14v8a2 2 0 01-2 2H7a2 2 0 01-2-2v-8z"/></svg>}
-                {cat.id === 'flower-dragon-gloves' && <svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M7 11V7a5 5 0 0110 0v4"/><path d="M5 11h14v8a2 2 0 01-2 2H7a2 2 0 01-2-2v-8z"/><circle cx="9.5" cy="16" r="1.2" fill="#1F5A66"/><circle cx="14.5" cy="16" r="1.2" fill="#1F5A66"/></svg>}
+                {/* 手套類：統一 24×24，rect 掌心 + 4 指，細節區分材質 */}
+                {cat.id === 'cotton-gloves'        && <svg viewBox="0 0 24 24" stroke-width="1.8"><rect x="2" y="13" width="20" height="9" rx="2.5"/><path d="M5 13V9a1.5 1.5 0 013 0v4M9 13V7a1.5 1.5 0 013 0v6M13 13V8a1.5 1.5 0 013 0v5M17 13V10a1.5 1.5 0 013 0v3"/><line x1="3" y1="17" x2="21" y2="17" stroke-dasharray="2 1.5"/></svg>}
+                {cat.id === 'rubber-gloves'        && <svg viewBox="0 0 24 24" stroke-width="1.8"><rect x="2" y="13" width="20" height="9" rx="2.5"/><path d="M5 13V9a1.5 1.5 0 013 0v4M9 13V7a1.5 1.5 0 013 0v6M13 13V8a1.5 1.5 0 013 0v5M17 13V10a1.5 1.5 0 013 0v3"/><path d="M2 19.5h20" stroke-width="2.5"/></svg>}
+                {cat.id === 'nylon-gloves'         && <svg viewBox="0 0 24 24" stroke-width="1.8"><rect x="2" y="13" width="20" height="9" rx="2.5"/><path d="M5 13V9a1.5 1.5 0 013 0v4M9 13V7a1.5 1.5 0 013 0v6M13 13V8a1.5 1.5 0 013 0v5M17 13V10a1.5 1.5 0 013 0v3"/><line x1="2" y1="13.5" x2="22" y2="21.5" stroke-dasharray="2 2" stroke-width="1"/><line x1="2" y1="17.5" x2="15" y2="22" stroke-dasharray="2 2" stroke-width="1"/></svg>}
+                {cat.id === 'white-dragon-gloves'  && <svg viewBox="0 0 24 24" stroke-width="1.8"><rect x="2" y="13" width="20" height="9" rx="2.5"/><path d="M5 13V9a1.5 1.5 0 013 0v4M9 13V7a1.5 1.5 0 013 0v6M13 13V8a1.5 1.5 0 013 0v5M17 13V10a1.5 1.5 0 013 0v3"/></svg>}
+                {cat.id === 'flower-dragon-gloves' && <svg viewBox="0 0 24 24" stroke-width="1.8"><rect x="2" y="13" width="20" height="9" rx="2.5"/><path d="M5 13V9a1.5 1.5 0 013 0v4M9 13V7a1.5 1.5 0 013 0v6M13 13V8a1.5 1.5 0 013 0v5M17 13V10a1.5 1.5 0 013 0v3"/><circle cx="7" cy="18.5" r="1.5"/><circle cx="12" cy="18.5" r="1.5"/><circle cx="17" cy="18.5" r="1.5"/></svg>}
+                {/* 口罩：保留原版 */}
                 {cat.id === 'masks'                && <svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M3 11c0-2 2-3 5-4l4-1.5L16 7c3 1 5 2 5 4v3c0 3-4 5.5-9 5.5S3 17 3 14v-3z"/><path d="M7 13h10M8 16h8"/></svg>}
-                {cat.id === 'packaging'            && <svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M5 8h14M5 8l2-4h10l2 4M5 8v12a1 1 0 001 1h12a1 1 0 001-1V8"/><path d="M10 12h4"/></svg>}
+                {/* 膠帶捲：雙同心圓 + 拉舌線 */}
+                {cat.id === 'packaging'            && <svg viewBox="0 0 24 24" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M18.5 5.5l2-2M20.5 3.5l1 1-1.5 3"/></svg>}
+                {/* 扳手：保留 */}
                 {cat.id === 'hardware'             && <svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94L5.83 19.83a2 2 0 01-2.83-2.83l7.94-7.94A6 6 0 0114.7 6.3z"/></svg>}
-                {cat.id === 'bulk-bags'            && <svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M7 4h10M5 4l1 3h12l1-3"/><path d="M4 7h16l-2 13H6L4 7z"/><path d="M9 12h6"/></svg>}
+                {/* 太空包：束口麻袋形（矩形袋身 + 頂部吊耳） */}
+                {cat.id === 'bulk-bags'            && <svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M5 9h14v9.5c0 2-1.5 3-4 3H9c-2.5 0-4-1-4-3V9z"/><path d="M7 9V6M17 9V6M6 6h12"/><line x1="5" y1="14.5" x2="19" y2="14.5" stroke-dasharray="2 2"/></svg>}
+                {/* 清潔用品：保留 */}
                 {cat.id === 'cleaning'             && <svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M9 3h6l1 8H8L9 3z"/><path d="M7 11v8a1 1 0 001 1h8a1 1 0 001-1v-8"/><path d="M10 15h4"/></svg>}
-                {cat.id === 'special-gloves'       && <svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M12 2l2.9 5.8L22 9l-5 4.9 1.2 6.8L12 17.7l-6.2 3.1L7 14 2 9l7.1-1.2L12 2z"/></svg>}
+                {/* 特殊手套：手套 + 掌心星形 */}
+                {cat.id === 'special-gloves'       && <svg viewBox="0 0 24 24" stroke-width="1.8"><rect x="2" y="13" width="20" height="9" rx="2.5"/><path d="M5 13V9a1.5 1.5 0 013 0v4M9 13V7a1.5 1.5 0 013 0v6M13 13V8a1.5 1.5 0 013 0v5M17 13V10a1.5 1.5 0 013 0v3"/><path d="M12 15l.9 1.8 1.9.3-1.4 1.4.3 1.9-1.7-.9-1.7.9.3-1.9-1.4-1.4 1.9-.3z"/></svg>}
+                {/* 交通安全：保留 */}
                 {cat.id === 'traffic-safety'       && <svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M12 3L7 20h10L12 3z"/><path d="M8.5 14h7M9.5 17.5h5"/></svg>}
-                {cat.id === 'cleanroom'            && <svg viewBox="0 0 24 24" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>}
+                {/* 無塵室：盾形 + 漸縮過濾線 */}
+                {cat.id === 'cleanroom'            && <svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M12 3L4 6v5c0 5 3.5 9.5 8 11 4.5-1.5 8-6 8-11V6l-8-3z"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="7.5" y1="13" x2="16.5" y2="13"/><line x1="9" y1="16" x2="15" y2="16"/></svg>}
+                {/* 其他：保留 */}
                 {cat.id === 'others'               && <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>}
               </div>
               <span class="hp-qn-label">{cat.name}</span>
@@ -401,17 +411,33 @@ function articleFilter(post: typeof sortedPosts[0]): string {
   /* ══ 快速導覽 ══ */
   .hp-qnav-wrap { background: var(--white); border-bottom: 1px solid var(--line); }
 
+  /* 手機：右側漸層 + scroll-snap */
+  @media (max-width: 1023px) {
+    .hp-qnav-wrap { position: relative; }
+    .hp-qnav-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 56px;
+      background: linear-gradient(to right, transparent, #fff);
+      pointer-events: none;
+      z-index: 1;
+    }
+  }
+
   /* 手機：padding 由子元素控制 */
   .hp-qnav-label { font-size: 12px; font-weight: 700; color: var(--sub); margin: 0 0 10px; padding-inline: var(--px); padding-top: 14px; display: block; }
   .hp-qnav {
     display: flex; gap: clamp(14px, 2.5vw, 28px);
     overflow-x: auto; padding-inline: var(--px); padding-bottom: 10px;
     scrollbar-width: none;
+    scroll-snap-type: x proximity;
   }
   .hp-qnav::-webkit-scrollbar { display: none; }
   .hp-qn-item {
     flex: 0 0 auto; display: flex; flex-direction: column; align-items: center;
     gap: 6px; width: clamp(52px, 7vw, 68px); text-decoration: none; color: var(--ink);
+    scroll-snap-align: start;
   }
   .hp-qn-icon {
     width: clamp(44px, 6vw, 58px); height: clamp(44px, 6vw, 58px);
@@ -593,8 +619,10 @@ function articleFilter(post: typeof sortedPosts[0]): string {
   .hp-articles { padding-block: 32px; border-top: 1px solid var(--line); }
   .hp-articles-title { font-size: clamp(18px, 2.5vw, 26px); font-weight: 800; margin: 0 0 4px; }
   .hp-articles-sub { font-size: 13px; color: var(--sub); margin: 0 0 16px; }
-  .hp-pills { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin-bottom: 20px; }
+  /* 手機隱藏 pill 篩選器 */
+  .hp-pills { display: none; gap: 8px; overflow-x: auto; scrollbar-width: none; margin-bottom: 20px; }
   .hp-pills::-webkit-scrollbar { display: none; }
+  @media (min-width: 640px) { .hp-pills { display: flex; } }
   .hp-pill {
     flex: 0 0 auto; font-size: 12.5px; font-weight: 700;
     padding: 8px 16px; border-radius: 999px;
@@ -609,6 +637,13 @@ function articleFilter(post: typeof sortedPosts[0]): string {
   }
   @media (min-width: 640px)  { .hp-article-grid { grid-template-columns: repeat(3, 1fr); } }
   @media (min-width: 1024px) { .hp-article-grid { grid-template-columns: repeat(4, 1fr); } }
+  /* 手機：只顯示前4篇；平板以上：顯示前8篇 */
+  .hp-article-card:nth-child(n+5) { display: none; }
+  @media (min-width: 640px) {
+    .hp-article-card:nth-child(n+5) { display: flex; }
+    .hp-article-card:nth-child(n+9) { display: none; }
+  }
+
   .hp-article-card { text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 8px; transition: opacity .2s; }
   .hp-article-card:hover { opacity: .85; }
   .hp-article-img {
