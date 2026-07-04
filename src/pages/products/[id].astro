@@ -63,6 +63,7 @@ const structuredData = {
         name: company.shortName,
         url: `https://${company.website}`,
     },
+    dateModified: new Date().toISOString().split("T")[0],
     offers: {
         "@type": "Offer",
         url: `${siteUrl}/products/${product.id}`,

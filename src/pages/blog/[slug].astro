@@ -80,6 +80,23 @@ const articleSchema = {
     keywords: (post.data.tags || []).join(", "),
 };
 
+// HowTo Schema：標題含「如何」「指南」「選購」「選擇」「步驟」且有 summary 時產生
+const isHowTo = post.data.summary && post.data.summary.length > 0 &&
+    /如何|指南|選購|選擇|步驟|比較/.test(post.data.title);
+
+const howToSchema = isHowTo ? {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: post.data.title,
+    description: post.data.description,
+    image: `${siteUrl}${processedHeroImage.src}`,
+    step: post.data.summary.map((s: string, i: number) => ({
+        "@type": "HowToStep",
+        position: i + 1,
+        text: s,
+    })),
+} : null;
+
 // FAQPage Schema：從 blockData 提取 faq 類型的區塊
 const faqItems = (blockData?.blocks ?? [])
     .filter((b: { type: string }) => b.type === "faq")
@@ -145,6 +162,12 @@ const proseClass =
             <script
                 type="application/ld+json"
                 set:html={JSON.stringify(faqSchema)}
+            />
+        )}
+        {howToSchema && (
+            <script
+                type="application/ld+json"
+                set:html={JSON.stringify(howToSchema)}
             />
         )}
     </Fragment>

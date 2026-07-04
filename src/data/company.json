@@ -24,7 +24,12 @@
         }
     },
     "website": "www.chiaohsin.com.tw",
-    "sameAs": [],
+    "sameAs": [
+        "https://www.google.com/maps/search/?api=1&query=23.169508,120.330238",
+        "https://findbiz.nat.gov.tw/fts/company/80446975",
+        "https://www.twincn.com/item.aspx?no=80446975",
+        "https://redant.web66.com.tw/"
+    ],
     "services": {
         "products": [
             "棉紗手套",

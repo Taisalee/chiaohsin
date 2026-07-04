@@ -111,6 +111,7 @@ const localBusinessData = {
   },
   url: `https://${company.website}`,
   priceRange: "$$",
+  openingHours: ["Mo-Sa 08:00-18:00"],
 };
 
 // WebSite 結構化資料
@@ -122,6 +123,14 @@ const websiteData = {
   url: siteUrl,
   description: seo.description,
   inLanguage: "zh-TW",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${siteUrl}/products?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
 };
 ---
 
@@ -152,7 +161,7 @@ const websiteData = {
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={ogType} />
