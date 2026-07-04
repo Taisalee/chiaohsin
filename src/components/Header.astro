@@ -2,299 +2,400 @@
 import company from "../data/company.json";
 import navigation from "../data/navigation.json";
 import products from "../data/products.json";
+
+const currentPath = Astro.url.pathname;
+function isActive(url: string) {
+  if (url === '/') return currentPath === '/';
+  return currentPath.startsWith(url);
+}
 ---
 
-<div class="navbar bg-base-100 shadow-md sticky top-0 z-50 px-4 md:px-8">
-  <div class="navbar-start">
-    <div class="dropdown">
-      <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-5 w-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          ><path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h8m-8 6h16"></path></svg
-        >
-      </div>
-      <ul
-        tabindex="0"
-        class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-base"
-      >
-        {
-          navigation.main.map((item) => (
-            <li>
-              {item.children.length > 0 ? (
-                <details>
-                  <summary class="text-base">{item.title}</summary>
-                  <ul class="p-2">
-                    {item.children.map((child) => (
-                      <li>
-                        <a href={child.url} class="text-base">
-                          {child.title}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </details>
-              ) : (
-                <a href={item.url} class="text-base">
-                  {item.title}
-                </a>
-              )}
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-    <a
-      href="/"
-      class="btn btn-ghost text-xl normal-case font-bold text-primary flex items-center gap-2"
-    >
-      <span class="relative inline-block h-10">
-        <img src={`/${company.logo}`} alt="" class="h-10 w-auto invisible" aria-hidden="true" />
-        <span
-          class="absolute inset-0 bg-primary"
-          style={`-webkit-mask-image: url('/${company.logo}'); mask-image: url('/${company.logo}'); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center;`}
-          role="img"
-          aria-label={`${company.name}標誌`}
-        ></span>
+<header class="hd">
+  <div class="hd-inner">
+
+    <!-- 品牌 -->
+    <a href="/" class="hd-brand" aria-label={company.name}>
+      <span class="hd-logo-wrap" aria-hidden="true">
+        <img src={`/${company.logo}`} alt="" class="hd-logo-img" />
+        <span class="hd-logo-mask" style={`-webkit-mask-image:url('/${company.logo}');mask-image:url('/${company.logo}');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;`}></span>
       </span>
-      <span class="hidden sm:inline">喬新針織有限公司(永力新國際有限公司)</span>
+      <span class="hd-brand-name">
+        <span class="hd-brand-main">紅螞蟻手套</span>
+        <span class="hd-brand-sub">{company.shortName}有限公司</span>
+      </span>
     </a>
-  </div>
-  <div class="navbar-center hidden lg:flex">
-    <ul
-      class="menu menu-horizontal px-1 font-medium bg-base-100/50 backdrop-blur-sm rounded-full text-lg"
-    >
-      {
-        navigation.main.map((item) => (
-          <li>
-            {item.children.length > 0 ? (
-              <details>
-                <summary>{item.title}</summary>
-                <ul class="p-2 w-48 bg-base-100 shadow-xl border border-base-200">
-                  {item.children.map((child) => (
-                    <li>
-                      <a href={child.url}>{child.title}</a>
-                    </li>
-                  ))}
-                </ul>
-              </details>
-            ) : (
-              <a href={item.url}>{item.title}</a>
-            )}
-          </li>
-        ))
-      }
-    </ul>
-  </div>
-  <div class="navbar-end gap-2">
-    <!-- 產品搜尋 -->
-    <div class="dropdown dropdown-end" id="search-container">
-      <button
-        class="btn btn-ghost btn-circle"
-        id="search-toggle"
-        aria-label="搜尋產品"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-5 w-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
+
+    <span class="hd-divider" aria-hidden="true"></span>
+
+    <!-- 桌面導覽 -->
+    <nav class="hd-nav" aria-label="主選單">
+      {navigation.main.map(item => (
+        <a
+          href={item.url}
+          class={`hd-link${isActive(item.url) ? ' is-active' : ''}`}
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          {item.title}
+        </a>
+      ))}
+    </nav>
+
+    <!-- 右側操作區 -->
+    <div class="hd-actions">
+      <a href={`tel:${company.contact.phone}`} class="hd-phone" aria-label={`撥打 ${company.contact.phone}`}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.08 1.19 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/>
+        </svg>
+        <span>{company.contact.phone}</span>
+      </a>
+
+      <button class="hd-icon-btn" id="hdSearchBtn" aria-label="搜尋產品" aria-expanded="false" aria-controls="hdSearchBar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
         </svg>
       </button>
-      <div
-        id="search-dropdown"
-        class="dropdown-content mt-3 z-[100] bg-base-100 shadow-xl rounded-box w-80 md:w-96 hidden"
-      >
-        <div class="p-3 border-b border-base-200">
-          <div class="form-control">
-            <div class="input-group flex gap-2">
-              <input
-                type="text"
-                id="search-input"
-                placeholder="輸入產品名稱搜尋..."
-                class="input input-bordered flex-1 focus:outline-primary"
-                autocomplete="off"
-              />
-              <button class="btn btn-ghost btn-circle btn-sm" id="search-close">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div id="search-results" class="max-h-80 overflow-y-auto">
-          <div class="p-4 text-center text-base-content/50" id="search-hint">
-            請輸入關鍵字開始搜尋
-          </div>
-        </div>
-      </div>
+
+      <a href={`tel:${company.contact.phone}`} class="hd-cta">立即詢價</a>
+
+      <button class="hd-menu-btn" id="hdMenuBtn" aria-label="開啟選單" aria-expanded="false" aria-controls="hdMobileMenu">
+        <span class="hd-bar" aria-hidden="true"></span>
+        <span class="hd-bar" aria-hidden="true"></span>
+        <span class="hd-bar" aria-hidden="true"></span>
+      </button>
     </div>
-
-    <a
-      href="tel:{company.contact.phone}"
-      class="btn btn-primary btn-sm md:btn-md text-white"
-    >
-      聯絡我們
-    </a>
   </div>
-</div>
 
-<!-- 搜尋功能的 JavaScript -->
+  <!-- 搜尋列 -->
+  <div class="hd-search" id="hdSearchBar" role="search" aria-hidden="true">
+    <div class="hd-search-row">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hd-search-ico" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input
+        type="search"
+        id="hdSearchInput"
+        class="hd-search-input"
+        placeholder="搜尋產品名稱、規格..."
+        autocomplete="off"
+        aria-label="搜尋產品"
+      />
+      <button class="hd-search-close" id="hdSearchClose" aria-label="關閉搜尋">✕</button>
+    </div>
+    <div class="hd-search-results" id="hdSearchResults" role="listbox" aria-label="搜尋結果"></div>
+  </div>
+
+  <!-- 手機選單 -->
+  <nav class="hd-mobile" id="hdMobileMenu" aria-label="手機選單" aria-hidden="true">
+    {navigation.main.map(item => (
+      <a href={item.url} class={`hd-ml${isActive(item.url) ? ' is-active' : ''}`}>
+        {item.title}
+      </a>
+    ))}
+    <a href={`tel:${company.contact.phone}`} class="hd-ml-phone">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.08 1.19 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/>
+      </svg>
+      <span class="hd-ml-phone-info">
+        <span class="hd-ml-phone-label">立即來電詢價</span>
+        <span class="hd-ml-phone-num">{company.contact.phone}</span>
+      </span>
+    </a>
+  </nav>
+</header>
+
 <script define:vars={{ products }}>
-  document.addEventListener("DOMContentLoaded", () => {
-    const searchToggle = document.getElementById("search-toggle");
-    const searchDropdown = document.getElementById("search-dropdown");
-    const searchInput = document.getElementById("search-input");
-    const searchResults = document.getElementById("search-results");
-    const searchClose = document.getElementById("search-close");
-    const searchHint = document.getElementById("search-hint");
+  // ── 搜尋 ──
+  const searchBtn     = document.getElementById('hdSearchBtn');
+  const searchBar     = document.getElementById('hdSearchBar');
+  const searchInput   = document.getElementById('hdSearchInput');
+  const searchClose   = document.getElementById('hdSearchClose');
+  const searchResults = document.getElementById('hdSearchResults');
 
-    // 產品資料
-    const productsData = products;
+  function openSearch() {
+    searchBar.classList.add('is-open');
+    searchBar.setAttribute('aria-hidden', 'false');
+    searchBtn.setAttribute('aria-expanded', 'true');
+    searchInput.focus();
+  }
+  function closeSearch() {
+    searchBar.classList.remove('is-open');
+    searchBar.setAttribute('aria-hidden', 'true');
+    searchBtn.setAttribute('aria-expanded', 'false');
+    searchInput.value = '';
+    searchResults.innerHTML = '';
+  }
 
-    // 切換搜尋下拉選單
-    searchToggle?.addEventListener("click", (e) => {
-      e.stopPropagation();
-      searchDropdown?.classList.toggle("hidden");
-      if (!searchDropdown?.classList.contains("hidden")) {
-        searchInput?.focus();
-      }
-    });
+  searchBtn?.addEventListener('click', () =>
+    searchBar.classList.contains('is-open') ? closeSearch() : openSearch()
+  );
+  searchClose?.addEventListener('click', closeSearch);
+  document.addEventListener('keydown', e => e.key === 'Escape' && closeSearch());
 
-    // 關閉搜尋
-    searchClose?.addEventListener("click", () => {
-      searchDropdown?.classList.add("hidden");
-      if (searchInput) searchInput.value = "";
-      if (searchHint) searchHint.style.display = "block";
-      if (searchResults) {
-        searchResults.innerHTML =
-          '<div class="p-4 text-center text-base-content/50" id="search-hint">請輸入關鍵字開始搜尋</div>';
-      }
-    });
+  searchInput?.addEventListener('input', e => {
+    const q = e.target.value.trim().toLowerCase();
+    if (!q) { searchResults.innerHTML = ''; return; }
+    const hits = products
+      .filter(p => [p.name, p.description, p.category, ...(p.tags || [])].join(' ').toLowerCase().includes(q))
+      .slice(0, 8);
+    if (!hits.length) {
+      searchResults.innerHTML = `<p class="hd-sr-empty">找不到「${q}」的相關產品</p>`;
+      return;
+    }
+    searchResults.innerHTML = hits.map(p => `
+      <a href="/products/${p.id}" class="hd-sr-item" role="option">
+        <img src="/${p.image}" alt="${p.name}" class="hd-sr-img" loading="lazy" />
+        <span class="hd-sr-name">${p.name}</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hd-sr-arr" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+    `).join('') + (hits.length >= 8
+      ? `<a href="/products" class="hd-sr-more">查看所有產品 →</a>`
+      : '');
+  });
 
-    // 點擊外部關閉
-    document.addEventListener("click", (e) => {
-      const container = document.getElementById("search-container");
-      if (container && !container.contains(e.target)) {
-        searchDropdown?.classList.add("hidden");
-      }
-    });
+  // ── 手機選單 ──
+  const menuBtn    = document.getElementById('hdMenuBtn');
+  const mobileMenu = document.getElementById('hdMobileMenu');
 
-    // 搜尋功能
-    searchInput?.addEventListener("input", (e) => {
-      const query = e.target.value.trim().toLowerCase();
+  menuBtn?.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('is-open');
+    menuBtn.setAttribute('aria-expanded', String(open));
+    mobileMenu.setAttribute('aria-hidden', String(!open));
+    menuBtn.classList.toggle('is-open', open);
+  });
 
-      if (!query) {
-        if (searchResults) {
-          searchResults.innerHTML =
-            '<div class="p-4 text-center text-base-content/50">請輸入關鍵字開始搜尋</div>';
-        }
-        return;
-      }
-
-      // 搜尋產品
-      const results = productsData
-        .filter((product) => {
-          const name = product.name?.toLowerCase() || "";
-          const description = product.description?.toLowerCase() || "";
-          const category = product.category?.toLowerCase() || "";
-          const tags = (product.tags || []).join(" ").toLowerCase();
-          return (
-            name.includes(query) ||
-            description.includes(query) ||
-            category.includes(query) ||
-            tags.includes(query)
-          );
-        })
-        .slice(0, 8); // 最多顯示8個結果
-
-      if (results.length === 0) {
-        if (searchResults) {
-          searchResults.innerHTML = `
-            <div class="p-4 text-center text-base-content/50">
-              <p>找不到符合「${query}」的產品</p>
-              <a href="/products" class="link link-primary mt-2 inline-block">瀏覽所有產品</a>
-            </div>
-          `;
-        }
-        return;
-      }
-
-      // 渲染搜尋結果
-      if (searchResults) {
-        searchResults.innerHTML = results
-          .map(
-            (product) => `
-          <a 
-            href="/products/${product.id}" 
-            class="flex items-center gap-3 p-3 hover:bg-base-200 transition-colors border-b border-base-200 last:border-b-0"
-          >
-            <div class="avatar">
-              <div class="w-12 h-12 rounded-lg overflow-hidden bg-base-200">
-                <img 
-                  src="/${product.image}" 
-                  alt="${product.name}"
-                  class="object-cover w-full h-full"
-
-                />
-              </div>
-            </div>
-            <div class="flex-1 min-w-0">
-              <p class="font-medium text-base-content truncate">${product.name}</p>
-              <p class="text-sm text-base-content/60 truncate">${product.size || ""}</p>
-            </div>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-base-content/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </a>
-        `,
-          )
-          .join("");
-
-        // 添加查看全部結果的連結
-        if (results.length >= 8) {
-          searchResults.innerHTML += `
-            <a 
-              href="/products?q=${encodeURIComponent(query)}" 
-              class="block p-3 text-center text-primary hover:bg-base-200 transition-colors font-medium"
-            >
-              查看更多結果 →
-            </a>
-          `;
-        }
-      }
-    });
-
-    // 按 ESC 關閉搜尋
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        searchDropdown?.classList.add("hidden");
-      }
-    });
+  document.addEventListener('click', e => {
+    if (!menuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+      mobileMenu.classList.remove('is-open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      menuBtn.classList.remove('is-open');
+    }
   });
 </script>
+
+<style>
+  :root {
+    --hd-red:    #c0392b;
+    --hd-orange: #FF6B35;
+    --hd-ink:    #1a1a2e;
+    --hd-sub:    #5a6472;
+    --hd-line:   #e5e8ed;
+    --hd-bg:     #ffffff;
+    --hd-hover:  #fdf0ef;
+    --hd-h:      64px;
+    --hd-px:     clamp(16px, 4vw, 56px);
+  }
+
+  /* ── 容器 ── */
+  .hd {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--hd-bg);
+    border-bottom: 1px solid var(--hd-line);
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .hd-inner {
+    max-width: 1280px; margin: 0 auto;
+    padding: 0 var(--hd-px);
+    height: var(--hd-h);
+    display: flex; align-items: center; gap: 16px;
+  }
+
+  /* ── 品牌 ── */
+  .hd-brand {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; color: inherit; flex-shrink: 0;
+  }
+  .hd-logo-wrap {
+    position: relative; display: inline-block;
+    width: 38px; height: 38px; flex-shrink: 0;
+  }
+  .hd-logo-img  { width: 38px; height: 38px; visibility: hidden; display: block; }
+  .hd-logo-mask {
+    position: absolute; inset: 0;
+    background: var(--hd-red);
+  }
+  .hd-brand-name {
+    display: flex; flex-direction: column; gap: 1px; line-height: 1.2;
+  }
+  .hd-brand-main {
+    font-size: 17px; font-weight: 900;
+    color: var(--hd-red); letter-spacing: .02em;
+  }
+  .hd-brand-sub {
+    font-size: 9.5px; font-weight: 500; color: var(--hd-sub);
+    width: 100%; text-align: justify; text-align-last: justify;
+  }
+
+  /* ── 分隔線 ── */
+  .hd-divider {
+    display: none;
+    width: 1px; height: 26px;
+    background: var(--hd-line); flex-shrink: 0;
+  }
+  @media (min-width: 768px) { .hd-divider { display: block; } }
+
+  /* ── 桌面導覽 ── */
+  .hd-nav {
+    display: none; align-items: center; gap: 2px; flex: 1;
+  }
+  @media (min-width: 768px) { .hd-nav { display: flex; } }
+
+  .hd-link {
+    padding: 7px 13px; border-radius: 8px;
+    font-size: 14px; font-weight: 600; color: var(--hd-sub);
+    text-decoration: none; white-space: nowrap;
+    transition: color .15s, background .15s;
+    position: relative;
+  }
+  .hd-link::after {
+    content: ''; position: absolute;
+    bottom: 3px; left: 13px; right: 13px;
+    height: 2px; border-radius: 1px; background: var(--hd-red);
+    transform: scaleX(0); transition: transform .2s ease;
+  }
+  .hd-link:hover { color: var(--hd-ink); background: var(--hd-hover); }
+  .hd-link:hover::after { transform: scaleX(1); }
+  .hd-link.is-active { color: var(--hd-red); font-weight: 700; }
+  .hd-link.is-active::after { transform: scaleX(1); }
+
+  /* ── 操作區 ── */
+  .hd-actions {
+    display: flex; align-items: center; gap: 8px; margin-left: auto;
+  }
+
+  .hd-phone {
+    display: none; align-items: center; gap: 6px;
+    padding: 6px 10px; border-radius: 8px;
+    font-size: 13.5px; font-weight: 700; color: var(--hd-ink);
+    text-decoration: none; white-space: nowrap;
+    transition: background .15s, color .15s;
+  }
+  .hd-phone svg { width: 14px; height: 14px; color: var(--hd-red); flex-shrink: 0; }
+  .hd-phone:hover { background: #f4f6f9; color: var(--hd-red); }
+  @media (min-width: 1024px) { .hd-phone { display: flex; } }
+
+  .hd-icon-btn {
+    width: 36px; height: 36px; border-radius: 8px; border: none;
+    background: transparent; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--hd-sub); transition: background .15s, color .15s;
+  }
+  .hd-icon-btn:hover { background: #f4f6f9; color: var(--hd-ink); }
+  .hd-icon-btn svg { width: 18px; height: 18px; }
+
+  .hd-cta {
+    display: none;
+    padding: 9px 18px; border-radius: 9px;
+    background: var(--hd-orange); color: #fff;
+    font-size: 13.5px; font-weight: 700;
+    text-decoration: none; white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(255,107,53,.28);
+    transition: opacity .15s, transform .15s;
+  }
+  .hd-cta:hover { opacity: .9; transform: translateY(-1px); }
+  @media (min-width: 640px) { .hd-cta { display: inline-block; } }
+
+  /* ── 漢堡 ── */
+  .hd-menu-btn {
+    display: flex; flex-direction: column; gap: 5px; justify-content: center;
+    width: 36px; height: 36px; border: none; background: transparent;
+    cursor: pointer; padding: 7px; border-radius: 8px;
+    transition: background .15s;
+  }
+  .hd-menu-btn:hover { background: #f4f6f9; }
+  .hd-bar {
+    display: block; width: 100%; height: 2px;
+    border-radius: 1px; background: var(--hd-ink);
+    transition: transform .22s ease, opacity .22s ease;
+    transform-origin: center;
+  }
+  .hd-menu-btn.is-open .hd-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hd-menu-btn.is-open .hd-bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hd-menu-btn.is-open .hd-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  @media (min-width: 768px) { .hd-menu-btn { display: none; } }
+
+  /* ── 搜尋列 ── */
+  .hd-search {
+    overflow: hidden; max-height: 0;
+    border-top: 0px solid var(--hd-line);
+    background: #f8f9fb;
+    transition: max-height .25s ease, border-top-width .1s;
+  }
+  .hd-search.is-open {
+    max-height: 480px;
+    border-top-width: 1px;
+  }
+  .hd-search-row {
+    max-width: 1280px; margin: 0 auto;
+    padding: 12px var(--hd-px);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hd-search-ico { width: 18px; height: 18px; color: var(--hd-sub); flex-shrink: 0; }
+  .hd-search-input {
+    flex: 1; border: none; background: transparent; outline: none;
+    font-size: 15px; color: var(--hd-ink);
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .hd-search-input::placeholder { color: #9ca3af; }
+  .hd-search-close {
+    border: none; background: transparent; cursor: pointer;
+    font-size: 13px; color: var(--hd-sub);
+    padding: 4px 8px; border-radius: 4px; transition: background .15s;
+  }
+  .hd-search-close:hover { background: var(--hd-line); }
+
+  .hd-search-results {
+    max-width: 1280px; margin: 0 auto;
+    padding: 0 var(--hd-px) 12px;
+  }
+  .hd-sr-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px; border-radius: 8px;
+    text-decoration: none; color: var(--hd-ink);
+    transition: background .15s;
+  }
+  .hd-sr-item:hover { background: var(--hd-hover); }
+  .hd-sr-img {
+    width: 40px; height: 40px; border-radius: 6px;
+    object-fit: cover; background: #e5e8ed; flex-shrink: 0;
+  }
+  .hd-sr-name { flex: 1; font-size: 14px; font-weight: 600; }
+  .hd-sr-arr  { width: 16px; height: 16px; color: var(--hd-sub); flex-shrink: 0; }
+  .hd-sr-empty { padding: 16px 12px; font-size: 14px; color: var(--hd-sub); }
+  .hd-sr-more {
+    display: block; padding: 10px 12px; text-align: center;
+    font-size: 13px; font-weight: 700; color: var(--hd-red);
+    text-decoration: none; border-radius: 8px; transition: background .15s;
+  }
+  .hd-sr-more:hover { background: var(--hd-hover); }
+
+  /* ── 手機選單 ── */
+  .hd-mobile {
+    display: none;
+    flex-direction: column;
+    border-top: 1px solid var(--hd-line);
+    background: var(--hd-bg);
+    padding: 8px var(--hd-px) 16px;
+  }
+  .hd-mobile.is-open { display: flex; }
+  @media (min-width: 768px) { .hd-mobile { display: none !important; } }
+
+  .hd-ml {
+    padding: 13px 4px; font-size: 15px; font-weight: 600;
+    color: var(--hd-sub); text-decoration: none;
+    border-bottom: 1px solid var(--hd-line);
+    transition: color .15s;
+  }
+  .hd-ml:hover { color: var(--hd-ink); }
+  .hd-ml.is-active { color: var(--hd-red); font-weight: 700; }
+
+  .hd-ml-phone {
+    display: flex; align-items: center; gap: 12px;
+    margin-top: 14px; padding: 12px 14px; border-radius: 10px;
+    background: var(--hd-hover); text-decoration: none;
+    border: 1px solid rgba(192,57,43,.12);
+  }
+  .hd-ml-phone svg { width: 18px; height: 18px; stroke: var(--hd-red); flex-shrink: 0; }
+  .hd-ml-phone-info { display: flex; flex-direction: column; gap: 2px; }
+  .hd-ml-phone-label { font-size: 10px; color: var(--hd-sub); font-weight: 600; letter-spacing: .02em; }
+  .hd-ml-phone-num   { font-size: 17px; font-weight: 900; color: var(--hd-red); letter-spacing: .02em; }
+</style>
