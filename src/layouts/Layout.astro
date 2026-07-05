@@ -49,7 +49,7 @@ const organizationData = {
   "@id": `${siteUrl}/#organization`,
   name: company.shortName,
   legalName: company.name,
-  alternateName: [company.englishName],
+  alternateName: [company.englishName, company.brandName, company.otherBrand],
   url: `https://${company.website}`,
   logo: {
     "@type": "ImageObject",
@@ -92,6 +92,7 @@ const localBusinessData = {
   "@type": "WholesaleStore",
   "@id": `${siteUrl}/#local-business`,
   name: company.shortName,
+  alternateName: [company.brandName, company.otherBrand],
   description: company.description,
   image: `${siteUrl}/${company.logo}`,
   telephone: company.contact.phone,
@@ -239,6 +240,10 @@ const websiteData = {
 </html>
 
 <style is:global>
+  :root {
+    --color-base-100: #F7F6F3;
+  }
+
   /* Custom scrollbar for webkit */
   ::-webkit-scrollbar {
     width: 10px;

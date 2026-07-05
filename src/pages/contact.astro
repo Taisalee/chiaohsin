@@ -3,15 +3,43 @@ import Layout from "../layouts/Layout.astro";
 import company from "../data/company.json";
 import seo from "../data/seo.json";
 
+const siteUrl = "https://www.chiaohsin.com.tw";
+
 // 聯絡頁面 SEO 設定
-const contactDescription = `聯絡${company.name} - 電話：${company.contact.phone}，地址：${company.address.full}。專業工作手套供應商，歡迎來電或來信洽詢。`;
+const contactDescription = `聯絡喬新針織 ${company.contact.phone}，台南官田區棉紗手套批發商。提供棉紗、尼龍、沾膠等工作手套詢價報價，週一至週六 08:00–18:00 服務。`;
 const contactKeywords = [
-  company.name,
+  company.shortName,
   "聯絡我們",
-  "工作手套",
+  "棉紗手套批發",
+  "工作手套詢價",
   company.address.city,
   company.address.district,
 ];
+
+const contactPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "@id": `${siteUrl}/contact`,
+  name: `聯絡${company.shortName}`,
+  url: `${siteUrl}/contact`,
+  description: contactDescription,
+  mainEntity: {
+    "@type": "WholesaleStore",
+    "@id": `${siteUrl}/#local-business`,
+    name: company.shortName,
+    telephone: company.contact.phone,
+    email: company.contact.email,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: company.address.full,
+      addressLocality: company.address.district,
+      addressRegion: company.address.city,
+      postalCode: company.address.postalCode,
+      addressCountry: "TW",
+    },
+    openingHours: ["Mo-Sa 08:00-18:00"],
+  },
+};
 ---
 
 <Layout
@@ -20,6 +48,9 @@ const contactKeywords = [
   keywords={contactKeywords}
   canonical="/contact"
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(contactPageSchema)} />
+  </Fragment>
   <div class="bg-base-200 py-12">
     <div class="max-w-6xl mx-auto px-4">
       <!-- Header -->

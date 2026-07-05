@@ -4,14 +4,49 @@ import company from "../../data/company.json";
 import categories from "../../data/categories.json";
 import products from "../../data/products.json";
 import seo from "../../data/seo.json";
+
+const siteUrl = "https://www.chiaohsin.com.tw";
+
+const productsDescription = `${company.shortName}產品目錄：棉紗手套、尼龍手套、沾膠手套、膠手套、白龍手套、花龍手套、口罩、太空包、PE膜等工安耗材批發，台南在地廠商、全台配送。`;
+
+const availableCategories = categories.filter((cat) =>
+  products.some((p) => p.category === cat.id && p.available !== false)
+);
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: `${company.shortName}產品分類`,
+  url: `${siteUrl}/products`,
+  numberOfItems: availableCategories.length,
+  itemListElement: availableCategories.map((cat, idx) => ({
+    "@type": "ListItem",
+    position: idx + 1,
+    name: cat.name,
+    url: `${siteUrl}/products#${cat.id}`,
+    item: {
+      "@type": "Product",
+      name: cat.name,
+      description: cat.description,
+      url: `${siteUrl}/products#${cat.id}`,
+      brand: {
+        "@type": "Brand",
+        name: company.shortName,
+      },
+    },
+  })),
+};
 ---
 
 <Layout
     title="商品介紹"
-    description={`${company.name}提供多樣化的工作手套與防護用品，包括棉紗手套、尼龍手套、膠手套、口罩、包裝材料等，品質優良、價格合宜。`}
-    keywords={["工作手套", "棉紗手套", "尼龍手套", "防護用品", "口罩", "膠帶"]}
+    description={productsDescription}
+    keywords={["棉紗手套批發", "工作手套", "尼龍手套", "沾膠手套", "口罩", "PE膜", "太空包", "台南手套"]}
     canonical="/products"
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+  </Fragment>
     <div class="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content flex flex-col p-4 md:p-10">

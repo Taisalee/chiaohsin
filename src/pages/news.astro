@@ -3,21 +3,57 @@ import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import company from "../data/company.json";
 
+const siteUrl = "https://www.chiaohsin.com.tw";
+
 const allNews = await getCollection("news", ({ data }) => data.draft !== true);
 const sortedNews = allNews.sort(
     (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
 );
 
 const pageTitle = `最新消息 - ${company.shortName}`;
-const pageDescription = `${company.shortName}最新消息，包含新品上架、公司動態、採購優惠等公告。`;
+const pageDescription = `${company.shortName}最新消息：新品上架公告、庫存備貨通知、工作手套優惠資訊，定期更新，掌握棉紗手套批發動態。`;
+
+const blogSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "@id": `${siteUrl}/news`,
+  name: `${company.shortName}最新消息`,
+  url: `${siteUrl}/news`,
+  description: pageDescription,
+  inLanguage: "zh-TW",
+  publisher: {
+    "@type": "Organization",
+    "@id": `${siteUrl}/#organization`,
+    name: company.shortName,
+  },
+};
+
+const newsItemListSchema = sortedNews.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: `${company.shortName}最新消息列表`,
+  numberOfItems: sortedNews.length,
+  itemListElement: sortedNews.map((item, idx) => ({
+    "@type": "ListItem",
+    position: idx + 1,
+    name: item.data.title,
+    url: `${siteUrl}/news/${item.id.replace(/\/index$/, "")}`,
+  })),
+} : null;
 ---
 
 <Layout
     title={pageTitle}
     description={pageDescription}
-    keywords={["喬新針織最新消息", "台南手套批發公告", "工安耗材新品"]}
+    keywords={["喬新針織最新消息", "台南棉紗手套批發公告", "工安耗材新品上架"]}
     canonical="/news"
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(blogSchema)} />
+    {newsItemListSchema && (
+      <script type="application/ld+json" set:html={JSON.stringify(newsItemListSchema)} />
+    )}
+  </Fragment>
     <div class="bg-gradient-to-r from-primary/10 to-secondary/10 py-16 px-4">
         <div class="max-w-6xl mx-auto text-center">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">最新消息</h1>

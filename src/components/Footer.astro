@@ -4,7 +4,7 @@ import navigation from "../data/navigation.json";
 import categories from "../data/categories.json";
 
 const currentYear = new Date().getFullYear();
-const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=120.3252%2C23.1645%2C120.3352%2C23.1745&layer=mapnik&marker=${company.address.coordinates.lat}%2C${company.address.coordinates.lng}`;
+const mapSrc = `https://www.google.com/maps?q=${company.address.coordinates.lat},${company.address.coordinates.lng}&z=16&output=embed`;
 const mapsLink = `https://www.google.com/maps/search/?api=1&query=${company.address.coordinates.lat},${company.address.coordinates.lng}`;
 ---
 
@@ -182,7 +182,7 @@ const mapsLink = `https://www.google.com/maps/search/?api=1&query=${company.addr
   <div class="ft-legal">
     <div class="ft-legal-inner">
       <p class="ft-copyright">© {currentYear} 喬新針織有限公司・紅螞蟻手套　版權所有</p>
-      <p class="ft-legal-note">魚得水 品牌旗下　｜　關係企業：永立新國際有限公司</p>
+      <p class="ft-legal-note">旗下品牌：{company.brandName}、{company.otherBrand}　｜　關係企業：永立新國際有限公司</p>
     </div>
   </div>
 
@@ -302,8 +302,8 @@ const mapsLink = `https://www.google.com/maps/search/?api=1&query=${company.addr
 
 /* ── 欄標題 ── */
 .ft-heading {
-  font-size: 11px; font-weight: 700; color: #fff;
-  text-transform: uppercase; letter-spacing: .1em;
+  font-size: 13.5px; font-weight: 700; color: #fff;
+  text-transform: uppercase; letter-spacing: .08em;
   padding-bottom: 12px; margin-bottom: 16px; position: relative;
 }
 .ft-heading::after {
@@ -316,8 +316,8 @@ const mapsLink = `https://www.google.com/maps/search/?api=1&query=${company.addr
 .ft-details summary {
   list-style: none; cursor: pointer;
   display: flex; align-items: center; justify-content: space-between;
-  font-size: 11px; font-weight: 700; color: #fff;
-  text-transform: uppercase; letter-spacing: .1em;
+  font-size: 13.5px; font-weight: 700; color: #fff;
+  text-transform: uppercase; letter-spacing: .08em;
   padding-bottom: 12px; margin-bottom: 0; position: relative;
   border-bottom: 1px solid var(--ft-border);
 }
@@ -336,8 +336,8 @@ const mapsLink = `https://www.google.com/maps/search/?api=1&query=${company.addr
 
 .ft-heading-static {
   display: none;
-  font-size: 11px; font-weight: 700; color: #fff;
-  text-transform: uppercase; letter-spacing: .1em;
+  font-size: 13.5px; font-weight: 700; color: #fff;
+  text-transform: uppercase; letter-spacing: .08em;
   padding-bottom: 12px; margin-bottom: 16px; position: relative;
 }
 .ft-heading-static::after {

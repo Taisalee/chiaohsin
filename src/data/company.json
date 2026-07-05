@@ -1,6 +1,8 @@
 {
     "name": "喬新針織有限公司(永立新國際有限公司)",
     "shortName": "喬新針織",
+    "brandName": "紅螞蟻手套",
+    "otherBrand": "魚得水",
     "englishName": "Chiaohsin Knitting Co., Ltd.",
     "foundingYear": "2003",
     "tagline": "棉紗/白龍/花龍/尼龍/沾膠/工作用手套",
@@ -62,7 +64,8 @@
         "口罩",
         "膠帶",
         "PE膜",
-        "砂輪片"
+        "砂輪片",
+        "紅螞蟻手套"
     ],
     "assets": {
         "images": {
