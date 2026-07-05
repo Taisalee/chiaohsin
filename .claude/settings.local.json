@@ -3,7 +3,8 @@
     "allow": [
       "Bash(node *)",
       "Bash(Remove-Item *)",
-      "Bash(python *)"
+      "Bash(python *)",
+      "Skill(loop)"
     ]
   }
 }
