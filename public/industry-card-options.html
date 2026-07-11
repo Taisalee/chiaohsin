@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>適用行業卡片 三方案比較</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  * { font-family: 'Noto Sans TC', sans-serif; }
+
+  /* ── 方向 1：白底卡片 ── */
+  .card-v1 {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    padding: 16px 10px;
+    border-radius: 14px;
+    border: 1px solid #E5E7EB;
+    background: #ffffff;
+    text-align: center;
+    font-size: 0.8rem; font-weight: 500; color: #374151;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .card-v1:hover { border-color: #93C5FD; box-shadow: 0 2px 8px rgba(0,102,204,0.08); }
+
+  /* ── 方向 2：白底 + icon 藍圓 ── */
+  .card-v2 {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    padding: 16px 10px;
+    border-radius: 14px;
+    border: 1px solid #E5E7EB;
+    background: #ffffff;
+    text-align: center;
+    font-size: 0.8rem; font-weight: 500; color: #374151;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .card-v2:hover { border-color: #93C5FD; box-shadow: 0 2px 8px rgba(0,102,204,0.08); }
+  .card-v2 .icon-wrap {
+    width: 40px; height: 40px;
+    background: #EFF6FF;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* ── 方向 3：淺藍底整張卡 ── */
+  .card-v3 {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    padding: 16px 10px;
+    border-radius: 14px;
+    border: 1px solid #BFDBFE;
+    background: #EFF6FF;
+    text-align: center;
+    font-size: 0.8rem; font-weight: 500; color: #1E40AF;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .card-v3:hover { border-color: #93C5FD; box-shadow: 0 2px 8px rgba(0,102,204,0.12); }
+
+  .option-wrap {
+    background: white; border-radius: 20px;
+    border: 2px solid #E5E7EB; overflow: hidden;
+  }
+  .section-label {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+    color: #9CA3AF; text-transform: uppercase; margin-bottom: 10px;
+  }
+</style>
+</head>
+<body class="bg-gray-100 min-h-screen py-10 px-4">
+<div class="max-w-4xl mx-auto space-y-6">
+
+  <div class="text-center mb-8">
+    <h1 class="text-2xl font-black text-gray-900">適用行業卡片 — 三方向比較</h1>
+    <p class="text-sm text-gray-400 mt-1">背景色 gray-100，模擬實際頁面環境</p>
+  </div>
+
+  <!-- ══ 方向 1 ══ -->
+  <div class="option-wrap">
+    <div class="flex items-center gap-3 bg-gray-50 px-6 py-4 border-b border-gray-100">
+      <span class="text-xl font-black text-gray-400">1</span>
+      <div>
+        <div class="font-bold text-gray-900">白底卡片</div>
+        <div class="text-xs text-gray-400">最保守，從灰色頁面背景浮起來，無多餘色彩</div>
+      </div>
+    </div>
+    <div class="p-6 bg-gray-100">
+      <p class="section-label">適用行業</p>
+      <div class="grid grid-cols-3 sm:grid-cols-5 gap-3">
+
+        <div class="card-v1">
+          <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z"/></svg>
+          建築營造
+        </div>
+        <div class="card-v1">
+          <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l5.653-4.655m5.8-5.8 1.875-1.875a1.5 1.5 0 0 1 2.122 2.12l-1.875 1.876m-5.8 5.8L7.5 7.5"/></svg>
+          製造業
+        </div>
+        <div class="card-v1">
+          <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/></svg>
+          物流倉儲
+        </div>
+        <div class="card-v1">
+          <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z"/></svg>
+          電子業
+        </div>
+        <div class="card-v1">
+          <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.871c1.355 0 2.697.056 4.024.166C17.155 8.51 18 9.473 18 10.608v2.513M15 8.25v-1.5m-6 1.5v-1.5m12 9.75-1.5.75a3.354 3.354 0 0 1-3 0 3.354 3.354 0 0 0-3 0 3.354 3.354 0 0 1-3 0 3.354 3.354 0 0 0-3 0 3.354 3.354 0 0 1-3 0L3 16.5m15-3.379a48.474 48.474 0 0 0-6-.371c-2.032 0-4.034.126-6 .371m12 0c.39.049.777.102 1.163.16 1.07.16 1.837 1.094 1.837 2.175v5.169c0 .621-.504 1.125-1.125 1.125H4.125A1.125 1.125 0 0 1 3 20.625v-5.17c0-1.08.768-2.014 1.837-2.174A47.78 47.78 0 0 1 6 13.12M12.265 3.11a.375.375 0 1 1-.53 0L12 2.845l.265.265Zm-3 0a.375.375 0 1 1-.53 0L9 2.845l.265.265Zm6 0a.375.375 0 1 1-.53 0L15 2.845l.265.265Z"/></svg>
+          食品加工
+        </div>
+
+      </div>
+    </div>
+    <div class="px-6 py-3 border-t border-gray-100 flex gap-4 text-xs text-gray-500">
+      <span class="text-green-600 font-medium">✅ 乾淨不搶眼</span>
+      <span class="text-green-600 font-medium">✅ 跟頁面其他白色卡片一致</span>
+      <span class="text-red-400 font-medium">❌ 視覺差異較少，稍微平</span>
+    </div>
+  </div>
+
+  <!-- ══ 方向 2 ══ -->
+  <div class="option-wrap">
+    <div class="flex items-center gap-3 bg-blue-50 px-6 py-4 border-b border-blue-100">
+      <span class="text-xl font-black text-blue-300">2</span>
+      <div>
+        <div class="font-bold text-gray-900">白底 + icon 藍色底圓 <span class="text-xs text-blue-500 font-normal ml-1">（推薦）</span></div>
+        <div class="text-xs text-gray-400">卡片白底，icon 放進藍色小圓框，層次感來自圓框而非卡片本身</div>
+      </div>
+    </div>
+    <div class="p-6 bg-gray-100">
+      <p class="section-label">適用行業</p>
+      <div class="grid grid-cols-3 sm:grid-cols-5 gap-3">
+
+        <div class="card-v2">
+          <div class="icon-wrap">
+            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z"/></svg>
+          </div>
+          建築營造
+        </div>
+        <div class="card-v2">
+          <div class="icon-wrap">
+            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l5.653-4.655m5.8-5.8 1.875-1.875a1.5 1.5 0 0 1 2.122 2.12l-1.875 1.876m-5.8 5.8L7.5 7.5"/></svg>
+          </div>
+          製造業
+        </div>
+        <div class="card-v2">
+          <div class="icon-wrap">
+            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/></svg>
+          </div>
+          物流倉儲
+        </div>
+        <div class="card-v2">
+          <div class="icon-wrap">
+            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z"/></svg>
+          </div>
+          電子業
+        </div>
+        <div class="card-v2">
+          <div class="icon-wrap">
+            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.871c1.355 0 2.697.056 4.024.166C17.155 8.51 18 9.473 18 10.608v2.513M15 8.25v-1.5m-6 1.5v-1.5m12 9.75-1.5.75a3.354 3.354 0 0 1-3 0 3.354 3.354 0 0 0-3 0 3.354 3.354 0 0 1-3 0 3.354 3.354 0 0 0-3 0 3.354 3.354 0 0 1-3 0L3 16.5m15-3.379a48.474 48.474 0 0 0-6-.371c-2.032 0-4.034.126-6 .371m12 0c.39.049.777.102 1.163.16 1.07.16 1.837 1.094 1.837 2.175v5.169c0 .621-.504 1.125-1.125 1.125H4.125A1.125 1.125 0 0 1 3 20.625v-5.17c0-1.08.768-2.014 1.837-2.174A47.78 47.78 0 0 1 6 13.12M12.265 3.11a.375.375 0 1 1-.53 0L12 2.845l.265.265Zm-3 0a.375.375 0 1 1-.53 0L9 2.845l.265.265Zm6 0a.375.375 0 1 1-.53 0L15 2.845l.265.265Z"/></svg>
+          </div>
+          食品加工
+        </div>
+
+      </div>
+    </div>
+    <div class="px-6 py-3 border-t border-gray-100 flex gap-4 text-xs text-gray-500">
+      <span class="text-green-600 font-medium">✅ 有層次感，icon 清楚</span>
+      <span class="text-green-600 font-medium">✅ 品牌色聚焦在 icon，不干擾文字</span>
+      <span class="text-green-600 font-medium">✅ 跟整頁 SVG 風格最一致</span>
+    </div>
+  </div>
+
+  <!-- ══ 方向 3 ══ -->
+  <div class="option-wrap">
+    <div class="flex items-center gap-3 bg-gray-50 px-6 py-4 border-b border-gray-100">
+      <span class="text-xl font-black text-gray-400">3</span>
+      <div>
+        <div class="font-bold text-gray-900">整張卡片藍底</div>
+        <div class="text-xs text-gray-400">藍色 bg + 藍色邊框，整個 section 帶品牌色調，視覺最強</div>
+      </div>
+    </div>
+    <div class="p-6 bg-gray-100">
+      <p class="section-label">適用行業</p>
+      <div class="grid grid-cols-3 sm:grid-cols-5 gap-3">
+
+        <div class="card-v3">
+          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z"/></svg>
+          建築營造
+        </div>
+        <div class="card-v3">
+          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l5.653-4.655m5.8-5.8 1.875-1.875a1.5 1.5 0 0 1 2.122 2.12l-1.875 1.876m-5.8 5.8L7.5 7.5"/></svg>
+          製造業
+        </div>
+        <div class="card-v3">
+          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/></svg>
+          物流倉儲
+        </div>
+        <div class="card-v3">
+          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z"/></svg>
+          電子業
+        </div>
+        <div class="card-v3">
+          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.871c1.355 0 2.697.056 4.024.166C17.155 8.51 18 9.473 18 10.608v2.513M15 8.25v-1.5m-6 1.5v-1.5m12 9.75-1.5.75a3.354 3.354 0 0 1-3 0 3.354 3.354 0 0 0-3 0 3.354 3.354 0 0 1-3 0 3.354 3.354 0 0 0-3 0 3.354 3.354 0 0 1-3 0L3 16.5m15-3.379a48.474 48.474 0 0 0-6-.371c-2.032 0-4.034.126-6 .371m12 0c.39.049.777.102 1.163.16 1.07.16 1.837 1.094 1.837 2.175v5.169c0 .621-.504 1.125-1.125 1.125H4.125A1.125 1.125 0 0 1 3 20.625v-5.17c0-1.08.768-2.014 1.837-2.174A47.78 47.78 0 0 1 6 13.12M12.265 3.11a.375.375 0 1 1-.53 0L12 2.845l.265.265Zm-3 0a.375.375 0 1 1-.53 0L9 2.845l.265.265Zm6 0a.375.375 0 1 1-.53 0L15 2.845l.265.265Z"/></svg>
+          食品加工
+        </div>
+
+      </div>
+    </div>
+    <div class="px-6 py-3 border-t border-gray-100 flex gap-4 text-xs text-gray-500">
+      <span class="text-green-600 font-medium">✅ 最顯眼，section 感最強</span>
+      <span class="text-red-400 font-medium">❌ 若頁面藍色元素多，容易視覺疲勞</span>
+      <span class="text-red-400 font-medium">❌ 整塊藍色在白色頁面偏重</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

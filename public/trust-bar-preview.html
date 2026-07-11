@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>信任條（AEO/GEO 區塊）排版方案比較</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --prd-td: #4A90A4;
+    --prd-white: #ffffff;
+    --prd-ink: #1F2937;
+    --prd-sub: #6B7280;
+    --prd-line: #E6E4DE;
+    --prd-chip: color-mix(in srgb, #4A90A4 12%, white);
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: #f3f4f6;
+    margin: 0;
+    padding: 40px 16px 80px;
+    color: var(--prd-ink);
+  }
+  .page-title { max-width: 1000px; margin: 0 auto 32px; text-align: center; }
+  .page-title h1 { font-size: 22px; font-weight: 900; margin: 0 0 6px; }
+  .page-title p { font-size: 13px; color: var(--prd-sub); margin: 0; }
+
+  .option-wrap {
+    max-width: 1000px; margin: 0 auto 40px;
+    background: white; border-radius: 20px; border: 2px solid #E5E7EB;
+    overflow: hidden;
+  }
+  .option-head {
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px 24px; background: #fafafa; border-bottom: 1px solid #eee;
+  }
+  .option-head .num {
+    font-size: 20px; font-weight: 900; color: #cbd5e1; flex-shrink: 0;
+  }
+  .option-head .name { font-weight: 700; font-size: 15px; }
+  .option-head .name .tag { font-size: 11px; font-weight: 500; color: var(--prd-td); margin-left: 6px; }
+  .option-head .desc { font-size: 12px; color: var(--prd-sub); margin-top: 2px; }
+
+  .stage { padding: 28px 24px; background: #f9f9f8; }
+  .stage-label {
+    font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    color: #9CA3AF; margin: 0 0 10px;
+  }
+  .stage-label:not(:first-child) { margin-top: 24px; }
+
+  .mock-hero {
+    height: 36px; border-radius: 10px 10px 0 0;
+    background: linear-gradient(120deg, #3f6f7a, #c98c4e);
+    margin-bottom: 0;
+  }
+  .mock-nav {
+    height: 30px; border-radius: 0 0 10px 10px;
+    background: #fff; border: 1px solid var(--prd-line); border-top: none;
+    margin-top: 0;
+  }
+
+  /* ── 現況 ── */
+  .trust-current {
+    display: flex; gap: clamp(12px, 3vw, 28px); flex-wrap: wrap;
+    padding: 12px 16px;
+    background: var(--prd-white); border: 1px solid var(--prd-line); border-radius: 0;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--prd-sub); white-space: nowrap;
+  }
+  .trust-icon {
+    width: 28px; height: 28px; border-radius: 50%; background: var(--prd-chip);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .trust-icon svg { width: 14px; height: 14px; stroke: var(--prd-td); }
+  .trust-item strong { color: var(--prd-ink); font-weight: 700; }
+
+  /* ── 方案 A：4 欄等寬 grid + 分隔線 ── */
+  .trust-gridA {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    background: var(--prd-white); border: 1px solid var(--prd-line); border-radius: 0;
+  }
+  .trust-gridA .trust-item {
+    padding: 16px 14px;
+    justify-content: flex-start;
+    border-right: 1px solid var(--prd-line);
+  }
+  .trust-gridA .trust-item:last-child { border-right: none; }
+  .trust-gridA .trust-item span { white-space: normal; }
+
+  @media (max-width: 640px) {
+    .trust-gridA { grid-template-columns: repeat(2, 1fr); }
+    .trust-gridA .trust-item:nth-child(2) { border-right: none; }
+    .trust-gridA .trust-item:nth-child(1),
+    .trust-gridA .trust-item:nth-child(2) { border-bottom: 1px solid var(--prd-line); }
+  }
+
+  /* ── 方案 B：置中撐滿（改動最小） ── */
+  .trust-centered {
+    display: flex; gap: clamp(12px, 3vw, 28px); flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 16px 16px;
+    background: var(--prd-white); border: 1px solid var(--prd-line); border-radius: 0;
+  }
+  .trust-centered .trust-item { white-space: normal; }
+
+  .mobile-frame {
+    width: 360px; margin: 0 auto;
+    border: 8px solid #1f2937; border-radius: 28px;
+    overflow: hidden; background: #000;
+  }
+  .mobile-frame .mock-hero { border-radius: 0; }
+  .mobile-frame .mock-nav { border-radius: 0; }
+
+  .verdict {
+    display: flex; flex-wrap: wrap; gap: 16px;
+    padding: 14px 24px; border-top: 1px solid #eee;
+    font-size: 12.5px; color: var(--prd-sub);
+  }
+  .verdict .good { color: #16a34a; font-weight: 500; }
+  .verdict .bad { color: #dc2626; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<div class="page-title">
+  <h1>信任條區塊排版方案比較</h1>
+  <p>模擬實際頁面環境（Hero 漸層區 → 信任條 → 分類導覽列），內容文字不變，純比較排版</p>
+</div>
+
+<!-- ══ 現況 ══ -->
+<div class="option-wrap">
+  <div class="option-head">
+    <span class="num">0</span>
+    <div>
+      <div class="name">現況（對照組）</div>
+      <div class="desc">flex + gap，無 justify-content，寬螢幕靠左擠成一團、右側留白；手機無專屬規則</div>
+    </div>
+  </div>
+  <div class="stage">
+    <p class="stage-label">桌面寬度</p>
+    <div class="mock-hero"></div>
+    <div class="trust-current">
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
+        <span><strong>台南在地製造</strong>・品質直營</span>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <span><strong>全台快速配送</strong>・大量現貨</span>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg></div>
+        <span><strong>客製規格接單</strong>・來樣訂製</span>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <span><strong>成立 2003 年</strong>・超過 20 年批發經驗</span>
+      </div>
+    </div>
+    <div class="mock-nav"></div>
+
+    <p class="stage-label">手機寬度（375px）</p>
+    <div class="mobile-frame">
+      <div class="mock-hero"></div>
+      <div class="trust-current">
+        <div class="trust-item">
+          <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
+          <span><strong>台南在地製造</strong>・品質直營</span>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+          <span><strong>全台快速配送</strong>・大量現貨</span>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg></div>
+          <span><strong>客製規格接單</strong>・來樣訂製</span>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <span><strong>成立 2003 年</strong>・超過 20 年批發經驗</span>
+        </div>
+      </div>
+      <div class="mock-nav"></div>
+    </div>
+  </div>
+  <div class="verdict">
+    <span class="bad">❌ 桌面右側留白，視覺不平衡</span>
+    <span class="bad">❌ 緊貼 Hero 與分類列，沒有獨立區塊感</span>
+    <span class="bad">❌ 手機沒有專屬排版，換行位置不可控</span>
+  </div>
+</div>
+
+<!-- ══ 方案 A ══ -->
+<div class="option-wrap">
+  <div class="option-head">
+    <span class="num" style="color:#4A90A4">A</span>
+    <div>
+      <div class="name">4 欄等寬 Grid + 分隔線 <span class="tag">（推薦）</span></div>
+      <div class="desc">桌面 4 欄平均撐滿全寬，中間細線分隔；手機收成 2×2；上下加留白讓它獨立成一個區塊</div>
+    </div>
+  </div>
+  <div class="stage">
+    <p class="stage-label">桌面寬度</p>
+    <div class="mock-hero"></div>
+    <div class="trust-gridA">
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
+        <span><strong>台南在地製造</strong>・品質直營</span>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <span><strong>全台快速配送</strong>・大量現貨</span>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg></div>
+        <span><strong>客製規格接單</strong>・來樣訂製</span>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <span><strong>成立 2003 年</strong>・超過 20 年批發經驗</span>
+      </div>
+    </div>
+    <div class="mock-nav"></div>
+
+    <p class="stage-label">手機寬度（375px）</p>
+    <div class="mobile-frame">
+      <div class="mock-hero"></div>
+      <div class="trust-gridA">
+        <div class="trust-item">
+          <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
+          <span><strong>台南在地製造</strong>・品質直營</span>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+          <span><strong>全台快速配送</strong>・大量現貨</span>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg></div>
+          <span><strong>客製規格接單</strong>・來樣訂製</span>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <span><strong>成立 2003 年</strong>・超過 20 年批發經驗</span>
+        </div>
+      </div>
+      <div class="mock-nav"></div>
+    </div>
+  </div>
+  <div class="verdict">
+    <span class="good">✅ 桌面撐滿全寬，四點份量平均</span>
+    <span class="good">✅ 分隔線讓它讀起來像「一份清單」，GEO 語意更清楚</span>
+    <span class="good">✅ 手機 2×2 整齊，不會亂換行</span>
+  </div>
+</div>
+
+<!-- ══ 方案 B ══ -->
+<div class="option-wrap">
+  <div class="option-head">
+    <span class="num">B</span>
+    <div>
+      <div class="name">置中撐滿（改動最小）</div>
+      <div class="desc">只改 justify-content: space-evenly，維持原本圓形 icon + 單行文字風格，不加分隔線</div>
+    </div>
+  </div>
+  <div class="stage">
+    <p class="stage-label">桌面寬度</p>
+    <div class="mock-hero"></div>
+    <div class="trust-centered">
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
+        <span><strong>台南在地製造</strong>・品質直營</span>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <span><strong>全台快速配送</strong>・大量現貨</span>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg></div>
+        <span><strong>客製規格接單</strong>・來樣訂製</span>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <span><strong>成立 2003 年</strong>・超過 20 年批發經驗</span>
+      </div>
+    </div>
+    <div class="mock-nav"></div>
+
+    <p class="stage-label">手機寬度（375px）</p>
+    <div class="mobile-frame">
+      <div class="mock-hero"></div>
+      <div class="trust-centered">
+        <div class="trust-item">
+          <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
+          <span><strong>台南在地製造</strong>・品質直營</span>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+          <span><strong>全台快速配送</strong>・大量現貨</span>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg></div>
+          <span><strong>客製規格接單</strong>・來樣訂製</span>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <span><strong>成立 2003 年</strong>・超過 20 年批發經驗</span>
+        </div>
+      </div>
+      <div class="mock-nav"></div>
+    </div>
+  </div>
+  <div class="verdict">
+    <span class="good">✅ 改動最小，一行 CSS 就解決留白問題</span>
+    <span class="good">✅ 保留原本圓形 icon 風格</span>
+    <span class="bad">❌ 手機換行位置還是不完全可控（依文字長度）</span>
+  </div>
+</div>
+
+</body>
+</html>

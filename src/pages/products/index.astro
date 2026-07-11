@@ -1,11 +1,14 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import PageHero from "../../components/PageHero.astro";
+import ProductCard from "../../components/ProductCard.astro";
 import company from "../../data/company.json";
 import categories from "../../data/categories.json";
 import products from "../../data/products.json";
 import seo from "../../data/seo.json";
 
 const siteUrl = "https://www.chiaohsin.com.tw";
+const LINE_ID = company.contact["LINE ID"];
 
 const productsDescription = `成立 2003 年・台南廠商直營，提供棉紗手套、NBR/PVC 膠手套、尼龍手套、口罩、太空包等 14 大類工安耗材批發。質量足重、全台配送、客製規格接單，歡迎企業詢價。`;
 
@@ -110,19 +113,21 @@ const faqSchema = {
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   </Fragment>
 
-  <!-- ① 麵包屑 + 頁面標題 + 信任條 -->
-  <div class="prd-outer">
-    <nav class="prd-breadcrumb" aria-label="breadcrumb">
+  <PageHero
+    title="工安耗材批發目錄｜工作手套・膠手套・口罩"
+    description="成立 2003 年・台南在地廠商直營・全台配送"
+  >
+    <nav slot="breadcrumb" class="ph-breadcrumb" aria-label="breadcrumb">
       <a href="/">首頁</a>
-      <span class="prd-sep" aria-hidden="true">／</span>
-      <span class="prd-cur">商品介紹</span>
+      <span class="ph-breadcrumb-sep" aria-hidden="true">／</span>
+      <span class="ph-breadcrumb-cur">商品介紹</span>
     </nav>
+  </PageHero>
 
-    <div class="prd-head">
-      <h1 class="prd-h1">工安耗材批發目錄｜工作手套・膠手套・口罩</h1>
-      <p class="prd-sub">成立 2003 年・台南在地廠商直營・全台配送</p>
+  <!-- ① 信任條 -->
+  <div class="prd-outer">
 
-      <div class="prd-trust">
+    <div class="prd-trust">
         <div class="trust-item">
           <div class="trust-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -156,7 +161,6 @@ const faqSchema = {
           <span><strong>成立 2003 年</strong>・超過 20 年批發經驗</span>
         </div>
       </div>
-    </div>
   </div>
 
   <!-- ② 黏性分類導覽（hp-qnav 樣式） -->
@@ -227,35 +231,16 @@ const faqSchema = {
 
             <div class="prd-grid">
               {catProducts.map((p) => (
-                <a
-                  href={`/products/${p.id}`}
-                  class="prd-card product-card"
-                  data-product-id={p.id}
-                  data-product-name={p.name}
-                  data-product-description={p.description}
-                  data-product-category={p.category}
-                  data-product-tags={(p.tags || []).join(" ")}
-                >
-                  <div class="prd-card-img">
-                    <img
-                      src={`/${p.image}`}
-                      alt={`${p.name}${p.size && p.size !== '-' ? ` ${p.size}` : ''} ${cat.name}批發 - 喬新針織`}
-                      loading="lazy"
-                      width="300"
-                      height="300"
-                    />
-                  </div>
-                  <div class="prd-card-body">
-                    <div class="prd-card-title-row">
-                      <span class="prd-card-name">{p.name}</span>
-                      {p.size && p.size !== "-" && (
-                        <span class="prd-size-badge">{p.size}</span>
-                      )}
-                    </div>
-                    <p class="prd-card-desc">{p.description}</p>
-                    <span class="prd-card-cta" aria-label={`了解 ${p.name} 規格與報價`}>了解規格 →</span>
-                  </div>
-                </a>
+                <ProductCard
+                    id={p.id}
+                    name={p.name}
+                    image={p.image}
+                    description={p.description}
+                    size={p.size}
+                    category={p.category}
+                    tags={p.tags || []}
+                    categoryName={cat.name}
+                />
               ))}
             </div>
           </section>
@@ -309,27 +294,29 @@ const faqSchema = {
         </div>
       </section>
 
-      <!-- ⑤ 詢價 CTA 橫幅 -->
-      <div class="prd-cta-banner">
-        <div class="prd-cta-text">
-          <h3>大量採購享優惠・客製規格歡迎詢問</h3>
-          <p>工廠直營・棉紗手套・膠手套・口罩・包裝材料・全品項供應</p>
-        </div>
-        <div class="prd-cta-actions">
-          <a href={`tel:${company.contact.phone}`} class="prd-cta-phone">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:16px;height:16px;flex-shrink:0;">
-              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.08 1.19 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/>
-            </svg>
-            {company.contact.phone}
-          </a>
-          <a href="/contact" class="prd-cta-btn">立即詢價 →</a>
-        </div>
-      </div>
-
     </main>
   </div>
 
-  <!-- ⑤ 回頂部按鈕 -->
+  <!-- ⑤ 詢價 CTA -->
+  <section class="prd-cta">
+    <div class="prd-cta-blob prd-cta-blob-1"></div>
+    <div class="prd-cta-blob prd-cta-blob-2"></div>
+    <div class="prd-outer prd-cta-inner">
+      <h2 class="prd-cta-title">大量採購・工廠直營批發報價</h2>
+      <p class="prd-cta-sub">棉紗手套、膠手套、口罩、包裝材料全品項現貨供應，來電或 LINE 詢價，告知品項與數量即可快速取得批發報價。</p>
+      <div class="prd-cta-btns">
+        <a href={`tel:${company.contact.phone}`} class="prd-cta-btn-primary">{company.contact.phone}</a>
+        <a href={`https://line.me/ti/p/~${LINE_ID}`} target="_blank" rel="noopener noreferrer" class="prd-cta-btn-ghost">LINE 詢價</a>
+      </div>
+      <div class="prd-cta-meta">
+        <span>週一至週六　08:00 – 18:00</span>
+        <span class="prd-cta-meta-dot">|</span>
+        <span>{company.address.full}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑥ 回頂部按鈕 -->
   <button class="prd-btt" id="prdBtt" aria-label="回到頂部">↑</button>
 
 </Layout>
@@ -338,7 +325,6 @@ const faqSchema = {
   /* ── 設計 Token ── */
   :root {
     --prd-red:    #c0392b;
-    --prd-orange: #FF6B35;
     --prd-td:     #4A90A4;
     --prd-teal:   #D4A574;
     --prd-cream:  #F7F6F3;
@@ -401,6 +387,7 @@ const faqSchema = {
   }
   .trust-icon svg { width: 14px; height: 14px; stroke: var(--prd-td); }
   .trust-item strong { color: var(--prd-ink); font-weight: 700; }
+  @media (max-width: 1023px) { .prd-trust { display: none; } }
 
   /* ── ② 黏性分類導覽 ── */
   .prd-qnav-wrap {
@@ -529,89 +516,40 @@ const faqSchema = {
     .prd-grid { grid-template-columns: repeat(4, 1fr); gap: 16px; }
   }
 
-  /* 產品卡片 */
-  .prd-card {
-    background: var(--prd-white); border: 1px solid var(--prd-line);
-    border-radius: 12px; overflow: hidden;
-    text-decoration: none; color: inherit;
-    display: flex; flex-direction: column;
-    transition: transform .18s cubic-bezier(.34,1.56,.64,1), box-shadow .18s;
-  }
-  .prd-card:hover {
-    transform: scale(.97);
-    box-shadow: 0 2px 12px rgba(0,0,0,.08);
-  }
-  .prd-card-img {
-    aspect-ratio: 1 / 1; background: #F3F4F6; overflow: hidden;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .prd-card-img img {
-    width: 100%; height: 100%; object-fit: contain; padding: 16px;
-    transition: transform .3s ease;
-  }
-  .prd-card:hover .prd-card-img img { transform: scale(1.04); }
-
-  .prd-card-body { padding: 12px 14px 14px; display: flex; flex-direction: column; flex: 1; }
-  .prd-card-title-row {
-    display: flex; align-items: flex-start; justify-content: space-between;
-    gap: 8px; margin-bottom: 5px;
-  }
-  .prd-card-name { font-size: 14px; font-weight: 700; color: var(--prd-ink); line-height: 1.3; }
-  .prd-size-badge {
-    background: var(--prd-line); color: var(--prd-sub);
-    border-radius: 6px; padding: 2px 7px;
-    font-size: 10px; font-weight: 600; white-space: nowrap; flex-shrink: 0; margin-top: 2px;
-  }
-  .prd-card-desc {
-    font-size: 12px; color: var(--prd-sub); line-height: 1.6;
-    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-    overflow: hidden; flex: 1; margin-bottom: 12px;
-  }
-  .prd-card-cta {
-    display: inline-flex; align-items: center; gap: 4px;
-    background: var(--prd-orange); color: #fff;
-    border-radius: 8px; padding: 7px 14px;
-    font-size: 12px; font-weight: 700;
-    text-decoration: none; align-self: flex-start; transition: opacity .15s;
-  }
-  .prd-card:hover .prd-card-cta { opacity: .88; }
-
-  /* 手機版簡化卡片 */
-  @media (max-width: 767px) {
-    .prd-card-body    { padding: 8px 10px 10px; }
-    .prd-card-name    { font-size: 12px; }
-    .prd-card-desc    { display: none; }
-    .prd-card-img img { padding: 8px; }
-    .prd-card-cta {
-      background: transparent; color: var(--prd-td);
-      padding: 0; font-size: 11px;
-    }
-  }
-
-  /* ── ④ 詢價 CTA 橫幅 ── */
-  .prd-cta-banner {
+  /* ── ⑤ 詢價 CTA ── */
+  .prd-cta {
     margin-top: 52px;
-    background: linear-gradient(135deg, var(--prd-td) 0%, color-mix(in srgb, var(--prd-td) 65%, var(--prd-teal)) 100%);
-    border-radius: 16px;
-    padding: clamp(24px, 4vw, 40px) clamp(20px, 5vw, 52px);
-    display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 20px; color: #fff;
+    background: linear-gradient(135deg,
+      var(--prd-td) 0%,
+      color-mix(in srgb, var(--prd-td) 90%, white) 55%,
+      color-mix(in srgb, var(--prd-teal) 70%, white) 100%);
+    color: #fff; padding-block: clamp(36px, 5vw, 64px); text-align: center;
+    position: relative; overflow: hidden;
   }
-  .prd-cta-text h3 { font-size: clamp(16px, 2.5vw, 22px); font-weight: 900; margin-bottom: 4px; }
-  .prd-cta-text p  { font-size: 13px; opacity: .85; }
-  .prd-cta-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-  .prd-cta-phone {
-    display: flex; align-items: center; gap: 6px;
-    font-size: clamp(15px, 2vw, 19px); font-weight: 900;
-    letter-spacing: .04em; color: #fff; text-decoration: none; white-space: nowrap;
+  .prd-cta-blob { position: absolute; border-radius: 50%; background: rgba(255,255,255,.06); pointer-events: none; }
+  .prd-cta-blob-1 { width: 240px; height: 240px; top: -70px; right: -60px; }
+  .prd-cta-blob-2 { width: 190px; height: 190px; bottom: -60px; left: -40px; }
+  .prd-cta-inner { position: relative; z-index: 2; }
+  .prd-cta-title { font-size: clamp(20px, 3vw, 32px); font-weight: 800; margin: 0 0 10px; }
+  .prd-cta-sub { font-size: clamp(13px, 1.4vw, 16px); opacity: .85; margin: 0 0 28px; max-width: 520px; margin-inline: auto; }
+  .prd-cta-btns { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .prd-cta-btn-primary {
+    background: #fff; color: var(--prd-td); border: none; border-radius: 8px;
+    padding: 11px 24px; font-size: clamp(13px, 1.4vw, 15px); font-weight: 700;
+    text-decoration: none; display: inline-block; transition: opacity .18s;
   }
-  .prd-cta-btn {
-    background: var(--prd-orange); color: #fff; border: none;
-    border-radius: 999px; padding: 10px 24px;
-    font-size: 14px; font-weight: 700; text-decoration: none;
-    white-space: nowrap; transition: opacity .15s;
+  .prd-cta-btn-primary:hover { opacity: .88; }
+  .prd-cta-btn-ghost {
+    background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.65);
+    border-radius: 8px; padding: 11px 24px; font-size: clamp(13px, 1.4vw, 15px); font-weight: 700;
+    text-decoration: none; display: inline-block; transition: background .18s;
   }
-  .prd-cta-btn:hover { opacity: .88; }
+  .prd-cta-btn-ghost:hover { background: rgba(255,255,255,.13); }
+  .prd-cta-meta {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 14px;
+    margin-top: 24px; font-size: 12.5px; color: rgba(255,255,255,.65);
+  }
+  .prd-cta-meta-dot { opacity: .5; }
 
   /* ── FAQ 區塊 ── */
   .prd-faq { margin-bottom: 48px; }

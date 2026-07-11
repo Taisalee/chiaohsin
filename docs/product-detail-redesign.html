@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>產品詳情頁 重設計範本 — 7針20兩灰棉</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  * { font-family: 'Noto Sans TC', sans-serif; }
+
+  /* 品牌色 */
+  :root {
+    --brand-blue: #0066CC;
+    --brand-orange: #FF6B35;
+    --line-green: #06C755;
+  }
+
+  /* Sticky CTA bar (mobile) */
+  #sticky-cta {
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+  }
+  #sticky-cta.visible {
+    transform: translateY(0);
+  }
+
+  /* Image zoom */
+  .product-img-wrap { overflow: hidden; }
+  .product-img-wrap img {
+    transition: transform 0.4s ease;
+    cursor: zoom-in;
+  }
+  .product-img-wrap img:hover {
+    transform: scale(1.06);
+  }
+
+  /* Lightbox */
+  #lightbox {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+  }
+  #lightbox.open { display: flex; }
+  #lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 12px; }
+
+  /* Badge 特色 */
+  .feature-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 4px 12px; border-radius: 9999px;
+    background: #EFF6FF; color: #1D4ED8;
+    border: 1px solid #BFDBFE;
+    font-size: 0.8rem; font-weight: 600;
+  }
+
+  /* 規格 highlight */
+  .spec-highlight {
+    background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%);
+    border: 1.5px solid #FED7AA;
+    border-radius: 14px;
+    padding: 16px 20px;
+  }
+
+  /* 主 CTA */
+  .btn-line {
+    background: linear-gradient(135deg, #06C755 0%, #05a346 100%);
+    color: white; border: none;
+  }
+  .btn-line:hover { background: linear-gradient(135deg, #05a346 0%, #048038 100%); }
+  .btn-phone {
+    background: linear-gradient(135deg, #0066CC 0%, #0052a3 100%);
+    color: white; border: none;
+  }
+  .btn-phone:hover { background: linear-gradient(135deg, #0052a3 0%, #003d7a 100%); }
+
+  /* 次 CTA（零售） */
+  .btn-retail {
+    background: white;
+    border: 1.5px solid #E5E7EB;
+    color: #374151;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-retail:hover { border-color: #9CA3AF; background: #F9FAFB; }
+
+  /* 行業 card */
+  .industry-card {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    padding: 14px 10px;
+    border-radius: 14px;
+    border: 1px solid #E5E7EB;
+    background: #F9FAFB;
+    text-align: center;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #374151;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .industry-card:hover { border-color: #93C5FD; box-shadow: 0 2px 8px rgba(0,102,204,0.1); }
+  .industry-card .icon { font-size: 1.6rem; }
+
+  /* Section heading */
+  .section-label {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #6B7280;
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+<!-- ===== HEADER (示意) ===== -->
+<header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 md:px-10 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center text-white text-xs font-bold">螞</div>
+      <div>
+        <div class="font-black text-sm text-red-600 leading-none">紅螞蟻手套</div>
+        <div class="text-xs text-gray-400 leading-none">喬新針織 出品</div>
+      </div>
+    </div>
+    <nav class="hidden md:flex items-center gap-6 text-sm text-gray-600">
+      <a href="#" class="hover:text-blue-600">首頁</a>
+      <a href="#" class="text-blue-600 font-semibold">產品介紹</a>
+      <a href="#" class="hover:text-blue-600">關於我們</a>
+      <a href="#" class="hover:text-blue-600">聯絡我們</a>
+    </nav>
+    <a href="tel:0933098358" class="hidden md:inline-flex items-center gap-2 bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+      📞 0933-098-358
+    </a>
+  </div>
+</header>
+
+<!-- ===== BREADCRUMB ===== -->
+<nav class="bg-white border-b border-gray-100 py-3 px-4 md:px-10 text-sm text-gray-500">
+  <div class="max-w-7xl mx-auto flex items-center gap-2">
+    <a href="#" class="hover:text-blue-600">首頁</a>
+    <span class="text-gray-300">/</span>
+    <a href="#" class="hover:text-blue-600">產品介紹</a>
+    <span class="text-gray-300">/</span>
+    <a href="#" class="hover:text-blue-600">棉紗手套</a>
+    <span class="text-gray-300">/</span>
+    <span class="text-gray-800 font-medium">7針20兩灰棉</span>
+  </div>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="max-w-7xl mx-auto px-4 md:px-10 py-8 md:py-12">
+
+  <!-- ── 手機版：標題先行 ── -->
+  <div class="lg:hidden mb-5">
+    <a href="#" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold mb-3">棉紗手套</a>
+    <h1 class="text-2xl font-black leading-snug">7針20兩灰棉</h1>
+    <!-- 【改動1】副標：關鍵規格一行掌握 -->
+    <p class="text-sm text-gray-500 mt-1">中厚款 · 足重 750g/打 · 棉70% 聚酯30% · 工廠直營</p>
+    <div class="flex flex-wrap gap-2 mt-3">
+      <span class="feature-badge">✓ 高含棉量</span>
+      <span class="feature-badge">✓ 透氣舒適</span>
+      <span class="feature-badge">✓ 耐磨耐用</span>
+      <span class="feature-badge">✓ 彈性貼手</span>
+      <span class="feature-badge">✓ 工廠直營</span>
+    </div>
+  </div>
+
+  <div class="flex flex-col lg:flex-row gap-8 lg:gap-14">
+
+    <!-- ── 左欄：圖片（sticky） ── -->
+    <div class="flex-1 lg:sticky lg:top-24 self-start space-y-4">
+      <!-- 【改動5】圖片 zoom -->
+      <div class="product-img-wrap bg-white rounded-2xl border border-gray-200 p-6 flex items-center justify-center min-h-[320px] shadow-sm" onclick="openLightbox()">
+        <img
+          src="https://placehold.co/480x480/f3f4f6/9ca3af?text=7針20兩灰棉"
+          alt="7針20兩灰棉 產品圖片"
+          class="w-full max-h-[420px] object-contain rounded-xl"
+        />
+      </div>
+      <p class="text-center text-xs text-gray-400">點擊圖片可放大查看</p>
+
+      <!-- 【改動5】Lightbox -->
+      <div id="lightbox" onclick="closeLightbox()">
+        <img src="https://placehold.co/800x800/f3f4f6/9ca3af?text=7針20兩灰棉" alt="放大圖" />
+      </div>
+    </div>
+
+    <!-- ── 右欄：產品資訊 ── -->
+    <div class="flex-1 space-y-6">
+
+      <!-- 電腦版：分類 + 標題 -->
+      <div class="hidden lg:block">
+        <a href="#" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold mb-3">棉紗手套</a>
+        <h1 class="text-4xl font-black leading-snug">7針20兩灰棉</h1>
+        <!-- 【改動1】副標 -->
+        <p class="text-base text-gray-500 mt-1.5">中厚款 · 足重 750g/打 · 棉70% 聚酯30% · 工廠直營</p>
+        <div class="flex flex-wrap gap-2 mt-4">
+          <span class="feature-badge">✓ 高含棉量</span>
+          <span class="feature-badge">✓ 透氣舒適</span>
+          <span class="feature-badge">✓ 耐磨耐用</span>
+          <span class="feature-badge">✓ 彈性貼手</span>
+          <span class="feature-badge">✓ 工廠直營</span>
+        </div>
+      </div>
+
+      <!-- 【改動2】重量視覺強調 -->
+      <div class="spec-highlight flex items-center gap-4">
+        <div class="text-3xl">⚖️</div>
+        <div>
+          <div class="text-xs font-semibold text-orange-600 uppercase tracking-wide mb-0.5">品質關鍵 · 足重保證</div>
+          <div class="font-black text-xl text-orange-800">20 兩 / 打</div>
+          <div class="text-xs text-orange-600 mt-0.5">每打實重 750g，比市面薄手套重 20–30%，耐用度更高</div>
+        </div>
+      </div>
+
+      <!-- 規格表 -->
+      <div>
+        <p class="section-label">產品規格</p>
+        <div class="rounded-xl border border-gray-200 overflow-hidden text-sm">
+          <table class="w-full">
+            <tbody class="divide-y divide-gray-100">
+              <tr class="bg-white">
+                <td class="px-4 py-3 font-medium text-gray-500 w-1/3">材質成分</td>
+                <td class="px-4 py-3 text-gray-800">棉70% / 聚酯纖維30%</td>
+              </tr>
+              <tr class="bg-gray-50">
+                <td class="px-4 py-3 font-medium text-gray-500">尺寸</td>
+                <td class="px-4 py-3 text-gray-800">F（均碼）</td>
+              </tr>
+              <tr class="bg-white">
+                <td class="px-4 py-3 font-medium text-gray-500">包裝規格</td>
+                <td class="px-4 py-3 text-gray-800">12雙 / 打</td>
+              </tr>
+              <tr class="bg-gray-50">
+                <td class="px-4 py-3 font-medium text-gray-500">重量</td>
+                <td class="px-4 py-3 font-semibold text-orange-700">每打約 20兩（750g）</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── 【改動1】CTA 區塊重整 ── -->
+      <div class="space-y-3" id="cta-block">
+
+        <!-- 【改動1】批量採購提示移到 CTA 正上方 -->
+        <div class="flex items-start gap-3 bg-orange-50 border border-orange-200 rounded-xl px-4 py-3">
+          <span class="text-xl mt-0.5">💼</span>
+          <div>
+            <div class="font-bold text-orange-800 text-sm">企業大量採購享優惠</div>
+            <div class="text-xs text-orange-600 mt-0.5">歡迎工廠、工地、倉儲業者批量訂購，量大另有折扣。</div>
+          </div>
+        </div>
+
+        <!-- 【改動1】主 CTA：LINE + 電話 -->
+        <div class="grid grid-cols-2 gap-3">
+          <button class="btn-line flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-base shadow-lg shadow-green-500/20 hover:scale-[1.02] active:scale-95 transition-all cursor-pointer">
+            <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current flex-shrink-0" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+            </svg>
+            LINE 洽詢
+          </button>
+          <button class="btn-phone flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-base shadow-lg shadow-blue-500/20 hover:scale-[1.02] active:scale-95 transition-all cursor-pointer">
+            <span class="text-xl">📞</span>
+            立即電話
+          </button>
+        </div>
+
+        <!-- 【改動1】次 CTA：零售管道（視覺降級） -->
+        <div>
+          <div class="flex items-center gap-3 my-2">
+            <div class="flex-1 border-t border-gray-200"></div>
+            <span class="text-xs text-gray-400 whitespace-nowrap">也可在以下平台零售購買</span>
+            <div class="flex-1 border-t border-gray-200"></div>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <button class="btn-retail flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium cursor-pointer">
+              <span class="text-green-700 font-bold">7-11</span> 賣貨便
+            </button>
+            <button class="btn-retail flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium cursor-pointer">
+              <span class="text-blue-600 font-bold">全家</span> 好賣+
+            </button>
+          </div>
+        </div>
+
+        <!-- 信任標章 -->
+        <div class="flex items-center justify-center gap-4 pt-1 text-xs text-gray-400">
+          <span class="flex items-center gap-1">✅ 台南工廠直營</span>
+          <span class="flex items-center gap-1">✅ 全台配送</span>
+          <span class="flex items-center gap-1">✅ 成立 2003 年</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── 產品說明 + 適用對象（全寬） ── -->
+  <div class="mt-12 pt-10 border-t border-gray-200 space-y-10">
+
+    <!-- 【改動7】適用行業：icon card 格式 -->
+    <div>
+      <p class="section-label">適用行業</p>
+      <div class="grid grid-cols-3 sm:grid-cols-5 gap-3">
+        <div class="industry-card"><span class="icon">🏗️</span>建築營造</div>
+        <div class="industry-card"><span class="icon">🏭</span>製造業</div>
+        <div class="industry-card"><span class="icon">📦</span>物流倉儲</div>
+        <div class="industry-card"><span class="icon">💡</span>電子業</div>
+        <div class="industry-card"><span class="icon">🍱</span>食品加工</div>
+      </div>
+    </div>
+
+    <!-- 適用對象 -->
+    <div>
+      <p class="section-label">適用對象</p>
+      <div class="flex flex-wrap gap-2">
+        <span class="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm text-gray-700">👷 工地作業員</span>
+        <span class="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm text-gray-700">🚚 搬運工人</span>
+        <span class="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm text-gray-700">⚙️ 機械操作員</span>
+        <span class="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm text-gray-700">📦 倉儲人員</span>
+        <span class="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm text-gray-700">👨‍🔧 一般勞工</span>
+      </div>
+    </div>
+
+    <!-- 產品說明 -->
+    <div>
+      <p class="section-label">產品說明</p>
+      <div class="prose max-w-none text-gray-600 leading-relaxed space-y-4">
+        <p>我們的棉紗手套專為高強度作業設計，解決工作現場手部磨損與滑手問題。採用高含棉量紗線精密編織，不僅具備優異的吸汗透氣性，更能長時間維持乾爽舒適，減少因悶熱造成的不適感。</p>
+        <p>手套結構紮實且貼合手型，提供良好的抓握力與防護屏障，有效阻隔粗糙物件對皮膚的傷害。無論是建築工地搬運、工廠機械操作、車輛維修還是農業園藝，都能輕鬆應對各種繁重任務。</p>
+        <p>這是一雙能陪伴您整日工作的基礎防護裝備，穩定、可靠、日常可依賴。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 相關產品 ── -->
+  <section class="mt-14 pt-10 border-t border-gray-200">
+    <h2 class="text-xl font-bold mb-6">其他棉紗手套</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- 示意卡片 -->
+      <a href="#" class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all group">
+        <div class="bg-gray-100 flex items-center justify-center h-40">
+          <img src="https://placehold.co/200x160/e5e7eb/9ca3af?text=相關產品" class="h-36 object-contain group-hover:scale-105 transition-transform" />
+        </div>
+        <div class="p-4">
+          <div class="font-semibold text-gray-800">7針16兩灰棉</div>
+          <div class="text-xs text-gray-400 mt-1">標準款 · 600g/打</div>
+        </div>
+      </a>
+      <a href="#" class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all group">
+        <div class="bg-gray-100 flex items-center justify-center h-40">
+          <img src="https://placehold.co/200x160/e5e7eb/9ca3af?text=相關產品" class="h-36 object-contain group-hover:scale-105 transition-transform" />
+        </div>
+        <div class="p-4">
+          <div class="font-semibold text-gray-800">10針白棉手套</div>
+          <div class="text-xs text-gray-400 mt-1">細針款 · 輕巧型</div>
+        </div>
+      </a>
+      <a href="#" class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all group">
+        <div class="bg-gray-100 flex items-center justify-center h-40">
+          <img src="https://placehold.co/200x160/e5e7eb/9ca3af?text=相關產品" class="h-36 object-contain group-hover:scale-105 transition-transform" />
+        </div>
+        <div class="p-4">
+          <div class="font-semibold text-gray-800">7針紅邊白棉</div>
+          <div class="text-xs text-gray-400 mt-1">標示款 · 易辨識</div>
+        </div>
+      </a>
+    </div>
+    <div class="text-center mt-8">
+      <a href="#" class="inline-flex items-center gap-2 border border-gray-300 text-gray-700 px-6 py-2.5 rounded-xl text-sm font-medium hover:border-blue-400 hover:text-blue-600 transition-colors">
+        查看所有棉紗手套 →
+      </a>
+    </div>
+  </section>
+
+  <!-- 返回 -->
+  <div class="mt-12 pt-8 border-t border-gray-200">
+    <a href="#" class="inline-flex items-center gap-2 text-gray-500 hover:text-blue-600 text-sm transition-colors">← 返回產品列表</a>
+  </div>
+</main>
+
+<!-- ===== 【改動6】Mobile Sticky CTA Bar ===== -->
+<div id="sticky-cta" class="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-2xl px-4 py-3 flex gap-3 z-50">
+  <button class="btn-line flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm cursor-pointer">
+    <svg viewBox="0 0 24 24" class="h-5 w-5 fill-current" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+    </svg>
+    LINE 洽詢
+  </button>
+  <a href="tel:0933098358" class="btn-phone flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm no-underline cursor-pointer">
+    📞 立即電話
+  </a>
+</div>
+
+<script>
+  // Lightbox
+  function openLightbox() { document.getElementById('lightbox').classList.add('open'); }
+  function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); }
+
+  // Sticky CTA bar：捲過 CTA 後才顯示
+  const ctaBlock = document.getElementById('cta-block');
+  const stickyCta = document.getElementById('sticky-cta');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) stickyCta.classList.add('visible');
+      else stickyCta.classList.remove('visible');
+    });
+  }, { threshold: 0.1 });
+  if (ctaBlock) observer.observe(ctaBlock);
+</script>
+
+<!-- ===== 設計說明對照表 ===== -->
+<div class="max-w-7xl mx-auto px-4 md:px-10 pb-20 mt-16">
+  <div class="bg-blue-50 border border-blue-200 rounded-2xl p-6">
+    <h3 class="font-bold text-blue-800 text-lg mb-4">📋 本範本改動說明（vs 現行版本）</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+      <div class="space-y-3">
+        <div class="flex gap-3">
+          <span class="text-red-500 font-bold flex-shrink-0">改1</span>
+          <div><div class="font-semibold text-gray-800">CTA 層級重整</div><div class="text-gray-600">LINE + 電話升為主要 CTA；零售管道降為次要（帶分隔線說明）；批量採購提示移到 CTA 正上方</div></div>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-red-500 font-bold flex-shrink-0">改2</span>
+          <div><div class="font-semibold text-gray-800">重量視覺強調</div><div class="text-gray-600">「20兩 / 打」橙色 highlight 卡，說明足重的比較優勢</div></div>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-orange-500 font-bold flex-shrink-0">改3</span>
+          <div><div class="font-semibold text-gray-800">產品副標</div><div class="text-gray-600">H1 下一行顯示「中厚款 · 750g/打 · 棉70% 聚酯30% · 工廠直營」</div></div>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-orange-500 font-bold flex-shrink-0">改4</span>
+          <div><div class="font-semibold text-gray-800">按鈕顏色統一</div><div class="text-gray-600">電話改為品牌藍（原為紫色）；零售按鈕改 outline 樣式，不再搶眼</div></div>
+        </div>
+      </div>
+      <div class="space-y-3">
+        <div class="flex gap-3">
+          <span class="text-yellow-600 font-bold flex-shrink-0">改5</span>
+          <div><div class="font-semibold text-gray-800">圖片 zoom</div><div class="text-gray-600">hover 放大 + 點擊 lightbox，採購前可看清材質紋路</div></div>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-yellow-600 font-bold flex-shrink-0">改6</span>
+          <div><div class="font-semibold text-gray-800">Mobile Sticky CTA bar</div><div class="text-gray-600">捲過主 CTA 後，底部固定顯示 LINE + 電話兩個按鈕（手機模式才出現）</div></div>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-yellow-600 font-bold flex-shrink-0">改7</span>
+          <div><div class="font-semibold text-gray-800">適用行業 icon card</div><div class="text-gray-600">從 badge 改為 icon + 文字小卡，視覺更友善、易掃描</div></div>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-gray-500 font-bold flex-shrink-0">加</span>
+          <div><div class="font-semibold text-gray-800">信任標章</div><div class="text-gray-600">CTA 下方加「台南工廠直營 · 全台配送 · 成立2003年」三個 checkmark</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

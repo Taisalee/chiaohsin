@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import ProductCard from "../../components/ProductCard.astro";
 import company from "../../data/company.json";
 import categories from "../../data/categories.json";
 import products from "../../data/products.json";
@@ -26,10 +27,13 @@ const { product, category } = Astro.props;
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? "https://www.chiaohsin.com.tw";
 
+// 超商零售連結（選填欄位，無值則不顯示零售區塊）
+const retailLinks = (product as any).retailLinks as { "711"?: string; family?: string } | undefined;
+
 // 取得同分類的其他產品作為相關產品
 const relatedProducts = products
     .filter((p) => p.category === product.category && p.id !== product.id && p.available !== false)
-    .slice(0, 3);
+    .slice(0, 4);
 
 // SEO 相關設定
 const productTitle = `${product.name} - ${category.name}`;
@@ -46,22 +50,25 @@ const structuredData = {
     "@id": `${siteUrl}/products/${product.id}`,
     name: product.name,
     description: product.description,
-    image: `${siteUrl}/${product.image}`,
+    image: [`${siteUrl}/${product.image}`],
     url: `${siteUrl}/products/${product.id}`,
     sku: product.id,
     category: category.name,
     ...(product.materials && { material: product.materials }),
     ...(product.size && product.size !== "-" && { size: product.size }),
+    ...(product.weight && { weight: { "@type": "QuantitativeValue", name: product.weight } }),
     brand: {
         "@type": "Organization",
         "@id": `${siteUrl}/#organization`,
         name: company.shortName,
+        foundingDate: "2003",
     },
     manufacturer: {
         "@type": "Organization",
         "@id": `${siteUrl}/#organization`,
         name: company.shortName,
         url: `https://${company.website}`,
+        foundingDate: "2003",
     },
     dateModified: new Date().toISOString().split("T")[0],
     offers: {
@@ -69,12 +76,65 @@ const structuredData = {
         url: `${siteUrl}/products/${product.id}`,
         availability: "https://schema.org/InStock",
         itemCondition: "https://schema.org/NewCondition",
+        priceSpecification: {
+            "@type": "PriceSpecification",
+            priceCurrency: "TWD",
+            description: "批發價格依數量而定，請洽詢業務",
+        },
         seller: {
             "@type": "Organization",
             "@id": `${siteUrl}/#organization`,
             name: company.shortName,
         },
     },
+};
+
+// FAQ 結構化資料
+const faqItems = [
+    ...(product.materials ? [{
+        "@type": "Question",
+        name: `${product.name} 的材質成分是什麼？`,
+        acceptedAnswer: { "@type": "Answer", text: product.materials },
+    }] : []),
+    ...(product.packaging ? [{
+        "@type": "Question",
+        name: `${product.name} 的包裝規格為何？`,
+        acceptedAnswer: { "@type": "Answer", text: product.packaging },
+    }] : []),
+    ...((product as any).targetIndustries?.length > 0 ? [{
+        "@type": "Question",
+        name: `${product.name} 適合哪些行業或場合使用？`,
+        acceptedAnswer: { "@type": "Answer", text: (product as any).targetIndustries.join("、") },
+    }] : []),
+    ...((product as any).targetAudiences?.length > 0 ? [{
+        "@type": "Question",
+        name: `${product.name} 適合哪些工作崗位使用？`,
+        acceptedAnswer: {
+            "@type": "Answer",
+            text: `本產品適合以下工作人員配戴使用：${(product as any).targetAudiences.join("、")}。如有大量採購需求，歡迎洽詢喬新針織取得批發報價。`,
+        },
+    }] : []),
+    {
+        "@type": "Question",
+        name: `如何批發購買 ${product.name}？`,
+        acceptedAnswer: {
+            "@type": "Answer",
+            text: `可透過 LINE（ID：ulh0933098358）或電話（${company.contact.phone}）聯絡喬新針織業務，洽談批發報價與出貨事宜。`,
+        },
+    },
+    {
+        "@type": "Question",
+        name: `購買 ${product.name} 是否有量大優惠？`,
+        acceptedAnswer: {
+            "@type": "Answer",
+            text: "喬新針織提供量大優惠，訂購數量越多折扣越好，詳細價格請來電或 LINE 洽詢。",
+        },
+    },
+];
+const faqData = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems,
 };
 
 // 麵包屑結構化資料
@@ -86,25 +146,25 @@ const breadcrumbData = {
             "@type": "ListItem",
             position: 1,
             name: "首頁",
-            item: "https://www.chiaohsin.com.tw/",
+            item: `${siteUrl}/`,
         },
         {
             "@type": "ListItem",
             position: 2,
             name: "產品介紹",
-            item: "https://www.chiaohsin.com.tw/products",
+            item: `${siteUrl}/products`,
         },
         {
             "@type": "ListItem",
             position: 3,
             name: category.name,
-            item: `https://www.chiaohsin.com.tw/products#${category.id}`,
+            item: `${siteUrl}/products#${category.id}`,
         },
         {
             "@type": "ListItem",
             position: 4,
             name: product.name,
-            item: `https://www.chiaohsin.com.tw/products/${product.id}`,
+            item: `${siteUrl}/products/${product.id}`,
         },
     ],
 };
@@ -127,6 +187,10 @@ const breadcrumbData = {
         <script
             type="application/ld+json"
             set:html={JSON.stringify(breadcrumbData)}
+        />
+        <script
+            type="application/ld+json"
+            set:html={JSON.stringify(faqData)}
         />
     </Fragment>
 
@@ -201,13 +265,13 @@ const breadcrumbData = {
                 <div class="flex items-center gap-2 mb-3">
                     <a
                         href={`/products#${category.id}`}
-                        class="badge badge-primary badge-lg hover:badge-secondary transition-colors text-white"
+                        class="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold hover:bg-blue-200 transition-colors"
                     >
                         {category.name}
                     </a>
                 </div>
                 <!-- 產品名稱 -->
-                <h1 class="text-3xl font-bold leading-tight">
+                <h1 class="text-3xl font-black leading-snug">
                     {product.name}
                 </h1>
                 <!-- 規格尺寸 -->
@@ -218,7 +282,7 @@ const breadcrumbData = {
                                 規格尺寸：
                             </span>
                             <span class="badge badge-outline">
-                                {product.size}
+                                {product.size === "F" ? "F（均碼）" : product.size}
                             </span>
                         </div>
                     )
@@ -228,7 +292,7 @@ const breadcrumbData = {
                     product.features && product.features.length > 0 && (
                         <div class="flex flex-wrap gap-2 mt-3">
                             {product.features.map((feature: string) => (
-                                <span class="badge badge-primary badge-lg gap-1">
+                                <span class="feature-badge">
                                     ✓ {feature}
                                 </span>
                             ))}
@@ -253,41 +317,15 @@ const breadcrumbData = {
                         />
                     </figure>
 
-                    <!-- 批量採購提示 -->
-                    <div
-                        class="alert bg-gradient-to-r from-orange-100 to-amber-100 border border-orange-200 shadow-md mt-4 lg:mt-6"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="stroke-orange-600 shrink-0 h-6 w-6"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                            ></path>
-                        </svg>
-                        <div>
-                            <h4 class="font-bold text-orange-800">
-                                💼 企業大量採購享優惠
-                            </h4>
-                            <p class="text-sm text-orange-700">
-                                歡迎公司行號、工廠批量訂購，量大另有折扣，請來電洽詢！
-                            </p>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- 產品資訊 -->
-                <div class="flex-1 space-y-6">
+                <div class="flex-1 space-y-4 md:space-y-6">
                     <!-- 電腦版：分類標籤 -->
                     <div class="hidden lg:flex items-center gap-2">
                         <a
                             href={`/products#${category.id}`}
-                            class="badge badge-primary badge-lg hover:badge-secondary transition-colors text-white"
+                            class="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold hover:bg-blue-200 transition-colors"
                         >
                             {category.name}
                         </a>
@@ -295,7 +333,8 @@ const breadcrumbData = {
 
                     <!-- 電腦版：產品名稱 -->
                     <h1
-                        class="hidden lg:block text-4xl md:text-5xl font-bold leading-tight"
+                        class="hidden lg:block text-4xl font-black leading-snug"
+                        aria-hidden="true"
                     >
                         {product.name}
                     </h1>
@@ -305,7 +344,7 @@ const breadcrumbData = {
                         product.features && product.features.length > 0 && (
                             <div class="hidden lg:flex flex-wrap gap-2 pt-2">
                                 {product.features.map((feature: string) => (
-                                    <span class="badge badge-primary badge-lg gap-1">
+                                    <span class="feature-badge">
                                         ✓ {feature}
                                     </span>
                                 ))}
@@ -319,207 +358,144 @@ const breadcrumbData = {
                             product.packaging ||
                             product.weight ||
                             product.specifications) && (
-                            <div class="overflow-x-auto">
-                                <table class="table table-zebra w-full text-sm lg:text-base">
-                                    <thead>
-                                        <tr>
-                                            <th
-                                                colspan="2"
-                                                class="bg-base-200 text-base lg:text-lg"
-                                            >
-                                                📋 產品規格
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {product.materials && (
-                                            <tr>
-                                                <td class="font-medium w-1/3">
-                                                    材質成分
-                                                </td>
-                                                <td>{product.materials}</td>
-                                            </tr>
-                                        )}
-                                        {product.size &&
-                                            product.size !== "-" &&
-                                            !product.specifications && (
+                            <div>
+                                <p class="section-label">產品規格</p>
+                                <div class="rounded-xl border border-gray-200 overflow-hidden spec-table-wrap">
+                                    <table class="w-full text-sm lg:text-base">
+                                        <tbody class="divide-y divide-gray-100">
+                                            {product.materials && (
                                                 <tr>
-                                                    <td class="font-medium">
-                                                        尺寸規格
+                                                    <td class="px-4 py-3 font-semibold text-gray-700 w-1/3">
+                                                        材質成分
                                                     </td>
-                                                    <td>{product.size}</td>
+                                                    <td class="px-4 py-3 text-gray-600">{product.materials}</td>
                                                 </tr>
                                             )}
-                                        {product.packaging && (
-                                            <tr>
-                                                <td class="font-medium">
-                                                    包裝規格
-                                                </td>
-                                                <td>{product.packaging}</td>
-                                            </tr>
-                                        )}
-                                        {product.weight && (
-                                            <tr>
-                                                <td class="font-medium">
-                                                    重量
-                                                </td>
-                                                <td>{product.weight}</td>
-                                            </tr>
-                                        )}
-                                        {product.specifications &&
-                                            Object.entries(
-                                                product.specifications,
-                                            ).map(([key, value]) => (
+                                            {product.size &&
+                                                product.size !== "-" &&
+                                                !product.specifications && (
+                                                    <tr>
+                                                        <td class="px-4 py-3 font-semibold text-gray-700">
+                                                            尺寸規格
+                                                        </td>
+                                                        <td class="px-4 py-3 text-gray-600">{product.size === "F" ? "F（均碼）" : product.size}</td>
+                                                    </tr>
+                                                )}
+                                            {product.packaging && (
                                                 <tr>
-                                                    <td class="font-medium w-1/3">
-                                                        {key}
+                                                    <td class="px-4 py-3 font-semibold text-gray-700">
+                                                        包裝規格
                                                     </td>
-                                                    <td>{value}</td>
+                                                    <td class="px-4 py-3 text-gray-600">{product.packaging}</td>
                                                 </tr>
-                                            ))}
-                                    </tbody>
-                                </table>
+                                            )}
+                                            {product.weight && (
+                                                <tr>
+                                                    <td class="px-4 py-3 font-semibold text-gray-700">
+                                                        重量
+                                                    </td>
+                                                    <td class="px-4 py-3 text-gray-600">{product.weight}</td>
+                                                </tr>
+                                            )}
+                                            {product.specifications &&
+                                                Object.entries(
+                                                    product.specifications,
+                                                ).map(([key, value]) => (
+                                                    <tr>
+                                                        <td class="px-4 py-3 font-semibold text-gray-700 w-1/3">
+                                                            {key}
+                                                        </td>
+                                                        <td class="px-4 py-3 text-gray-600">{value}</td>
+                                                    </tr>
+                                                ))}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         )
                     }
 
                     <!-- CTA 按鈕區塊 -->
-                    <div class="space-y-4 pt-4">
-                        <!-- 線上購買專區 (並排顯示) -->
+                    <div class="space-y-2 pt-4" id="cta-block">
+                        <!-- 主 CTA：LINE + 電話 -->
                         <div class="grid grid-cols-2 gap-3">
-                            <!-- 賣貨便 -->
-                            <a
-                                href="https://myship.7-11.com.tw/general/detail/GM2101143624321"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="btn h-auto py-3 px-2 border-0 shadow-lg shadow-green-500/20 text-white flex flex-col items-center gap-1 hover:scale-[1.02] active:scale-95 transition-all rounded-xl"
-                                style="background: linear-gradient(145deg, #21903E 0%, #007C36 100%);"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="h-6 w-6"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                                    ></path>
-                                </svg>
-                                <span class="text-sm font-medium"
-                                    >7-11 賣貨便</span
-                                >
-                            </a>
-
-                            <!-- 好賣+ -->
-                            <a
-                                href="https://famistore.famiport.com.tw/users/6035178"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="btn h-auto py-3 px-2 border-0 shadow-lg shadow-blue-500/20 text-white flex flex-col items-center gap-1 hover:scale-[1.02] active:scale-95 transition-all rounded-xl"
-                                style="background: linear-gradient(145deg, #00AEEF 0%, #0077c8 100%);"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="h-6 w-6"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                                    ></path>
-                                </svg>
-                                <span class="text-sm font-medium"
-                                    >全家 好賣+</span
-                                >
-                            </a>
-                        </div>
-
-                        <!-- 聯絡 buttons -->
-                        <div class="flex flex-col sm:flex-row gap-3">
-                            <a
-                                href={`tel:${company.contact.phone}`}
-                                class="btn btn-lg flex-1 border-0 shadow-lg shadow-violet-500/20 text-white hover:scale-[1.02] active:scale-95 transition-all rounded-xl"
-                                style="background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);"
-                            >
-                                <span class="text-xl">📞</span> 立即洽詢
-                            </a>
                             <a
                                 href="https://line.me/ti/p/~ulh0933098358"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="btn btn-lg flex-1 border-0 shadow-lg shadow-green-500/20 text-white hover:scale-[1.02] active:scale-95 transition-all rounded-xl"
+                                class="btn btn-lg border-0 shadow-lg shadow-green-500/20 text-white hover:scale-[1.02] active:scale-95 transition-all rounded-xl gap-2"
                                 style="background: linear-gradient(135deg, #06C755 0%, #05a346 100%);"
                             >
-                                <svg
-                                    viewBox="0 0 24 24"
-                                    class="h-8 w-8 fill-current"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        fill-rule="evenodd"
-                                        d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"
-                                    ></path>
+                                <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current flex-shrink-0" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"></path>
                                 </svg>
                                 LINE 洽詢
                             </a>
+                            <a
+                                href={`tel:${company.contact.phone}`}
+                                class="btn btn-lg border-0 shadow-lg shadow-blue-500/20 text-white hover:scale-[1.02] active:scale-95 transition-all rounded-xl gap-2"
+                                style="background: linear-gradient(135deg, #0066CC 0%, #0052a3 100%);"
+                            >
+                                <svg class="h-5 w-5 fill-current flex-shrink-0" viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z" clip-rule="evenodd"/>
+                                </svg>
+                                立即電話
+                            </a>
                         </div>
+
+                        <!-- 信任標章 -->
+                        <div class="flex items-center justify-center gap-3 py-1 text-xs text-gray-400 flex-wrap">
+                            <span>✅ 台南工廠直營</span>
+                            <span>✅ 全台配送</span>
+                            <span>✅ 成立 2003 年</span>
+                            <span>✅ 量大另有折扣</span>
+                        </div>
+
+                        <!-- 超商零售（有 retailLinks 才顯示） -->
+                        {retailLinks && (retailLinks["711"] || retailLinks.family) && (
+                            <div class="pt-1">
+                                <div class="flex items-center gap-3">
+                                    <div class="flex-1 border-t border-gray-100"></div>
+                                    <span class="text-xs text-gray-300 whitespace-nowrap">也可在超商零售購買</span>
+                                    <div class="flex-1 border-t border-gray-100"></div>
+                                </div>
+                                <div class="grid gap-2 mt-2" style={`grid-template-columns: repeat(${[retailLinks["711"], retailLinks.family].filter(Boolean).length}, 1fr)`}>
+                                    {retailLinks["711"] && (
+                                        <a href={retailLinks["711"]} target="_blank" rel="noopener noreferrer"
+                                            class="flex flex-col items-center justify-center py-3.5 rounded-xl border border-gray-200 bg-white hover:border-gray-300 transition-colors gap-1">
+                                            <span class="font-black text-base" style="color:#007340;">7-ELEVEN</span>
+                                            <span class="text-gray-400 text-xs">賣貨便</span>
+                                        </a>
+                                    )}
+                                    {retailLinks.family && (
+                                        <a href={retailLinks.family} target="_blank" rel="noopener noreferrer"
+                                            class="flex flex-col items-center justify-center py-3.5 rounded-xl border border-gray-200 bg-white hover:border-gray-300 transition-colors gap-1">
+                                            <span class="font-black text-base" style="color:#00AEEF;">全家 FamilyMart</span>
+                                            <span class="text-gray-400 text-xs">好賣+</span>
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
 
             <!-- 次要資訊：適用對象/行業 + 產品說明（全寬） -->
             {
-                (product.targetAudiences?.length > 0 ||
-                    product.targetIndustries?.length > 0 ||
+                (product.targetIndustries?.length > 0 ||
                     product.description) && (
-                    <div class="mt-10 pt-8 border-t border-base-300 space-y-8">
-                        {(product.targetAudiences?.length > 0 ||
-                            product.targetIndustries?.length > 0) && (
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                {product.targetAudiences &&
-                                    product.targetAudiences.length > 0 && (
-                                        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-base-200 dark:to-base-300 rounded-xl p-5 border border-blue-100 dark:border-base-300">
-                                            <h3 class="font-semibold mb-3 flex items-center gap-2 text-blue-700 dark:text-blue-300">
-                                                <span class="text-xl">👷</span>
-                                                適用對象
-                                            </h3>
-                                            <div class="flex flex-wrap gap-2">
-                                                {product.targetAudiences.map(
-                                                    (audience: string) => (
-                                                        <span class="badge badge-outline badge-lg">
-                                                            {audience}
-                                                        </span>
-                                                    ),
-                                                )}
-                                            </div>
-                                        </div>
-                                    )}
-                                {product.targetIndustries &&
-                                    product.targetIndustries.length > 0 && (
-                                        <div class="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-base-200 dark:to-base-300 rounded-xl p-5 border border-green-100 dark:border-base-300">
-                                            <h3 class="font-semibold mb-3 flex items-center gap-2 text-green-700 dark:text-green-300">
-                                                <span class="text-xl">🏭</span>
-                                                適用行業
-                                            </h3>
-                                            <div class="flex flex-wrap gap-2">
-                                                {product.targetIndustries.map(
-                                                    (industry: string) => (
-                                                        <span class="badge badge-outline badge-lg">
-                                                            {industry}
-                                                        </span>
-                                                    ),
-                                                )}
-                                            </div>
-                                        </div>
-                                    )}
+                    <div class="mt-5 pt-5 md:mt-10 md:pt-8 border-t border-base-300 space-y-5 md:space-y-8">
+                        {product.targetIndustries?.length > 0 && (
+                            <div>
+                                <p class="text-xs font-bold tracking-widest text-gray-400 uppercase mb-3">適合對象</p>
+                                <div class="flex flex-wrap gap-2">
+                                    {product.targetIndustries?.map((industry: string) => (
+                                        <span class="inline-flex items-center px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-700 font-medium">
+                                            {industry}
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
                         )}
                         <div class="prose prose-lg max-w-none">
@@ -538,46 +514,47 @@ const breadcrumbData = {
                     </div>
                 )
             }
+
+            <!-- FAQ 區塊 -->
+            <div class="mt-5 pt-5 md:mt-10 md:pt-8 border-t border-gray-100">
+                <p class="section-label">常見問題</p>
+                <div class="space-y-2">
+                    {faqItems.map((item) => (
+                        <details class="group rounded-xl border border-gray-200 overflow-hidden bg-gray-50">
+                            <summary class="faq-summary flex items-center justify-between px-5 py-4 cursor-pointer font-semibold text-gray-800 hover:bg-gray-100 transition-colors">
+                                {item.name}
+                                <svg class="h-4 w-4 text-gray-400 group-open:rotate-180 transition-transform duration-200 flex-shrink-0 ml-3" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </summary>
+                            <div class="px-5 py-4 text-gray-600 text-sm leading-relaxed border-t border-gray-100 bg-white">
+                                {item.acceptedAnswer.text}
+                            </div>
+                        </details>
+                    ))}
+                </div>
+            </div>
         </article>
 
         <!-- 相關產品 -->
         {
             relatedProducts.length > 0 && (
-                <section class="mt-16 pt-8 border-t border-base-300">
-                    <h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
+                <section class="mt-2 pt-4 md:mt-16 md:pt-8 border-t border-base-300 max-w-7xl mx-auto px-4 md:px-10">
+                    <h2 class="text-2xl font-bold mb-5 md:mb-8 flex items-center gap-3">
                         其他{category.name}產品
                     </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {relatedProducts.map((relatedProduct) => (
-                            <a
-                                href={`/products/${relatedProduct.id}`}
-                                class="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 border border-base-200 group hover:-translate-y-1"
-                            >
-                                <figure class="px-4 pt-4 bg-base-200/50 min-h-[160px] flex items-center justify-center overflow-hidden">
-                                    <img
-                                        src={`/${relatedProduct.image}`}
-                                        alt={`${relatedProduct.name} 產品圖片`}
-                                        class="rounded-xl h-40 object-contain group-hover:scale-105 transition-transform duration-300"
-                                        loading="lazy"
-                                        width="200"
-                                        height="160"
-                                    />
-                                </figure>
-                                <div class="card-body">
-                                    <h3 class="card-title text-lg">
-                                        {relatedProduct.name}
-                                        {relatedProduct.size &&
-                                            relatedProduct.size !== "-" && (
-                                                <span class="badge badge-outline text-xs">
-                                                    {relatedProduct.size}
-                                                </span>
-                                            )}
-                                    </h3>
-                                    <p class="text-sm text-gray-500 line-clamp-2">
-                                        {relatedProduct.description}
-                                    </p>
-                                </div>
-                            </a>
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                        {relatedProducts.map((p) => (
+                            <ProductCard
+                                id={p.id}
+                                name={p.name}
+                                image={p.image}
+                                description={p.description}
+                                size={p.size}
+                                category={p.category}
+                                tags={(p as any).tags || []}
+                                categoryName={category.name}
+                            />
                         ))}
                     </div>
                     <div class="text-center mt-8">
@@ -593,15 +570,86 @@ const breadcrumbData = {
         }
 
         <!-- 返回連結 -->
-        <div class="mt-12 pt-8 border-t border-base-300">
+        <div class="mt-6 pt-5 md:mt-12 md:pt-8 border-t border-base-300">
             <a href="/products" class="btn btn-ghost gap-2"> ← 返回產品列表 </a>
         </div>
     </div>
+<!-- Mobile Sticky CTA Bar（捲過主 CTA 後才出現） -->
+<div id="sticky-cta" class="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-2xl px-4 py-3 flex gap-3 z-50 translate-y-full transition-transform duration-300">
+    <a
+        href="https://line.me/ti/p/~ulh0933098358"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm text-white"
+        style="background: linear-gradient(135deg, #06C755 0%, #05a346 100%);"
+    >
+        <svg viewBox="0 0 24 24" class="h-5 w-5 fill-current flex-shrink-0" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"></path>
+        </svg>
+        LINE 洽詢
+    </a>
+    <a
+        href={`tel:${company.contact.phone}`}
+        class="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm text-white"
+        style="background: linear-gradient(135deg, #0066CC 0%, #0052a3 100%);"
+    >
+        <svg class="h-5 w-5 fill-current flex-shrink-0" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z" clip-rule="evenodd"/>
+        </svg>
+        立即電話
+    </a>
+</div>
+
+<script>
+    const ctaBlock = document.getElementById('cta-block');
+    const stickyCta = document.getElementById('sticky-cta');
+    if (ctaBlock && stickyCta) {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (!e.isIntersecting) stickyCta.classList.remove('translate-y-full');
+                else stickyCta.classList.add('translate-y-full');
+            });
+        }, { threshold: 0.1 });
+        observer.observe(ctaBlock);
+    }
+</script>
 </Layout>
 
 <style>
     .breadcrumbs li {
         display: inline-flex;
         align-items: center;
+    }
+    .section-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #9ca3af;
+        margin-bottom: 0.5rem;
+    }
+    .feature-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.375rem 0.75rem;
+        border-radius: 9999px;
+        background-color: #eff6ff;
+        color: #1d4ed8;
+        border: 1px solid #bfdbfe;
+        font-size: 0.875rem;
+        font-weight: 600;
+    }
+    .faq-summary {
+        list-style: none;
+    }
+    .faq-summary::-webkit-details-marker {
+        display: none;
+    }
+    .spec-table-wrap tr:nth-child(odd) {
+        background-color: #ffffff;
+    }
+    .spec-table-wrap tr:nth-child(even) {
+        background-color: #f9fafb;
     }
 </style>

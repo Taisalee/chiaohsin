@@ -6,17 +6,17 @@
             "children": []
         },
         {
-            "title": "最新動態",
+            "title": "最新消息",
             "url": "/news",
             "children": []
         },
         {
-            "title": "探索產品",
+            "title": "商品介紹",
             "url": "/products",
             "children": []
         },
         {
-            "title": "挑選手套指南",
+            "title": "如何挑選手套",
             "url": "/blog",
             "children": []
         }

@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
 import { getCollection } from "astro:content";
 import company from "../data/company.json";
 
@@ -54,15 +55,13 @@ const newsItemListSchema = sortedNews.length > 0 ? {
       <script type="application/ld+json" set:html={JSON.stringify(newsItemListSchema)} />
     )}
   </Fragment>
-    <div class="bg-gradient-to-r from-primary/10 to-secondary/10 py-16 px-4">
-        <div class="max-w-6xl mx-auto text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">最新消息</h1>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                新品上架、公司動態與採購相關公告
-            </p>
-            <div class="w-24 h-1 bg-primary mx-auto mt-6 rounded-full"></div>
-        </div>
-    </div>
+    <PageHero title="喬新針織最新消息｜棉紗手套批發公告與產品動態" description="新品上架公告、庫存備貨通知、喬新針織公司動態，掌握棉紗手套批發最新資訊">
+      <nav slot="breadcrumb" class="ph-breadcrumb" aria-label="breadcrumb">
+        <a href="/">首頁</a>
+        <span class="ph-breadcrumb-sep" aria-hidden="true">／</span>
+        <span class="ph-breadcrumb-cur">最新消息</span>
+      </nav>
+    </PageHero>
 
     <section class="py-16 px-4 bg-base-100">
         <div class="max-w-4xl mx-auto">

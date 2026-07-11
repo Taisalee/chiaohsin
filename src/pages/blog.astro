@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import company from "../data/company.json";
@@ -21,16 +22,13 @@ const pageDescription = `${company.name} 專業教學文章，教您如何選擇
     keywords={["手套選購", "工作手套", "防護用品", "教學文章"]}
     canonical="/blog"
 >
-    <!-- Hero Section -->
-    <div class="bg-gradient-to-r from-primary/10 to-secondary/10 py-16 px-4">
-        <div class="max-w-6xl mx-auto text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">如何挑選手套</h1>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                專業教學文章，幫助您選擇最適合的工作防護用品
-            </p>
-            <div class="w-24 h-1 bg-primary mx-auto mt-6 rounded-full"></div>
-        </div>
-    </div>
+    <PageHero title="如何挑選工作手套｜棉紗・膠手套・尼龍手套選購指南" description="喬新針織專業教學文章：棉紗手套重量選法、膠手套材質比較、尼龍手套應用場合，幫助您找到最適合的防護用品">
+      <nav slot="breadcrumb" class="ph-breadcrumb" aria-label="breadcrumb">
+        <a href="/">首頁</a>
+        <span class="ph-breadcrumb-sep" aria-hidden="true">／</span>
+        <span class="ph-breadcrumb-cur">如何挑選手套</span>
+      </nav>
+    </PageHero>
 
     <!-- Articles Grid -->
     <section class="py-16 px-4 bg-base-100">

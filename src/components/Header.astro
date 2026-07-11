@@ -41,20 +41,35 @@ function isActive(url: string) {
 
     <!-- 右側操作區 -->
     <div class="hd-actions">
-      <a href={`tel:${company.contact.phone}`} class="hd-phone" aria-label={`撥打 ${company.contact.phone}`}>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.08 1.19 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/>
-        </svg>
-        <span>{company.contact.phone}</span>
-      </a>
-
       <button class="hd-icon-btn" id="hdSearchBtn" aria-label="搜尋產品" aria-expanded="false" aria-controls="hdSearchBar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
         </svg>
       </button>
 
-      <a href={`tel:${company.contact.phone}`} class="hd-cta">立即詢價</a>
+      <div class="hd-dropdown" id="hdContactDropdown">
+        <button class="hd-cta" id="hdCtaBtn" aria-label="聯絡方式選單" aria-expanded="false" aria-controls="hdContactMenu">立即詢價</button>
+        <nav class="hd-contact-menu" id="hdContactMenu" aria-hidden="true">
+          <a href={`https://line.me/ti/p/${company.contact['LINE ID']}`} class="hd-contact-item hd-contact-line" target="_blank" rel="noopener noreferrer" aria-label="用 LINE 詢價">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M19.365 9.863c.349-1.89.321-3.483-.635-4.494-1.922-2.013-6.903-1.235-11.665.437C3.669 7.272 1.314 10.05 1.314 12.85c0 2.527 1.745 4.728 4.577 6.066-.248 1.319-1.58 4.155-1.678 4.388-.119.309-.038.517.165.681.134.108.338.158.517.158.352 0 .754-.095 1.287-.251 3.646-.864 6.59-3.737 7.623-4.942 1.572.23 2.834.088 3.799-.446 1.922-1.024 2.99-3.312 2.99-5.958.001-2.506-1.413-4.627-3.597-5.634zm-7.682 3.5h-2.87a.476.476 0 0 1 0-.952h2.87a.476.476 0 0 1 0 .952zm4.739 0h-2.87a.476.476 0 0 1 0-.952h2.87a.476.476 0 0 1 0 .952zm-9.28-4.246h2.87a.476.476 0 0 1 0 .952h-2.87a.476.476 0 0 1 0-.952zm0 1.904h2.87a.476.476 0 0 1 0 .952h-2.87a.476.476 0 0 1 0-.952z"/>
+            </svg>
+            <span>用 LINE 詢價</span>
+          </a>
+          <a href={`tel:${company.contact.phone}`} class="hd-contact-item hd-contact-phone" aria-label={`撥打 ${company.contact.phone}`}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81A19.79 19.79 0 01.08 1.19 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/>
+            </svg>
+            <span>直接撥電話</span>
+          </a>
+          <a href={`mailto:${company.contact.email}`} class="hd-contact-item hd-contact-email" aria-label={`寄信至 ${company.contact.email}`}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 4 10 8 10-8"/>
+            </svg>
+            <span>寄送詢價單</span>
+          </a>
+        </nav>
+      </div>
 
       <button class="hd-menu-btn" id="hdMenuBtn" aria-label="開啟選單" aria-expanded="false" aria-controls="hdMobileMenu">
         <span class="hd-bar" aria-hidden="true"></span>
@@ -149,6 +164,26 @@ function isActive(url: string) {
     `).join('') + (hits.length >= 8
       ? `<a href="/products" class="hd-sr-more">查看所有產品 →</a>`
       : '');
+  });
+
+  // ── 聯絡下拉選單 ──
+  const ctaBtn     = document.getElementById('hdCtaBtn');
+  const dropdown   = document.getElementById('hdContactDropdown');
+  const contactMenu = document.getElementById('hdContactMenu');
+
+  ctaBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = dropdown.classList.toggle('is-open');
+    contactMenu.setAttribute('aria-hidden', String(!isOpen));
+    ctaBtn.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  document.addEventListener('click', e => {
+    if (!dropdown?.contains(e.target)) {
+      dropdown.classList.remove('is-open');
+      contactMenu.setAttribute('aria-hidden', 'true');
+      ctaBtn.setAttribute('aria-expanded', 'false');
+    }
   });
 
   // ── 手機選單 ──
@@ -262,16 +297,47 @@ function isActive(url: string) {
     display: flex; align-items: center; gap: 8px; margin-left: auto;
   }
 
-  .hd-phone {
-    display: none; align-items: center; gap: 6px;
-    padding: 6px 10px; border-radius: 8px;
-    font-size: 13.5px; font-weight: 700; color: var(--hd-ink);
-    text-decoration: none; white-space: nowrap;
-    transition: background .15s, color .15s;
+  /* ── 下拉選單 ── */
+  .hd-dropdown {
+    position: relative; display: inline-block;
   }
-  .hd-phone svg { width: 14px; height: 14px; color: var(--hd-red); flex-shrink: 0; }
-  .hd-phone:hover { background: #f4f6f9; color: var(--hd-red); }
-  @media (min-width: 1024px) { .hd-phone { display: flex; } }
+  .hd-cta {
+    display: none;
+    padding: 9px 18px; border-radius: 9px;
+    background: var(--hd-orange); color: #fff; border: none;
+    font-size: 13.5px; font-weight: 700;
+    text-decoration: none; white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(255,107,53,.28);
+    transition: opacity .15s, transform .15s;
+    cursor: pointer;
+  }
+  .hd-cta:hover { opacity: .9; transform: translateY(-1px); }
+  @media (min-width: 640px) { .hd-cta { display: inline-block; } }
+
+  .hd-contact-menu {
+    position: absolute; top: 100%; right: 0;
+    background: var(--hd-bg); border: 1px solid var(--hd-line);
+    border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,.12);
+    min-width: 180px; margin-top: 8px;
+    display: none; flex-direction: column;
+    z-index: 1000; overflow: hidden;
+  }
+  .hd-dropdown.is-open .hd-contact-menu { display: flex; }
+
+  .hd-contact-item {
+    padding: 12px 16px; display: flex; align-items: center; gap: 10px;
+    text-decoration: none; color: var(--hd-ink);
+    font-size: 13px; font-weight: 500;
+    border-bottom: 1px solid var(--hd-line);
+    transition: background .15s;
+  }
+  .hd-contact-item:last-child { border-bottom: none; }
+  .hd-contact-item:hover { background: var(--hd-hover); }
+  .hd-contact-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  .hd-contact-line svg { color: #00B900; }
+  .hd-contact-phone svg { color: var(--hd-red); }
+  .hd-contact-email svg { color: var(--hd-sub); }
 
   .hd-icon-btn {
     width: 36px; height: 36px; border-radius: 8px; border: none;

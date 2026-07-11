@@ -32,6 +32,12 @@ user_invocable: true
 | 圖片 | `public/images/` |
 | 可重用元件 | `src/components/` |
 
+## 元件速查
+
+| 元件 | 檔案 | 用途 |
+|------|------|------|
+| ProductCard | `src/components/ProductCard.astro` | 產品卡片，列表頁與相關產品共用 |
+
 ## 設計 Token 速查
 
 ```
@@ -44,9 +50,40 @@ Gray 文字：text-gray-600（正文）/ text-gray-500（輔助）
 ```
 
 常用 class 模式：
-- 卡片：`rounded-2xl border border-gray-200 bg-white hover:shadow-lg transition-shadow p-6`
-- 區塊寬度：`max-w-4xl`（文章）/ `max-w-6xl`（列表）
-- 圓角：小元素 `rounded-lg`、卡片 `rounded-2xl`、大區塊 `rounded-3xl`
+- 區塊寬度：`max-w-4xl`（文章）/ `max-w-7xl`（列表/詳情頁）
+- 圓角：小元素 `rounded-lg`、卡片 `rounded-xl`、大區塊 `rounded-2xl`
+
+## UI 設計規範
+
+### Badge／標籤
+- **分類標籤**：`inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold`
+- **功能標籤（feature badge）**：`.feature-badge` class（`bg-blue-50 border border-blue-200 text-blue-700 rounded-full`）
+- 不使用 DaisyUI `badge-primary`
+
+### H1 Typography
+- `font-black leading-snug`（不用 `font-bold` / `leading-tight`）
+
+### ProductCard 原則
+- 圖片區**白底**、卡身 `#F3F4F6` 灰底
+- 用陰影取代邊框（常駐 `0 1px 4px rgba(0,0,0,.07)`，hover 加深）
+- **無 CTA 按鈕**（整張卡片為連結，使用者習慣點擊）
+- Size badge 背景同卡身色（`#F3F4F6`），文字 `#9CA3AF`（退場不搶眼）
+
+### 規格表
+- 自訂 clean 表格，`rounded-xl border border-gray-200 overflow-hidden`
+- 交替行底色（`spec-table-wrap` CSS class）
+- `section-label` 小標，不用 emoji 表頭
+- 不使用 DaisyUI `table-zebra`
+
+### FAQ
+- `<details>/<summary>` accordion（原生 HTML，不需 JS）
+- 卡片灰底 `#F3F4F6` 突出於白色頁面
+- 展開內容白底
+
+### 整體原則
+- 傾向自訂 CSS，避免 DaisyUI 元件（badge、table、card）
+- 減少冗餘視覺元素（emoji 標題、多餘 CTA）
+- 相關產品區需加 `max-w-7xl mx-auto px-4 md:px-10` 與上方內容對齊
 
 ## 分類 ID 速查（categories.json）
 

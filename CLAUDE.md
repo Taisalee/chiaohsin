@@ -42,6 +42,16 @@ draft: false
 3. 儲存後列表頁 `/news` 會自動出現新文章，個別文章網址為 `/news/<資料夾名稱>`
 4. 不需修改任何頁面程式碼
 
+## 頁面設計完成後的 SEO / AEO / GEO 檢查
+
+每次頁面排版或內容設計完成後，**不需使用者開口**，主動掃描整頁並給出優化或修改建議，涵蓋：
+
+- **SEO**：`<title>`、`<meta description>`、H1/H2 結構、canonical、Schema markup（JSON-LD）、圖片 alt
+- **AEO**（Answer Engine Optimization）：FAQ 結構、問答式段落、`FAQPage` Schema
+- **GEO**（Generative Engine Optimization）：品牌與地點資訊明確度、`Organization` / `LocalBusiness` Schema、聯絡資訊結構化
+
+輸出格式：條列清單，每項說明「問題 → 建議修改方式」，使用者確認後才動手修改。
+
 ## 知識筆記 SOP
 
 開發過程中遇到的注意事項或知識點，用以下表格格式整理，方便複製到 Notion：

@@ -1,0 +1,74 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+}
+const { eyebrow = '紅螞蟻手套', title, description } = Astro.props;
+---
+
+<section class="ph">
+  <div class="ph-inner">
+    <slot name="breadcrumb" />
+    {eyebrow && <p class="ph-eyebrow">{eyebrow}</p>}
+    <h1 class="ph-h1">{title}</h1>
+    {description && <p class="ph-desc">{description}</p>}
+  </div>
+</section>
+
+<style>
+  .ph {
+    background: linear-gradient(150deg, #4A90A4 0%, #D4A574 65%);
+    color: #fff;
+    padding-block: clamp(28px, 5vw, 56px);
+  }
+  .ph-inner {
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 5vw, 64px);
+  }
+  /* breadcrumb slot 樣式（白色半透明，hero 內使用） */
+  .ph-inner :global(.ph-breadcrumb) {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, .65);
+    margin-bottom: 14px;
+  }
+  .ph-inner :global(.ph-breadcrumb a) {
+    color: rgba(255, 255, 255, .65);
+    text-decoration: none;
+    transition: color .15s;
+  }
+  .ph-inner :global(.ph-breadcrumb a:hover) {
+    color: #fff;
+  }
+  .ph-inner :global(.ph-breadcrumb-sep) {
+    opacity: .4;
+  }
+  .ph-inner :global(.ph-breadcrumb-cur) {
+    color: rgba(255, 255, 255, .9);
+    font-weight: 600;
+  }
+  .ph-eyebrow {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #E0A458;
+    font-weight: 700;
+    margin: 0 0 10px;
+    text-transform: uppercase;
+  }
+  .ph-h1 {
+    font-size: clamp(22px, 4vw, 42px);
+    font-weight: 800;
+    line-height: 1.3;
+    margin: 0 0 12px;
+  }
+  .ph-desc {
+    font-size: clamp(13px, 1.5vw, 16px);
+    line-height: 1.8;
+    opacity: .85;
+    margin: 0;
+  }
+</style>
