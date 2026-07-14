@@ -69,11 +69,11 @@ const newsItemListSchema = sortedNews.length > 0 ? {
                 <div class="space-y-6">
                     {sortedNews.map((item) => (
                         <a href={`/news/${item.id.replace(/\/index$/, '')}`} class="group block">
-                            <article class="card bg-base-100 shadow-md hover:shadow-xl transition-all duration-300 border border-base-200 p-6">
+                            <article class="card bg-base-100 shadow-md hover:shadow-xl transition-all duration-300 border border-[#E6E4DE] p-6">
                                 <div class="flex items-start justify-between gap-4">
                                     <div class="flex-1">
                                         <time
-                                            class="text-sm text-gray-400 block mb-2"
+                                            class="text-sm text-gray-500 block mb-2"
                                             datetime={item.data.publishDate.toISOString()}
                                         >
                                             {item.data.publishDate.toLocaleDateString("zh-TW", {
@@ -91,7 +91,7 @@ const newsItemListSchema = sortedNews.length > 0 ? {
                                         {item.data.tags && item.data.tags.length > 0 && (
                                             <div class="flex flex-wrap gap-2 mt-3">
                                                 {item.data.tags.map((tag: string) => (
-                                                    <span class="px-2 py-1 rounded-md bg-gray-100 text-gray-500 text-xs">
+                                                    <span class="px-2 py-1 rounded-md bg-gray-100 text-gray-600 text-xs">
                                                         {tag}
                                                     </span>
                                                 ))}
@@ -112,14 +112,6 @@ const newsItemListSchema = sortedNews.length > 0 ? {
                     <p class="text-gray-500">請稍後再來查看。</p>
                 </div>
             )}
-        </div>
-    </section>
-
-    <section class="py-16 px-4 bg-base-200">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-2xl font-bold mb-4">需要批發報價？</h2>
-            <p class="text-lg text-gray-600 mb-8">歡迎來電或 LINE 詢價，告知品項與數量即可快速報價</p>
-            <a href="/contact" class="btn btn-primary btn-lg">聯絡我們</a>
         </div>
     </section>
 </Layout>

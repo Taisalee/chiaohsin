@@ -381,13 +381,16 @@ function isActive(url: string) {
 
   /* ── 搜尋列 ── */
   .hd-search {
+    position: absolute; top: 100%; left: 0; right: 0;
     overflow: hidden; max-height: 0;
     border-top: 0px solid var(--hd-line);
     background: #f8f9fb;
+    box-shadow: 0 12px 24px rgba(0,0,0,.1);
     transition: max-height .25s ease, border-top-width .1s;
   }
   .hd-search.is-open {
     max-height: 480px;
+    overflow-y: auto;
     border-top-width: 1px;
   }
   .hd-search-row {
@@ -413,26 +416,28 @@ function isActive(url: string) {
     max-width: 1280px; margin: 0 auto;
     padding: 0 var(--hd-px) 12px;
   }
-  .hd-sr-item {
+  /* hd-sr-* 節點由 script 以 innerHTML 動態插入，不會被 Astro 編譯器加上
+     scoped 屬性，需用 :global() 讓這些選擇器能命中它們 */
+  .hd-search-results :global(.hd-sr-item) {
     display: flex; align-items: center; gap: 12px;
     padding: 10px 12px; border-radius: 8px;
     text-decoration: none; color: var(--hd-ink);
     transition: background .15s;
   }
-  .hd-sr-item:hover { background: var(--hd-hover); }
-  .hd-sr-img {
+  .hd-search-results :global(.hd-sr-item:hover) { background: var(--hd-hover); }
+  .hd-search-results :global(.hd-sr-img) {
     width: 40px; height: 40px; border-radius: 6px;
     object-fit: cover; background: #e5e8ed; flex-shrink: 0;
   }
-  .hd-sr-name { flex: 1; font-size: 14px; font-weight: 600; }
-  .hd-sr-arr  { width: 16px; height: 16px; color: var(--hd-sub); flex-shrink: 0; }
-  .hd-sr-empty { padding: 16px 12px; font-size: 14px; color: var(--hd-sub); }
-  .hd-sr-more {
+  .hd-search-results :global(.hd-sr-name) { flex: 1; font-size: 14px; font-weight: 600; }
+  .hd-search-results :global(.hd-sr-arr)  { width: 16px; height: 16px; color: var(--hd-sub); flex-shrink: 0; }
+  .hd-search-results :global(.hd-sr-empty) { padding: 16px 12px; font-size: 14px; color: var(--hd-sub); }
+  .hd-search-results :global(.hd-sr-more) {
     display: block; padding: 10px 12px; text-align: center;
     font-size: 13px; font-weight: 700; color: var(--hd-red);
     text-decoration: none; border-radius: 8px; transition: background .15s;
   }
-  .hd-sr-more:hover { background: var(--hd-hover); }
+  .hd-search-results :global(.hd-sr-more:hover) { background: var(--hd-hover); }
 
   /* ── 手機選單 ── */
   .hd-mobile {

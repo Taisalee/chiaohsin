@@ -85,6 +85,11 @@ Gray 文字：text-gray-600（正文）/ text-gray-500（輔助）
 - 減少冗餘視覺元素（emoji 標題、多餘 CTA）
 - 相關產品區需加 `max-w-7xl mx-auto px-4 md:px-10` 與上方內容對齊
 
+### Blog 文章 GloveSpecCard 規則
+- 配色用 `primary`（teal `#4A90A4`）：進度條、badge、tag pill、featured 頂條
+- `featured: true` **只在同一情境下有明確推薦選項時才用**（例：四大材質中棉紗最通用）。若卡片比較的是不同場景/用途，全設 `featured: false`，不出現「★ 推薦首選」
+- `percentage` 欄位可省略——省略時不渲染進度條，適用於文字說明型 metrics（如危害因素、材質、針數）
+
 ## 分類 ID 速查（categories.json）
 
 | id | 名稱 |

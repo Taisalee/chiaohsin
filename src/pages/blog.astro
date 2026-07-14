@@ -5,15 +5,50 @@ import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import company from "../data/company.json";
 
+const LINE_ID = company.contact["LINE ID"];
+const siteUrl = "https://www.chiaohsin.com.tw";
+
 const allPosts = await getCollection("blog", ({ data }) => data.draft !== true);
 
 const sortedPosts = allPosts.sort(
     (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
 );
 
+function articleFilter(post: typeof sortedPosts[0]): string {
+    const tags = post.data.tags ?? [];
+    const title = post.data.title;
+    if (tags.some(t => t.includes('材質') || t.includes('比較')) || title.includes('比較') || /\bvs\b/i.test(title)) return '材質比較';
+    if (title.includes('保養') || title.includes('維護')) return '使用維護';
+    if (title.includes('食品') || title.includes('電鍍') || title.includes('化工') || title.includes('物流') || title.includes('產業')) return '產業應用';
+    return '選購指南';
+}
+
 // SEO 設定
 const pageTitle = "如何挑選手套 - 教學文章";
 const pageDescription = `${company.name} 專業教學文章，教您如何選擇最適合的工作手套與防護用品。`;
+
+const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `${company.shortName}知識專欄文章`,
+    url: `${siteUrl}/blog`,
+    numberOfItems: sortedPosts.length,
+    itemListElement: sortedPosts.map((post, idx) => ({
+        "@type": "ListItem",
+        position: idx + 1,
+        name: post.data.title,
+        url: `${siteUrl}/blog/${post.id.replace(/\/index$/, '')}`,
+    })),
+};
+
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+        { "@type": "ListItem", position: 1, name: "首頁", item: `${siteUrl}/` },
+        { "@type": "ListItem", position: 2, name: "知識專欄", item: `${siteUrl}/blog` },
+    ],
+};
 ---
 
 <Layout
@@ -22,90 +57,214 @@ const pageDescription = `${company.name} 專業教學文章，教您如何選擇
     keywords={["手套選購", "工作手套", "防護用品", "教學文章"]}
     canonical="/blog"
 >
+    <Fragment slot="head">
+        <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+        <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    </Fragment>
+
     <PageHero title="如何挑選工作手套｜棉紗・膠手套・尼龍手套選購指南" description="喬新針織專業教學文章：棉紗手套重量選法、膠手套材質比較、尼龍手套應用場合，幫助您找到最適合的防護用品">
       <nav slot="breadcrumb" class="ph-breadcrumb" aria-label="breadcrumb">
         <a href="/">首頁</a>
         <span class="ph-breadcrumb-sep" aria-hidden="true">／</span>
-        <span class="ph-breadcrumb-cur">如何挑選手套</span>
+        <span class="ph-breadcrumb-cur">知識專欄</span>
       </nav>
     </PageHero>
 
-    <!-- Articles Grid -->
-    <section class="py-16 px-4 bg-base-100">
-        <div class="max-w-6xl mx-auto">
-            {
-                sortedPosts.length > 0 ? (
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {sortedPosts.map((post) => (
-                            <a href={`/blog/${post.id.replace(/\/index$/, '')}`} class="group">
-                                <article class="card bg-base-100 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 h-full border border-base-200 overflow-hidden">
-                                    <figure class="aspect-video overflow-hidden">
-                                        <Image
-                                            src={post.data.image}
-                                            alt={post.data.title}
-                                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                            width={600}
-                                            height={337}
-                                        />
-                                    </figure>
-                                    <div class="card-body">
-                                        {post.data.category && (
-                                            <div class="badge badge-primary badge-outline mb-2">
-                                                {post.data.category}
-                                            </div>
-                                        )}
-                                        <h2 class="card-title text-xl group-hover:text-primary transition-colors">
-                                            {post.data.title}
-                                        </h2>
-                                        <p class="text-gray-500 line-clamp-3">
-                                            {post.data.description}
-                                        </p>
-                                        <div class="flex items-center justify-between mt-4 pt-4 border-t border-base-200">
-                                            <time
-                                                class="text-sm text-gray-400"
-                                                datetime={post.data.publishDate.toISOString()}
-                                            >
-                                                {post.data.publishDate.toLocaleDateString(
-                                                    "zh-TW",
-                                                    {
-                                                        year: "numeric",
-                                                        month: "long",
-                                                        day: "numeric",
-                                                    },
-                                                )}
-                                            </time>
-                                            <span class="text-primary group-hover:translate-x-1 transition-transform">
-                                                閱讀更多 →
-                                            </span>
-                                        </div>
-                                    </div>
-                                </article>
-                            </a>
-                        ))}
-                    </div>
-                ) : (
-                    <div class="text-center py-16">
-                        <div class="text-6xl mb-4">📝</div>
-                        <h2 class="text-2xl font-bold mb-2">即將推出</h2>
-                        <p class="text-gray-500">
-                            我們正在準備精彩的教學內容，敬請期待！
-                        </p>
-                    </div>
-                )
-            }
-        </div>
-    </section>
+    <section class="blg-section">
+      <div class="blg-outer">
 
-    <!-- CTA Section -->
-    <section class="py-16 px-4 bg-base-200">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-2xl md:text-3xl font-bold mb-4">有任何問題嗎？</h2>
-            <p class="text-lg text-gray-600 mb-8">
-                我們的專業團隊隨時為您提供手套選購建議
+        {sortedPosts.length > 0 ? (
+          <>
+            <div class="blg-pills" id="blgPills">
+              <button class="blg-pill active" data-filter="全部">全部</button>
+              <button class="blg-pill" data-filter="選購指南">選購指南</button>
+              <button class="blg-pill" data-filter="材質比較">材質比較</button>
+              <button class="blg-pill" data-filter="使用維護">使用維護</button>
+              <button class="blg-pill" data-filter="產業應用">產業應用</button>
+            </div>
+
+            <div class="blg-grid" id="blgGrid">
+              {sortedPosts.map((post) => {
+                const filter = articleFilter(post);
+                return (
+                  <a
+                    href={`/blog/${post.id.replace(/\/index$/, '')}`}
+                    class="blg-card"
+                    data-filter={filter}
+                  >
+                    <div class="blg-card-img">
+                      <Image
+                        src={post.data.image}
+                        alt={post.data.title}
+                        loading="lazy"
+                        width={400}
+                        height={225}
+                      />
+                      <span class="blg-card-badge">{filter}</span>
+                    </div>
+                    <p class="blg-card-title">{post.data.title}</p>
+                    <time class="blg-card-meta" datetime={post.data.publishDate.toISOString()}>
+                      {post.data.publishDate.toLocaleDateString("zh-TW", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </time>
+                  </a>
+                );
+              })}
+            </div>
+
+            <p class="blg-brand-intro">
+              <strong>喬新針織（紅螞蟻手套）</strong>自 2003 年起深耕台南手套批發，累積第一線產業經驗整理成教學專欄，
+              涵蓋棉紗手套、NBR/PVC 膠手套、白龍尼龍手套等選購知識，協助採購與職安人員快速找到適合規格。
             </p>
-            <a href="/about#contact" class="btn btn-primary btn-lg text-white">
-                聯絡我們
-            </a>
+          </>
+        ) : (
+          <div class="blg-empty">
+            <h2>即將推出</h2>
+            <p>我們正在準備精彩的教學內容，敬請期待！</p>
+          </div>
+        )}
+
+      </div>
+
+      <section class="blg-cta">
+        <div class="blg-cta-blob blg-cta-blob-1"></div>
+        <div class="blg-cta-blob blg-cta-blob-2"></div>
+        <div class="blg-outer blg-cta-inner">
+          <h2>還在猶豫怎麼選？</h2>
+          <p>大量採購前，先讓我們的專業團隊幫您確認規格與數量，工廠直營報價更划算。</p>
+          <div class="blg-cta-btns">
+            <a href={`tel:${company.contact.phone}`} class="blg-cta-btn-primary">{company.contact.phone}</a>
+            <a href={`https://line.me/ti/p/~${LINE_ID}`} target="_blank" rel="noopener noreferrer" class="blg-cta-btn-ghost">LINE 詢價</a>
+          </div>
+          <div class="blg-cta-meta">
+            <span>週一至週六　08:00 – 18:00</span>
+            <span class="blg-cta-meta-dot">|</span>
+            <span>{company.address.full}</span>
+          </div>
         </div>
+      </section>
     </section>
 </Layout>
+
+<style>
+  :root {
+    --blg-td:    #4A90A4;
+    --blg-tan:   #D4A574;
+    --blg-cream: #F7F6F3;
+    --blg-white: #ffffff;
+    --blg-ink:   #1F2937;
+    --blg-sub:   #6B7280;
+    --blg-line:  #E6E4DE;
+    --blg-px:    clamp(20px, 5vw, 64px);
+  }
+
+  .blg-outer { max-width: 1280px; margin-inline: auto; padding-inline: var(--blg-px); }
+
+  .blg-section { padding-block: 40px 0; }
+
+  /* ── 分類篩選 pill ── */
+  .blg-pills {
+    display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin-bottom: 24px;
+  }
+  .blg-pills::-webkit-scrollbar { display: none; }
+  .blg-pill {
+    flex: 0 0 auto; font-size: 12.5px; font-weight: 700;
+    padding: 8px 16px; border-radius: 999px;
+    background: var(--blg-white); border: 1.5px solid var(--blg-line); color: var(--blg-ink);
+    cursor: pointer; white-space: nowrap; transition: all .18s; font-family: inherit;
+  }
+  .blg-pill:hover { border-color: var(--blg-td); color: var(--blg-td); }
+  .blg-pill.active { background: var(--blg-td); color: #fff; border-color: var(--blg-td); }
+
+  /* ── 文章卡片 ── */
+  .blg-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: clamp(14px, 2vw, 22px);
+    padding-bottom: 44px;
+  }
+  @media (max-width: 1000px) { .blg-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 720px)  { .blg-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 460px)  { .blg-grid { grid-template-columns: 1fr; } }
+
+  .blg-card { text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 9px; transition: opacity .2s; }
+  .blg-card:hover { opacity: .82; }
+  .blg-card-img {
+    aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; position: relative;
+    background: linear-gradient(135deg, #d8c6a8, #c2ab86);
+  }
+  .blg-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .blg-card-badge {
+    position: absolute; top: 8px; left: 8px;
+    background: rgba(255,255,255,.92); color: var(--blg-ink);
+    font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 5px;
+  }
+  .blg-card-title {
+    font-size: 14px; font-weight: 700; line-height: 1.55; margin: 0; color: var(--blg-ink);
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .blg-card-meta { font-size: 11.5px; color: var(--blg-sub); }
+
+  /* ── 品牌簡介段落（GEO 引用錨點） ── */
+  .blg-brand-intro {
+    font-size: 14px; line-height: 1.75; color: var(--blg-sub);
+    background: var(--blg-white); border: 1px solid var(--blg-line);
+    border-left: 3px solid var(--blg-td);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px; margin-bottom: 8px;
+  }
+  .blg-brand-intro strong { color: var(--blg-ink); }
+
+  .blg-empty { text-align: center; padding: 64px 0; color: var(--blg-sub); }
+  .blg-empty h2 { font-size: 22px; font-weight: 800; color: var(--blg-ink); margin: 0 0 8px; }
+
+  /* ── CTA 橫幅（比照首頁 hp-cta） ── */
+  .blg-cta {
+    margin-top: 46px;
+    background: linear-gradient(135deg,
+      var(--blg-td) 0%,
+      color-mix(in srgb, var(--blg-td) 90%, white) 55%,
+      color-mix(in srgb, var(--blg-tan) 70%, white) 100%);
+    color: #fff; padding-block: clamp(36px, 5vw, 64px); text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .blg-cta-blob { position: absolute; border-radius: 50%; background: rgba(255,255,255,.06); pointer-events: none; }
+  .blg-cta-blob-1 { width: 240px; height: 240px; top: -70px; right: -60px; }
+  .blg-cta-blob-2 { width: 190px; height: 190px; bottom: -60px; left: -40px; }
+  .blg-cta-inner { position: relative; z-index: 2; }
+  .blg-cta-inner h2 { font-size: clamp(20px, 3vw, 32px); font-weight: 800; margin: 0 0 10px; }
+  .blg-cta-inner p { font-size: clamp(13px, 1.4vw, 16px); opacity: .85; margin: 0 0 28px; max-width: 480px; margin-inline: auto; }
+  .blg-cta-btns { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .blg-cta-btn-primary {
+    background: #fff; color: var(--blg-td); border: none; border-radius: 8px;
+    padding: 11px 24px; font-size: clamp(13px, 1.4vw, 15px); font-weight: 700;
+    text-decoration: none; display: inline-block; transition: opacity .18s;
+  }
+  .blg-cta-btn-primary:hover { opacity: .88; }
+  .blg-cta-btn-ghost {
+    background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.65);
+    border-radius: 8px; padding: 11px 24px; font-size: clamp(13px, 1.4vw, 15px); font-weight: 700;
+    text-decoration: none; display: inline-block; transition: background .18s;
+  }
+  .blg-cta-btn-ghost:hover { background: rgba(255,255,255,.13); }
+  .blg-cta-meta {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 14px;
+    margin-top: 24px; font-size: 12.5px; color: rgba(255,255,255,.65);
+  }
+  .blg-cta-meta-dot { opacity: .5; }
+</style>
+
+<script>
+  document.getElementById('blgPills')?.addEventListener('click', (e) => {
+    const btn = (e.target as Element).closest('.blg-pill') as HTMLElement | null;
+    if (!btn) return;
+    document.querySelectorAll('.blg-pill').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll<HTMLElement>('.blg-card').forEach(card => {
+      card.style.display = (f === '全部' || card.dataset.filter === f) ? '' : 'none';
+    });
+  });
+</script>

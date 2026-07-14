@@ -25,6 +25,7 @@ const news = defineCollection({
         publishDate: z.coerce.date(),
         tags: z.array(z.string()).optional(),
         draft: z.boolean().default(false),
+        faq: z.array(z.object({ q: z.string(), a: z.string() })).optional(),
     })
 });
 

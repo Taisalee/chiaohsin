@@ -8,18 +8,20 @@ interface Props {
 const { type = 'insight', title, content } = Astro.props;
 
 const styles = {
-  insight: { bg: 'bg-blue-50', border: 'border-l-4 border-blue-500', text: 'text-blue-700' },
-  warning: { bg: 'bg-amber-50', border: 'border-l-4 border-amber-500', text: 'text-amber-700' },
-  info: { bg: 'bg-sky-50', border: 'border-l-4 border-sky-400', text: 'text-sky-700' },
-  success: { bg: 'bg-green-50', border: 'border-l-4 border-green-500', text: 'text-green-700' },
+  insight: { bg: 'bg-primary/5', border: 'border-l-4 border-primary', text: 'text-primary' },
+  warning: { bg: 'bg-amber-50',   border: 'border-l-4 border-amber-500', text: 'text-amber-700' },
+  info:    { bg: 'bg-primary/5', border: 'border-l-4 border-primary',   text: 'text-primary' },
+  success: { bg: 'bg-green-50',   border: 'border-l-4 border-green-500', text: 'text-green-700' },
 };
 
 const style = styles[type];
 ---
 
-<div class={`${style.bg} ${style.border} rounded-r-lg p-4 my-6`}>
-  {title && <p class={`font-semibold ${style.text} mb-2`}>{title}</p>}
-  <p class={`text-sm leading-relaxed ${style.text}`}>
-    {content ? content : <slot />}
-  </p>
+<div class={`${style.bg} ${style.border} rounded-r-xl px-6 py-5 my-6`}>
+  {title && <p class={`font-semibold text-sm ${style.text} mb-2`}>{title}</p>}
+  {content ? (
+    <p class="text-sm leading-relaxed text-gray-700" set:html={content} />
+  ) : (
+    <p class="text-sm leading-relaxed text-gray-700"><slot /></p>
+  )}
 </div>

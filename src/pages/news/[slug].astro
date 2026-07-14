@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import PageHero from "../../components/PageHero.astro";
 import { getCollection, render } from "astro:content";
 import company from "../../data/company.json";
 
@@ -25,6 +26,7 @@ const articleSchema = {
     headline: item.data.title,
     description: item.data.description,
     datePublished: item.data.publishDate.toISOString(),
+    dateModified: item.data.publishDate.toISOString(),
     author: {
         "@type": "Organization",
         "@id": `${siteUrl}/#organization`,
@@ -57,6 +59,19 @@ const breadcrumbSchema = {
     ],
 };
 
+const faqSchema = item.data.faq && item.data.faq.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: item.data.faq.map((f: { q: string; a: string }) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: {
+            "@type": "Answer",
+            text: f.a,
+        },
+    })),
+} : null;
+
 const proseClass =
     "prose prose-lg max-w-none " +
     "prose-headings:text-gray-900 prose-headings:font-bold " +
@@ -78,21 +93,25 @@ const proseClass =
     <Fragment slot="head">
         <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
         <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+        {faqSchema && (
+            <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+        )}
     </Fragment>
+
+    <PageHero title={item.data.title} eyebrow="最新消息">
+        <nav slot="breadcrumb" class="ph-breadcrumb" aria-label="breadcrumb">
+            <a href="/">首頁</a>
+            <span class="ph-breadcrumb-sep" aria-hidden="true">／</span>
+            <a href="/news">最新消息</a>
+            <span class="ph-breadcrumb-sep" aria-hidden="true">／</span>
+            <span class="ph-breadcrumb-cur">{item.data.title}</span>
+        </nav>
+    </PageHero>
 
     <div class="max-w-3xl mx-auto px-4 py-12">
 
-        <nav class="text-sm mb-8">
-            <ul class="flex items-center gap-2 text-gray-400">
-                <li><a href="/" class="hover:text-primary transition-colors">首頁</a></li>
-                <li class="before:content-['/'] before:mr-2">
-                    <a href="/news" class="hover:text-primary transition-colors">最新消息</a>
-                </li>
-            </ul>
-        </nav>
-
         <time
-            class="text-sm text-gray-400 block mb-3"
+            class="text-sm text-gray-500 block mb-3"
             datetime={item.data.publishDate.toISOString()}
         >
             {item.data.publishDate.toLocaleDateString("zh-TW", {
@@ -101,10 +120,6 @@ const proseClass =
                 day: "numeric",
             })}
         </time>
-
-        <h1 class="text-3xl md:text-4xl font-extrabold mb-6 text-gray-900 leading-tight">
-            {item.data.title}
-        </h1>
 
         <p class="text-lg text-gray-500 mb-8 pb-8 border-b border-gray-100">
             {item.data.description}
@@ -117,28 +132,64 @@ const proseClass =
         {item.data.tags && item.data.tags.length > 0 && (
             <div class="mt-10 pt-8 border-t border-gray-100 flex flex-wrap gap-2">
                 {item.data.tags.map((tag: string) => (
-                    <span class="px-3 py-1 rounded-lg bg-gray-100 text-gray-500 text-sm">#{tag}</span>
+                    <span class="px-3 py-1 rounded-full bg-gray-100 text-gray-600 text-sm">#{tag}</span>
                 ))}
             </div>
         )}
 
-        <div class="mt-12 p-8 rounded-2xl bg-primary/5 border border-primary/10 text-center">
-            <h3 class="text-xl font-bold mb-2">需要批發報價？</h3>
-            <p class="text-gray-600 mb-4">歡迎來電或 LINE 詢價，告知品項與數量即可快速報價</p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="/products" class="btn btn-primary">查看所有商品</a>
-                <a href="/contact" class="btn btn-outline">聯絡我們</a>
+    </div>
+
+    <section class="nc-cta">
+        <div class="nc-blob nc-blob-1"></div>
+        <div class="nc-blob nc-blob-2"></div>
+        <div class="nc-inner">
+            <h2 class="nc-title">需要批發報價？</h2>
+            <p class="nc-sub">歡迎工廠、工地與批發商來電或 LINE 詢價，告知品項與數量，即可快速取得批發報價。</p>
+            <div class="nc-btns">
+                <a href={`tel:${company.contact.phone}`} class="nc-btn-primary">{company.contact.phone}</a>
+                <a href={`https://line.me/ti/p/~${company.contact["LINE ID"]}`} target="_blank" rel="noopener noreferrer" class="nc-btn-ghost">LINE 詢價</a>
+            </div>
+            <div class="nc-meta">
+                <span>週一至週六　08:00 – 18:00</span>
+                <span class="nc-meta-dot">|</span>
+                <span>{company.address.full}</span>
             </div>
         </div>
+    </section>
 
-        <div class="mt-10">
-            <a href="/news" class="inline-flex items-center text-gray-500 hover:text-primary transition-colors font-medium">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-                返回最新消息
-            </a>
-        </div>
+<style>
+  .nc-cta {
+    background: linear-gradient(135deg, #4A90A4 0%, color-mix(in srgb, #4A90A4 90%, white) 55%, #D4A574 100%);
+    color: #fff;
+    padding-block: clamp(36px, 5vw, 64px);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .nc-blob { position: absolute; border-radius: 50%; background: rgba(255,255,255,.06); pointer-events: none; }
+  .nc-blob-1 { width: 240px; height: 240px; top: -70px; right: -60px; }
+  .nc-blob-2 { width: 190px; height: 190px; bottom: -60px; left: -40px; }
+  .nc-inner { position: relative; z-index: 2; padding-inline: clamp(20px, 5vw, 64px); max-width: 1280px; margin-inline: auto; }
+  .nc-title { font-size: clamp(20px, 3vw, 32px); font-weight: 800; margin: 0 0 10px; }
+  .nc-sub { font-size: clamp(13px, 1.4vw, 16px); opacity: .85; margin: 0 0 28px; max-width: 520px; margin-inline: auto; }
+  .nc-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+  .nc-btn-primary {
+    background: #fff; color: #4A90A4; border: none; border-radius: 8px;
+    padding: 11px 24px; font-size: clamp(13px, 1.4vw, 15px); font-weight: 700;
+    text-decoration: none; cursor: pointer; transition: opacity .18s; display: inline-block;
+  }
+  .nc-btn-primary:hover { opacity: .9; }
+  .nc-btn-ghost {
+    background: rgba(255,255,255,.12); color: #fff; border: 1.5px solid rgba(255,255,255,.35);
+    border-radius: 8px; padding: 11px 24px; font-size: clamp(13px, 1.4vw, 15px); font-weight: 700;
+    text-decoration: none; display: inline-block; transition: background .18s; cursor: pointer;
+  }
+  .nc-btn-ghost:hover { background: rgba(255,255,255,.2); }
+  .nc-meta {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 14px;
+    margin-top: 24px; font-size: 12.5px; color: rgba(255,255,255,.65);
+  }
+  .nc-meta-dot { opacity: .5; }
+</style>
 
-    </div>
 </Layout>

@@ -225,8 +225,8 @@ const proseClass =
                     )
                 }
                 <div class="flex items-center gap-4 text-gray-500 ml-auto">
-                    <div class="flex items-center gap-1">
-                        <span>📅</span>
+                    <div class="flex items-center gap-1.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
                         <time datetime={post.data.publishDate.toISOString()}>
                             {
                                 post.data.publishDate.toLocaleDateString(
@@ -240,8 +240,8 @@ const proseClass =
                             }
                         </time>
                     </div>
-                    <div class="flex items-center gap-1">
-                        <span>⏱️</span>
+                    <div class="flex items-center gap-1.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
                         <span>{readingTime} 分鐘</span>
                     </div>
                 </div>
@@ -253,12 +253,12 @@ const proseClass =
                 {post.data.title}
             </h1>
 
-            <p class="text-xl text-gray-600 leading-relaxed max-w-2xl">
+            <p class="text-xl text-gray-600 leading-relaxed">
                 {post.data.description}
             </p>
 
             {post.data.summary && post.data.summary.length > 0 && (
-                <div class="mt-8 bg-primary/5 border-l-4 border-primary rounded-r-xl px-6 py-5 max-w-2xl">
+                <div class="mt-8 bg-primary/5 border-l-4 border-primary rounded-r-xl px-6 py-5">
                     <p class="text-xs font-semibold text-primary uppercase tracking-widest mb-3">本文重點</p>
                     <ul class="space-y-2">
                         {post.data.summary.map((point: string) => (
