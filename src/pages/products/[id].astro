@@ -287,10 +287,10 @@ const breadcrumbData = {
                         </div>
                     )
                 }
-                <!-- 手機版：產品特色標籤（移到圖片上面）-->
+                <!-- 手機版：產品特色標籤（移到圖片上面，最多顯示 2 個） -->
                 {
                     product.features && product.features.length > 0 && (
-                        <div class="flex flex-wrap gap-2 mt-3">
+                        <div class="mobile-features flex flex-wrap gap-2 mt-3">
                             {product.features.map((feature: string) => (
                                 <span class="feature-badge">
                                     ✓ {feature}
@@ -651,5 +651,8 @@ const breadcrumbData = {
     }
     .spec-table-wrap tr:nth-child(even) {
         background-color: #f9fafb;
+    }
+    .mobile-features .feature-badge:nth-child(n+3) {
+        display: none;
     }
 </style>

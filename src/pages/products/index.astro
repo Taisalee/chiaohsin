@@ -447,10 +447,12 @@ const faqSchema = {
     font-size: clamp(9px, 1vw, 11px); text-align: center;
     white-space: nowrap; line-height: 1.3; color: var(--prd-sub); transition: color .15s;
   }
-  /* Active 狀態 */
+  /* Active 狀態（box-shadow 不用，overflow-x:auto 會裁切） */
   .prd-qn-item.active .prd-qn-icon {
-    background: color-mix(in srgb, var(--prd-red) 12%, white);
-    box-shadow: 0 0 0 2px color-mix(in srgb, var(--prd-red) 28%, white);
+    background: color-mix(in srgb, var(--prd-red) 18%, white);
+  }
+  .prd-qn-item.active:hover .prd-qn-icon {
+    background: color-mix(in srgb, var(--prd-red) 25%, white);
   }
   .prd-qn-item.active .prd-qn-icon svg { stroke: var(--prd-red); }
   .prd-qn-item.active .prd-qn-label { color: var(--prd-red); font-weight: 700; }

@@ -21,14 +21,5 @@
             "children": []
         }
     ],
-    "footer": [
-        {
-            "title": "訂閱最新消息",
-            "url": "/rss/news"
-        },
-        {
-            "title": "訂閱商品訊息",
-            "url": "/rss/products"
-        }
-    ]
+    "footer": []
 }
