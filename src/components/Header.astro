@@ -49,7 +49,7 @@ function isActive(url: string) {
 
       <div class="hd-dropdown" id="hdContactDropdown">
         <button class="hd-cta" id="hdCtaBtn" aria-label="聯絡方式選單" aria-expanded="false" aria-controls="hdContactMenu">立即詢價</button>
-        <nav class="hd-contact-menu" id="hdContactMenu" aria-hidden="true">
+        <nav class="hd-contact-menu" id="hdContactMenu" aria-hidden="true" inert>
           <a href={`https://line.me/ti/p/${company.contact['LINE ID']}`} class="hd-contact-item hd-contact-line" target="_blank" rel="noopener noreferrer" aria-label="用 LINE 詢價">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M19.365 9.863c.349-1.89.321-3.483-.635-4.494-1.922-2.013-6.903-1.235-11.665.437C3.669 7.272 1.314 10.05 1.314 12.85c0 2.527 1.745 4.728 4.577 6.066-.248 1.319-1.58 4.155-1.678 4.388-.119.309-.038.517.165.681.134.108.338.158.517.158.352 0 .754-.095 1.287-.251 3.646-.864 6.59-3.737 7.623-4.942 1.572.23 2.834.088 3.799-.446 1.922-1.024 2.99-3.312 2.99-5.958.001-2.506-1.413-4.627-3.597-5.634zm-7.682 3.5h-2.87a.476.476 0 0 1 0-.952h2.87a.476.476 0 0 1 0 .952zm4.739 0h-2.87a.476.476 0 0 1 0-.952h2.87a.476.476 0 0 1 0 .952zm-9.28-4.246h2.87a.476.476 0 0 1 0 .952h-2.87a.476.476 0 0 1 0-.952zm0 1.904h2.87a.476.476 0 0 1 0 .952h-2.87a.476.476 0 0 1 0-.952z"/>
@@ -80,7 +80,7 @@ function isActive(url: string) {
   </div>
 
   <!-- 搜尋列 -->
-  <div class="hd-search" id="hdSearchBar" role="search" aria-hidden="true">
+  <div class="hd-search" id="hdSearchBar" role="search" aria-hidden="true" inert>
     <div class="hd-search-row">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hd-search-ico" aria-hidden="true">
         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
@@ -99,7 +99,7 @@ function isActive(url: string) {
   </div>
 
   <!-- 手機選單 -->
-  <nav class="hd-mobile" id="hdMobileMenu" aria-label="手機選單" aria-hidden="true">
+  <nav class="hd-mobile" id="hdMobileMenu" aria-label="手機選單" aria-hidden="true" inert>
     {navigation.main.map(item => (
       <a href={item.url} class={`hd-ml${isActive(item.url) ? ' is-active' : ''}`}>
         {item.title}
@@ -118,6 +118,13 @@ function isActive(url: string) {
 </header>
 
 <script define:vars={{ products }}>
+  // 對應 scripts/generate-product-thumbnails.js 的命名規則
+  function productThumb(imagePath) {
+    const dot = imagePath.lastIndexOf('.');
+    if (dot === -1) return imagePath;
+    return imagePath.slice(0, dot) + '_thumb' + imagePath.slice(dot);
+  }
+
   // ── 搜尋 ──
   const searchBtn     = document.getElementById('hdSearchBtn');
   const searchBar     = document.getElementById('hdSearchBar');
@@ -128,12 +135,14 @@ function isActive(url: string) {
   function openSearch() {
     searchBar.classList.add('is-open');
     searchBar.setAttribute('aria-hidden', 'false');
+    searchBar.removeAttribute('inert');
     searchBtn.setAttribute('aria-expanded', 'true');
     searchInput.focus();
   }
   function closeSearch() {
     searchBar.classList.remove('is-open');
     searchBar.setAttribute('aria-hidden', 'true');
+    searchBar.setAttribute('inert', '');
     searchBtn.setAttribute('aria-expanded', 'false');
     searchInput.value = '';
     searchResults.innerHTML = '';
@@ -157,7 +166,7 @@ function isActive(url: string) {
     }
     searchResults.innerHTML = hits.map(p => `
       <a href="/products/${p.id}" class="hd-sr-item" role="option">
-        <img src="/${p.image}" alt="${p.name}" class="hd-sr-img" loading="lazy" />
+        <img src="/${productThumb(p.image)}" alt="${p.name}" class="hd-sr-img" loading="lazy" />
         <span class="hd-sr-name">${p.name}</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hd-sr-arr" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
       </a>
@@ -175,6 +184,7 @@ function isActive(url: string) {
     e.stopPropagation();
     const isOpen = dropdown.classList.toggle('is-open');
     contactMenu.setAttribute('aria-hidden', String(!isOpen));
+    contactMenu.toggleAttribute('inert', !isOpen);
     ctaBtn.setAttribute('aria-expanded', String(isOpen));
   });
 
@@ -182,6 +192,7 @@ function isActive(url: string) {
     if (!dropdown?.contains(e.target)) {
       dropdown.classList.remove('is-open');
       contactMenu.setAttribute('aria-hidden', 'true');
+      contactMenu.setAttribute('inert', '');
       ctaBtn.setAttribute('aria-expanded', 'false');
     }
   });
@@ -194,6 +205,7 @@ function isActive(url: string) {
     const open = mobileMenu.classList.toggle('is-open');
     menuBtn.setAttribute('aria-expanded', String(open));
     mobileMenu.setAttribute('aria-hidden', String(!open));
+    mobileMenu.toggleAttribute('inert', !open);
     menuBtn.classList.toggle('is-open', open);
   });
 
@@ -202,6 +214,7 @@ function isActive(url: string) {
       mobileMenu.classList.remove('is-open');
       menuBtn.setAttribute('aria-expanded', 'false');
       mobileMenu.setAttribute('aria-hidden', 'true');
+      mobileMenu.setAttribute('inert', '');
       menuBtn.classList.remove('is-open');
     }
   });

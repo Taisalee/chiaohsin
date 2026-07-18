@@ -161,6 +161,7 @@ const websiteData = {
     <link rel="canonical" href={canonicalUrl} />
 
     <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon-512.png" />
@@ -217,8 +218,8 @@ const websiteData = {
     <!-- 首屏圖片預加載（首頁優化） -->
     {Astro.url.pathname === '/' && (
       <>
-        <link rel="preload" as="image" href="/images/product_l_1468540.webp" />
-        <link rel="preload" as="image" href="/images/product_l_1468541.webp" />
+        <link rel="preload" as="image" href="/images/product_l_1468540_thumb.webp" fetchpriority="high" />
+        <link rel="preload" as="image" href="/images/product_l_1468541_thumb.webp" />
 
         <!-- 智慧 Prefetch：只在首頁 prefetch 高概率導航 -->
         <link rel="prefetch" href="/products" />
