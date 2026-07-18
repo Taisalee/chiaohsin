@@ -4,7 +4,7 @@ import PageHero from "../components/PageHero.astro";
 import { getCollection } from "astro:content";
 import company from "../data/company.json";
 
-const siteUrl = "https://www.chiaohsin.com.tw";
+const siteUrl = "https://chiaohsin.com.tw";
 
 const allNews = await getCollection("news", ({ data }) => data.draft !== true);
 const sortedNews = allNews.sort(
@@ -41,6 +41,15 @@ const newsItemListSchema = sortedNews.length > 0 ? {
     url: `${siteUrl}/news/${item.id.replace(/\/index$/, "")}`,
   })),
 } : null;
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "首頁", item: `${siteUrl}/` },
+    { "@type": "ListItem", position: 2, name: "最新消息", item: `${siteUrl}/news` },
+  ],
+};
 ---
 
 <Layout
@@ -51,6 +60,7 @@ const newsItemListSchema = sortedNews.length > 0 ? {
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(blogSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
     {newsItemListSchema && (
       <script type="application/ld+json" set:html={JSON.stringify(newsItemListSchema)} />
     )}

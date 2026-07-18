@@ -25,7 +25,7 @@ interface Props {
 
 const { product, category } = Astro.props;
 
-const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? "https://www.chiaohsin.com.tw";
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? "https://chiaohsin.com.tw";
 
 // 超商零售連結（選填欄位，無值則不顯示零售區塊）
 const retailLinks = (product as any).retailLinks as { "711"?: string; family?: string } | undefined;

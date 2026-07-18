@@ -14,6 +14,7 @@ const sortedPosts = allPosts.sort((a, b) => b.data.publishDate.valueOf() - a.dat
 
 const byCategory: Record<string, typeof products> = {};
 for (const p of products) {
+  if (p.available === false) continue;
   if (!byCategory[p.category]) byCategory[p.category] = [];
   byCategory[p.category].push(p);
 }

@@ -6,7 +6,7 @@ import { Image } from "astro:assets";
 import company from "../data/company.json";
 
 const LINE_ID = company.contact["LINE ID"];
-const siteUrl = "https://www.chiaohsin.com.tw";
+const siteUrl = "https://chiaohsin.com.tw";
 
 const allPosts = await getCollection("blog", ({ data }) => data.draft !== true);
 

@@ -5,7 +5,7 @@ import categories from "../data/categories.json";
 
 const currentYear = new Date().getFullYear();
 const mapSrc = `https://www.google.com/maps?q=${company.address.coordinates.lat},${company.address.coordinates.lng}&z=16&output=embed`;
-const mapsLink = `https://www.google.com/maps/search/?api=1&query=${company.address.coordinates.lat},${company.address.coordinates.lng}`;
+const mapsLink = company.googleBusinessProfile;
 ---
 
 <footer class="ft">
@@ -48,7 +48,7 @@ const mapsLink = `https://www.google.com/maps/search/?api=1&query=${company.addr
       <div class="ft-col ft-col--brand">
         <a href="/" class="ft-brand-link" aria-label="紅螞蟻手套 喬新針織有限公司">
           <span class="ft-logo-wrap" aria-hidden="true">
-            <img src={`/${company.logo}`} alt="" class="ft-logo-img" />
+            <img src={`/${company.logo}`} alt="" class="ft-logo-img" width="40" height="40" />
             <span
               class="ft-logo-mask"
               style={`-webkit-mask-image:url('/${company.logo}');mask-image:url('/${company.logo}');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;`}

@@ -1,0 +1,22 @@
+{
+  "name": "喬新針織有限公司 - 紅螞蟻手套",
+  "short_name": "喬新針織",
+  "description": "台南喬新針織（紅螞蟻手套）成立2003年，棉紗手套、NBR/PVC膠手套、尼龍手套、口罩批發直營。",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4A90A4",
+  "lang": "zh-TW",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
