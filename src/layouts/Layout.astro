@@ -217,7 +217,7 @@ const websiteData = {
     <!-- 首屏圖片預加載（首頁優化） -->
     {Astro.url.pathname === '/' && (
       <>
-        <link rel="preload" as="image" href="/images/product_l_1468540.webp" />
+        <link rel="preload" as="image" href="/images/product_l_1468540.webp" fetchpriority="high" />
         <link rel="preload" as="image" href="/images/product_l_1468541.webp" />
 
         <!-- 智慧 Prefetch：只在首頁 prefetch 高概率導航 -->
