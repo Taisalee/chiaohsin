@@ -118,6 +118,13 @@ function isActive(url: string) {
 </header>
 
 <script define:vars={{ products }}>
+  // 對應 scripts/generate-product-thumbnails.js 的命名規則
+  function productThumb(imagePath) {
+    const dot = imagePath.lastIndexOf('.');
+    if (dot === -1) return imagePath;
+    return imagePath.slice(0, dot) + '_thumb' + imagePath.slice(dot);
+  }
+
   // ── 搜尋 ──
   const searchBtn     = document.getElementById('hdSearchBtn');
   const searchBar     = document.getElementById('hdSearchBar');
@@ -159,7 +166,7 @@ function isActive(url: string) {
     }
     searchResults.innerHTML = hits.map(p => `
       <a href="/products/${p.id}" class="hd-sr-item" role="option">
-        <img src="/${p.image}" alt="${p.name}" class="hd-sr-img" loading="lazy" />
+        <img src="/${productThumb(p.image)}" alt="${p.name}" class="hd-sr-img" loading="lazy" />
         <span class="hd-sr-name">${p.name}</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hd-sr-arr" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
       </a>

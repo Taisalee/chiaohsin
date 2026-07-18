@@ -1,4 +1,6 @@
 ---
+import { productThumb } from "../utils/image";
+
 interface Props {
     id: string;
     name: string;
@@ -28,7 +30,7 @@ const altText = categoryName
 >
     <div class="prd-card-img">
         <img
-            src={`/${image}`}
+            src={`/${productThumb(image)}`}
             alt={altText}
             loading="lazy"
             width="300"

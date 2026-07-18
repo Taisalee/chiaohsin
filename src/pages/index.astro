@@ -5,6 +5,7 @@ import categories from '../data/categories.json';
 import products from '../data/products.json';
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
+import { productThumb } from '../utils/image';
 
 const LINE_ID = company.contact['LINE ID'];
 
@@ -148,7 +149,7 @@ function articleFilter(post: typeof sortedPosts[0]): string {
                 {ps.map((p, idx) => (
                   <a class="hp-item" href={`/products/${p.id}`}>
                     <div class="hp-item-img">
-                      <img src={`/${p.image}`} alt={p.name} loading={i === 0 && idx < 2 ? "eager" : "lazy"} fetchpriority={i === 0 && idx === 0 ? "high" : undefined} width="160" height="160" />
+                      <img src={`/${productThumb(p.image)}`} alt={p.name} loading={i === 0 && idx < 2 ? "eager" : "lazy"} fetchpriority={i === 0 && idx === 0 ? "high" : undefined} width="160" height="160" />
                     </div>
                     <p class="hp-item-name">{p.name}</p>
                     {p.features?.[0] && <span class="hp-item-spec">{p.features[0]}</span>}
@@ -187,7 +188,7 @@ function articleFilter(post: typeof sortedPosts[0]): string {
             {hwProducts.map((p) => (
               <a class="hp-item" href={`/products/${p.id}`}>
                 <div class="hp-item-img">
-                  <img src={`/${p.image}`} alt={p.name} loading="lazy" width="160" height="160" />
+                  <img src={`/${productThumb(p.image)}`} alt={p.name} loading="lazy" width="160" height="160" />
                 </div>
                 <p class="hp-item-name">{p.name}</p>
                 {p.features?.[0] && <span class="hp-item-spec">{p.features[0]}</span>}
@@ -224,7 +225,7 @@ function articleFilter(post: typeof sortedPosts[0]): string {
             {pkgProducts.map((p) => (
               <a class="hp-item" href={`/products/${p.id}`}>
                 <div class="hp-item-img">
-                  <img src={`/${p.image}`} alt={p.name} loading="lazy" width="160" height="160" />
+                  <img src={`/${productThumb(p.image)}`} alt={p.name} loading="lazy" width="160" height="160" />
                 </div>
                 <p class="hp-item-name">{p.name}</p>
                 {p.features?.[0] && <span class="hp-item-spec">{p.features[0]}</span>}
