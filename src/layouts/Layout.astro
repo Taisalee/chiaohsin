@@ -198,13 +198,34 @@ const websiteData = {
       content={`${company.address.coordinates.lat}, ${company.address.coordinates.lng}`}
     />
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts（非阻塞載入：先以 media=print 載入，onload 後切回 all） -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+
+    <!-- 首屏圖片預加載（首頁優化） -->
+    {Astro.url.pathname === '/' && (
+      <>
+        <link rel="preload" as="image" href="/images/product_l_1468540.webp" />
+        <link rel="preload" as="image" href="/images/product_l_1468541.webp" />
+
+        <!-- 智慧 Prefetch：只在首頁 prefetch 高概率導航 -->
+        <link rel="prefetch" href="/products" />
+        <link rel="prefetch" href="/news" />
+        <link rel="prefetch" href="/contact" />
+      </>
+    )}
 
     <!-- 結構化資料 -->
     <script

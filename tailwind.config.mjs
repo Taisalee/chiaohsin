@@ -4,11 +4,14 @@ export default {
     theme: {
         extend: {
             colors: {
-                primary: "#4A90A4", // Example from site-data (Rubber gloves color)
-                secondary: "#D4A574", // Cotton gloves
-                accent: "#FF69B4", // Flower dragon
+                primary: "#4A90A4",
+                secondary: "#D4A574",
+                accent: "#FF69B4",
             }
         },
+    },
+    corePlugins: {
+        preflight: true,
     },
     plugins: [
         require("@tailwindcss/typography"),
@@ -16,5 +19,9 @@ export default {
     ],
     daisyui: {
         themes: ["corporate"],
+        logs: false,
+        base: true,
+        styled: true,
+        utils: true,
     },
 }

@@ -11,7 +11,16 @@
       "Bash(npm run *)",
       "Bash(git checkout *)",
       "Bash(curl -s http://localhost:3000)",
-      "PowerShell(Get-Process *)"
+      "PowerShell(Get-Process *)",
+      "WebFetch(domain:pagespeed.web.dev)",
+      "Bash(npx lighthouse *)",
+      "PowerShell(Start-Process \"C:\\\\code\\\\chiaohsin\\\\lighthouse-report.html\")",
+      "Bash(pkill -f \"astro preview\")",
+      "Read(//tmp/**)",
+      "Bash(netstat -tuln)",
+      "Bash(npx playwright *)",
+      "PowerShell(Start-Process \"http://localhost:4328\")",
+      "Skill(code-review)"
     ]
   }
 }
