@@ -144,10 +144,10 @@ function articleFilter(post: typeof sortedPosts[0]): string {
             const ps = byCategory[tab.id] ?? [];
             return (
               <div class={`hp-sh-panel${i === 0 ? ' active' : ''}`} id={`hpanel-${tab.id}`}>
-                {ps.map(p => (
+                {ps.map((p, idx) => (
                   <a class="hp-item" href={`/products/${p.id}`}>
                     <div class="hp-item-img">
-                      <img src={`/${p.image}`} alt={p.name} loading="lazy" width="160" height="160" />
+                      <img src={`/${p.image}`} alt={p.name} loading={i === 0 && idx < 2 ? "eager" : "lazy"} width="160" height="160" />
                     </div>
                     <p class="hp-item-name">{p.name}</p>
                     {p.features?.[0] && <span class="hp-item-spec">{p.features[0]}</span>}
@@ -183,7 +183,7 @@ function articleFilter(post: typeof sortedPosts[0]): string {
         </a>
         <div class="hp-sh-right" id="hpSrHw">
           <div class="hp-sh-row">
-            {hwProducts.map(p => (
+            {hwProducts.map((p) => (
               <a class="hp-item" href={`/products/${p.id}`}>
                 <div class="hp-item-img">
                   <img src={`/${p.image}`} alt={p.name} loading="lazy" width="160" height="160" />
@@ -220,7 +220,7 @@ function articleFilter(post: typeof sortedPosts[0]): string {
         </a>
         <div class="hp-sh-right" id="hpSrPkg">
           <div class="hp-sh-row">
-            {pkgProducts.map(p => (
+            {pkgProducts.map((p) => (
               <a class="hp-item" href={`/products/${p.id}`}>
                 <div class="hp-item-img">
                   <img src={`/${p.image}`} alt={p.name} loading="lazy" width="160" height="160" />
@@ -302,7 +302,7 @@ function articleFilter(post: typeof sortedPosts[0]): string {
 
 <script>
   /* ── 左右捲動箭頭 ── */
-  function setupCarousel(
+  function setupCarouselHandlers(
     rightId: string, blId: string, brId: string, isTabbed: boolean
   ): (() => void) | undefined {
     const bl = document.getElementById(blId);
@@ -330,17 +330,42 @@ function articleFilter(post: typeof sortedPosts[0]): string {
       if (t) t.scrollBy({ left: t.clientWidth * 0.8, behavior: 'smooth' });
     });
 
-    document.getElementById(rightId)?.addEventListener('scroll', sync, { passive: true, capture: true });
-    window.addEventListener('resize', () => setTimeout(sync, 60));
-    setTimeout(sync, 80);
+    // 延遲掛載 scroll 監聽與初始同步（不阻塞首屏）
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => {
+        document.getElementById(rightId)?.addEventListener('scroll', sync, { passive: true, capture: true });
+        sync();
+      }, { timeout: 2000 });
+    } else {
+      setTimeout(() => {
+        document.getElementById(rightId)?.addEventListener('scroll', sync, { passive: true, capture: true });
+        sync();
+      }, 1500);
+    }
+
     return sync;
   }
 
-  const syncGloves = setupCarousel('hpSrGloves', 'hpBlGloves', 'hpBrGloves', true);
-  setupCarousel('hpSrHw',  'hpBlHw',  'hpBrHw',  false);
-  setupCarousel('hpSrPkg', 'hpBlPkg', 'hpBrPkg', false);
+  const syncGloves = setupCarouselHandlers('hpSrGloves', 'hpBlGloves', 'hpBrGloves', true);
+  const syncHw  = setupCarouselHandlers('hpSrHw',  'hpBlHw',  'hpBrHw',  false);
+  const syncPkg = setupCarouselHandlers('hpSrPkg', 'hpBlPkg', 'hpBrPkg', false);
 
-  /* ── 手套 tab 切換 ── */
+  // 單一 resize listener，避免重複掛載
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => {
+      window.addEventListener('resize', () => setTimeout(() => {
+        syncGloves?.(); syncHw?.(); syncPkg?.();
+      }, 60), { passive: true });
+    }, { timeout: 2000 });
+  } else {
+    setTimeout(() => {
+      window.addEventListener('resize', () => setTimeout(() => {
+        syncGloves?.(); syncHw?.(); syncPkg?.();
+      }, 60), { passive: true });
+    }, 1500);
+  }
+
+  /* ── 手套 tab 切換（立即掛載，避免首屏點擊無反應）── */
   document.getElementById('hpGloveTabs')?.addEventListener('click', (e) => {
     const btn = (e.target as Element).closest('.hp-gtab') as HTMLElement | null;
     if (!btn) return;
@@ -352,17 +377,34 @@ function articleFilter(post: typeof sortedPosts[0]): string {
     setTimeout(() => syncGloves?.(), 20);
   });
 
-  /* ── 文章篩選 ── */
-  document.getElementById('hpPills')?.addEventListener('click', (e) => {
-    const btn = (e.target as Element).closest('.hp-pill') as HTMLElement | null;
-    if (!btn) return;
-    document.querySelectorAll('.hp-pill').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    const f = btn.dataset.filter;
-    document.querySelectorAll<HTMLElement>('.hp-article-card').forEach(card => {
-      card.style.display = (f === '全部' || card.dataset.filter === f) ? '' : 'none';
-    });
-  });
+  /* ── 文章篩選（延遲初始化，非首屏關鍵交互）── */
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => {
+      document.getElementById('hpPills')?.addEventListener('click', (e) => {
+        const btn = (e.target as Element).closest('.hp-pill') as HTMLElement | null;
+        if (!btn) return;
+        document.querySelectorAll('.hp-pill').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        document.querySelectorAll<HTMLElement>('.hp-article-card').forEach(card => {
+          card.style.display = (f === '全部' || card.dataset.filter === f) ? '' : 'none';
+        });
+      });
+    }, { timeout: 3000 });
+  } else {
+    setTimeout(() => {
+      document.getElementById('hpPills')?.addEventListener('click', (e) => {
+        const btn = (e.target as Element).closest('.hp-pill') as HTMLElement | null;
+        if (!btn) return;
+        document.querySelectorAll('.hp-pill').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        document.querySelectorAll<HTMLElement>('.hp-article-card').forEach(card => {
+          card.style.display = (f === '全部' || card.dataset.filter === f) ? '' : 'none';
+        });
+      });
+    }, 2000);
+  }
 </script>
 
 <style>
