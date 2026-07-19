@@ -25,12 +25,17 @@
             "lng": 120.330238
         }
     },
-    "website": "www.chiaohsin.com.tw",
+    "website": "chiaohsin.com.tw",
+    "googleBusinessProfile": "https://www.google.com/maps?cid=15986021917958174118",
     "sameAs": [
-        "https://www.google.com/maps/search/?api=1&query=23.169508,120.330238",
+        "https://www.google.com/maps?cid=15986021917958174118",
         "https://findbiz.nat.gov.tw/fts/company/80446975",
         "https://www.twincn.com/item.aspx?no=80446975",
-        "https://redant.web66.com.tw/"
+        "https://redant.web66.com.tw/",
+        "https://www.104.com.tw/company/1a2x6blfw8",
+        "https://mygov.tw/company/80446975",
+        "https://twinc.com.tw/#/business/name/%E5%96%AC%E6%96%B0%E9%87%9D%E7%B9%94%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8/",
+        "https://info.technews.tw/company/80446975-%E5%96%AC%E6%96%B0%E9%87%9D%E7%B9%94%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8"
     ],
     "services": {
         "products": [

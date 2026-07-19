@@ -5,7 +5,7 @@ import categories from "../data/categories.json";
 
 const currentYear = new Date().getFullYear();
 const mapSrc = `https://www.google.com/maps?q=${company.address.coordinates.lat},${company.address.coordinates.lng}&z=16&output=embed`;
-const mapsLink = `https://www.google.com/maps/search/?api=1&query=${company.address.coordinates.lat},${company.address.coordinates.lng}`;
+const mapsLink = company.googleBusinessProfile;
 ---
 
 <footer class="ft">
@@ -48,7 +48,7 @@ const mapsLink = `https://www.google.com/maps/search/?api=1&query=${company.addr
       <div class="ft-col ft-col--brand">
         <a href="/" class="ft-brand-link" aria-label="紅螞蟻手套 喬新針織有限公司">
           <span class="ft-logo-wrap" aria-hidden="true">
-            <img src={`/${company.logo}`} alt="" class="ft-logo-img" />
+            <img src={`/${company.logo}`} alt="" class="ft-logo-img" width="40" height="40" />
             <span
               class="ft-logo-mask"
               style={`-webkit-mask-image:url('/${company.logo}');mask-image:url('/${company.logo}');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;`}
@@ -183,6 +183,7 @@ const mapsLink = `https://www.google.com/maps/search/?api=1&query=${company.addr
     <div class="ft-legal-inner">
       <p class="ft-copyright">© {currentYear} 喬新針織有限公司・紅螞蟻手套　版權所有</p>
       <p class="ft-legal-note">旗下品牌：{company.brandName}、{company.otherBrand}　｜　關係企業：永立新國際有限公司</p>
+      <p class="ft-legal-links"><a href="/privacy">隱私權政策</a>　｜　<a href="/terms">服務條款</a></p>
     </div>
   </div>
 
@@ -440,6 +441,9 @@ a.ft-ci:hover { color: var(--ft-hover); }
 }
 .ft-copyright  { font-size: 12px; color: #6b7280; }
 .ft-legal-note { font-size: 11px; color: #374151; }
+.ft-legal-links { font-size: 11px; }
+.ft-legal-links a { color: #374151; text-decoration: underline; text-underline-offset: 2px; }
+.ft-legal-links a:hover { color: var(--td, #4A90A4); }
 </style>
 
 <script>

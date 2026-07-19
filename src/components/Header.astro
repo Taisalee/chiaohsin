@@ -1,7 +1,6 @@
 ---
 import company from "../data/company.json";
 import navigation from "../data/navigation.json";
-import products from "../data/products.json";
 
 const currentPath = Astro.url.pathname;
 function isActive(url: string) {
@@ -16,7 +15,7 @@ function isActive(url: string) {
     <!-- 品牌 -->
     <a href="/" class="hd-brand" aria-label={company.name}>
       <span class="hd-logo-wrap" aria-hidden="true">
-        <img src={`/${company.logo}`} alt="" class="hd-logo-img" />
+        <img src={`/${company.logo}`} alt="" class="hd-logo-img" width="38" height="38" />
         <span class="hd-logo-mask" style={`-webkit-mask-image:url('/${company.logo}');mask-image:url('/${company.logo}');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;`}></span>
       </span>
       <span class="hd-brand-name">
@@ -117,7 +116,7 @@ function isActive(url: string) {
   </nav>
 </header>
 
-<script define:vars={{ products }}>
+<script>
   // 對應 scripts/generate-product-thumbnails.js 的命名規則
   function productThumb(imagePath) {
     const dot = imagePath.lastIndexOf('.');
@@ -132,12 +131,22 @@ function isActive(url: string) {
   const searchClose   = document.getElementById('hdSearchClose');
   const searchResults = document.getElementById('hdSearchResults');
 
+  // 搜尋索引很少人會用到，改成點開搜尋才下載，不要讓每個頁面都內嵌整份商品資料
+  let searchIndexPromise = null;
+  function loadSearchIndex() {
+    if (!searchIndexPromise) {
+      searchIndexPromise = fetch('/search-index.json').then(r => r.json());
+    }
+    return searchIndexPromise;
+  }
+
   function openSearch() {
     searchBar.classList.add('is-open');
     searchBar.setAttribute('aria-hidden', 'false');
     searchBar.removeAttribute('inert');
     searchBtn.setAttribute('aria-expanded', 'true');
     searchInput.focus();
+    loadSearchIndex();
   }
   function closeSearch() {
     searchBar.classList.remove('is-open');
@@ -154,9 +163,10 @@ function isActive(url: string) {
   searchClose?.addEventListener('click', closeSearch);
   document.addEventListener('keydown', e => e.key === 'Escape' && closeSearch());
 
-  searchInput?.addEventListener('input', e => {
+  searchInput?.addEventListener('input', async e => {
     const q = e.target.value.trim().toLowerCase();
     if (!q) { searchResults.innerHTML = ''; return; }
+    const products = await loadSearchIndex();
     const hits = products
       .filter(p => [p.name, p.description, p.category, ...(p.tags || [])].join(' ').toLowerCase().includes(q))
       .slice(0, 8);
@@ -166,7 +176,7 @@ function isActive(url: string) {
     }
     searchResults.innerHTML = hits.map(p => `
       <a href="/products/${p.id}" class="hd-sr-item" role="option">
-        <img src="/${productThumb(p.image)}" alt="${p.name}" class="hd-sr-img" loading="lazy" />
+        <img src="/${productThumb(p.image)}" alt="${p.name}" class="hd-sr-img" loading="lazy" width="40" height="40" />
         <span class="hd-sr-name">${p.name}</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hd-sr-arr" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
       </a>

@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 const { item } = Astro.props;
 const { Content } = await render(item);
 
-const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? "https://www.chiaohsin.com.tw";
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? "https://chiaohsin.com.tw";
 const pageTitle = `${item.data.title} - ${company.shortName}`;
 const pageDescription = item.data.description;
 const slug = item.id.replace(/\/index$/, '');
