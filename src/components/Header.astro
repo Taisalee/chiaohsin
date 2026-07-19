@@ -1,7 +1,6 @@
 ---
 import company from "../data/company.json";
 import navigation from "../data/navigation.json";
-import products from "../data/products.json";
 
 const currentPath = Astro.url.pathname;
 function isActive(url: string) {
@@ -117,7 +116,7 @@ function isActive(url: string) {
   </nav>
 </header>
 
-<script define:vars={{ products }}>
+<script>
   // 對應 scripts/generate-product-thumbnails.js 的命名規則
   function productThumb(imagePath) {
     const dot = imagePath.lastIndexOf('.');
@@ -132,12 +131,22 @@ function isActive(url: string) {
   const searchClose   = document.getElementById('hdSearchClose');
   const searchResults = document.getElementById('hdSearchResults');
 
+  // 搜尋索引很少人會用到，改成點開搜尋才下載，不要讓每個頁面都內嵌整份商品資料
+  let searchIndexPromise = null;
+  function loadSearchIndex() {
+    if (!searchIndexPromise) {
+      searchIndexPromise = fetch('/search-index.json').then(r => r.json());
+    }
+    return searchIndexPromise;
+  }
+
   function openSearch() {
     searchBar.classList.add('is-open');
     searchBar.setAttribute('aria-hidden', 'false');
     searchBar.removeAttribute('inert');
     searchBtn.setAttribute('aria-expanded', 'true');
     searchInput.focus();
+    loadSearchIndex();
   }
   function closeSearch() {
     searchBar.classList.remove('is-open');
@@ -154,11 +163,11 @@ function isActive(url: string) {
   searchClose?.addEventListener('click', closeSearch);
   document.addEventListener('keydown', e => e.key === 'Escape' && closeSearch());
 
-  searchInput?.addEventListener('input', e => {
+  searchInput?.addEventListener('input', async e => {
     const q = e.target.value.trim().toLowerCase();
     if (!q) { searchResults.innerHTML = ''; return; }
+    const products = await loadSearchIndex();
     const hits = products
-      .filter(p => p.available !== false)
       .filter(p => [p.name, p.description, p.category, ...(p.tags || [])].join(' ').toLowerCase().includes(q))
       .slice(0, 8);
     if (!hits.length) {

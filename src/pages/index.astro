@@ -42,13 +42,49 @@ function articleFilter(post: typeof sortedPosts[0]): string {
   if (title.includes('食品') || title.includes('電鍍') || title.includes('化工') || title.includes('物流') || title.includes('產業')) return '產業應用';
   return '選購指南';
 }
+
+const homeFaqs = [
+  {
+    q: '喬新針織主要賣什麼？跟紅螞蟻手套是什麼關係？',
+    a: '「紅螞蟻手套」是喬新針織有限公司的自有品牌，公司成立於 2003 年，位於台南市官田區，主要生產與批發棉紗手套、NBR/PVC 膠手套、尼龍手套、白龍花龍手套，以及口罩、包裝材料等工安耗材，長期供應製造業、物流業、工程業等企業客戶。',
+  },
+  {
+    q: '可以少量訂購嗎？還是一定要大量批發？',
+    a: '最低訂購量依品項而異，歡迎來電 06-6900359 或透過線上詢價洽詢確認的數量，客製規格請來電詢問。',
+  },
+  {
+    q: '配送範圍有涵蓋全台灣嗎？大概多久出貨？',
+    a: '全台皆可配送。現貨商品原則上 3 個工作日內出貨，下單後可與業務確認實際出貨時間。',
+  },
+  {
+    q: '除了手套，還有賣什麼耗材？',
+    a: '除了各式工作手套，我們也供應口罩、包裝材料（PE膜、膠帶）、建築五金、太空包、清潔用品、交通安全用品、無塵室耗材等工安相關商品，一次採購省去多方比價的麻煩。',
+  },
+  {
+    q: '怎麼詢價？需要準備什麼資訊？',
+    a: `提供需要的手套材質、針數/兩數規格與大概數量，透過 LINE（ID：${LINE_ID}）或電話 ${company.contact.phone} 聯繫業務，就能快速取得報價。`,
+  },
+];
+
+const homeFaqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: homeFaqs.map(item => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
 ---
 
 <Layout
   title="工作手套批發直營｜棉紗、膠手套、口罩・紅螞蟻手套・台南喬新針織"
-  description="台南喬新針織（紅螞蟻手套）成立 2003 年，棉紗手套、NBR/PVC 膠手套、尼龍手套、口罩批發直營，質量足重、工廠直供、全台配送，歡迎企業詢價。"
+  description="台南喬新針織（紅螞蟻手套）成立 2003 年，專營棉紗手套、NBR/PVC 膠手套、尼龍手套、口罩批發直營，另供應五金耗材、包裝材料、太空包等工安用品，質量足重、工廠直供、全台配送，歡迎企業來電詢價。"
   canonical="/"
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(homeFaqSchema)} />
+  </Fragment>
 
   <div class="hp">
 
@@ -56,7 +92,7 @@ function articleFilter(post: typeof sortedPosts[0]): string {
     <section class="hp-hero">
       <div class="hp-inner">
         <p class="hp-eyebrow">台南・紅螞蟻手套</p>
-        <h1 class="hp-h1">工作手套與防護用品批發</h1>
+        <h1 class="hp-h1">棉紗手套・膠手套・工作防護用品批發直營</h1>
         <p class="hp-desc">專業製造・品質保證・台灣製造，為您的工作環境提供最可靠的防護解決方案</p>
         <div class="hp-btns">
           <a href="/products" class="hp-btn-primary">瀏覽所有產品</a>
@@ -268,7 +304,15 @@ function articleFilter(post: typeof sortedPosts[0]): string {
           {sortedPosts.map(post => (
             <a class="hp-article-card" href={`/blog/${post.id.replace(/\/index$/, '')}`} data-filter={articleFilter(post)}>
               <div class="hp-article-img">
-                <Image src={post.data.image} alt={post.data.title} loading="lazy" width={400} height={225} />
+                <Image
+                  src={post.data.image}
+                  alt={post.data.title}
+                  loading="lazy"
+                  width={400}
+                  height={225}
+                  widths={[300, 400, 600]}
+                  sizes="(min-width: 1024px) 22vw, (min-width: 640px) 30vw, 45vw"
+                />
                 <span class="hp-article-badge">文章</span>
               </div>
               <p class="hp-article-title">{post.data.title}</p>
@@ -281,7 +325,25 @@ function articleFilter(post: typeof sortedPosts[0]): string {
       </div>
     </section>
 
-    <!-- ⑥ CTA -->
+    <!-- ⑥ 常見問題 -->
+    <section class="hp-faq">
+      <div class="hp-inner">
+        <h2 class="hp-faq-title">常見問題</h2>
+        <div class="hp-faq-list">
+          {homeFaqs.map((item, i) => (
+            <details class="hp-faq-item" open={i === 0}>
+              <summary class="hp-faq-q">
+                <span>{item.q}</span>
+                <svg class="hp-faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+              <p class="hp-faq-a">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑦ CTA -->
     <section class="hp-cta">
       <div class="hp-cta-blob hp-cta-blob-1"></div>
       <div class="hp-cta-blob hp-cta-blob-2"></div>
@@ -726,6 +788,29 @@ function articleFilter(post: typeof sortedPosts[0]): string {
     text-decoration: none; transition: all .18s;
   }
   .hp-btn-outline:hover { background: var(--td); color: #fff; }
+
+  /* ══ 常見問題 ══ */
+  .hp-faq { padding-block: 32px; border-top: 1px solid var(--line); }
+  .hp-faq-title { font-size: clamp(18px, 2.5vw, 26px); font-weight: 800; margin: 0 0 16px; }
+  .hp-faq-list { display: flex; flex-direction: column; gap: 10px; }
+  .hp-faq-item {
+    border: 1px solid var(--line); border-radius: 12px; background: var(--cream);
+    overflow: hidden; padding: 0;
+  }
+  .hp-faq-q {
+    cursor: pointer; list-style: none;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: clamp(14px, 1.8vw, 18px) clamp(16px, 2vw, 22px);
+    font-size: clamp(13.5px, 1.3vw, 15px); font-weight: 700; color: var(--ink);
+  }
+  .hp-faq-q::-webkit-details-marker { display: none; }
+  .hp-faq-chevron { width: 16px; height: 16px; flex-shrink: 0; color: var(--td); transition: transform .2s; }
+  .hp-faq-item[open] .hp-faq-chevron { transform: rotate(180deg); }
+  .hp-faq-a {
+    margin: 0; padding: 0 clamp(16px, 2vw, 22px) clamp(14px, 1.8vw, 18px);
+    font-size: clamp(12.5px, 1.15vw, 14px); line-height: 1.75; color: var(--sub);
+    background: var(--white);
+  }
 
   /* ══ CTA ══ */
   .hp-cta {

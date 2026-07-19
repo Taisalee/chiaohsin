@@ -58,6 +58,7 @@ const breadcrumbSchema = {
     canonical="/blog"
 >
     <Fragment slot="head">
+        <link rel="alternate" type="application/rss+xml" title={`${company.shortName}選購指南`} href="/blog/rss.xml" />
         <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
         <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
     </Fragment>
@@ -99,6 +100,8 @@ const breadcrumbSchema = {
                         loading="lazy"
                         width={400}
                         height={225}
+                        widths={[300, 400, 600]}
+                        sizes="(max-width: 460px) 100vw, (max-width: 720px) 50vw, (max-width: 1000px) 33vw, 25vw"
                       />
                       <span class="blg-card-badge">{filter}</span>
                     </div>
