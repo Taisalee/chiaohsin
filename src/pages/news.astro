@@ -60,10 +60,10 @@ const breadcrumbSchema = {
 >
   <Fragment slot="head">
     <link rel="alternate" type="application/rss+xml" title={`${company.shortName}最新消息`} href="/news/rss.xml" />
-    <script type="application/ld+json" set:html={JSON.stringify(blogSchema)} />
-    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(blogSchema)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
     {newsItemListSchema && (
-      <script type="application/ld+json" set:html={JSON.stringify(newsItemListSchema)} />
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(newsItemListSchema)} />
     )}
   </Fragment>
     <PageHero title="喬新針織最新消息｜棉紗手套批發公告與產品動態" description="新品上架公告、庫存備貨通知、喬新針織公司動態，掌握棉紗手套批發最新資訊">

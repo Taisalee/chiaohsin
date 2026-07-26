@@ -118,21 +118,31 @@ function isActive(url: string) {
 
 <script>
   // 對應 scripts/generate-product-thumbnails.js 的命名規則
-  function productThumb(imagePath) {
+  function productThumb(imagePath: string): string {
     const dot = imagePath.lastIndexOf('.');
     if (dot === -1) return imagePath;
     return imagePath.slice(0, dot) + '_thumb' + imagePath.slice(dot);
   }
 
+  interface SearchIndexItem {
+    id: string;
+    name: string;
+    description: string;
+    category: string;
+    tags?: string[];
+    image: string;
+  }
+
   // ── 搜尋 ──
-  const searchBtn     = document.getElementById('hdSearchBtn');
-  const searchBar     = document.getElementById('hdSearchBar');
-  const searchInput   = document.getElementById('hdSearchInput');
-  const searchClose   = document.getElementById('hdSearchClose');
-  const searchResults = document.getElementById('hdSearchResults');
+  // 以下元素皆為本元件模板中固定渲染的節點，不會缺席，故用 ! 斷言非 null
+  const searchBtn     = document.getElementById('hdSearchBtn')!;
+  const searchBar     = document.getElementById('hdSearchBar')!;
+  const searchInput   = document.getElementById('hdSearchInput') as HTMLInputElement;
+  const searchClose   = document.getElementById('hdSearchClose')!;
+  const searchResults = document.getElementById('hdSearchResults')!;
 
   // 搜尋索引很少人會用到，改成點開搜尋才下載，不要讓每個頁面都內嵌整份商品資料
-  let searchIndexPromise = null;
+  let searchIndexPromise: Promise<SearchIndexItem[]> | null = null;
   function loadSearchIndex() {
     if (!searchIndexPromise) {
       searchIndexPromise = fetch('/search-index.json').then(r => r.json());
@@ -163,8 +173,8 @@ function isActive(url: string) {
   searchClose?.addEventListener('click', closeSearch);
   document.addEventListener('keydown', e => e.key === 'Escape' && closeSearch());
 
-  searchInput?.addEventListener('input', async e => {
-    const q = e.target.value.trim().toLowerCase();
+  searchInput?.addEventListener('input', async (e) => {
+    const q = (e.target as HTMLInputElement).value.trim().toLowerCase();
     if (!q) { searchResults.innerHTML = ''; return; }
     const products = await loadSearchIndex();
     const hits = products
@@ -186,9 +196,9 @@ function isActive(url: string) {
   });
 
   // ── 聯絡下拉選單 ──
-  const ctaBtn     = document.getElementById('hdCtaBtn');
-  const dropdown   = document.getElementById('hdContactDropdown');
-  const contactMenu = document.getElementById('hdContactMenu');
+  const ctaBtn     = document.getElementById('hdCtaBtn')!;
+  const dropdown   = document.getElementById('hdContactDropdown')!;
+  const contactMenu = document.getElementById('hdContactMenu')!;
 
   ctaBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -199,7 +209,7 @@ function isActive(url: string) {
   });
 
   document.addEventListener('click', e => {
-    if (!dropdown?.contains(e.target)) {
+    if (!dropdown.contains(e.target as Node)) {
       dropdown.classList.remove('is-open');
       contactMenu.setAttribute('aria-hidden', 'true');
       contactMenu.setAttribute('inert', '');
@@ -208,8 +218,8 @@ function isActive(url: string) {
   });
 
   // ── 手機選單 ──
-  const menuBtn    = document.getElementById('hdMenuBtn');
-  const mobileMenu = document.getElementById('hdMobileMenu');
+  const menuBtn    = document.getElementById('hdMenuBtn')!;
+  const mobileMenu = document.getElementById('hdMobileMenu')!;
 
   menuBtn?.addEventListener('click', () => {
     const open = mobileMenu.classList.toggle('is-open');
@@ -220,7 +230,7 @@ function isActive(url: string) {
   });
 
   document.addEventListener('click', e => {
-    if (!menuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+    if (!menuBtn.contains(e.target as Node) && !mobileMenu.contains(e.target as Node)) {
       mobileMenu.classList.remove('is-open');
       menuBtn.setAttribute('aria-expanded', 'false');
       mobileMenu.setAttribute('aria-hidden', 'true');

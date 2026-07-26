@@ -4,23 +4,20 @@ import ProductCard from "../../components/ProductCard.astro";
 import company from "../../data/company.json";
 import categories from "../../data/categories.json";
 import products from "../../data/products.json";
-import seo from "../../data/seo.json";
 
 export function getStaticPaths() {
     return products
         .filter((product) => product.available !== false)
         .map((product) => {
             const category = categories.find((c) => c.id === product.category);
+            if (!category) {
+                throw new Error(`商品 ${product.id} 的分類 ${product.category} 在 categories.json 中不存在`);
+            }
             return {
                 params: { id: product.id },
                 props: { product, category },
             };
         });
-}
-
-interface Props {
-    product: (typeof products)[0];
-    category: (typeof categories)[0];
 }
 
 const { product, category } = Astro.props;
@@ -181,15 +178,15 @@ const breadcrumbData = {
     <!-- 結構化資料 -->
     <Fragment slot="head">
         <script
-            type="application/ld+json"
+            is:inline type="application/ld+json"
             set:html={JSON.stringify(structuredData)}
         />
         <script
-            type="application/ld+json"
+            is:inline type="application/ld+json"
             set:html={JSON.stringify(breadcrumbData)}
         />
         <script
-            type="application/ld+json"
+            is:inline type="application/ld+json"
             set:html={JSON.stringify(faqData)}
         />
     </Fragment>
@@ -309,7 +306,7 @@ const breadcrumbData = {
                     >
                         <img
                             src={`/${product.image}`}
-                            alt={`${product.name} 產品圖片`}
+                            alt={`${product.name}${product.size && product.size !== "-" ? ` ${product.size}` : ""} ${category.name}批發 - 喬新針織`}
                             class="w-full lg:max-h-[500px] object-contain rounded-xl shadow-lg"
                             width="500"
                             height="500"
@@ -414,6 +411,11 @@ const breadcrumbData = {
                             </div>
                         )
                     }
+
+                    <!-- 大宗採購提示 -->
+                    <p class="text-sm text-gray-500 leading-relaxed">
+                        歡迎工廠、營造業、五金行大宗採購，整打／整箱起訂享工廠直營價，可另議價。
+                    </p>
 
                     <!-- CTA 按鈕區塊 -->
                     <div class="space-y-2 pt-4" id="cta-block">
