@@ -1,4 +1,4 @@
-// 為 products.json 裡的每張商品圖產生一份縮圖（400x400），
+// 為 products.json 裡的每張商品圖產生一份縮圖（320x320），
 // 給首頁貨架、商品列表卡、Header 搜尋下拉等縮圖情境使用，
 // 詳情頁主圖繼續使用原始 800x800 圖檔。
 //
@@ -10,7 +10,7 @@ import { existsSync, statSync } from "node:fs";
 import path from "node:path";
 import sharp from "sharp";
 
-const THUMB_SIZE = 400;
+const THUMB_SIZE = 320;
 const THUMB_QUALITY = 80;
 
 const rootDir = path.resolve(import.meta.dirname, "..");
