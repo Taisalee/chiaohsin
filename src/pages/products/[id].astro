@@ -33,7 +33,7 @@ const relatedProducts = products
     .slice(0, 4);
 
 // SEO 相關設定
-const productTitle = `${product.name} - ${category.name}`;
+const productTitle = `${product.name} - ${category.name}｜紅螞蟻手套`;
 const _descFirstSentence = product.description.replace(/\n+/g, ' ').split('。')[0];
 const _descSnippet = _descFirstSentence.length > 80 ? _descFirstSentence.slice(0, 80) + '…' : _descFirstSentence;
 const productDescription = `${product.name}｜${category.name}批發直供。${_descSnippet}。喬新針織，全台配送。`.slice(0, 155);
