@@ -32,13 +32,6 @@ const itemListSchema = {
       description: cat.description,
       url: `${siteUrl}/products#${cat.id}`,
       brand: { "@type": "Brand", name: company.shortName },
-      offers: {
-        "@type": "Offer",
-        priceCurrency: "TWD",
-        availability: "https://schema.org/InStock",
-        seller: { "@type": "Organization", name: company.shortName },
-        url: `${siteUrl}/contact`,
-      },
     },
   })),
 };

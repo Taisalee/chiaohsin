@@ -68,22 +68,6 @@ const structuredData = {
         foundingDate: "2003",
     },
     dateModified: new Date().toISOString().split("T")[0],
-    offers: {
-        "@type": "Offer",
-        url: `${siteUrl}/products/${product.id}`,
-        availability: "https://schema.org/InStock",
-        itemCondition: "https://schema.org/NewCondition",
-        priceSpecification: {
-            "@type": "PriceSpecification",
-            priceCurrency: "TWD",
-            description: "批發價格依數量而定，請洽詢業務",
-        },
-        seller: {
-            "@type": "Organization",
-            "@id": `${siteUrl}/#organization`,
-            name: company.shortName,
-        },
-    },
 };
 
 // FAQ 結構化資料
