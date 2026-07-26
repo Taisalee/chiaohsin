@@ -56,7 +56,7 @@ export default defineConfig({
                 output: {
                     // 資源輸出優化
                     assetFileNames: (assetInfo) => {
-                        const name = assetInfo.names?.[0] ?? assetInfo.name ?? '';
+                        const name = assetInfo.names?.[0] ?? '';
                         if (/\.woff2?$/i.test(name)) {
                             return '_astro/fonts/[name][extname]';
                         } else if (/\.(png|jpe?g|gif|webp|svg)$/i.test(name)) {

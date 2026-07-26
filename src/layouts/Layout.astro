@@ -12,6 +12,8 @@ interface Props {
   ogImage?: string;
   ogType?: "website" | "article" | "product";
   noIndex?: boolean;
+  publishedTime?: string;
+  modifiedTime?: string;
 }
 
 const {
@@ -21,6 +23,8 @@ const {
   ogImage,
   ogType = "website",
   noIndex = false,
+  publishedTime,
+  modifiedTime,
 } = Astro.props;
 const pageTitle = title ? `${title} | ${company.shortName}` : seo.title;
 const pageDescription = description || seo.description;
@@ -54,6 +58,7 @@ const organizationData = {
   },
   description: company.description,
   foundingDate: company.foundingYear,
+  taxID: company.taxID,
   areaServed: "TW",
   knowsAbout: ["工業手套", "棉紗手套", "NBR手套", "PVC手套", "尼龍手套", "沾膠手套", "工作防護用品", "手套批發製造"],
   address: {
@@ -172,6 +177,12 @@ const websiteData = {
     <meta property="og:image:alt" content={pageTitle} />
     <meta property="og:locale" content="zh_TW" />
     <meta property="og:site_name" content={company.shortName} />
+    {ogType === "article" && publishedTime && (
+      <meta property="article:published_time" content={publishedTime} />
+    )}
+    {ogType === "article" && modifiedTime && (
+      <meta property="article:modified_time" content={modifiedTime} />
+    )}
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -225,15 +236,15 @@ const websiteData = {
 
     <!-- 結構化資料 -->
     <script
-      type="application/ld+json"
+      is:inline type="application/ld+json"
       set:html={JSON.stringify(organizationData)}
     />
     <script
-      type="application/ld+json"
+      is:inline type="application/ld+json"
       set:html={JSON.stringify(localBusinessData)}
     />
     <script
-      type="application/ld+json"
+      is:inline type="application/ld+json"
       set:html={JSON.stringify(websiteData)}
     />
 

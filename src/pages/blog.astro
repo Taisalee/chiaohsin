@@ -59,8 +59,8 @@ const breadcrumbSchema = {
 >
     <Fragment slot="head">
         <link rel="alternate" type="application/rss+xml" title={`${company.shortName}選購指南`} href="/blog/rss.xml" />
-        <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
-        <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+        <script is:inline type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+        <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
     </Fragment>
 
     <PageHero title="如何挑選工作手套｜棉紗・膠手套・尼龍手套選購指南" description="喬新針織專業教學文章：棉紗手套重量選法、膠手套材質比較、尼龍手套應用場合，幫助您找到最適合的防護用品">

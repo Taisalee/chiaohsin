@@ -5,7 +5,6 @@ import ProductCard from "../../components/ProductCard.astro";
 import company from "../../data/company.json";
 import categories from "../../data/categories.json";
 import products from "../../data/products.json";
-import seo from "../../data/seo.json";
 
 const siteUrl = "https://chiaohsin.com.tw";
 const LINE_ID = company.contact["LINE ID"];
@@ -91,6 +90,38 @@ const faqSchema = {
     },
     {
       "@type": "Question",
+      name: "付款方式有哪些？可以月結、開發票嗎？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "提供現金、ATM轉帳、貨到付款、電匯等付款方式；大量訂購或長期配合客戶可申請月結。可開立三聯式發票，方便企業報帳請款。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "可以客製印刷 LOGO 嗎？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "我們主要提供代工訂製服務，規格、尺寸、包裝可依需求客製；若需要印製品牌 LOGO，印刷作業需由客戶端自行安排。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "可以索取樣品嗎？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "大量訂購或長期配合的代工客戶，可安排打樣確認品質；一般小量採購建議先參考商品規格頁面，或直接洽詢業務了解細節。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "急單可以加急出貨嗎？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "視當下產線排程而定，若其他訂單不急，我們會盡量協助插單處理，建議儘早聯繫業務確認可行時程。",
+      },
+    },
+    {
+      "@type": "Question",
       name: "喬新針織是什麼公司？",
       acceptedAnswer: {
         "@type": "Answer",
@@ -108,9 +139,9 @@ const faqSchema = {
   canonical="/products"
 >
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
-    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
-    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   </Fragment>
 
   <PageHero
@@ -282,6 +313,34 @@ const faqSchema = {
             <summary class="prd-faq-q" itemprop="name">手套批發最低訂購量是多少？</summary>
             <div class="prd-faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
               <p itemprop="text">最低訂購量依品項而異，歡迎來電 06-6900359 或透過線上詢價表單洽詢。客製規格（重量、尺寸、印刷）亦可接單，工廠直營、交期穩定。</p>
+            </div>
+          </details>
+
+          <details class="prd-faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <summary class="prd-faq-q" itemprop="name">付款方式有哪些？可以月結、開發票嗎？</summary>
+            <div class="prd-faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+              <p itemprop="text">提供現金、ATM轉帳、貨到付款、電匯等付款方式；大量訂購或長期配合客戶可申請月結。可開立三聯式發票，方便企業報帳請款。</p>
+            </div>
+          </details>
+
+          <details class="prd-faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <summary class="prd-faq-q" itemprop="name">可以客製印刷 LOGO 嗎？</summary>
+            <div class="prd-faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+              <p itemprop="text">我們主要提供代工訂製服務，規格、尺寸、包裝可依需求客製；若需要印製品牌 LOGO，印刷作業需由客戶端自行安排。</p>
+            </div>
+          </details>
+
+          <details class="prd-faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <summary class="prd-faq-q" itemprop="name">可以索取樣品嗎？</summary>
+            <div class="prd-faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+              <p itemprop="text">大量訂購或長期配合的代工客戶，可安排打樣確認品質；一般小量採購建議先參考商品規格頁面，或直接洽詢業務了解細節。</p>
+            </div>
+          </details>
+
+          <details class="prd-faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <summary class="prd-faq-q" itemprop="name">急單可以加急出貨嗎？</summary>
+            <div class="prd-faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+              <p itemprop="text">視當下產線排程而定，若其他訂單不急，我們會盡量協助插單處理，建議儘早聯繫業務確認可行時程。</p>
             </div>
           </details>
 

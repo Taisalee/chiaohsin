@@ -25,7 +25,7 @@ const faqSchema = {
 };
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
 <div class="space-y-3" id="faq-container">
   {items.map((item, index) => (

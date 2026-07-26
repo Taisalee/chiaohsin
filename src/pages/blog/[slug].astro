@@ -9,11 +9,6 @@ import CauseList from "../../components/CauseList.astro";
 import FaqSection from "../../components/FaqSection.astro";
 import SelectionFlow from "../../components/SelectionFlow.astro";
 
-const allDataFiles = import.meta.glob<{ default: any }>(
-    "../../content/blog/*/data.json",
-    { eager: true }
-);
-
 export async function getStaticPaths() {
     const dataFiles = import.meta.glob<{ default: any }>(
         "../../content/blog/*/data.json",
@@ -57,6 +52,7 @@ const articleSchema = {
     description: post.data.description,
     image: `${siteUrl}${processedHeroImage.src}`,
     datePublished: post.data.publishDate.toISOString(),
+    dateModified: (post.data.updatedDate ?? post.data.publishDate).toISOString(),
     author: {
         "@type": "Organization",
         name: `${company.shortName}編輯團隊`,
@@ -89,7 +85,7 @@ const howToSchema = isHowTo ? {
     name: post.data.title,
     description: post.data.description,
     image: `${siteUrl}${processedHeroImage.src}`,
-    step: post.data.summary.map((s: string, i: number) => ({
+    step: post.data.summary!.map((s: string, i: number) => ({
         "@type": "HowToStep",
         position: i + 1,
         text: s,
@@ -147,25 +143,27 @@ const proseClass =
     canonical={`/blog/${post.id}`}
     ogImage={processedHeroImage.src}
     ogType="article"
+    publishedTime={post.data.publishDate.toISOString()}
+    modifiedTime={(post.data.updatedDate ?? post.data.publishDate).toISOString()}
 >
     <Fragment slot="head">
         <script
-            type="application/ld+json"
+            is:inline type="application/ld+json"
             set:html={JSON.stringify(articleSchema)}
         />
         <script
-            type="application/ld+json"
+            is:inline type="application/ld+json"
             set:html={JSON.stringify(breadcrumbSchema)}
         />
         {faqSchema && (
             <script
-                type="application/ld+json"
+                is:inline type="application/ld+json"
                 set:html={JSON.stringify(faqSchema)}
             />
         )}
         {howToSchema && (
             <script
-                type="application/ld+json"
+                is:inline type="application/ld+json"
                 set:html={JSON.stringify(howToSchema)}
             />
         )}

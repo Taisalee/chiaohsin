@@ -64,6 +64,22 @@ const homeFaqs = [
     q: '怎麼詢價？需要準備什麼資訊？',
     a: `提供需要的手套材質、針數/兩數規格與大概數量，透過 LINE（ID：${LINE_ID}）或電話 ${company.contact.phone} 聯繫業務，就能快速取得報價。`,
   },
+  {
+    q: '付款方式有哪些？可以月結、開發票嗎？',
+    a: '提供現金、ATM轉帳、貨到付款、電匯等付款方式；大量訂購或長期配合客戶可申請月結。可開立三聯式發票，方便企業報帳請款。',
+  },
+  {
+    q: '可以客製印刷 LOGO 嗎？',
+    a: '我們主要提供代工訂製服務，規格、尺寸、包裝可依需求客製；若需要印製品牌 LOGO，印刷作業需由客戶端自行安排。',
+  },
+  {
+    q: '可以索取樣品嗎？',
+    a: '大量訂購或長期配合的代工客戶，可安排打樣確認品質；一般小量採購建議先參考商品規格頁面，或直接洽詢業務了解細節。',
+  },
+  {
+    q: '急單可以加急出貨嗎？',
+    a: '視當下產線排程而定，若其他訂單不急，我們會盡量協助插單處理，建議儘早聯繫業務確認可行時程。',
+  },
 ];
 
 const homeFaqSchema = {
@@ -83,7 +99,7 @@ const homeFaqSchema = {
   canonical="/"
 >
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(homeFaqSchema)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(homeFaqSchema)} />
   </Fragment>
 
   <div class="hp">
@@ -186,7 +202,7 @@ const homeFaqSchema = {
                 {ps.map((p, idx) => (
                   <a class="hp-item" href={`/products/${p.id}`}>
                     <div class="hp-item-img">
-                      <img src={`/${productThumb(p.image)}`} alt={p.name} loading={i === 0 && idx < 2 ? "eager" : "lazy"} fetchpriority={i === 0 && idx === 0 ? "high" : undefined} width="160" height="160" />
+                      <img src={`/${productThumb(p.image)}`} alt={`${p.name}${p.size && p.size !== "-" ? ` ${p.size}` : ""} ${tab.label}批發 - 喬新針織`} loading={i === 0 && idx < 2 ? "eager" : "lazy"} fetchpriority={i === 0 && idx === 0 ? "high" : undefined} width="160" height="160" />
                     </div>
                     <p class="hp-item-name">{p.name}</p>
                     {p.features?.[0] && <span class="hp-item-spec">{p.features[0]}</span>}
@@ -225,7 +241,7 @@ const homeFaqSchema = {
             {hwProducts.map((p) => (
               <a class="hp-item" href={`/products/${p.id}`}>
                 <div class="hp-item-img">
-                  <img src={`/${productThumb(p.image)}`} alt={p.name} loading="lazy" width="160" height="160" />
+                  <img src={`/${productThumb(p.image)}`} alt={`${p.name}${p.size && p.size !== "-" ? ` ${p.size}` : ""} 建築五金批發 - 喬新針織`} loading="lazy" width="160" height="160" />
                 </div>
                 <p class="hp-item-name">{p.name}</p>
                 {p.features?.[0] && <span class="hp-item-spec">{p.features[0]}</span>}
@@ -262,7 +278,7 @@ const homeFaqSchema = {
             {pkgProducts.map((p) => (
               <a class="hp-item" href={`/products/${p.id}`}>
                 <div class="hp-item-img">
-                  <img src={`/${productThumb(p.image)}`} alt={p.name} loading="lazy" width="160" height="160" />
+                  <img src={`/${productThumb(p.image)}`} alt={`${p.name}${p.size && p.size !== "-" ? ` ${p.size}` : ""} 包裝材料批發 - 喬新針織`} loading="lazy" width="160" height="160" />
                 </div>
                 <p class="hp-item-name">{p.name}</p>
                 {p.features?.[0] && <span class="hp-item-spec">{p.features[0]}</span>}
@@ -382,8 +398,8 @@ const homeFaqSchema = {
     function sync() {
       const t = getTrack();
       if (!t) return;
-      bl.classList.toggle('gone', t.scrollLeft <= 4);
-      br.classList.toggle('gone', t.scrollLeft + t.clientWidth >= t.scrollWidth - 4);
+      bl!.classList.toggle('gone', t.scrollLeft <= 4);
+      br!.classList.toggle('gone', t.scrollLeft + t.clientWidth >= t.scrollWidth - 4);
     }
 
     bl.addEventListener('click', () => {
