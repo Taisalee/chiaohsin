@@ -11,6 +11,7 @@ user_invocable: true
 1. 取得圖片 → 複製到 `public/images/`，命名 `product_l_{id}.webp`
 2. 在 `src/data/products.json` 陣列末尾新增一筆記錄
 3. `category` 必須使用下方分類 ID 速查表中的現有 ID
+4. 執行 `node scripts/generate-product-thumbnails.js` 產生縮圖（自動輸出 320x320 webp，已跳過已存在且比原圖新的縮圖，可重複執行）
 
 ## products.json 必填欄位
 
