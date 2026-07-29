@@ -149,8 +149,8 @@ const faqSchema = {
   </PageHero>
 
   <!-- ① 信任條 -->
-  <div class="prd-outer">
-
+  <div class="prd-trust-wrap">
+    <div class="prd-outer">
     <div class="prd-trust">
         <div class="trust-item">
           <div class="trust-icon">
@@ -185,6 +185,7 @@ const faqSchema = {
           <span><strong>成立 2003 年</strong>・超過 20 年批發經驗</span>
         </div>
       </div>
+    </div>
   </div>
 
   <!-- ② 黏性分類導覽（hp-qnav 樣式） -->
@@ -423,11 +424,13 @@ const faqSchema = {
     padding: 12px 16px; margin-bottom: 16px;
   }
 
-  /* ── 信任條 ── */
+  /* ── 信任條（滿版色帶，跟下方分類導覽同一種做法） ── */
+  .prd-trust-wrap {
+    background: var(--prd-white); border-bottom: 1px solid var(--prd-line);
+  }
   .prd-trust {
     display: flex; gap: clamp(12px, 3vw, 28px); flex-wrap: wrap;
-    padding: 12px 16px;
-    background: var(--prd-white); border: 1px solid var(--prd-line); border-radius: 10px;
+    padding: 12px 0;
   }
   .trust-item {
     display: flex; align-items: center; gap: 8px;
@@ -439,7 +442,7 @@ const faqSchema = {
   }
   .trust-icon svg { width: 14px; height: 14px; stroke: var(--prd-td); }
   .trust-item strong { color: var(--prd-ink); font-weight: 700; }
-  @media (max-width: 1023px) { .prd-trust { display: none; } }
+  @media (max-width: 1023px) { .prd-trust-wrap { display: none; } }
 
   /* ── ② 黏性分類導覽 ── */
   .prd-qnav-wrap {
