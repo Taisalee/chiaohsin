@@ -25,7 +25,11 @@ const { product, category } = Astro.props;
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? "https://chiaohsin.com.tw";
 
 // 超商零售連結（選填欄位，無值則不顯示零售區塊）
-const retailLinks = (product as any).retailLinks as { "711"?: string; family?: string } | undefined;
+// 全站暫時隱藏：公司要求等賣場商品都上架後再顯示，資料保留在 products.json 不刪
+const SHOW_RETAIL_LINKS = false;
+const retailLinks = SHOW_RETAIL_LINKS
+    ? ((product as any).retailLinks as { "711"?: string; family?: string } | undefined)
+    : undefined;
 
 // 取得同分類的其他產品作為相關產品
 const relatedProducts = products

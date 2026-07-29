@@ -48,10 +48,10 @@ const mapsLink = company.googleBusinessProfile;
       <div class="ft-col ft-col--brand">
         <a href="/" class="ft-brand-link" aria-label="紅螞蟻手套 喬新針織有限公司">
           <span class="ft-logo-wrap" aria-hidden="true">
-            <img src={`/${company.logo}`} alt="" class="ft-logo-img" width="40" height="40" />
+            <img src={`/${company.logoIcon}`} alt="" class="ft-logo-img" width="40" height="40" />
             <span
               class="ft-logo-mask"
-              style={`-webkit-mask-image:url('/${company.logo}');mask-image:url('/${company.logo}');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;`}
+              style={`-webkit-mask-image:url('/${company.logoIcon}');mask-image:url('/${company.logoIcon}');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;`}
             ></span>
           </span>
           <span class="ft-brand-name">
@@ -285,7 +285,7 @@ const mapsLink = company.googleBusinessProfile;
 
 /* ── 品牌欄 ── */
 .ft-brand-link {
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; gap: 6px;
   text-decoration: none; margin-bottom: 16px;
 }
 .ft-logo-wrap { position: relative; width: 40px; height: 40px; flex-shrink: 0; }

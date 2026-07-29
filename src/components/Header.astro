@@ -15,8 +15,8 @@ function isActive(url: string) {
     <!-- 品牌 -->
     <a href="/" class="hd-brand" aria-label={company.name}>
       <span class="hd-logo-wrap" aria-hidden="true">
-        <img src={`/${company.logo}`} alt="" class="hd-logo-img" width="38" height="38" />
-        <span class="hd-logo-mask" style={`-webkit-mask-image:url('/${company.logo}');mask-image:url('/${company.logo}');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;`}></span>
+        <img src={`/${company.logoIcon}`} alt="" class="hd-logo-img" width="38" height="38" />
+        <span class="hd-logo-mask" style={`-webkit-mask-image:url('/${company.logoIcon}');mask-image:url('/${company.logoIcon}');-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;`}></span>
       </span>
       <span class="hd-brand-name">
         <span class="hd-brand-main">紅螞蟻手套</span>
@@ -269,7 +269,7 @@ function isActive(url: string) {
 
   /* ── 品牌 ── */
   .hd-brand {
-    display: flex; align-items: center; gap: 10px;
+    display: flex; align-items: center; gap: 6px;
     text-decoration: none; color: inherit; flex-shrink: 0;
   }
   .hd-logo-wrap {
