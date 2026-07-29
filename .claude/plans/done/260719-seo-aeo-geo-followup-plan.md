@@ -13,7 +13,7 @@
 - **未使用的 CSS（DaisyUI，116 KiB）：討論後決定不處理**。查證實際用到 9 種 DaisyUI 元件（btn/card/badge/breadcrumbs/dropdown/hero/mask/menu/divider），分佈 15+ 檔案；DaisyUI 的架構特性是「用到 `.btn` 就打包所有顏色/尺寸/狀態變體」，非按需產生。要瘦身需整個換成純 Tailwind 手刻樣式，重構風險與投入不成比例，且 CSS 大小不影響 TBT/CLS（互動流暢度已滿分），非首要問題
 - **CSS 未壓縮（10 KiB）：確認不需處理**。檢查 dist 輸出 5 個 CSS 檔皆已單行壓縮，10 KiB 來自外部 Google Fonts CSS（`fonts.googleapis.com`），非我方程式碼問題，無法修改
 - **回應式圖片（手機版顯示 155px vs 縮圖 320px）：討論 SEO 影響後決定不做**。查證 Google 官方文件：結構化資料/效能分數只影響 rich results 呈現與次要排名訊號，不是主要排名因素；且此站 Chrome UX Report 沒有足夠真實使用者資料，Google 目前根本沒有把 Core Web Vitals 當排名訊號套用在這個網站上。使用者決定「不管它」，320px 縮圖維持現狀不退回 400px
-- **顏色對比度不足（無障礙問題）：使用者確認不處理**，未查明具體元素
+- **顏色對比度不足（無障礙問題）：使用者確認不處理**。原因：對比度來自網頁既有配色系統，擔心調整會連動改變整體視覺風格，非漏查具體元素
 - **`product-upload` skill 補上缺漏步驟**：原本的上架 SOP 完全沒有「產生縮圖」這一步，只有複製圖片＋填 `products.json`，導致照 SOP 走新商品會沒有縮圖。已在 `.claude/skills/product-upload/SKILL.md` 加入第 4 步：執行 `node scripts/generate-product-thumbnails.js`（縮圖尺寸已寫死在 script 的 `THUMB_SIZE` 常數，不需要另外記規則，跑 script 就會自動保持一致）
 
 ## 已完成並上線（交接 session，2026-07-26）

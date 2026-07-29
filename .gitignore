@@ -25,3 +25,7 @@ pnpm-debug.log*
 
 # personal learning notes
 docs/notion-project-guide.md
+docs/website-project-playbook.md
+
+# skill-creator eval/test scratch output (not part of the skill itself)
+.claude/skills/*-workspace/
