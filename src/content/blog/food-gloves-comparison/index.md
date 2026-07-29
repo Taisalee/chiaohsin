@@ -7,6 +7,7 @@ summary:
   - "白龍手套可重複使用、成本低；PVC 手套多為一次性，單次成本低"
   - "同一產線若有乾濕兩種作業，建議分崗位採購不同手套"
 publishDate: 2026-04-25
+updatedDate: 2026-07-14
 image: "./cover.WebP"
 category: "選購指南"
 tags: ["食品加工", "手套選擇", "PVC手套", "白龍手套", "成本效益"]

@@ -4,7 +4,7 @@
 建立喬新針織專案專屬的 `seo-check` skill（SEO/AEO/GEO 健診），用 skill-creator 跑完整測試迭代驗證品質，並順手修掉測試過程中發現的 `/about` 頁真實 SEO bug。
 
 ## TODO
-- [ ] **push 本地的 2 個 commit 到 origin/develop**（使用者連續兩個 session 都決定先不 push，留到下次；origin/develop 目前無新變動，push 時應無 conflict）
+- [x] **push 本地 commit 到 origin/develop，並合併到 main 一併 push**（2026-07-30 完成；merge 用一般 merge commit，非 fast-forward，跟 repo 既有模式一致）
 
 ## 已完成並驗證
 
@@ -22,7 +22,13 @@
 - **`docs/website-project-playbook.md` 補充**：SEO 章節加了「誇大用詞紅線」「中文字元數修正」「共用 Layout 自動組字疊加 bug 類型」三條；新增 8.4（建 skill 前先查舊計劃、判斷該不該開新 skill）、8.5（skill 測試對照組常見誤判：baseline 不等於沒有 CLAUDE.md 背景、修 bug 要重跑全部測試案例）
 - **同步 3 篇知識筆記到 Notion「開發網站筆記」DB**：seo-check skill 建置心得、/about 頁三個 bug、website-project-playbook.md 全文。三篇的 frontmatter「標籤」（multi_select）跟「建立日期」（date）欄位工具沒自動填上，**使用者說要自己手動補**，不是我們的待辦
 - **`.gitignore` 補兩條**：`docs/website-project-playbook.md`（個人筆記不進 git，跟 `docs/notion-project-guide.md` 同模式）、`.claude/skills/*-workspace/`（skill 測試 scratch 產出）
-- **commit `0b2271a`**：新增 seo-check skill + `/about` 頁三個 bug 修復 + 上述 gitignore/plan 檔更新，尚未 push
+- **commit `0b2271a`**：新增 seo-check skill + `/about` 頁三個 bug 修復 + 上述 gitignore/plan 檔更新
+- **同 session 額外處理（跟 seo-check 主題無直接關聯，但一併記錄）**：
+  - 商品詳細頁暫時隱藏超商零售連結區塊（`commit b1996f6`，資料保留在 products.json，改 `SHOW_RETAIL_LINKS` 開關即可復原）
+  - 商品列表頁信任條改滿版色帶跟分類導覽視覺對齊（同 commit）
+  - **favicon/logo 全面修復**（`commit 9358799`）：`favicon.svg` 原本是包一層外部 PNG 的假 SVG，Chrome 用它當分頁圖示時不會抓取內部圖片、導致分頁空白；改成真正單一路徑向量圖（`public/images/logo-icon.svg`，品牌紅 `#c0392b`），viewBox 貼齊實際圖案邊界避免留白過多。Header/Footer logo 改用 `company.logoIcon` 套用同一份向量圖。`apple-touch-icon.png` 舊檔左右邊去背沒做完整（真正的 bug，非 Apple 規範要求），一併用新向量圖重新產生
+  - 三個 commit（`0b2271a`／`b1996f6`／`9358799`）已 merge 到 main 並 push（merge 用一般 merge commit，非 fast-forward，main 上有既有的 merge 歷史）
+  - **Google 相關快取，非程式碼問題**：Chrome 分頁圖示快取跟 Google 搜尋結果（SERP）favicon 快取是兩套獨立系統，都需要時間自然更新，已跟使用者說明不用重複動作
 
 ## 重要位置
 - `.claude/skills/seo-check/SKILL.md` - skill 本體，「使用方式」第1步是檔案存在性檢查、「紅線規則」第二條是誇大用詞、「檢查清單」SEO 段落是中文字元數公式

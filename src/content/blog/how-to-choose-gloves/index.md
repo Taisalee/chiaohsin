@@ -7,6 +7,7 @@ summary:
   - "正確的材質與尺寸比品牌名氣更重要"
   - "沒有最好的手套，只有最適合當前作業環境的手套"
 publishDate: 2025-01-25
+updatedDate: 2026-07-14
 image: "./cover.WebP"
 category: "選購指南"
 tags: ["手套選購", "工作手套", "棉紗手套", "NBR手套", "選購指南"]

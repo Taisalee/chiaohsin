@@ -387,7 +387,7 @@ const strengths = [
   .ab-section-alt { background: #fff; }
   .ab-h2 { font-size: clamp(20px, 2.8vw, 30px); font-weight: 900; line-height: 1.3; margin: 10px 0 10px; }
   .ab-sub-desc { font-size: clamp(13px, 1.3vw, 14.5px); color: var(--sub); line-height: 1.7; }
-  .ab-sub-text { color: var(--sub); }
+  .ab-sub-text { color: var(--sub); font-size: clamp(13.5px, 1.2vw, 15.5px); line-height: 1.75; }
   .ab-accent-td { color: var(--td); }
   .ab-accent-teal { color: var(--teal); font-size: clamp(15px, 1.8vw, 20px); display: block; margin-top: 4px; }
 
@@ -418,7 +418,7 @@ const strengths = [
   }
 
   /* ══ 核心產品與服務 ══ */
-  .ab-products-grid { display: flex; flex-direction: column-reverse; gap: 24px; }
+  .ab-products-grid { display: flex; flex-direction: column; gap: 24px; }
   @media (min-width: 768px) { .ab-products-grid { flex-direction: row; align-items: center; gap: clamp(24px, 4vw, 48px); } }
   .ab-products-lead { flex: 0 0 auto; }
   @media (min-width: 768px) { .ab-products-lead { flex: 0 0 30%; } }
@@ -440,7 +440,7 @@ const strengths = [
   /* ══ 核心競爭力 ══ */
   .ab-strength-grid { display: flex; flex-direction: column; gap: 24px; }
   @media (min-width: 640px) { .ab-strength-grid { flex-direction: row; align-items: flex-start; gap: clamp(24px, 4vw, 48px); } }
-  .ab-strength-lead { flex: 0 0 auto; position: sticky; top: 84px; align-self: flex-start; }
+  .ab-strength-lead { flex: 0 0 auto; }
   @media (min-width: 640px) { .ab-strength-lead { flex: 0 0 30%; } }
   .ab-strength-list { flex: 1; display: flex; flex-direction: column; gap: 12px; list-style: none; padding: 0; margin: 0; }
   .ab-strength-item {

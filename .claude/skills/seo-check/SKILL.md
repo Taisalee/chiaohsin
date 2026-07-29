@@ -38,8 +38,11 @@ user_invocable: true
 | 顏色對比度不足（無障礙） | 不處理 | 對比度來自既有視覺配色系統，擔心調整會連動改變整體風格 |
 | DaisyUI 未使用到的 CSS | 不處理 | 要瘦身需整個換成純 Tailwind 手刻樣式，重構風險與投入不成比例 |
 | sitemap.xml 檔名（`@astrojs/sitemap` 只產生 `-index.xml`，非 `/sitemap.xml`） | 維持現狀 | robots.txt 已正確指向，GSC 已驗證讀取成功，是文字檔名差異不是真的爬取問題 |
+| 在 `<head>` 加 `<link rel="sitemap">` 標籤 | 不加 | 查證過這是 IE 時代遺留慣例，Google 官方文件從未把它列為 sitemap 發現機制，只依賴 robots.txt 的 `Sitemap:` 指令或 GSC 手動提交（兩者都已到位）。純粹是為了迎合第三方檢測工具的路徑啟發式檢查，對 Google/AI 沒有實質幫助 |
 
 如果使用者主動重提其中一項（例如又貼了新的報告），可以重新討論，但不要主動再提。
+
+**第三方 AI 能見度檢測工具（Whoops 等）的建議，處理原則同「Google/Gemini 建議」紅線**：這類工具給的是自訂啟發式分數，不是 Google/AI 的真實行為，遇到「建議調整 XX 提升分數」先查證機制是否真實存在，不要為了衝分數做動作。已驗證過的案例：meta description 建議拉長到 120-160 字元（英文語境經驗值，套用中文會偏長，見下方檢查清單）、`<link rel="sitemap">` 標籤（見上表）。
 
 ## 已完成的基礎建設（健診時確認「還在」，不是要求重做）
 
@@ -49,6 +52,8 @@ user_invocable: true
 - 圖片 alt 文字格式：`{產品名稱}{尺寸} {分類名稱}批發 - 喬新針織`
 - 商品詳細頁 title 格式：`{name} - {分類名稱}｜紅螞蟻手套`
 - canonical / OG / sitemap 全站統一使用 `https://chiaohsin.com.tw`（非 www）
+- Header/Footer 品牌 logo 的 `<img alt="">` 是刻意留空——外層有 `aria-hidden="true"`，品牌名稱文字緊接在旁邊呈現，是正確的無障礙寫法，不是漏加 alt
+- blog（`src/content.config.ts` schema）與 news 都有 `updatedDate`（optional）欄位，`[slug].astro` 的 `dateModified`/`modifiedTime` 都是 `updatedDate ?? publishDate`。**文章知識內容有實質修正時記得補 `updatedDate`**（不是排版/格式微調就要補，2026-07-14 就發生過 9 篇 blog + 1 篇 news 改了實質內容但漏補的情況，已補上）
 
 發現這些東西「消失了」或跟目前程式碼對不上，才是真正的問題（可能是新頁面沒套用到既有規則），要列出來；已經存在且正確就不用提。
 
@@ -67,7 +72,7 @@ user_invocable: true
 ### AEO（Answer Engine Optimization）
 
 - 有沒有適合寫成問答形式的內容，卻寫成一般敘述段落（常見於產品規格、服務說明）。
-- 新增的 FAQ 內容有沒有同步更新對應的 `FAQPage` JSON-LD（這個專案的慣例是頁面上的 `<details>` 區塊跟 schema 是兩處分開維護，不會自動同步，要記得兩邊都改）。
+- 新增的 FAQ 內容有沒有同步更新對應的 `FAQPage` JSON-LD。首頁（`homeFaqs` 陣列）和 blog（`blockData.blocks` 的 faq 區塊）畫面顯示跟 schema 是同一個資料來源，架構上保證一致，不用手動核對。**news 是例外**：`[slug].astro` 的 FAQPage schema 讀 frontmatter 的 `faq:` 陣列，但畫面上的 Q&A 是寫在 Markdown 內文裡的手寫文字，兩處分開維護、不會自動同步——改 news 文章的 FAQ 要記得兩邊都改，並人工核對文字是否一致。
 - 回答內容要基於使用者確認過的事實，不確定的資訊（例如「是否 100% 台灣製造」）寧可不寫，不要為了讓答案看起來完整就編。
 
 ### GEO（Generative Engine Optimization）

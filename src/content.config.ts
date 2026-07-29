@@ -23,6 +23,7 @@ const news = defineCollection({
         title: z.string(),
         description: z.string(),
         publishDate: z.coerce.date(),
+        updatedDate: z.coerce.date().optional(),
         tags: z.array(z.string()).optional(),
         draft: z.boolean().default(false),
         faq: z.array(z.object({ q: z.string(), a: z.string() })).optional(),
