@@ -7,6 +7,7 @@ summary:
   - "機械加工、汽車維修、電子製造、食品加工均適合使用 NBR 手套"
   - "NBR 不耐強氧化酸（如硝酸）與強溶劑（如苯、甲苯），使用前需確認"
 publishDate: 2026-04-29
+updatedDate: 2026-07-14
 image: "./cover.WebP"
 category: "選購指南"
 tags: ["NBR 手套", "丁腈手套", "耐油手套", "工廠採購", "職安防護"]
