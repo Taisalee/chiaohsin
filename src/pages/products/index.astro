@@ -9,7 +9,7 @@ import products from "../../data/products.json";
 const siteUrl = "https://chiaohsin.com.tw";
 const LINE_ID = company.contact["LINE ID"];
 
-const productsDescription = `成立 2003 年・台南廠商直營，提供棉紗手套、NBR/PVC 膠手套、尼龍手套、口罩、太空包等 14 大類工安耗材批發。質量足重、全台配送、客製規格接單，歡迎企業詢價。`;
+const productsDescription = `成立於2003年・台南廠商直營，提供棉紗手套、NBR/PVC 膠手套、尼龍手套、口罩、太空包等 14 大類工安耗材批發。質量足重、全台配送、客製規格接單，歡迎企業詢價。`;
 
 const availableCategories = categories.filter((cat) =>
   products.some((p) => p.category === cat.id && p.available !== false)
@@ -139,7 +139,7 @@ const faqSchema = {
 
   <PageHero
     title="工安耗材批發目錄｜工作手套・膠手套・口罩"
-    description="成立 2003 年・台南在地廠商直營・全台配送"
+    description="成立於2003年・台南在地廠商直營・全台配送"
   >
     <nav slot="breadcrumb" class="ph-breadcrumb" aria-label="breadcrumb">
       <a href="/">首頁</a>
@@ -182,7 +182,7 @@ const faqSchema = {
               <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
             </svg>
           </div>
-          <span><strong>成立 2003 年</strong>・超過 20 年批發經驗</span>
+          <span><strong>成立於2003年</strong>・超過 20 年批發經驗</span>
         </div>
       </div>
     </div>
