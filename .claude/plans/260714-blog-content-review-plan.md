@@ -50,8 +50,8 @@
   - 乳膠「耐溶劑」評級 ★★→★（不耐有機溶劑）
 
 ### 其他
-- [ ] `public/design-preview.html` 刪除（設計方案已定）
-- [ ] blog.astro「使用維護」分類顯示 0 篇（待確認是否有文章屬於此分類、或分類標籤需調整）
+- [x] `public/design-preview.html` 刪除（設計方案已定）
+- [ ] blog.astro「使用維護」分類顯示 0 篇 — 已確認：9 篇文章比對 title/tags 皆無「保養」「維護」關鍵字，確實無文章符合此分類。與用戶討論後決定：**先擱置**，保留篩選按鈕，之後補一篇手套清潔保養/維護主題文章即可讓分類有內容（不需改 code）
 
 ## 重要位置
 - `src/components/GloveSpecCard.astro` — spec card 元件
